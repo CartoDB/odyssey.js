@@ -23,9 +23,9 @@ Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/
 
 If you are interested in helping us develop the project, see [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
-## Licence 
+## License 
 
-Odyssey.js is available under a [BSD 3-clause licence](LICENCE)
+Odyssey.js is available under a [BSD 3-clause license](LICENSE)
 
 ## Support
 
