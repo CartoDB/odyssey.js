@@ -21,7 +21,7 @@ Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/
 
 ## Contributing
 
-If you are interested in helping us develop the project, see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+If you are interested in helping us develop the project, see [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
 ## Licence 
 
