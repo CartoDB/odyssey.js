@@ -15,6 +15,10 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 
 We will be documenting future [milestones here](MILESTONES.md)
 
+## Examples
+
+Launch example [code](examples/) [live](http://cartodb.github.io/odyssey.js/examples/quick-start-example.html)
+
 ## Contributing
 
 If you are interested in helping us develop the project, see [CONTRIBUTING.md] for more information.
