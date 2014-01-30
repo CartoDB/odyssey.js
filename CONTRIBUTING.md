@@ -2,7 +2,7 @@ Want to help us build an amazing library to help tell map based sotries? Here is
 
 ## Libary feedback
 
-The libarary is intentionally easy to start using. Take one of our examples and start testing it right away. We'd love to hear your feedback regarding features and API methods.
+The library is intentionally easy to start using. Take one of our examples and start testing it right away. We'd love to hear your feedback regarding features and API methods.
 
 ## Tickets 
 
