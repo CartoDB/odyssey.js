@@ -8,6 +8,17 @@ Story()
   .addState(Scroll('tt2', 400), m.moveTo([51.52, -0.075]));
 
 /*
+Story()
+  .addLinearState(Scroll(), map.GrowLine(points|line))
+  .addLinearState(Scroll(), map.Zoom([1, 1.2, 4.5, 2.1]))
+  .addState(ScrollReach('10%'), chain(
+    map.addMarker(),
+    map.showPopup()
+  )
+*/
+  
+
+/*
 
 //
 // define an slide based story
