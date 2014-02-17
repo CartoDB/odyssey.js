@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+  <link rel="stylesheet" href="../vendor/leaflet.css" />
   <style>
     body {
       text-align: center;
@@ -24,6 +24,7 @@
   </style>
 </head>
 <body>
+  <div id="map" style="width: 100%; height: 400px"></div>
     <div id="test" style="position:fixed; top:0; height: 40px;background: #333;">
         this is an example
     </div>
@@ -44,10 +45,11 @@
     <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
   </div>
 
-  <script src="d3.v3.js"></script>
-  <script src="../lib/oddisey/story.js" charset="UTF-8"></script>
+  <script src="../vendor/d3.v3.js"></script>
+  <script src="../vendor/leaflet.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
   <script>
-  var showDivAction = Action({
+  var showDivAction = Odyssey.Action({
       enter: function() {
           console.log("show");
           document.getElementById('test').style.display = 'block';
@@ -58,12 +60,14 @@
       }
   });
 
+  var map = L.map('map').setView([51.505, -0.09], 13);
 
+  var marker = L.marker([51.5, -0.09]).bindPopup("<b>Hello world!</b><br />I am a popup.");
 
-  Story()
-    .addLinearState(Scroll().reach('tt1').level('50%'), Debug().log('tt'))
-    .addState(Scroll().reach('tt2').level('50%'), Debug().log('tt3'))
-    .addState(Scroll().reach('tt3').level('50%'), Chain(showDivAction, Sleep(1000), Debug().log('done')));
+  Odyssey.Story()
+    .addLinearState(Odyssey.Scroll().reach('tt1').level('50%'), Odyssey.Debug().log('tt'))
+    .addState(Odyssey.Scroll().reach('tt2').level('50%'), marker.actions.addTo(map))// Odyssey.Debug().log('tt3'))
+    .addState(Odyssey.Scroll().reach('tt3').level('50%'), Odyssey.Chain(showDivAction, Odyssey.Sleep(1000), Odyssey.Debug().log('done')));
   </script>
 </body>
 </html>
