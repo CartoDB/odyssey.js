@@ -1,5 +1,6 @@
 
 ODYSSEY_FILES= \
+	index.js \
 	lib/odyssey/start.js \
 	lib/odyssey/story.js \
 	lib/odyssey/actions/*.js \
@@ -8,4 +9,7 @@ ODYSSEY_FILES= \
 	lib/odyssey/end.js 
 
 dist/odyssey.js: $(ODYSSEY_FILES)
-	browserify -s Odysset index.js > $@
+	browserify -s Odyssey index.js > $@
+
+clean: 
+	rm -rf dist/*
