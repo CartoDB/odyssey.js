@@ -8,4 +8,4 @@ ODYSSEY_FILES= \
 	lib/odyssey/end.js 
 
 dist/odyssey.js: $(ODYSSEY_FILES)
-	cat $(ODYSSEY_FILES) > $@
+	browserify -s Odysset index.js > $@
