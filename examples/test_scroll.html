@@ -65,9 +65,9 @@
   var marker = L.marker([51.5, -0.09]).bindPopup("<b>Hello world!</b><br />I am a popup.");
 
   Odyssey.Story()
-    .addLinearState(Odyssey.Scroll().reach('tt1').level('50%'), Odyssey.Debug().log('tt'))
-    .addState(Odyssey.Scroll().reach('tt2').level('50%'), marker.actions.addTo(map))// Odyssey.Debug().log('tt3'))
-    .addState(Odyssey.Scroll().reach('tt3').level('50%'), Odyssey.Chain(showDivAction, Odyssey.Sleep(1000), Odyssey.Debug().log('done')));
+    .addLinearState(Odyssey.Triggers.Scroll().reach('tt1').level('50%'), Odyssey.Actions.Debug().log('tt'))
+    .addState(Odyssey.Triggers.Scroll().reach('tt2').level('50%'), marker.actions.addTo(map))// Odyssey.Debug().log('tt3'))
+    .addState(Odyssey.Triggers.Scroll().reach('tt3').level('50%'), Odyssey.Chain(showDivAction, Odyssey.Actions.Sleep(1000), Odyssey.Actions.Debug().log('done')));
   </script>
 </body>
 </html>
