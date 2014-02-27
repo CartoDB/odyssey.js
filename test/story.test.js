@@ -9,12 +9,13 @@ function a(t) {
 }
 function e() { this.ex = !this.ex ? 1: ++this.ex; }
 module('story');
-var story, t1, t2, a1, la0;
+var story, t1, t2, a1, a2, la0;
 QUnit.testStart(function() {
   story = Odyssey.Story();
   t1 = Odyssey.Trigger({});
   t2 = Odyssey.Trigger({});
   a1 = Odyssey.Action(a);
+  a2 = Odyssey.Action(a)
   la0 = Odyssey.Action({
     enter: a,
     update: function(t) { this.t = t; },
@@ -22,7 +23,7 @@ QUnit.testStart(function() {
   });
 });
 
-test('addState', 8, function() {
+test('addState', 9, function() {
   story.addState(t1, a1);
   story.addState(t2, la0);
   t1.trigger();
@@ -45,6 +46,7 @@ test('addState', 8, function() {
   // add non valid story
   try {
     story.addState(null, a1);
+    equal(1, 0);
   } catch(e) {
     equal(1, 1);
   }
@@ -52,9 +54,17 @@ test('addState', 8, function() {
   // add non valid story
   try {
     story.addState(t1);
+    equal(1, 0);
   } catch(e) {
     equal(1, 1);
   }
+});
+
+test('addState - multiple', 2, function() {
+  story.addState(t1, [a1, a2]);
+  t1.trigger();
+  equal(1, a1.called);
+  equal(1, a2.called);
 });
 
 test('addLinearState', 5, function() {
