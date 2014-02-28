@@ -33,7 +33,7 @@
   <div id="content">
   </div>
 
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet-src.js"></script>
   <script src="../../vendor/d3.v3.js"></script>
   <script src="../../dist/odyssey.js" charset="UTF-8"></script>
   <script>
@@ -74,21 +74,30 @@
       bit.append('span').text(function(d) { return d['Fecha y Hora'] });
 
 
+      var defaultIcon = L.icon({
+        iconUrl: 'icons/circle-stroked-24.png'
+      });
+
       var story = Odyssey.Story()
+
       for(var i = 0; i < data.length; ++i) {
         var d = data[i];
         var pos = new L.LatLng(+d.Lat, +d.Lon);
         story.addState(
-          Odyssey.Triggers.Scroll().reach('item_' + d['item #']).level('50%'), [
+          Odyssey.Triggers.Scroll().reach('item_' + d['item #']).level('50%'), 
+          Odyssey.Parallel(
             map.actions.panTo(pos),
-            L.marker(pos).actions.addRemove(map),
+            //L.marker(pos).actions.addRemove(map),
+            L.marker(pos, { icon: defaultIcon } ).addTo(map).actions.icon('./icons/circle-24.png', './icons/circle-stroked-24.png'),
             AddRemoveClass('#item_' + d['item #'], 'highlight'),
             Odyssey.Actions.Location.changeHash(i)
-          ]
+          )
         );
       }
       if (location.hash) {
         story.go(+location.hash.slice(1), { reverse: true });
+      } else {
+        story.go(0, { reverse: true });
       }
     });
   </script>
