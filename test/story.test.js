@@ -1,13 +1,19 @@
 
 function a(t) { 
   this.t = t;
+  this.lastEnterCall = new Date().getTime()
   if (this.called) {
     ++this.called;
   } else {
     this.called = 1;
   }
 }
-function e() { this.ex = !this.ex ? 1: ++this.ex; }
+
+function e() { 
+  this.lastExitCall = new Date().getTime()
+  this.ex = !this.ex ? 1: ++this.ex; 
+}
+
 module('story');
 var story, t1, t2, a1, a2, la0;
 QUnit.testStart(function() {
@@ -44,27 +50,8 @@ test('addState', 9, function() {
   equal(1, la0.ex);
 
   // add non valid story
-  try {
-    story.addState(null, a1);
-    equal(1, 0);
-  } catch(e) {
-    equal(1, 1);
-  }
-
-  // add non valid story
-  try {
-    story.addState(t1);
-    equal(1, 0);
-  } catch(e) {
-    equal(1, 1);
-  }
-});
-
-test('addState - multiple', 2, function() {
-  story.addState(t1, [a1, a2]);
-  t1.trigger();
-  equal(1, a1.called);
-  equal(1, a2.called);
+  throws(function() { story.addState(null, a1) });
+  throws(function() { story.addState(t1) });
 });
 
 test('addLinearState', 5, function() {
@@ -80,4 +67,38 @@ test('addLinearState', 5, function() {
 
   t2.trigger();
   equal(1, la0.ex);
+});
+
+
+test('Chain', function() {
+  story.addState(t1, Odyssey.Chain(a1, a2));
+  t1.trigger();
+  equal(1, a1.called, "a1 should be called");
+  equal(1, a2.called, "a2 should be called");
+  ok(a1.lastEnterCall <= a2.lastEnterCall, "a1 should be called before a2");
+})
+
+asyncTest('Chain - async', 3, function() {
+  var finished = false;
+  var asyncAction = Odyssey.Action({
+    enter: function() {
+      var self = this;
+      this.lastEnterCall = new Date().getTime();
+      setTimeout(function() {
+        self.finish();
+      }, 1000);
+      return true;
+    }
+  });
+  story.addState(t1, Odyssey.Chain(asyncAction, a2).on('finish.test', function() {
+    finished = true;
+  }));
+
+  t1.trigger();
+  setTimeout(function() {
+    equal(1, a2.called, "a2 should be called");
+    ok(a2.lastEnterCall - asyncAction.lastEnterCall > 990, "a2 shouldn't be called until asyncAction finish");
+    ok(finished, "chain should call finish");
+    start();
+  }, 1100);
 });
