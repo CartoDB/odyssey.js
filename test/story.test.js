@@ -102,3 +102,62 @@ asyncTest('Chain - async', 3, function() {
     start();
   }, 1100);
 });
+
+test('Parallel', function() {
+  var finished = false;
+  story.addState(t1, Odyssey.Parallel(a1, a2).on('finish.test', function() {
+    finished = true;
+  }));
+  t1.trigger();
+  equal(1, a1.called, "a1 should be called");
+  equal(1, a2.called, "a2 should be called");
+  ok(finished, "finish signal should be throw");
+});
+
+asyncTest('Parallel - async', 3, function() {
+  var finished = false;
+  var asyncAction = Odyssey.Action({
+    enter: function() {
+      var self = this;
+      this.lastEnterCall = new Date().getTime();
+      setTimeout(function() {
+        self.finish();
+      }, 1000);
+      return true;
+    }
+  });
+  story.addState(t1, Odyssey.Parallel(asyncAction, a2).on('finish.test', function() {
+    finished = true;
+  }));
+
+  t1.trigger();
+  equal(1, a2.called, "a2 should be called");
+  setTimeout(function() { ok(!finished); }, 100);
+  setTimeout(function() { ok(finished); start(); }, 1000);
+});
+
+asyncTest('Chain - async', 3, function() {
+  var finished = false;
+  var asyncAction = Odyssey.Action({
+    enter: function() {
+      var self = this;
+      this.lastEnterCall = new Date().getTime();
+      setTimeout(function() {
+        self.finish();
+      }, 1000);
+      return true;
+    }
+  });
+  story.addState(t1, Odyssey.Chain(asyncAction, a2).on('finish.test', function() {
+    finished = true;
+  }));
+
+  t1.trigger();
+  setTimeout(function() {
+    equal(1, a2.called, "a2 should be called");
+    ok(a2.lastEnterCall - asyncAction.lastEnterCall > 990, "a2 shouldn't be called until asyncAction finish");
+    ok(finished, "chain should call finish");
+    start();
+  }, 1100);
+});
+
