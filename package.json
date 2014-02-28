@@ -1,0 +1,22 @@
+{
+  "name"          : "odyssey.js",
+  "description"   : "",
+  "url": "https://github.com/cartodb/odyssey.js.git",
+  "author"        : "",
+  "dependencies"  : {
+  },
+  "devDependencies": {
+    "phantomjs": "~1.9.0"
+  },
+  "scripts": {
+    "test": "phantomjs test/vendor/runner.js test/suite.html?noglobals=true",
+    "lint": "jsl -nofilelisting -nologo -conf docs/jsl.conf -process dist/odyssey.js"
+  },
+  "main"          : "",
+  "version"       : "0.1.0",
+  "license"       : "BSD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cartodb/odyssey.js.git"
+  }
+}
