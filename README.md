@@ -2,6 +2,8 @@
 
 The odyssey.js library is being developed to help journalists, bloggers, and other people on the web publish stories that combine narratives with maps and map interactions. The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.
 
+[![Build Status](https://travis-ci.org/CartoDB/odyssey.js.png)](https://travis-ci.org/CartoDB/odyssey.js)
+
 ## Goals
 
 * Create a simple JavaScript library that links page elements to slippy map interactions
