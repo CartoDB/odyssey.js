@@ -25,6 +25,11 @@ the trigger is updated
 
 ## Oddysey.Story.go(action_index[, options])
 
+Move story to desired state 
+  * ``action_index``: base 0 index of state
+  * ``options``: todo
+
+
 ## Oddysey.Chain
 
 executes actions serially, waits until the previous task is completed to start with the second and so on
