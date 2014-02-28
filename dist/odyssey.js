@@ -110,6 +110,23 @@ function MarkerActions(marker) {
     });
   };
 
+  _marker.icon = function(iconEnabled, iconDisabled) {
+    iconEnabled = L.icon({
+      iconUrl: iconEnabled
+    });
+    iconDisabled = L.icon({
+      iconUrl: iconDisabled
+    });
+    return Action({
+      enter: function() {
+        marker.setIcon(iconEnabled);
+      },
+      exit: function() {
+        marker.setIcon(iconDisabled);
+      }
+    });
+  }
+
   return _marker;
 }
 
@@ -176,7 +193,6 @@ function Story() {
 
   // go to state index
   story.go = function(index, opts) {
-    var j;
     opts = opts || {};
     if (story.state() !== index) {
 
@@ -191,22 +207,19 @@ function Story() {
 
       // raise exit
       if (prevState !== null) {
-          var prev = triggers[prevState].b;
-          for (j = 0; prev && j < prev.length; ++j) {
-            var p = prev[j];
-            p.exit && p.exit();
-          }
+        var prev = triggers[prevState].b;
+        if (prev.exit) {
+          prev.exit();
+        }
       }
 
       var b = triggers[index].b;
 
       // enter in current state
-      for (j = 0; j < b.length; ++j) {
-        b[j].enter();
-      }
+      b.enter();
     }
 
-  }
+  };
 
   story.addState = function(a, b, opts) {
     var i = triggers.length;
@@ -214,8 +227,6 @@ function Story() {
     if(!a || !b) {
       throw new Error("action and trigger must be defined");
     }
-
-    b = [].concat(b);
 
     triggers.push({
       a: a,
@@ -234,8 +245,6 @@ function Story() {
     var j;
     var i = triggers.length;
 
-    b = [].concat(b);
-
     triggers.push({
       a: a,
       b: b,
@@ -244,29 +253,13 @@ function Story() {
 
     a._story(story, function(t) {
       if (story.state() !== i) {
-        // current state
-        story.state(i);
-
-        // raise exit
-        if (prevState !== null) {
-          var prev = triggers[prevState].b;
-          for (j = 0; prev && j < prev.length; ++j) {
-            var p = prev[j];
-            p.exit && p.exit();
-          }
-        }
-
-        // enter in current state
-        for (j = 0; j < b.length; ++j) {
-          b[j].enter();
-        }
+        story.go(i);
       } else {
-        for (j = 0; j < b.length; ++j) {
-          b[j].update && b[j].update(t);
+        if (b.update) {
+          b.update(t);
         }
       }
     });
-
 
     return story;
   };
@@ -320,6 +313,59 @@ function Trigger(t) {
 // raises finish when all the tasks has been completed
 //
 function Parallel () {
+  var actions = Array.prototype.slice.call(arguments);
+  var tasksLeft;
+
+  function _Parallel() {}
+
+  function start() {
+    tasksLeft = actions.length;
+  }
+
+  function done() {
+    if (--tasksLeft === 0) {
+      _Parallel.finish();
+    }
+  }
+
+  function wait(action) {
+    action.on('finish.parallel', function() {
+      action.on('finish.parallel', null);
+      done();
+    });
+  }
+
+
+  _Parallel.enter = function() {
+    start();
+    for(var i = 0, len = actions.length; i < len; ++i) {
+      var a = actions[i];
+      if (a.enter) {
+        if (a.enter()) {
+          wait(a);
+        } else {
+          done();
+        }
+      }
+    }
+  };
+
+  _Parallel.exit = function() {
+    start();
+    for(var i = actions.length - 1; i >= 0; --i) {
+      var a = actions[i];
+      if (a.exit) {
+        if (a.exit()) {
+          wait(a);
+        } else {
+          done();
+        }
+      }
+    }
+  };
+
+  _Parallel = Action(_Parallel);
+  return _Parallel;
 }
 
 
@@ -378,6 +424,7 @@ module.exports = {
   Action: Action,
   Trigger: Trigger,
   Chain: Chain,
+  Parallel: Parallel
 }
 
 
