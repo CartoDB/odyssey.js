@@ -6,7 +6,9 @@
   "dependencies"  : {
   },
   "devDependencies": {
-    "phantomjs": "~1.9.0"
+    "phantomjs": "~1.9.0",
+    "d3": "3.3.10",
+    "smash": "0.0"
   },
   "scripts": {
     "test": "phantomjs test/vendor/runner.js test/suite.html?noglobals=true",
