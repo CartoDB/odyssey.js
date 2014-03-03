@@ -81,6 +81,29 @@
   )
 
   var TRIGGER_LINE = 400 + 50;
+
+  /*
+  var story = Odyssey.Story()
+    .addEvent(
+      edge,
+      O.Parallel(
+        O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
+        O.Actions.Debug().log('attach')
+      )
+    )
+    .addState(
+      O.Triggers.Scroll().within('spain').offset(TRIGGER_LINE),
+      map.actions.panTo(spain)
+    )
+    .addState(
+      O.Triggers.Scroll().within('brazil').offset(TRIGGER_LINE), 
+      map.actions.panTo(brazil)
+    )
+    .addState(
+      O.Triggers.Scroll().within('usa').offset(TRIGGER_LINE),
+      map.actions.panTo(usa)
+    )
+    */
   var story = Odyssey.Story()
     .addEvent(
       edge,
