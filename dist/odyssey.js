@@ -6,7 +6,7 @@ e.Triggers = _dereq_('./lib/odyssey/triggers');
 e.Core = _dereq_('./lib/odyssey/core');
 module.exports = e;
 
-},{"./lib/odyssey/actions":4,"./lib/odyssey/core":9,"./lib/odyssey/story":10,"./lib/odyssey/triggers":11}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/triggers":12}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -27,7 +27,7 @@ function CSS(el) {
 
 module.exports = CSS;
 
-},{"../story":10}],3:[function(_dereq_,module,exports){
+},{"../story":11}],3:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 //
@@ -62,7 +62,7 @@ function Debug() {
 
 module.exports = Debug;
 
-},{"../story":10}],4:[function(_dereq_,module,exports){
+},{"../story":11}],4:[function(_dereq_,module,exports){
 
 module.exports = {
   Sleep: _dereq_('./sleep'),
@@ -72,10 +72,11 @@ module.exports = {
     Marker: _dereq_('./leaflet/marker'),
     Map: _dereq_('./leaflet/map')
   },
-  CSS: _dereq_('./css')
+  CSS: _dereq_('./css'),
+  Slides: _dereq_('./slides')
 };
 
-},{"./css":2,"./debug":3,"./leaflet/map":5,"./leaflet/marker":6,"./location":7,"./sleep":8}],5:[function(_dereq_,module,exports){
+},{"./css":2,"./debug":3,"./leaflet/map":5,"./leaflet/marker":6,"./location":7,"./sleep":8,"./slides":9}],5:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -108,7 +109,7 @@ if (typeof window.L !== 'undefined') {
 module.exports = MapActions;
 
 
-},{"../../story":10}],6:[function(_dereq_,module,exports){
+},{"../../story":11}],6:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -164,7 +165,7 @@ module.exports = MarkerActions;
 //marker.actions.addTo(map);
 //addState(, map.actions.moveTo(..).addMarker(m)
 
-},{"../../story":10}],7:[function(_dereq_,module,exports){
+},{"../../story":11}],7:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -184,7 +185,7 @@ var Location = {
 
 module.exports = Location;
 
-},{"../story":10}],8:[function(_dereq_,module,exports){
+},{"../story":11}],8:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -203,7 +204,42 @@ function Sleep(ms) {
 module.exports = Sleep;
 
 
-},{"../story":10}],9:[function(_dereq_,module,exports){
+},{"../story":11}],9:[function(_dereq_,module,exports){
+
+var Action = _dereq_('../story').Action;
+var Core = _dereq_('../core');
+
+function Slides(el) {
+
+  var slideElements = Core.getElement(el).children;
+  
+  function slides() {};
+
+  function _activate(idx) {
+    for(var i = 0; i < slideElements.length; ++i) {
+      if (i === idx) {
+        slideElements[i].style.display = "block";
+      } else {
+        slideElements[i].style.display = "none";
+      }
+    }
+  };
+
+  slides.activate = function(i) {
+    return Action(function() {
+      _activate(i);
+    });
+  };
+
+  _activate(-1);
+
+  return slides;
+
+}
+
+module.exports = Slides;
+
+},{"../core":10,"../story":11}],10:[function(_dereq_,module,exports){
 
 function getElement(el) {
   if(typeof jQuery !== 'undefined') {
@@ -222,7 +258,7 @@ module.exports = {
   getElement: getElement
 };
 
-},{}],10:[function(_dereq_,module,exports){
+},{}],11:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/d3.custom');
 
@@ -502,13 +538,13 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":13}],11:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":14}],12:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll')
 };
 
-},{"./scroll":12}],12:[function(_dereq_,module,exports){
+},{"./scroll":13}],13:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -648,7 +684,7 @@ function Scroll() {
 Scroll._scrolls = [];
 module.exports = Scroll;
 
-},{"../core":9,"../story":10}],13:[function(_dereq_,module,exports){
+},{"../core":10,"../story":11}],14:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
