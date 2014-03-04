@@ -538,13 +538,14 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":14}],12:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":15}],12:[function(_dereq_,module,exports){
 
 module.exports = {
-  Scroll: _dereq_('./scroll')
+  Scroll: _dereq_('./scroll'),
+  Sequential: _dereq_('./sequential')
 };
 
-},{"./scroll":13}],13:[function(_dereq_,module,exports){
+},{"./scroll":13,"./sequential":14}],13:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -685,6 +686,55 @@ Scroll._scrolls = [];
 module.exports = Scroll;
 
 },{"../core":10,"../story":11}],14:[function(_dereq_,module,exports){
+
+var Trigger = _dereq_('../story').Trigger;
+
+function Sequential() {
+  var current = 0;
+  var steps = [];
+  var max = 0;
+
+  function seq() {}
+
+  function update() {
+    for (var i = 0; i < steps.length; ++i) {
+      steps[i].check();
+    }
+  }
+
+  seq.step = function(n) {
+    var t = Trigger({ 
+      check: function() {
+        if (n === current) this.trigger();
+      }
+    });
+    max = Math.max(max, n);
+    steps.push(t);
+    return t;
+  };
+
+  seq.next = function() {
+    current += 1;
+    if (current > max) {
+      current = 0;
+    }
+    update();
+  };
+
+  seq.prev = function() {
+    current -= 1;
+    if (current < 0) {
+      current = max;
+    }
+    update();
+  };
+
+  return seq;
+}
+
+module.exports = Sequential;
+
+},{"../story":11}],15:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
