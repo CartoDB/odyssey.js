@@ -96,6 +96,8 @@ function MapActions(map) {
 
   // leaflet methods
   leaflet_method('panTo');
+  leaflet_method('setView');
+  leaflet_method('setZoom');
 
   return _map;
 }
