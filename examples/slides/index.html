@@ -67,38 +67,7 @@
 
   var O = Odyssey;
 
-  function Sequential() {
-    var current = 0;
-    var steps = [];
-    var max = 0;
-
-    function seq() {}
-
-    seq.step = function(n) {
-      var t = O.Trigger({ 
-        check: function() {
-          if (n === current) this.trigger();
-        }
-      });
-      max = Math.max(max, n);
-      steps.push(t);
-      return t;
-    }
-
-    seq.next = function() {
-      current += 1;
-      if (current > max) {
-        current = 0;
-      }
-      for (var i = 0; i < steps.length; ++i) {
-        steps[i].check();
-      }
-    }
-
-    return seq;
-  }
-
-  var seq = Sequential();
+  var seq = O.Triggers.Sequential();
 
   var slides = O.Actions.Slides('slides');
   var story = Odyssey.Story()
