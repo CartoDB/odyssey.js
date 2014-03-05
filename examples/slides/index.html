@@ -69,6 +69,10 @@
 
   var seq = O.Triggers.Sequential();
 
+  // enanle keys to move
+  O.Triggers.Keys().left().then(seq.next, seq)
+  O.Triggers.Keys().right().then(seq.next, seq)
+
   var slides = O.Actions.Slides('slides');
   var story = Odyssey.Story()
     .addState(
