@@ -392,6 +392,12 @@ function Trigger(t) {
     this.trigger = trigger;
     this.story = story;
   };
+
+  t.then = function(t, context) {
+    this.trigger = function() {
+      t.call(context || self);
+    };
+  };
   return t;
 }
 
@@ -540,14 +546,71 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":15}],12:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":16}],12:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
-  Sequential: _dereq_('./sequential')
+  Sequential: _dereq_('./sequential'),
+  Keys: _dereq_('./keys')
 };
 
-},{"./scroll":13,"./sequential":14}],13:[function(_dereq_,module,exports){
+},{"./keys":13,"./scroll":14,"./sequential":15}],13:[function(_dereq_,module,exports){
+
+var Trigger = _dereq_('../story').Trigger;
+
+/**
+ *
+ *
+ */
+function Keys() {
+
+  KEY_LEFT = 37;
+  KEY_UP = 38;
+  KEY_RIGHT = 39;
+  KEY_DOWN = 40;
+
+  var el = document;
+
+  var keys = {};
+
+  function listenForKey(el, k, callback) {
+    el.addEventListener('keydown', function(e) {
+       var code = e.keyCode;
+       if (code === k) {
+         callback();
+       }
+       e.preventDefault();
+    });
+  }
+
+  keys.left = function() {
+    var t = Trigger({});
+    listenForKey(el, KEY_LEFT, function() {
+      t.trigger();
+    });
+    return t;
+  }
+
+  keys.right = function() {
+    var t = Trigger({});
+    listenForKey(el, KEY_RIGHT, function() {
+      t.trigger();
+    });
+    return t;
+  }
+
+  keys.on = function(element) {
+    el = element
+    return keys;
+  }
+
+  return keys;
+
+}
+
+module.exports = Keys;
+
+},{"../story":11}],14:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -687,7 +750,7 @@ function Scroll() {
 Scroll._scrolls = [];
 module.exports = Scroll;
 
-},{"../core":10,"../story":11}],14:[function(_dereq_,module,exports){
+},{"../core":10,"../story":11}],15:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 
@@ -736,7 +799,7 @@ function Sequential() {
 
 module.exports = Sequential;
 
-},{"../story":11}],15:[function(_dereq_,module,exports){
+},{"../story":11}],16:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
