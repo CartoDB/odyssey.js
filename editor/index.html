@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../vendor/leaflet.css" />
+  <style>
+    body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Helvetica;
+      background: #EEE;
+    }
+    h2 {
+      font-weight: normal;
+    }
+    #slides{
+    }
+    .slide {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      font-size: 45px;
+
+    }
+  
+    #map {
+      position: absolute; 
+      top: 0; left: 0;
+      width:100%;
+      height: 100%;
+    }
+    #content {
+      padding: 0 40px;
+      height: 1500px;
+    }
+    
+  </style>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100%"></div></div>
+    <div id="slides"></div>
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="../vendor/leaflet.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+  <script src="markdown.js" charset="UTF-8"></script>
+  <script src="actions.js" charset="UTF-8"></script>
+  <script>
+
+
+  O.Template({
+
+    init: function() {
+      var map = L.map('map').setView([0, 0.0], 4);
+        L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+      var seq = O.Triggers.Sequential();
+
+      // enanle keys to move
+      O.Triggers.Keys().on('map').left().then(seq.next, seq)
+      O.Triggers.Keys().on('map').right().then(seq.next, seq)
+
+      var slides = O.Actions.Slides('slides');
+      var story = O.Story()
+
+      this.map = map;
+      this.story = story;
+      this.seq = seq;
+      this.slides = slides;
+    },
+
+    update: function(actions) {
+      this.story.clear();
+
+      var sl = actions;
+
+      document.getElementById('slides').innerHTML = ''
+
+      // create new story
+      for(var i = 0; i < sl.length; ++i) {
+        var slide = sl[i];
+        var tmpl = "<div class='slide' style='diplay:none'>"
+        tmpl += slide.html();
+        tmpl += "</div>";
+        document.getElementById('slides').innerHTML += tmpl;
+
+        var actions = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
+        this.story.addState( 
+          this.seq.step(i), 
+          actions
+        )
+      }
+      this.story.go(this.seq.current());
+    }
+    
+  });
+
+  </script>
+</body>
+</html>
+

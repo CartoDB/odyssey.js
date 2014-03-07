@@ -1,12 +1,13 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Odyssey=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var e = _dereq_('./lib/odyssey/story');
 e.Actions = _dereq_('./lib/odyssey/actions');
 e.Triggers = _dereq_('./lib/odyssey/triggers');
 e.Core = _dereq_('./lib/odyssey/core');
+e.Template = _dereq_('./lib/odyssey/template');
 module.exports = e;
 
-},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/triggers":12}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/template":12,"./lib/odyssey/triggers":13}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -132,6 +133,9 @@ function MarkerActions(marker) {
       },
       exit: function() {
         map.removeLayer(marker);
+      }, 
+      clear: function() {
+        map.removeLayer(marker);
       }
     });
   };
@@ -149,7 +153,8 @@ function MarkerActions(marker) {
       },
       exit: function() {
         marker.setIcon(iconDisabled);
-      }
+      },
+      clear: function() { }
     });
   }
 
@@ -213,11 +218,11 @@ var Core = _dereq_('../core');
 
 function Slides(el) {
 
-  var slideElements = Core.getElement(el).children;
   
   function slides() {};
 
   function _activate(idx) {
+    var slideElements = Core.getElement(el).children;
     for(var i = 0; i < slideElements.length; ++i) {
       if (i === idx) {
         slideElements[i].style.display = "block";
@@ -225,7 +230,7 @@ function Slides(el) {
         slideElements[i].style.display = "none";
       }
     }
-  };
+  }
 
   slides.activate = function(i) {
     return Action(function() {
@@ -267,6 +272,7 @@ _dereq_('../../vendor/d3.custom');
 function Story() {
 
   var triggers = [];
+  var events = [];
   var currentState = null;
   var prevState = null;
 
@@ -278,12 +284,35 @@ function Story() {
     trigger._story(story, function() {
       action.enter();
     });
+    events.push({
+      a: trigger,
+      b: action
+    });
     return story;
+  };
+
+  story.clear = function() {
+    var all = triggers.concat(events);
+    for(var i = 0; i < all.length; ++i) {
+      var a = all[i];
+      a.a.story = null;
+      a.a.trigger = null;
+      a.b.clear && a.b.clear();
+    }
+
+    triggers = [];
+    events = [];
+    currentState = null;
+    prevState = null;
+
   };
 
   // go to state index
   story.go = function(index, opts) {
     opts = opts || {};
+    if(index > triggers.length) {
+      throw new Error("index should be less than states length");
+    }
     if (story.state() !== index) {
 
       if (opts.reverse) {
@@ -546,7 +575,31 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":16}],12:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":17}],12:[function(_dereq_,module,exports){
+
+var Template = function(template) {
+  window.addEventListener("message", function(event) {
+    var actions = actionsFromMarkdown(event.data);
+    template.update(actions);
+  }, false);
+  template.init();
+};
+
+Template.Storage = {
+
+  save: function(md) {
+    location.hash = btoa(md);
+  },
+
+  load: function(done) {
+    var h = location.hash;
+    done && h && done(atob(h.slice(1)));
+  }
+};
+
+module.exports = Template;
+
+},{}],13:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -554,9 +607,10 @@ module.exports = {
   Keys: _dereq_('./keys')
 };
 
-},{"./keys":13,"./scroll":14,"./sequential":15}],13:[function(_dereq_,module,exports){
+},{"./keys":14,"./scroll":15,"./sequential":16}],14:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
+var Core = _dereq_('../core');
 
 /**
  *
@@ -578,8 +632,9 @@ function Keys() {
        var code = e.keyCode;
        if (code === k) {
          callback();
+         e.preventDefault();
+         e.stopPropagation()
        }
-       e.preventDefault();
     });
   }
 
@@ -600,7 +655,7 @@ function Keys() {
   }
 
   keys.on = function(element) {
-    el = element
+    el = Core.getElement(element);
     return keys;
   }
 
@@ -610,7 +665,7 @@ function Keys() {
 
 module.exports = Keys;
 
-},{"../story":11}],14:[function(_dereq_,module,exports){
+},{"../core":10,"../story":11}],15:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -750,7 +805,7 @@ function Scroll() {
 Scroll._scrolls = [];
 module.exports = Scroll;
 
-},{"../core":10,"../story":11}],15:[function(_dereq_,module,exports){
+},{"../core":10,"../story":11}],16:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 
@@ -770,7 +825,7 @@ function Sequential() {
   seq.step = function(n) {
     var t = Trigger({ 
       check: function() {
-        if (n === current) this.trigger();
+        if (n === current && this.trigger) this.trigger();
       }
     });
     max = Math.max(max, n);
@@ -786,6 +841,17 @@ function Sequential() {
     update();
   };
 
+  seq.clear = function() {
+    steps = [];
+    max = 0;
+    current = 0;
+    return seq;
+  };
+
+  seq.current = function() {
+    return current;
+  };
+
   seq.prev = function() {
     current -= 1;
     if (current < 0) {
@@ -799,7 +865,7 @@ function Sequential() {
 
 module.exports = Sequential;
 
-},{"../story":11}],16:[function(_dereq_,module,exports){
+},{"../story":11}],17:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {

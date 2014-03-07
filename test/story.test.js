@@ -69,6 +69,15 @@ test('addLinearState', 5, function() {
   equal(1, la0.ex);
 });
 
+test('clear', 2, function() {
+  story.addState(t2, a1);
+  t2.trigger();
+  equal(1, a1.called);
+  story.clear();
+  equal(t2.trigger, null);
+});
+
+
 
 test('Chain', function() {
   story.addState(t1, Odyssey.Chain(a1, a2));
