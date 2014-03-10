@@ -560,7 +560,7 @@ function Edge(a, b) {
     }
     s = 1;
   });
-  return Odyssey.Trigger(t);
+  return Trigger(t);
 }
 
 

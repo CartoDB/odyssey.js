@@ -53,7 +53,7 @@ function md2json(tree) {
   for (var i = 0; i < elements.length; ++i) {
     var el = elements[i];
     var add = true;
-    if (el[0] === 'header') {
+    if (el[0] === 'header' && el[1].level === 1) {
       if (slide) slides.push(Slide(slide.md_tree, slide.actions));
       slide = {
         md_tree: [],
