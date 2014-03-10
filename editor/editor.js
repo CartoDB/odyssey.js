@@ -41,6 +41,8 @@ function dialog() {
       .data([code]);
 
 
+
+
     var enter = codeEditor.enter();
     enter.append('h1').text('Odyssey editor');
     var select = enter.append('select')
@@ -51,15 +53,24 @@ function dialog() {
         evt.template(this.value);
       });
 
-    enter.append('textarea')
+    var textarea = enter.append('textarea')
       .attr('id', 'code')
       .on('keyup.editor', function() {
         evt.code(this.value);
       });
 
+    textarea.each(function() {
+      this.codemirror = CodeMirror.fromTextArea(this, {
+        mode: "markdown"
+      });
+      this.codemirror.on('change', function(c) {
+        evt.code(c.getValue());
+      });
+    });
+
     // update
     codeEditor.each(function(d) {
-      this.value = d;
+      this.codemirror.setValue(d);
     });
   }
 

@@ -36,7 +36,7 @@ body {
   border-top-right-radius: 5px;
 }
 
-textarea {
+textarea, .CodeMirror {
   color: rgba(0,0,0,0.9);
   background-color:#FFF;
   position: absolute;
@@ -52,5 +52,6 @@ textarea {
   margin: 0;
   outline: none;
   padding: 20px;
+  height: 100%;
 }
 
