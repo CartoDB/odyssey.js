@@ -1,6 +1,7 @@
 .idea
 .swp
 .swo
+.saas-cache
 dist
 node_modules
 design
