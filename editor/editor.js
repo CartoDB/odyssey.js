@@ -113,7 +113,7 @@ function dialog(context) {
         if (++c === 2) {
           // inser in the previous line
           currentLine = codemirror.getLineHandle(i);
-          codemirror.setLine(i, "\n" + action + "\n" + currentLine.text);
+          codemirror.setLine(i, action + "\n" + currentLine.text);
           return;
         }
       } else if(SLIDE_REGEXP.exec(line)) {
