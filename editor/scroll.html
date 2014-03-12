@@ -72,6 +72,9 @@
       'show marker': function() {
         var center = this.map.getCenter()
         return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+      },
+      'sleep': function() {
+        return "O.Actions.Sleep(1000)";
       }
     },
 

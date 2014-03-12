@@ -18,7 +18,7 @@ function Slide(tree, actions) {
   var action;
 
   function compile(context) {
-    action = O.Parallel.apply(window, 
+    action = O.Chain.apply(window, 
       actions.map(function(o) {
         var f = Function("S", "return " + o + ";");
         return f(context);
