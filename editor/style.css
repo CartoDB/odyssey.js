@@ -44,14 +44,40 @@ textarea, .CodeMirror {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 560px;
+  width: 530px;
   border: none;
   font-family: monospace;
   font-size: 14px;
   border: 0;
   margin: 0;
   outline: none;
-  padding: 20px;
+  padding: 20px 20px 20px 50px;
   height: 100%;
 }
 
+.actionButton {
+  position: absolute;
+  text-transform: uppercase;
+  background-color: rgb(209, 209, 209);
+  color: white;
+  border-radius: 2px;
+  padding: 3px;
+  font-size: 9px;
+}
+.actionButton:hover {
+  cursor: pointer;
+}
+
+#actionDropdown {
+  background: white;
+  width: 150px;
+  z-index: 20;
+  border: 1px solid #888;
+  text-align: left;
+}
+
+#actionDropdown li {
+padding: 5px;
+list-style: none;
+border-bottom: 1px solid #888;
+}

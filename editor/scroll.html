@@ -61,6 +61,14 @@
 
 
   O.Template({
+
+    actions: {
+      'move map to': function() {
+        var center = this.map.getCenter()
+        return 'S.map.actions.setView([' + center.lat + ', ' + center.lng + '],' + this.map.getZoom() + ')'
+      }
+    },
+
     init: function() {
       var map = L.map('map').setView([0, 0.0], 4);
         L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);

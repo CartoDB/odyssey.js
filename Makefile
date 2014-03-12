@@ -10,7 +10,8 @@ ODYSSEY_FILES= \
 	lib/odyssey/triggers/*.js \
 
 dist/odyssey.js: $(ODYSSEY_FILES) $(VENDOR_FILES)
-	browserify -s O index.js > $@
+	node node_modules/browserify/bin/cmd.js -s O index.js > $@
+	#browserify -s O index.js > $@
 
 vendor/d3.custom.js:
 	node_modules/smash/smash node_modules/d3/src/start.js node_modules/d3/src/event/dispatch.js node_modules/d3/src/core/rebind.js node_modules/d3/src/end.js > $@

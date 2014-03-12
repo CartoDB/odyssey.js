@@ -297,6 +297,7 @@ function Story() {
       var a = all[i];
       a.a.story = null;
       a.a.trigger = null;
+      a.a.clear && a.a.clear();
       a.b.clear && a.b.clear();
     }
 
@@ -579,8 +580,26 @@ module.exports = {
 
 var Template = function(template) {
   window.addEventListener("message", function(event) {
-    var actions = actionsFromMarkdown(event.data);
-    template.update(actions);
+    var msg = JSON.parse(event.data);
+
+    function sendMsg(_) {
+      event.source.postMessage(JSON.stringify({
+        id: msg.id,
+        data: _
+      }), event.currentTarget.location);
+    }
+
+    if (msg.type === 'md') {
+      var actions = actionsFromMarkdown(msg.code);
+      template.update(actions);
+    } else if (msg.type === 'actions') {
+      sendMsg(Object.keys(template.actions));
+    } else if (msg.type === 'get_action') {
+      sendMsg(template.actions[msg.code].call(template))
+    } else if (msg.type === 'code') {
+      //TODO: error management
+      sendMsg(eval(msg.code));
+    }
   }, false);
   template.init();
 };
@@ -730,6 +749,10 @@ function Scroll() {
       scroller.scrollTo(0, bounds.top - offset);
     };
 
+    _reach.clear = function() {
+      unregister(_reach);
+    }
+
     // add to working scrolls
     register(_reach);
 
@@ -786,6 +809,13 @@ function Scroll() {
   function register(s) {
     scrolls.push(s);
     initScroll();
+  }
+
+  function unregister(s) {
+    var i = scrolls.indexOf(s);
+    if (i >= 0) {
+      scrolls.splice(i, 1);
+    }
   }
 
   function initScroll() {
