@@ -47,6 +47,36 @@ story
 
 Odyssey defines some useful actions and triggers, they are defined in the API documentation.
 
+## triggers can raise other triggers
+
+Imagine we want to create a story that passes slides with right and left keys. We need a trigger
+that is raised every time we press the key. Let's do it
+
+```javascript
+
+// create a sequential trigger
+// seq.step(1) creates a trigger that will be raised then sequence enters
+// in step 1
+var seq = O.Sequential();
+
+// attach left and right keys to next//prev
+O.Keys().left().then(seq.next, seq)
+O.Keys().right().then(seq.next, seq)
+
+// create the story
+O.Story()
+    .addState(seq.step(0), O.Debug().log('slide 1'))
+    .addState(seq.step(1), O.Debug().log('slide 2'))
+    .addState(seq.step(2), O.Debug().log('slide 3'))
+
+// we could control programatically
+// pass the slides every 5000
+setInterval(function() {
+    seq.next()
+}, 5000);
+```
+
+
 # how to define your own actions
 
 Odyssey provides actions but you can define yours
@@ -111,5 +141,4 @@ function IntervalTrigger() {
 // state if the trigger is raised again it has no effect
 story.addAction(IntervalTrigger(), O.Debug().log('enter')); 
 ```
-
 
