@@ -11,8 +11,7 @@ Let's define the core of Odyssey
 
 this examples prints in the console when an user press a key
 
-```
-
+```javascript
 var story = O.Story();
 
 story
@@ -27,7 +26,7 @@ another trigger is raised (so it enters in another state)
 
 we can execute multiple actions at the same time with ``O.Parallel``
 
-```
+```javascript
 story
     .addAState(O.Keys().right(), O.Parallel(
         O.Debug().log('rigth key pressed'),
@@ -37,7 +36,7 @@ story
 
 or one by one using ``O.Chain``:
 
-```
+```javascript
 story
     .addAState(O.Keys().right(), O.Chain(
         O.Debug().log('rigth key pressed'),
@@ -52,65 +51,65 @@ Odyssey defines some useful actions and triggers, they are defined in the API do
 
 Odyssey provides actions but you can define yours
 
-```
-    var hideDivAction = O.Action(function() {
-        $('#element').hide()
-    });
+```javascript
+var hideDivAction = O.Action(function() {
+    $('#element').hide()
+});
 
-    story.addAction(O.Keys().right(), hideDivAction)
+story.addAction(O.Keys().right(), hideDivAction)
 ```
 
 more advanced actions can be created, for example, one that show an element when the story enters in
 the state and hides it when leaves it
 
-```
-    var showHideAction = O.Action({
-        enter: function() {
-            $('#element').show()
-        },
+```javascript
+var showHideAction = O.Action({
+    enter: function() {
+        $('#element').show()
+    },
 
-        exit: function() {
-            $('#element').hide()
-        }
-    });
+    exit: function() {
+        $('#element').hide()
+    }
+});
 
-    story.addAction(O.Keys().right(), showHideAction)
+story.addAction(O.Keys().right(), showHideAction)
 ```
 
 but the right way to define this actions would be:
 
-```
-    function ShowHideAction(el) {
-        return O.Action({
-            enter: function() {
-                el.show()
-            },
+```javascript
+function ShowHideAction(el) {
+    return O.Action({
+        enter: function() {
+            el.show()
+        },
 
-            exit: function() {
-                el.hide()
-            }
-        });
-    }
+        exit: function() {
+            el.hide()
+        }
+    });
+}
 
-    story.addAction(O.Keys().right(), ShowHideAction($('#element')))
+story.addAction(O.Keys().right(), ShowHideAction($('#element')))
 ```
 
 # define custom triggers
 
 let's define a trigger that is raised every 3 seconds
 
-```
-    function IntervalTrigger() {
-        t = O.Trigger();
-        setInterval(funtion() {
-            t.trigger();
-        }, 3000)
-        return t;
-    }
+```javascript
+function IntervalTrigger() {
+    t = O.Trigger();
+    setInterval(funtion() {
+        t.trigger();
+    }, 3000)
+    return t;
+}
 
-    // enter will be printed only once since when the story is in a 
-    // state if the trigger is raised again it has no effect
-    story.addAction(IntervalTrigger(), O.Debug().log('enter')); 
+// enter will be printed only once since when the story is in a 
+// state if the trigger is raised again it has no effect
+story.addAction(IntervalTrigger(), O.Debug().log('enter')); 
 ```
 
 
