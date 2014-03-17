@@ -1,12 +1,12 @@
 # intro
 
-Odyssey allows you to create event based stories. In order to create a story you add some states,
+Odyssey allows you to create event based stories. In order to create one you add some states,
 each of those states are raised by a trigger and some actions are performed for each state. For example, a trigger could be "pressing the right key" and the action it raises "to move a map to a certain place".
 
 
 # most basic example
 
-this examples prints in the console when an user press a key
+This examples prints messages in the console when an user press a key:
 
 ```javascript
 var story = O.Story();
@@ -17,11 +17,10 @@ story
 
 ```
 
-When the user press right key the story enters in the first state and it does not leave it until
-another trigger is raised (so it enters in another state)
+When the user press the right key, the story goes to the first state and does not leave it until
+another trigger is raised (entering in another state).
 
-
-we can execute multiple actions at the same time with ``O.Parallel``
+It's possible to execute multiple actions at the same time with ``O.Parallel``:
 
 ```javascript
 story
@@ -31,7 +30,7 @@ story
     ))
 ```
 
-or one by one using ``O.Chain``:
+or just one by one using ``O.Chain``:
 
 ```javascript
 story
@@ -42,12 +41,12 @@ story
     ))
 ```
 
-Odyssey defines some useful actions and triggers, they are defined in the API documentation.
+Odyssey defines some useful actions and triggers, they are explained in the API documentation.
 
 ## triggers can raise other triggers
 
 Imagine we want to create a story that passes slides with right and left keys. We need a trigger
-that is raised every time we press the key. Let's do it
+that is raised every time we press the key. Let's do it:
 
 ```javascript
 
@@ -76,7 +75,7 @@ setInterval(function() {
 
 # how to define your own actions
 
-Odyssey provides actions but you can define yours
+Odyssey provides actions but you can define yours:
 
 ```javascript
 var hideDivAction = O.Action(function() {
@@ -86,8 +85,8 @@ var hideDivAction = O.Action(function() {
 story.addAction(O.Keys().right(), hideDivAction)
 ```
 
-more advanced actions can be created, for example, one that show an element when the story enters in
-the state and hides it when leaves it
+More advanced actions can be created, for example, let's define one that shows an element when the story enters in
+the state and hides it when leaves it:
 
 ```javascript
 var showHideAction = O.Action({
@@ -103,7 +102,7 @@ var showHideAction = O.Action({
 story.addState(O.Keys().right(), showHideAction)
 ```
 
-but the right way to define this actions would be:
+but the right way to define these actions would be:
 
 ```javascript
 function ShowHideAction(el) {
@@ -123,7 +122,7 @@ story.addState(O.Keys().right(), ShowHideAction($('#element')))
 
 # define custom triggers
 
-let's define a trigger that is raised every 3 seconds
+Let's define a trigger that is raised every 3 seconds:
 
 ```javascript
 function IntervalTrigger() {
