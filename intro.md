@@ -1,7 +1,6 @@
 # intro
 
-Odyssey allows you to create event based stories. In order to create one you add some states,
-each of those states are raised by a trigger and some actions are performed for each state. For example, a trigger could be "pressing the right key" and the action it raises "to move a map to a certain place".
+Odyssey allows you to create event based stories. In order to create one, you define some states (that can be raised by a trigger) and some actions (that will be performed for each state). For example, a trigger could be "pressing the right key" and the action it raises "to move a map to a certain place".
 
 
 # most basic example
