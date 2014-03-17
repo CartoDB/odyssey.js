@@ -67,7 +67,7 @@ function dialog(context) {
     var enter = codeEditor.enter();
     enter.append('h1').text('Odyssey editor');
     var select = enter.append('select')
-      .html(['scroll', 'slides'].map(function(v) {
+      .html(['torque', 'scroll', 'slides'].map(function(v) {
         return "<option value='" + v + "'>" + v + "</option>";
       }).join('\n'))
       .on('change', function() {
@@ -271,7 +271,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('scroll');
+  set_template('torque');
 
 
 
