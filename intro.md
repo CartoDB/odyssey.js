@@ -85,7 +85,7 @@ var hideDivAction = O.Action(function() {
 story.addAction(O.Keys().right(), hideDivAction)
 ```
 
-More advanced actions can be created, for example, let's define one that shows an element when the story enters in
+More advanced actions can be created. For example, let's define one that shows an element when the story enters in
 the state and hides it when leaves it:
 
 ```javascript
