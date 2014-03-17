@@ -1,4 +1,3 @@
-
 # intro
 
 Odyssey allows you to create event based stories. In order to create a story you add a series of
@@ -28,21 +27,21 @@ we can execute multiple actions at the same time with ``O.Parallel``
 
 ```javascript
 story
-    .addAState(O.Keys().right(), O.Parallel(
+    .addState(O.Keys().right(), O.Parallel(
         O.Debug().log('rigth key pressed'),
         O.Debug().log('hello')
-    ),
+    ))
 ```
 
 or one by one using ``O.Chain``:
 
 ```javascript
 story
-    .addAState(O.Keys().right(), O.Chain(
+    .addState(O.Keys().right(), O.Chain(
         O.Debug().log('rigth key pressed'),
-        O.Sleep(1000)
+        O.Sleep(1000),
         O.Debug().log('this is printed after 1 second')
-    )
+    ))
 ```
 
 Odyssey defines some useful actions and triggers, they are defined in the API documentation.
@@ -73,7 +72,7 @@ var showHideAction = O.Action({
     }
 });
 
-story.addAction(O.Keys().right(), showHideAction)
+story.addState(O.Keys().right(), showHideAction)
 ```
 
 but the right way to define this actions would be:
@@ -91,7 +90,7 @@ function ShowHideAction(el) {
     });
 }
 
-story.addAction(O.Keys().right(), ShowHideAction($('#element')))
+story.addState(O.Keys().right(), ShowHideAction($('#element')))
 ```
 
 # define custom triggers
@@ -109,7 +108,7 @@ function IntervalTrigger() {
 
 // enter will be printed only once since when the story is in a 
 // state if the trigger is raised again it has no effect
-story.addAction(IntervalTrigger(), O.Debug().log('enter')); 
+story.addState(IntervalTrigger(), O.Debug().log('enter')); 
 ```
 
 
