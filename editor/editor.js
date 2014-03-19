@@ -67,7 +67,7 @@ function dialog(context) {
     var enter = codeEditor.enter();
     enter.append('h1').text('Odyssey editor');
     var select = enter.append('select')
-      .html(['scroll', 'slides'].map(function(v) {
+      .html(['torque', 'scroll', 'slides'].map(function(v) {
         return "<option value='" + v + "'>" + v + "</option>";
       }).join('\n'))
       .on('change', function() {
@@ -113,7 +113,7 @@ function dialog(context) {
         if (++c === 2) {
           // inser in the previous line
           currentLine = codemirror.getLineHandle(i);
-          codemirror.setLine(i, "\n" + action + "\n" + currentLine.text);
+          codemirror.setLine(i, action + "\n" + currentLine.text);
           return;
         }
       } else if(SLIDE_REGEXP.exec(line)) {
@@ -271,7 +271,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('scroll');
+  set_template('torque');
 
 
 

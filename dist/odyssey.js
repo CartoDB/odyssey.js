@@ -490,6 +490,13 @@ function Parallel () {
     }
   };
 
+  _Parallel.clear = function() {
+    for(var i = 0, len = actions.length; i < len; ++i) {
+      var a = actions[i];
+      a.clear && a.clear();
+    }
+  }
+
   _Parallel = Action(_Parallel);
   return _Parallel;
 }
@@ -539,6 +546,13 @@ function Chain() {
     queue = actions.slice();
     next('exit');
     return true;
+  }
+
+  _Chain.clear = function() {
+    for(var i = 0, len = actions.length; i < len; ++i) {
+      var a = actions[i];
+      a.clear && a.clear();
+    }
   }
 
   _Chain = Action(_Chain);

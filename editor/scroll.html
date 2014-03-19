@@ -6,7 +6,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../../vendor/leaflet.css" />
+  <!--<link rel="stylesheet" href="../../vendor/leaflet.css" />-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <style>
     body {
       text-align: center;
@@ -53,7 +54,8 @@
   </div> <!-- layout -->
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="../../vendor/leaflet.js"></script>
+  <!--<script src="../../vendor/leaflet.js"></script>-->
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../../dist/odyssey.js" charset="UTF-8"></script>
   <script src="markdown.js" charset="UTF-8"></script>
   <script src="actions.js" charset="UTF-8"></script>
@@ -65,7 +67,14 @@
     actions: {
       'move map to': function() {
         var center = this.map.getCenter()
-        return 'S.map.actions.setView([' + center.lat + ', ' + center.lng + '],' + this.map.getZoom() + ')'
+        return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
+      },
+      'show marker': function() {
+        var center = this.map.getCenter()
+        return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+      },
+      'sleep': function() {
+        return "O.Actions.Sleep(1000)";
       }
     },
 
