@@ -6,7 +6,7 @@
 - python -m SimpleHTTPServer
 - open http://locahost:8000/editor/editor.html
 
-# how to run for developers
+# how to run (for developers)
 
 - go to the root of this repository
 - npm install
