@@ -96,12 +96,16 @@ body {
   border-radius: 4px / 4px;
 }
 /* line 30, ../sass/screen.scss */
+#editor_modal.expanded {
+  width: 720px;
+}
+/* line 34, ../sass/screen.scss */
 #editor_modal div.header {
   background: #ff7373 url("../assets/img/greyBarBkg.png") repeat-y left top;
   color: white;
   line-height: 1em;
   margin: 0;
-  padding: 22px 20px 20px 15px;
+  padding: 22px 20px 20px 16px;
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
   border-top-left-radius: 4px;
@@ -109,27 +113,37 @@ body {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 38, ../sass/screen.scss */
+/* line 42, ../sass/screen.scss */
 #editor_modal div.header a.expandButton {
   background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
   padding: 4px 13px;
 }
-/* line 42, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
 #editor_modal div.header a.expandButton:hover {
-  background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 -28px;
+  background-position: 0 -28px;
 }
-/* line 47, ../sass/screen.scss */
+/* line 50, ../sass/screen.scss */
+#editor_modal div.header a.expandButton.expanded {
+  background-position: -27px 0;
+}
+/* line 53, ../sass/screen.scss */
+#editor_modal div.header a.expandButton.expanded:hover {
+  background-position: -27px -28px;
+}
+/* line 59, ../sass/screen.scss */
 #editor_modal div.header h1 {
   display: inline;
   width: auto;
   margin: 0 0 0 35px;
 }
-/* line 53, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 #editor_modal div.header select {
-  margin: 0 0 0 126px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
   width: 120px;
 }
-/* line 60, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   color: rgba(0, 0, 0, 0.9);
   background: transparent;
@@ -139,7 +153,7 @@ body {
   height: 100%;
   width: 382px;
 }
-/* line 70, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -151,13 +165,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 79, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 #actionDropdown {
   background: white;
   width: 150px;
@@ -166,7 +180,7 @@ body {
   text-align: left;
 }
 
-/* line 94, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 #actionDropdown li {
   padding: 5px;
   list-style: none;

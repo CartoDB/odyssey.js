@@ -27,12 +27,16 @@ body{
   text-align: left;
   @include border-radius(4px, 4px);
 
+  &.expanded{
+    width: 720px;
+  }
+
 	div.header {
     background: rgb(255, 115, 115) url("../assets/img/greyBarBkg.png") repeat-y left top;
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
-	  padding: 22px 20px 20px 15px;
+	  padding: 22px 20px 20px 16px;
     @include border-top-radius(4px);
 
     a.expandButton{
@@ -40,7 +44,15 @@ body{
       padding: 4px 13px;
 
       &:hover{
-        background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 -28px;
+        background-position: 0 -28px;
+      }
+
+      &.expanded{
+        background-position: -27px 0; 
+
+        &:hover{
+          background-position: -27px -28px;
+        }
       }
     }
 
@@ -51,7 +63,9 @@ body{
     }
 
     select{
-      margin: 0 0 0 126px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
       width: 120px;
     }
 

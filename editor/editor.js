@@ -68,7 +68,11 @@ function dialog(context) {
       .attr('class','header');
 
     divHeader.append('a')
-      .attr('class','expandButton');
+      .attr('class','expandButton')
+      .on('click', function(){
+        // console.log(event.target);
+        _expand();
+      })
 
     divHeader.append('h1')
       .text('Odyssey editor');
@@ -96,6 +100,16 @@ function dialog(context) {
         placeActionButtons(el, codemirror);
       });
     });
+
+    function _expand(){
+      var _t = d3.select('#editor_modal');
+      var _hassClass = _t.classed('expanded')
+      _t.classed('expanded', !_hassClass);
+
+      var _b = d3.select('a.expandButton');
+      _b.classed('expanded', !_hassClass);
+
+    }
 
     // update
     codeEditor.each(function(d) {
