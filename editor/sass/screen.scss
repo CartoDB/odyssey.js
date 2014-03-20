@@ -32,13 +32,22 @@ body{
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
-	  padding: 22px 20px 20px 20px;
+	  padding: 22px 20px 20px 15px;
     @include border-top-radius(4px);
+
+    a.expandButton{
+      background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
+      padding: 4px 13px;
+
+      &:hover{
+        background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 -28px;
+      }
+    }
 
     h1{
       display: inline;
       width: auto;
-      margin: 0 0 0 55px;
+      margin: 0 0 0 35px;
     }
 
     select{

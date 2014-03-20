@@ -65,7 +65,10 @@ function dialog(context) {
 
     var enter = codeEditor.enter();
     var divHeader = enter.append('div')
-      .attr('class','header')
+      .attr('class','header');
+
+    divHeader.append('a')
+      .attr('class','expandButton');
 
     divHeader.append('h1')
       .text('Odyssey editor');
