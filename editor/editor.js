@@ -66,14 +66,17 @@ function dialog(context) {
     var enter = codeEditor.enter();
     var divHeader = enter.append('div')
       .attr('class','header')
-      .append('h1').text('Odyssey editor')
-      .append('select')
-        .html(['torque', 'scroll', 'slides'].map(function(v) {
-          return "<option value='" + v + "'>" + v + "</option>";
-        }).join('\n'))
-        .on('change', function() {
-          evt.template(this.value);
-        });
+
+    divHeader.append('h1')
+      .text('Odyssey editor');
+      
+    divHeader.append('select')
+      .html(['torque', 'scroll', 'slides'].map(function(v) {
+        return "<option value='" + v + "'>" + v + "</option>";
+      }).join('\n'))
+      .on('change', function() {
+        evt.template(this.value);
+      });
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')
