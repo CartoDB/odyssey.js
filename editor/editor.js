@@ -295,7 +295,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('torque');
+  set_template('scroll');
 
 
 
