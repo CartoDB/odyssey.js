@@ -96,7 +96,7 @@ body {
   border-radius: 4px / 4px;
 }
 /* line 30, ../sass/screen.scss */
-#editor_modal h1 {
+#editor_modal div.header {
   background-color: #ff7373;
   color: white;
   line-height: 1em;
@@ -109,7 +109,17 @@ body {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 39, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
+#editor_modal div.header h1 {
+  display: inline;
+  width: 300px;
+}
+/* line 43, ../sass/screen.scss */
+#editor_modal div.header select {
+  margin: 0 0 0 180px;
+  width: 120px;
+}
+/* line 50, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   color: rgba(0, 0, 0, 0.9);
   background-color: rgba(255, 0, 0, 0.05);
@@ -119,7 +129,7 @@ body {
   height: 100%;
   width: 382px;
 }
-/* line 49, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -131,13 +141,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 58, ../sass/screen.scss */
+/* line 69, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 65, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 #actionDropdown {
   background: white;
   width: 150px;
@@ -146,7 +156,7 @@ body {
   text-align: left;
 }
 
-/* line 73, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 #actionDropdown li {
   padding: 5px;
   list-style: none;

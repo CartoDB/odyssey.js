@@ -52,7 +52,6 @@ function open(el, items) {
   d.call(drop);
   return drop;
 
-
 }
 
 function dialog(context) {
@@ -65,14 +64,16 @@ function dialog(context) {
       .data([code]);
 
     var enter = codeEditor.enter();
-    enter.append('h1').text('Odyssey editor');
-    var select = enter.append('select')
-      .html(['torque', 'scroll', 'slides'].map(function(v) {
-        return "<option value='" + v + "'>" + v + "</option>";
-      }).join('\n'))
-      .on('change', function() {
-        evt.template(this.value);
-      });
+    var divHeader = enter.append('div')
+      .attr('class','header')
+      .append('h1').text('Odyssey editor')
+      .append('select')
+        .html(['torque', 'scroll', 'slides'].map(function(v) {
+          return "<option value='" + v + "'>" + v + "</option>";
+        }).join('\n'))
+        .on('change', function() {
+          evt.template(this.value);
+        });
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')

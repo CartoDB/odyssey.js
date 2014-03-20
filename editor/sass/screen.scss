@@ -27,13 +27,24 @@ body{
   text-align: left;
   @include border-radius(4px, 4px);
 
-	h1 {
+	div.header {
 	  background-color: rgb(255, 115, 115);
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
 	  padding: 20px;
     @include border-top-radius(4px);
+
+    h1{
+      display: inline;
+      width: 300px;
+    }
+
+    select{
+      margin: 0 0 0 180px;
+      width: 120px;
+    }
+
 	}
 
   textarea, .CodeMirror {
