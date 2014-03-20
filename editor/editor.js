@@ -166,6 +166,9 @@ function dialog(context) {
       ++lineNumber;
     });
 
+    //remove previously added buttons
+    el.selectAll('.actionButton').remove()
+
     var buttons = el.selectAll('.actionButton')
       .data(positions);
 
