@@ -169,10 +169,10 @@ function dialog(context) {
       });
 
     // update
-    var LINE_HEIGHT = 22;
+    var LINE_HEIGHT = 28;
     buttons.style({
       top: function(d) { return (d.pos - LINE_HEIGHT) + "px"; },
-      left: 10 + "px"
+      left: 16 + "px"
     });
 
   }

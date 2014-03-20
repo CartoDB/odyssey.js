@@ -18,7 +18,7 @@ body{
 }
 
 #editor_modal {
-  background-color:#FFF;
+  background: #ffffff url("../assets/img/greyBarBkg.png") repeat-y left top;
   position: absolute;
   right: 30px;
   top: 30px;
@@ -28,20 +28,21 @@ body{
   @include border-radius(4px, 4px);
 
 	div.header {
-	  background-color: rgb(255, 115, 115);
+    background: rgb(255, 115, 115) url("../assets/img/greyBarBkg.png") repeat-y left top;
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
-	  padding: 20px;
+	  padding: 22px 20px 20px 20px;
     @include border-top-radius(4px);
 
     h1{
       display: inline;
-      width: 300px;
+      width: auto;
+      margin: 0 0 0 55px;
     }
 
     select{
-      margin: 0 0 0 180px;
+      margin: 0 0 0 126px;
       width: 120px;
     }
 
@@ -49,10 +50,10 @@ body{
 
   textarea, .CodeMirror {
     color: rgba(0,0,0,0.9);
-    background-color: rgba(255,0,0,0.05);
+    background: transparent;
     font-family: monospace;
     font-size: 14px;
-    padding: 20px 20px 20px 50px;
+    padding: 20px 20px 20px 72px;
     height: 100%;
     width: 382px;
   }
