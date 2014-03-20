@@ -192,7 +192,7 @@ function editor() {
 
   var iframeWindow;
   var $editor = body.append('div')
-    .attr('id', 'editor_dialog')
+    .attr('id', 'editor_modal')
     .call(code_dialog);
 
 

@@ -1,4 +1,5 @@
 @import "compass/reset";
+@import "compass/css3/border-radius";
 
 body{
   text-align: center;
@@ -10,7 +11,67 @@ body{
 
 #template {
   position: absolute; 
-  top: 0; left: 0;
+  top: 0; 
+  left: 0;
   width:100%;
   height: 100%;
+}
+
+#editor_modal {
+  background-color:#FFF;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  bottom: 30px;
+  width: 452px;
+  text-align: left;
+  @include border-radius(4px, 4px);
+
+	h1 {
+	  background-color: rgb(255, 115, 115);
+	  color: white;
+	  line-height: 1em;
+	  margin: 0;
+	  padding: 20px;
+    @include border-top-radius(4px);
+	}
+
+  textarea, .CodeMirror {
+    color: rgba(0,0,0,0.9);
+    background-color: rgba(255,0,0,0.05);
+    font-family: monospace;
+    font-size: 14px;
+    padding: 20px 20px 20px 50px;
+    height: 100%;
+    width: 382px;
+  }
+
+  .actionButton {
+    position: absolute;
+    background-color: rgb(209, 209, 209);
+    padding: 3px 3px 1px 3px;
+    @include border-radius(2px, 2px);
+    color: #FFF;
+    font-size: 8px;
+    text-transform: uppercase;
+    
+    &:hover{
+      background-color: rgb(175, 175, 175);
+      cursor: pointer;
+    }
+  }
+}
+
+#actionDropdown {
+  background: white;
+  width: 150px;
+  z-index: 20;
+  border: 1px solid #888;
+  text-align: left;
+}
+
+#actionDropdown li {
+  padding: 5px;
+  list-style: none;
+  border-bottom: 1px solid #888;
 }
