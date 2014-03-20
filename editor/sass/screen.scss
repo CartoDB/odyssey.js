@@ -68,17 +68,19 @@ body{
       right: 20px;
       width: 120px;
     }
-
 	}
 
   textarea, .CodeMirror {
+    position: absolute;
+    top: 57px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     color: rgba(0,0,0,0.9);
     background: transparent;
     font-family: monospace;
     font-size: 14px;
     padding: 20px 20px 20px 72px;
-    height: 100%;
-    width: 382px;
   }
 
   .actionButton {

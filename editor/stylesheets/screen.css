@@ -143,17 +143,20 @@ body {
   right: 20px;
   width: 120px;
 }
-/* line 74, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
+  position: absolute;
+  top: 57px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   color: rgba(0, 0, 0, 0.9);
   background: transparent;
   font-family: monospace;
   font-size: 14px;
   padding: 20px 20px 20px 72px;
-  height: 100%;
-  width: 382px;
 }
-/* line 84, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -165,13 +168,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 93, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 100, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 #actionDropdown {
   background: white;
   width: 150px;
@@ -180,7 +183,7 @@ body {
   text-align: left;
 }
 
-/* line 108, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 #actionDropdown li {
   padding: 5px;
   list-style: none;
