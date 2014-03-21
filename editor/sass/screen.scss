@@ -72,10 +72,11 @@ body{
 
   textarea, .CodeMirror {
     position: absolute;
-    top: 57px;
+    top: 58px;
     bottom: 0;
     left: 0;
     right: 0;
+    height: auto;
     color: rgba(0,0,0,0.9);
     background: transparent;
     font-family: monospace;
