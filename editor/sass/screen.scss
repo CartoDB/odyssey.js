@@ -1,5 +1,6 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
+@import "compass/css3/font-face";
 
 body{
   text-align: center;
@@ -82,6 +83,7 @@ body{
     font-family: monospace;
     font-size: 14px;
     padding: 20px 20px 20px 72px;
+    overflow-x: hidden;
   }
 
   .actionButton {
