@@ -181,28 +181,60 @@ a:hover {
 ul#navButtons {
   margin: 20px 0 0 0;
 }
-/* line 93, ../sass/slides.scss */
+/* line 92, ../sass/slides.scss */
 ul#navButtons li {
   width: 30px;
   display: inline;
 }
-/* line 97, ../sass/slides.scss */
+/* line 96, ../sass/slides.scss */
 ul#navButtons li a {
   display: inline-block;
   width: 23px;
   height: 30px;
   background: transparent url("../assets/img/navBtns.png") no-repeat -10px 0;
 }
-/* line 102, ../sass/slides.scss */
+/* line 101, ../sass/slides.scss */
 ul#navButtons li a:hover {
   background-position: -10px -30px;
   cursor: pointer;
 }
-/* line 104, ../sass/slides.scss */
+/* line 103, ../sass/slides.scss */
 ul#navButtons li a.prev {
   background: transparent url("../assets/img/navBtns.png") no-repeat -30px 0;
 }
-/* line 106, ../sass/slides.scss */
+/* line 105, ../sass/slides.scss */
 ul#navButtons li a.prev:hover {
   background-position: -30px -30px;
+}
+
+/* line 111, ../sass/slides.scss */
+div#credits {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  background-color: #FFF;
+}
+/* line 119, ../sass/slides.scss */
+div#credits span {
+  padding: 12px 0 0 0;
+  position: absolute;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+/* line 125, ../sass/slides.scss */
+div#credits span.title {
+  left: 80px;
+  font-family: ProximaNovaBold, Sans-serif;
+  color: #333;
+}
+/* line 131, ../sass/slides.scss */
+div#credits span.author {
+  right: 80px;
+  font-family: AleoRegular, Serif;
+  color: #999;
+  letter-spacing: 2px;
+  font-size: 10px;
+  text-align: right;
 }

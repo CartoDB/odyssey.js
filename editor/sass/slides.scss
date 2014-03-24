@@ -87,7 +87,6 @@ a{
 }
 
 ul#navButtons{
-
 	margin: 20px 0 0 0;
 
 	li{
@@ -106,5 +105,37 @@ ul#navButtons{
 				&:hover{ background-position: -30px -30px;}
 			}
 		}
+	}
+}
+
+div#credits{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 42px;
+	background-color: #FFF;
+
+	span{
+		padding: 12px 0 0 0;
+		position: absolute;
+		font-size: 12px;
+		text-transform: uppercase;
+
+		&.title{
+			left: 80px;
+			font-family: ProximaNovaBold, Sans-serif;
+			color: #333;
+		}
+
+		&.author{
+			right: 80px;
+			font-family: AleoRegular, Serif;
+			color: #999;
+			letter-spacing: 2px;
+			font-size: 10px;
+			text-align: right;
+		}
+
 	}
 }
