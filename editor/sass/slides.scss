@@ -1,0 +1,112 @@
+@import "compass/reset";
+@import "compass/css3/font-face";
+
+@include font-face("AleoRegular", font-files("/editor/assets/fonts/aleo-regular-webfont.woff", "/editor/assets/fonts/aleo-regular-webfont.ttf", "/editor/assets/fonts/aleo-regular-webfont.svg"), "/editor/assets/fonts/aleo-regular-webfont.eot");
+@include font-face("AleoBold", font-files("/editor/assets/fonts/aleo-bold-webfont.woff", "/editor/assets/fonts/aleo-bold-webfont.ttf", "/editor/assets/fonts/aleo-bold-webfont.svg"), "/editor/assets/fonts/aleo-bold-webfont.eot");
+@include font-face("ProximaNovaBold", font-files("/editor/assets/fonts/ProximaNova-bold.woff", "/editor/assets/fonts/ProximaNova-bold.ttf", "/editor/assets/fonts/ProximaNova-bold.svg"), "/editor/assets/fonts/ProximaNova-bold.eot");
+	
+#map { position: absolute;  top: 0; left: 0; width:100%; height: 100%;}
+
+.slide {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	width: 320px;
+	padding: 40px;
+	background-color: rgba(255,255,255,0.5);
+}
+
+ul#dots{
+	margin: 0 0 20px 0;
+
+	li{
+		display: inline;	
+		
+		a{
+			opacity: 0.2;
+			color: #333;
+
+			&:before {
+	    	content: ' \25CF';
+	    	font-size: 16px;
+	  	}
+
+			&.active{opacity: 1;}
+			&:hover{
+				opacity: 1;
+				cursor: pointer;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: ProximaNovaBold, Sans-serif;
+	color: #333;
+	font-size: 45px;
+	text-transform: uppercase;
+
+	&:after{
+		display: block;
+		margin: 20px 0 20px 0;
+    height: 3px;
+    content: " ";
+    text-shadow: none;
+    background-color: #333;
+    width: 140px;
+	}
+}
+
+h2, h3, h4, h5, h6{
+	font-size: 19px;
+
+	&:after{
+    height: 1px;
+    margin: 18px 0 18px 0;
+    width: 180px;
+	}
+
+}
+
+
+p, span{
+	font-family: AleoRegular, Serif;
+	color: #333;
+	font-size: 15px;
+	line-height: 21px;
+	margin: 0 0 19px 0;
+}
+
+a{
+	color: #FF7373;
+	text-decoration: none;
+
+	&:hover{
+		text-decoration: underline;
+	}
+
+}
+
+ul#navButtons{
+
+	margin: 20px 0 0 0;
+
+	li{
+		width: 30px;
+		display: inline;
+
+		a{
+			display: inline-block;
+			width: 23px;
+			height: 30px;
+			background: transparent url("../assets/img/navBtns.png") no-repeat -10px 0 ;
+			&:hover{ background-position: -10px -30px; cursor: pointer;}
+
+			&.prev{
+				background: transparent url("../assets/img/navBtns.png") no-repeat -30px 0;
+				&:hover{ background-position: -30px -30px;}
+			}
+		}
+	}
+}
