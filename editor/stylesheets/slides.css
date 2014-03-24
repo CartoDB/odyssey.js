@@ -213,12 +213,12 @@ div#credits {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 42px;
+  height: 44px;
   background-color: #FFF;
 }
 /* line 119, ../sass/slides.scss */
 div#credits span {
-  padding: 12px 0 0 0;
+  padding: 13px 0 0 0;
   position: absolute;
   font-size: 12px;
   text-transform: uppercase;
