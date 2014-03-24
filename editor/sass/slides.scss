@@ -24,6 +24,7 @@ ul#dots{
 		
 		a{
 			opacity: 0.2;
+			color: #333;
 
 			&:before {
 	    	content: ' \25CF';
@@ -34,12 +35,13 @@ ul#dots{
 			&:hover{
 				opacity: 1;
 				cursor: pointer;
+				text-decoration: none;
 			}
 		}
 	}
 }
 
-h1{
+h1, h2, h3, h4, h5, h6{
 	font-family: ProximaNovaBold, Sans-serif;
 	color: #333;
 	font-size: 45px;
@@ -56,11 +58,34 @@ h1{
 	}
 }
 
+h2, h3, h4, h5, h6{
+	font-size: 19px;
+
+	&:after{
+    height: 1px;
+    margin: 18px 0 18px 0;
+    width: 180px;
+	}
+
+}
+
+
 p, span{
 	font-family: AleoRegular, Serif;
 	color: #333;
 	font-size: 15px;
 	line-height: 21px;
+	margin: 0 0 19px 0;
+}
+
+a{
+	color: #FF7373;
+	text-decoration: none;
+
+	&:hover{
+		text-decoration: underline;
+	}
+
 }
 
 ul#navButtons{
