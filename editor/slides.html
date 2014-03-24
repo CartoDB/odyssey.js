@@ -64,6 +64,20 @@
 
   O.Template({
 
+    actions: {
+      'move map to': function() {
+        var center = this.map.getCenter()
+        return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
+      },
+      'show marker': function() {
+        var center = this.map.getCenter()
+        return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+      },
+      'sleep': function() {
+        return "O.Actions.Sleep(1000)";
+      }
+    },
+
     init: function() {
       var map = L.map('map').setView([0, 0.0], 4);
         L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
