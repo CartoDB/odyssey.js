@@ -47,7 +47,7 @@ function dialog(context) {
       .text('Odyssey editor');
       
     divHeader.append('select')
-      .html(['torque', 'scroll', 'slides'].map(function(v) {
+      .html(['torque', 'scroll', 'slides', 'rolling_stones'].map(function(v) {
         return "<option value='" + v + "'>" + v + "</option>";
       }).join('\n'))
       .on('change', function() {

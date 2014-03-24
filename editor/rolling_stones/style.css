@@ -1,0 +1,344 @@
+
+@font-face {
+    font-family: 'hero_lightlight';
+    src: url('hero_light-webfont.eot');
+    src: url('hero_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./hero_light-webfont.woff') format('woff'),
+         url('hero_light-webfont.ttf') format('truetype'),
+         url('hero_light-webfont.svg#hero_lightlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'heroregular';
+    src: url('hero-webfont.eot');
+    src: url('hero-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./hero-webfont.woff') format('woff'),
+         url('hero-webfont.ttf') format('truetype'),
+         url('hero-webfont.svg#heroregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html, body {
+  background-color: #111;
+  width: 100%;
+  height: 100%;
+  padding: 0; margin: 0;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+}
+
+div#header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding: 24px 0 0 0;
+  pointer-events:none;
+}
+
+div#header a{
+  font-family: 'hero_lightlight';
+  font-size: 23px;
+  color: #FFF;
+  text-decoration: none;
+  margin: 0 0 0 104px;
+  letter-spacing: -1px;
+  float:left;
+  pointer-events:all;
+}
+
+#overImg{
+    background: url(../img/overImg.png) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/overImg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/overImg.jpg', sizingMethod='scale')";
+    pointer-events:none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+div#header a{
+    font-family: 'hero_lightlight';
+    font-size: 23px;
+    color: #FFF;
+    text-decoration: none;
+    margin: 0 0 0 104px;
+    letter-spacing: -1px;
+    float:left;
+    pointer-events:all;
+}
+
+div#header div.sharing{
+    float:right;
+    width: 156px;
+    margin-top: -4px;
+    margin-right: 92px;
+}
+
+div#header div.sharing a.fb{
+    background: url(../img/fbBtn.png) 0 0 no-repeat;
+    display: inline-block;
+    height: 28px;
+    width: 78px;
+    margin: 0 7px 0 0;
+}
+
+div#header div.sharing a.fb:hover{
+    background: url(../img/fbBtn.png) 0 -28px no-repeat;
+}
+
+div#header div.sharing a.tw{
+    background: url(../img/twBtn.png) 0 0 no-repeat;
+    display: inline-block;
+    height: 28px;
+    width: 68px;
+    margin: 0;
+}
+
+div#header div.sharing a.tw:hover{
+    background: url(../img/twBtn.png) 0 -28px no-repeat;
+}
+
+.reveal h1{text-shadow:none; text-transform: none;}
+.reveal h2{text-shadow:none; text-transform: none;}
+
+section {
+    position: absolute;
+    top: 50%;
+    height: 540px;
+    margin-top: -270px;
+    left: 100px;
+}
+
+section.landing h1{
+    font-family: 'hero_lightlight';
+    font-size: 76px;
+    color: #FFF;
+    text-align: left;
+    width: 500px;
+    letter-spacing: -2px;
+}
+
+section.landing h1 strong{
+    font-family: 'heroregular';
+    color: #FF0000; 
+    font-weight: normal;
+}
+
+section.landing h1.hugeNumber{
+    font-size: 197px;
+    margin: 0 0 -10px -5px;
+}
+
+section.landing h2{
+    font-family: 'hero_lightlight';
+    font-size: 31px;
+    text-align: left;
+    color: #FFF;
+    margin: 22px 0 0 0;
+    width: 370px;
+    line-height: 35px;
+}
+
+
+section {
+  font-family: 'hero_lightlight';
+  text-align: left;
+  color: #FFF;
+}
+
+section h1 {
+  /*font-family: 'heroregular';*/
+  font-size: 117px;
+  margin: 0;
+}
+
+section h2{
+  font-size: 76px;
+  color: #ff0000;
+  margin: 11px 0 20px 2px;
+  width: 470px;
+}
+
+section p {
+  font-size: 21px;
+  width: 420px;
+  line-height: 25px;
+  margin: 0 0 0 7px;
+}
+
+
+div.nextButton{
+    position: absolute;
+    top: 50%;
+    margin: -103px 0 0 0;
+    right: 100px;
+}
+
+section.tour div.nextButton{
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    margin: -103px 0 0 0;
+    right: 100px;
+    pointer-events: all;
+}
+
+div.nextButton a{
+    display: block;
+    width: 207px;
+    height: 206px;
+    background: url(../img/nextButton.png) 0 0 no-repeat;
+    pointer-events: all
+}
+
+div.nextButton a:hover{
+    background: url(../img/nextButton.png) 0 -206px no-repeat;
+}
+
+div#pointTT{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display:none;
+    z-index: 1000;
+    pointer-events: none;
+    text-shadow: 0px 0px 6px #000;
+    text-align: center;
+}
+
+div#pointTT p.name{
+    font-size: 15px;
+    font-family: 'heroregular';
+    color: #FFF;
+    width: 100%;
+    margin-top: 0;
+}
+
+div#pointTT p.date{
+    font-size: 13px;
+    font-family: 'heroregular';
+    color: #FF0000;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+div#timeline{
+    position: absolute;
+    display: block;
+    height: 56px;
+    bottom: 0;
+    right: 100px;
+    z-index: 100;
+}
+
+div#timeline ul li{
+    display: inline-block;
+    margin: 0 7px 0 0;
+}
+
+div#timeline ul li a{
+    display: block;
+    width: 9px;
+    height: 9px;
+    background: url(../img/timeBullet.png) 0 0 no-repeat;
+}
+
+div#timeline ul li a.selected, div#timeline ul li a:hover{
+    background: url(../img/timeBullet.png) 0 -9px no-repeat;
+}
+
+div#timeline ul li span{
+    font-size: 15px;
+    font-family: 'heroregular';
+    color: #666;
+    margin-top: 0;
+    width: auto;
+    height: auto;
+}
+
+div#timeline ul li span.selected{
+    color: #FFF;
+}
+
+a#wikipedia_logo{
+    background: url(../img/wikipedia_logo.png) 0 0 no-repeat;
+    position: absolute;
+    display: block;
+    width: 70px;
+    height: 23px;
+    bottom: 23px;
+    left: 185px;
+}
+
+div#cursorsThumbnail{
+    display:block;
+    position: absolute;
+    right: 106px;
+    bottom: 50px;
+    width: 56px;
+    height: 37px;
+    background: url(../img/cursorsThumbnail.png) no-repeat center center; 
+    z-index: 200;
+}
+
+/*SECTIONS*/
+
+section.landing{
+    background: url(../img/landingBkg.jpg) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/landingBkg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/landingBkg.jpg', sizingMethod='scale')";
+    pointer-events:all;
+}
+
+
+/*BROWSER NOT SUPPORTED*/
+
+body.badbrowser{
+    background: url(../img/browserNotSupported.jpg) repeat-x top center;
+}
+
+div#mainText{
+    margin: 200px auto 0 auto;
+    width: 550px;
+    height: 400px;
+    text-align: center;
+}
+
+div#mainText h1{
+    color: #FF0000;
+    font-size: 57px;
+    font-family: 'heroregular';
+    margin: 10px 0 0 0;
+    font-weight: normal;
+    line-height: 60px;
+}
+
+div#mainText h2{
+    color: #FFF;
+    font-size: 19px;
+    font-family: 'heroregular';
+    font-weight: normal;
+}
+

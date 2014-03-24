@@ -7,25 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="../vendor/leaflet.css" />
+  <link rel="stylesheet" href="./rolling_stones/style.css" />
   <style>
-    body {
-      text-align: center;
-      margin: 0; padding: 0;
-      font-family: Helvetica;
-      background: #EEE;
-    }
-    h2 {
-      font-weight: normal;
-    }
     #slides{
     }
-    .slide {
+    /*.slide {
       position: absolute;
-      top: 25%;
-      left: 5%;
+      top: 50%;
+      left: 100px;
       font-size: 45px;
 
-    }
+    }*/
   
     #map {
       position: absolute; 
@@ -63,6 +55,9 @@
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div></div>
+  <div id="header">
+    <a id="title" href="#"></a>
+  </div>
   <div id="slides"></div>
   <div id="progress"></div>
 
@@ -116,7 +111,7 @@
 
     init: function() {
       var map = L.map('map').setView([0, 0.0], 4);
-        L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+        L.tileLayer('http://0.api.cartocdn.com/base-dark/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
       var seq = O.Triggers.Sequential();
 
       // enanle keys to move
@@ -141,12 +136,14 @@
       document.getElementById('slides').innerHTML = ''
       this.progress.count(sl.length);
 
+
+      document.getElementById('title').innerHTML = actions.global.title;
       // create new story
       for(var i = 0; i < sl.length; ++i) {
         var slide = sl[i];
-        var tmpl = "<div class='slide' style='diplay:none'>"
+        var tmpl = "<section class='slide' style='diplay:none'><div class='content'>"
         tmpl += slide.html();
-        tmpl += "</div>";
+        tmpl += "</section></div>";
         document.getElementById('slides').innerHTML += tmpl;
 
         var actions = O.Parallel.apply(window, [
