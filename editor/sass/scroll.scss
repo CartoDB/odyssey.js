@@ -1,0 +1,29 @@
+@import "compass/reset";
+@import "compass/css3/font-face";
+
+@include font-face("AleoRegular", font-files("/editor/assets/fonts/aleo-regular-webfont.woff", "/editor/assets/fonts/aleo-regular-webfont.ttf", "/editor/assets/fonts/aleo-regular-webfont.svg"), "/editor/assets/fonts/aleo-regular-webfont.eot");
+@include font-face("AleoBold", font-files("/editor/assets/fonts/aleo-bold-webfont.woff", "/editor/assets/fonts/aleo-bold-webfont.ttf", "/editor/assets/fonts/aleo-bold-webfont.svg"), "/editor/assets/fonts/aleo-bold-webfont.eot");
+@include font-face("ProximaNovaBold", font-files("/editor/assets/fonts/ProximaNova-bold.woff", "/editor/assets/fonts/ProximaNova-bold.ttf", "/editor/assets/fonts/ProximaNova-bold.svg"), "/editor/assets/fonts/ProximaNova-bold.eot");
+
+body { text-align: center; background: #EEE; }
+
+#layout { 
+	width: 768px; 
+	margin: 0px auto;
+  padding-top: 70px;
+  background: #FFF;
+  height: 2000px;
+}
+
+#map_pos {
+  height: 400px;
+
+  #map_container{
+  	&.attachTop { position: fixed; width: 768px; top: 0; }
+  }
+}
+
+#content {
+  padding: 0 40px;
+  height: 1500px;
+}
