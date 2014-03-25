@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -91,7 +91,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 10, ../sass/slides.scss */
-.slide {
+#slides_container {
   position: absolute;
   top: 40px;
   left: 40px;
@@ -100,43 +100,43 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* line 19, ../sass/slides.scss */
-ul#dots {
+/* line 22, ../sass/slides.scss */
+#dots {
   margin: 0 0 20px 0;
 }
-/* line 22, ../sass/slides.scss */
-ul#dots li {
+/* line 25, ../sass/slides.scss */
+#dots li {
   display: inline;
 }
-/* line 25, ../sass/slides.scss */
-ul#dots li a {
+/* line 28, ../sass/slides.scss */
+#dots li a {
   opacity: 0.2;
   color: #333;
 }
-/* line 29, ../sass/slides.scss */
-ul#dots li a:before {
+/* line 32, ../sass/slides.scss */
+#dots li a:before {
   content: ' \25CF';
   font-size: 16px;
 }
-/* line 34, ../sass/slides.scss */
-ul#dots li a.active {
+/* line 37, ../sass/slides.scss */
+#dots li a.active {
   opacity: 1;
 }
-/* line 35, ../sass/slides.scss */
-ul#dots li a:hover {
+/* line 38, ../sass/slides.scss */
+#dots li a:hover {
   opacity: 1;
   cursor: pointer;
   text-decoration: none;
 }
 
-/* line 44, ../sass/slides.scss */
+/* line 47, ../sass/slides.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: ProximaNovaBold, Sans-serif;
   color: #333;
   font-size: 45px;
   text-transform: uppercase;
 }
-/* line 50, ../sass/slides.scss */
+/* line 53, ../sass/slides.scss */
 h1:after, h2:after, h3:after, h4:after, h5:after, h6:after {
   display: block;
   margin: 20px 0 20px 0;
@@ -147,18 +147,18 @@ h1:after, h2:after, h3:after, h4:after, h5:after, h6:after {
   width: 140px;
 }
 
-/* line 61, ../sass/slides.scss */
+/* line 64, ../sass/slides.scss */
 h2, h3, h4, h5, h6 {
   font-size: 19px;
 }
-/* line 64, ../sass/slides.scss */
+/* line 67, ../sass/slides.scss */
 h2:after, h3:after, h4:after, h5:after, h6:after {
   height: 1px;
   margin: 18px 0 18px 0;
   width: 180px;
 }
 
-/* line 72, ../sass/slides.scss */
+/* line 75, ../sass/slides.scss */
 p, span {
   font-family: AleoRegular, Serif;
   color: #333;
@@ -167,53 +167,53 @@ p, span {
   margin: 0 0 19px 0;
 }
 
-/* line 80, ../sass/slides.scss */
+/* line 83, ../sass/slides.scss */
 a {
   color: #FF7373;
   text-decoration: none;
 }
-/* line 84, ../sass/slides.scss */
+/* line 87, ../sass/slides.scss */
 a:hover {
   text-decoration: underline;
 }
 
-/* line 89, ../sass/slides.scss */
+/* line 92, ../sass/slides.scss */
 img {
   max-width: 400px;
   margin: 20px 0 20px -40px;
 }
 
-/* line 94, ../sass/slides.scss */
+/* line 97, ../sass/slides.scss */
 ul#navButtons {
   margin: 20px 0 0 0;
 }
-/* line 97, ../sass/slides.scss */
+/* line 100, ../sass/slides.scss */
 ul#navButtons li {
   width: 30px;
   display: inline;
 }
-/* line 101, ../sass/slides.scss */
+/* line 104, ../sass/slides.scss */
 ul#navButtons li a {
   display: inline-block;
   width: 23px;
   height: 30px;
   background: transparent url("../assets/img/navBtns.png") no-repeat -10px 0;
 }
-/* line 106, ../sass/slides.scss */
+/* line 109, ../sass/slides.scss */
 ul#navButtons li a:hover {
   background-position: -10px -30px;
   cursor: pointer;
 }
-/* line 108, ../sass/slides.scss */
+/* line 111, ../sass/slides.scss */
 ul#navButtons li a.prev {
   background: transparent url("../assets/img/navBtns.png") no-repeat -30px 0;
 }
-/* line 110, ../sass/slides.scss */
+/* line 113, ../sass/slides.scss */
 ul#navButtons li a.prev:hover {
   background-position: -30px -30px;
 }
 
-/* line 116, ../sass/slides.scss */
+/* line 119, ../sass/slides.scss */
 div#credits {
   position: absolute;
   bottom: 0;
@@ -222,20 +222,20 @@ div#credits {
   height: 44px;
   background-color: #FFF;
 }
-/* line 124, ../sass/slides.scss */
+/* line 127, ../sass/slides.scss */
 div#credits span {
   padding: 13px 0 0 0;
   position: absolute;
   font-size: 12px;
   text-transform: uppercase;
 }
-/* line 130, ../sass/slides.scss */
+/* line 133, ../sass/slides.scss */
 div#credits span.title {
   left: 80px;
   font-family: ProximaNovaBold, Sans-serif;
   color: #333;
 }
-/* line 136, ../sass/slides.scss */
+/* line 139, ../sass/slides.scss */
 div#credits span.author {
   right: 80px;
   font-family: AleoRegular, Serif;

@@ -308,7 +308,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('scroll');
+  set_template('slides');
 
 }
 
