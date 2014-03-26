@@ -1,5 +1,6 @@
 
 var dropdown = require('./dropdown');
+var saveAs = require('../vendor/FileSaver');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -36,6 +37,7 @@ function dialog(context) {
     var divHeader = enter.append('div')
       .attr('class','header');
 
+
     divHeader.append('a')
       .attr('class','expandButton')
       .on('click', function(){
@@ -45,6 +47,12 @@ function dialog(context) {
 
     divHeader.append('h1')
       .text('Odyssey editor');
+
+    divHeader.append('a').text('save').on('click', function() {
+      var md = el.select('textarea').node().codemirror.getValue()
+      var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, 'oddysey.md');
+    });
       
     divHeader.append('select')
       .html(['torque', 'scroll', 'slides', 'rolling_stones'].map(function(v) {
@@ -70,7 +78,7 @@ function dialog(context) {
       });
     });
 
-    function _expand(){
+    function _expand() {
       var _t = d3.select('#editor_modal');
       var _hassClass = _t.classed('expanded')
       _t.classed('expanded', !_hassClass);
