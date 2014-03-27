@@ -3,6 +3,7 @@ VENDOR_FILES= vendor/d3.custom.js vendor/d3.js
 
 ODYSSEY_FILES= \
 	index.js \
+	lib/odyssey/core.js \
 	lib/odyssey/story.js \
 	lib/odyssey/template.js \
 	lib/odyssey/actions/*.js \
@@ -10,6 +11,8 @@ ODYSSEY_FILES= \
 	lib/odyssey/triggers/*.js 
 
 ODYSSEY_EDITOR_FILES= editor/*.js
+
+all: dist/odyssey.js  dist/editor.js
 
 dist/odyssey.js: $(ODYSSEY_FILES) $(VENDOR_FILES)
 	node node_modules/browserify/bin/cmd.js -s O index.js > $@
