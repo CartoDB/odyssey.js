@@ -108,7 +108,7 @@ ul#navButtons{
 			background: transparent url("../assets/img/navBtns.png") no-repeat -10px 0 ;
 			&:hover{ background-position: -10px -30px; cursor: pointer;}
 
-			&.prev{
+			&.next{
 				background: transparent url("../assets/img/navBtns.png") no-repeat -30px 0;
 				&:hover{ background-position: -30px -30px;}
 			}
