@@ -5,6 +5,7 @@ e.Actions = _dereq_('./lib/odyssey/actions');
 e.Triggers = _dereq_('./lib/odyssey/triggers');
 e.Core = _dereq_('./lib/odyssey/core');
 e.Template = _dereq_('./lib/odyssey/template');
+e.UI = _dereq_('./lib/odyssey/ui');
 
 for (var k in e.Actions) {
   e[k] = e.Actions[k];
@@ -14,7 +15,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/template":12,"./lib/odyssey/triggers":13}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/template":12,"./lib/odyssey/triggers":13,"./lib/odyssey/ui":18}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -265,8 +266,32 @@ function getElement(el) {
       }
     }
   } 
+  if (el instanceof NodeList) {
+    return el[0];
+  } else if (el instanceof Element) {
+    return el;
+  }
   return document.getElementById(el);
 }
+
+function getElements(el) {
+  if(typeof jQuery !== 'undefined') {
+    if (el instanceof jQuery) {
+      return el[0];
+    } else if(typeof el === 'string') {
+      if (el[0] === '#' || el[0] === '.') {
+        return getElement($(el));
+      }
+    }
+  } 
+  if (el instanceof NodeList) {
+    return el[0];
+  } else if (el instanceof Element) {
+    return el;
+  }
+  return document.getElementById(el);
+}
+
 
 module.exports = {
   getElement: getElement
@@ -318,7 +343,7 @@ function Story() {
   // go to state index
   story.go = function(index, opts) {
     opts = opts || {};
-    if(index > triggers.length) {
+    if(index < 0 && index > triggers.length) {
       throw new Error("index should be less than states length");
     }
     if (story.state() !== index) {
@@ -433,7 +458,13 @@ function Trigger(t) {
 
   t.then = function(t, context) {
     this.trigger = function() {
-      t.call(context || self);
+      if (t.trigger) {
+        t.trigger()
+      } else if (t.call) {
+        t.call(context || self);
+      } else {
+        throw new Error("then first param should be either function or trigger");
+      }
     };
   };
   return t;
@@ -598,7 +629,7 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":21}],12:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":23}],12:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 
@@ -775,7 +806,7 @@ function actionsFromMarkdown(md) {
 
 module.exports = Template;
 
-},{"../../vendor/markdown":22}],13:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":24}],13:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -1000,6 +1031,7 @@ function Sequential() {
   var current = 0;
   var steps = [];
   var max = 0;
+  var triggers = {}
 
   function seq() {}
 
@@ -1010,6 +1042,9 @@ function Sequential() {
   }
 
   seq.step = function(n) {
+    if (n in triggers) {
+      return triggers[n];
+    }
     var t = Trigger({ 
       check: function() {
         if (n === current && this.trigger) this.trigger();
@@ -1017,7 +1052,7 @@ function Sequential() {
     });
     max = Math.max(max, n);
     steps.push(t);
-    return t;
+    return triggers[n] = t;
   };
 
   seq.next = function() {
@@ -1053,6 +1088,111 @@ function Sequential() {
 module.exports = Sequential;
 
 },{"../story":11}],17:[function(_dereq_,module,exports){
+/**
+# dot progress
+ui widget that controls dot progress 
+
+## usage
+in order to use it you need to instanciate using a container, so for example:
+
+  <div id="dots"></div>
+
+  ...
+
+  var progress = DotProgress('dots')
+
+  // we set the number of slides
+  progress.count(10);
+
+  // we can activate it as an action
+  // then the story enters in this state the second dot
+  // will be activated
+  story.addState(trigger, progress.activate(1))
+
+  // when an user clicks on the dot it can trigger an action
+  story.addState(progress.step(1), action);
+
+## styling
+the html rendered is the following:
+```
+  <div id="dots">
+    <ul>
+      <li><href="#0"></a></li>
+      <li><href="#1" class="active"></a></li>
+      <li><href="#2"></a></li>
+      <li><href="#2"></a></li>
+    </ul>
+  </div>
+```
+
+so you can use active class to style the active one
+ 
+ */
+
+var Core = _dereq_('../core');
+
+function DotProgress(el) {
+  var count = 0;
+  var element = Core.getElement(el);
+  var triggers = {};
+
+  function _progress() {
+    return _progress;
+  }
+
+  function render() {
+    var html = '<ul>';
+    for(var i = 0; i < count; ++i) { 
+      html += '<li><a slide-index="' + i + '" href="#' + i + '"></a></li>'; 
+    }
+    html += "</ul>";
+    element.innerHTML = html;
+  }
+
+  _progress.count = function(_) {
+    count = _;
+    render();
+    return _progress;
+  };
+
+  // returns an action to activate the index
+  _progress.activate = function(activeIndex) {
+    return O.Action(function () {
+      var children = element.children[0].children;
+      for(var i = 0; i < children.length; ++i) {
+        children[i].children[0].setAttribute('class', '');
+      }
+      children[activeIndex].children[0].setAttribute('class', 'active');
+    });
+  };
+
+  element.onclick = function(e) {
+    var idx = e.target.getAttribute('slide-index');
+    var t = triggers[idx];
+    if (t) {
+      t.trigger();
+    }
+  };
+
+  _progress.step = function(i) {
+    var t = O.Trigger();
+    triggers[i] = t;
+    return t;
+  };
+
+  return _progress;
+
+}
+
+module.exports = DotProgress;
+
+},{"../core":10}],18:[function(_dereq_,module,exports){
+
+module.exports = {
+  DotProgress: _dereq_('./dotprogress')
+}
+
+},{"./dotprogress":17}],19:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1077,7 +1217,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],18:[function(_dereq_,module,exports){
+},{}],20:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1132,14 +1272,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],19:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],20:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1729,7 +1869,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":19,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":18,"inherits":17}],21:[function(_dereq_,module,exports){
+},{"./support/isBuffer":21,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":20,"inherits":19}],23:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -1881,7 +2021,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],22:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -3623,6 +3763,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":20}]},{},[1])
+},{"util":22}]},{},[1])
 (1)
 });

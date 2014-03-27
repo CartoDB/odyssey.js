@@ -205,11 +205,11 @@ ul#navButtons li a:hover {
   cursor: pointer;
 }
 /* line 111, ../sass/slides.scss */
-ul#navButtons li a.prev {
+ul#navButtons li a.next {
   background: transparent url("../assets/img/navBtns.png") no-repeat -30px 0;
 }
 /* line 113, ../sass/slides.scss */
-ul#navButtons li a.prev:hover {
+ul#navButtons li a.next:hover {
   background-position: -30px -30px;
 }
 
