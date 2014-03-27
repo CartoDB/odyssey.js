@@ -4,6 +4,7 @@ e.Actions = require('./lib/odyssey/actions');
 e.Triggers = require('./lib/odyssey/triggers');
 e.Core = require('./lib/odyssey/core');
 e.Template = require('./lib/odyssey/template');
+e.UI = require('./lib/odyssey/ui');
 
 for (var k in e.Actions) {
   e[k] = e.Actions[k];
