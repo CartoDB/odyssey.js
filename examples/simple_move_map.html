@@ -59,7 +59,7 @@
   var seq = O.Sequential();
 
   // when press left mode to next
-  O.Keys().left().then(seq.next, seq)
+  O.Keys().left().then(seq.prev, seq)
   O.Keys().right().then(seq.next, seq)
 
   // create a story 
