@@ -15,7 +15,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":4,"./lib/odyssey/core":11,"./lib/odyssey/story":12,"./lib/odyssey/template":13,"./lib/odyssey/triggers":14,"./lib/odyssey/ui":19}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":4,"./lib/odyssey/core":11,"./lib/odyssey/story":12,"./lib/odyssey/template":13,"./lib/odyssey/triggers":14,"./lib/odyssey/ui":20}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -730,7 +730,7 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":24}],13:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":25}],13:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 
@@ -907,15 +907,16 @@ function actionsFromMarkdown(md) {
 
 module.exports = Template;
 
-},{"../../vendor/markdown":25}],14:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":26}],14:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
   Sequential: _dereq_('./sequential'),
-  Keys: _dereq_('./keys')
+  Keys: _dereq_('./keys'),
+  Video: _dereq_('./video')
 };
 
-},{"./keys":15,"./scroll":16,"./sequential":17}],15:[function(_dereq_,module,exports){
+},{"./keys":15,"./scroll":16,"./sequential":17,"./video":18}],15:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -1192,6 +1193,49 @@ function Sequential() {
 module.exports = Sequential;
 
 },{"../story":12}],18:[function(_dereq_,module,exports){
+
+function Video(player) {
+  if (typeof YT === 'undefined' || !(player instanceof YT.Player)) {
+    throw new Error("player should be a YT.Player instance, see youtube API");
+  }
+  
+  var triggers = [];
+
+  var i = setInterval(function() {
+    var seconds = player.getCurrentTime();
+    for (var i = 0; i < triggers.length; ++i) {
+      var t = triggers[i];
+      if (t.start <= seconds && t.end > seconds) {
+        t.trigger((seconds - t.end)/(t.end - t.start));
+      }
+    }
+  }, 100);
+
+  var clear = function(t) {
+    if (triggers.length === 0) {
+      clearInterval(i);
+    }
+  };
+
+  return {
+    between: function(start, end) {
+      var t = O.Trigger();
+      t.start = start;
+      t.end = end;
+      triggers.push(t);
+      t.clear = function() {
+        triggers.splice(triggers.indexOf(t), 1);
+        clear();
+      };
+      return t;
+    }
+  }
+
+}
+
+module.exports = Video
+
+},{}],19:[function(_dereq_,module,exports){
 /**
 # dot progress
 ui widget that controls dot progress 
@@ -1290,13 +1334,13 @@ function DotProgress(el) {
 
 module.exports = DotProgress;
 
-},{"../core":11}],19:[function(_dereq_,module,exports){
+},{"../core":11}],20:[function(_dereq_,module,exports){
 
 module.exports = {
   DotProgress: _dereq_('./dotprogress')
 }
 
-},{"./dotprogress":18}],20:[function(_dereq_,module,exports){
+},{"./dotprogress":19}],21:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1321,7 +1365,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],21:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1376,14 +1420,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],22:[function(_dereq_,module,exports){
+},{}],23:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],23:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1973,7 +2017,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":22,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":21,"inherits":20}],24:[function(_dereq_,module,exports){
+},{"./support/isBuffer":23,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":22,"inherits":21}],25:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -2125,7 +2169,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],25:[function(_dereq_,module,exports){
+},{}],26:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -3867,6 +3911,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":23}]},{},[1])
+},{"util":24}]},{},[1])
 (1)
 });
