@@ -15,7 +15,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":4,"./lib/odyssey/core":10,"./lib/odyssey/story":11,"./lib/odyssey/template":12,"./lib/odyssey/triggers":13,"./lib/odyssey/ui":18}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":4,"./lib/odyssey/core":11,"./lib/odyssey/story":12,"./lib/odyssey/template":13,"./lib/odyssey/triggers":14,"./lib/odyssey/ui":19}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -36,7 +36,7 @@ function CSS(el) {
 
 module.exports = CSS;
 
-},{"../story":11}],3:[function(_dereq_,module,exports){
+},{"../story":12}],3:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 //
@@ -71,7 +71,7 @@ function Debug() {
 
 module.exports = Debug;
 
-},{"../story":11}],4:[function(_dereq_,module,exports){
+},{"../story":12}],4:[function(_dereq_,module,exports){
 
 module.exports = {
   Sleep: _dereq_('./sleep'),
@@ -79,13 +79,14 @@ module.exports = {
   Location: _dereq_('./location'),
   Leaflet: {
     Marker: _dereq_('./leaflet/marker'),
-    Map: _dereq_('./leaflet/map')
+    Map: _dereq_('./leaflet/map'),
+    Popup: _dereq_('./leaflet/popup')
   },
   CSS: _dereq_('./css'),
   Slides: _dereq_('./slides')
 };
 
-},{"./css":2,"./debug":3,"./leaflet/map":5,"./leaflet/marker":6,"./location":7,"./sleep":8,"./slides":9}],5:[function(_dereq_,module,exports){
+},{"./css":2,"./debug":3,"./leaflet/map":5,"./leaflet/marker":6,"./leaflet/popup":7,"./location":8,"./sleep":9,"./slides":10}],5:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -120,7 +121,7 @@ if (typeof window.L !== 'undefined') {
 module.exports = MapActions;
 
 
-},{"../../story":11}],6:[function(_dereq_,module,exports){
+},{"../../story":12}],6:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -201,7 +202,85 @@ module.exports = MarkerActions;
 //marker.actions.addTo(map);
 //addState(, map.actions.moveTo(..).addMarker(m)
 
-},{"../../story":11}],7:[function(_dereq_,module,exports){
+},{"../../story":12}],7:[function(_dereq_,module,exports){
+
+/**
+directional popup allows to create popups in the left and the right of a point,
+not only on the top.
+
+Same api than L.popup but you can spcify ``potision`` to 'left' or 'right'
+
+*/
+
+var Action = _dereq_('../../story').Action;
+
+L.DirectionalPopup = L.Popup.extend({
+    _updatePosition: function() {
+        L.Popup.prototype._updatePosition.call(this);
+        var offset = L.point(this.options.offset),
+            animated = this._animated;
+
+        switch(this.options.position) {
+          case 'left':
+            this._container.style.bottom = 'auto';
+            this._container.style.left = 'auto';
+            this._container.style.right = offset.x + (animated ? 0 : pos.x) + "px";
+            break;
+          case 'right':
+            this._container.style.bottom = 'auto';
+            this._container.style.left =  offset.x + "px";
+            break;
+      }
+    }
+});
+
+L.directionalPopup = function (options, source) {
+  return new L.DirectionalPopup(options, source);
+};
+
+function PopupActions(popup) {
+
+  function _popup() {}
+
+  // helper method to translate leaflet methods to actions
+  function leaflet_method(name) {
+    _popup[name] = function() {
+      var args = arguments;
+      return Action(function() {
+        popup[name].apply(popup, args);
+      });
+    };
+  }
+
+  // leaflet methods
+  leaflet_method('openOn');
+  _popup.openClose = function(map) {
+    if (!map) {
+      throw new Error("openClose gets map as first param");
+    }
+    return Action({
+      enter: function() {
+        popup.openOn(map);
+      },
+      
+      exit: function() {
+        map.closePopup(popup);
+      }
+
+    });
+  };
+
+  return _popup;
+}
+
+
+if (typeof window.L !== 'undefined') {
+  L.Popup.addInitHook(function () {
+    this.actions = PopupActions(this);
+  });
+}
+
+},{"../../story":12}],8:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -221,7 +300,7 @@ var Location = {
 
 module.exports = Location;
 
-},{"../story":11}],8:[function(_dereq_,module,exports){
+},{"../story":12}],9:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -240,7 +319,7 @@ function Sleep(ms) {
 module.exports = Sleep;
 
 
-},{"../story":11}],9:[function(_dereq_,module,exports){
+},{"../story":12}],10:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 var Core = _dereq_('../core');
@@ -275,7 +354,7 @@ function Slides(el) {
 
 module.exports = Slides;
 
-},{"../core":10,"../story":11}],10:[function(_dereq_,module,exports){
+},{"../core":11,"../story":12}],11:[function(_dereq_,module,exports){
 
 function getElement(el) {
   if(typeof jQuery !== 'undefined') {
@@ -318,7 +397,7 @@ module.exports = {
   getElement: getElement
 };
 
-},{}],11:[function(_dereq_,module,exports){
+},{}],12:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/d3.custom');
 
@@ -651,7 +730,7 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":23}],12:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":24}],13:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 
@@ -828,7 +907,7 @@ function actionsFromMarkdown(md) {
 
 module.exports = Template;
 
-},{"../../vendor/markdown":24}],13:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":25}],14:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -836,7 +915,7 @@ module.exports = {
   Keys: _dereq_('./keys')
 };
 
-},{"./keys":14,"./scroll":15,"./sequential":16}],14:[function(_dereq_,module,exports){
+},{"./keys":15,"./scroll":16,"./sequential":17}],15:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -894,7 +973,7 @@ function Keys() {
 
 module.exports = Keys;
 
-},{"../core":10,"../story":11}],15:[function(_dereq_,module,exports){
+},{"../core":11,"../story":12}],16:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -1045,7 +1124,7 @@ function Scroll() {
 Scroll._scrolls = [];
 module.exports = Scroll;
 
-},{"../core":10,"../story":11}],16:[function(_dereq_,module,exports){
+},{"../core":11,"../story":12}],17:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 
@@ -1112,7 +1191,7 @@ function Sequential() {
 
 module.exports = Sequential;
 
-},{"../story":11}],17:[function(_dereq_,module,exports){
+},{"../story":12}],18:[function(_dereq_,module,exports){
 /**
 # dot progress
 ui widget that controls dot progress 
@@ -1211,13 +1290,13 @@ function DotProgress(el) {
 
 module.exports = DotProgress;
 
-},{"../core":10}],18:[function(_dereq_,module,exports){
+},{"../core":11}],19:[function(_dereq_,module,exports){
 
 module.exports = {
   DotProgress: _dereq_('./dotprogress')
 }
 
-},{"./dotprogress":17}],19:[function(_dereq_,module,exports){
+},{"./dotprogress":18}],20:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1242,7 +1321,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],20:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1297,14 +1376,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],21:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],22:[function(_dereq_,module,exports){
+},{}],23:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1894,7 +1973,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":21,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":20,"inherits":19}],23:[function(_dereq_,module,exports){
+},{"./support/isBuffer":22,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":21,"inherits":20}],24:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -2046,7 +2125,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],24:[function(_dereq_,module,exports){
+},{}],25:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -3788,6 +3867,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":22}]},{},[1])
+},{"util":23}]},{},[1])
 (1)
 });
