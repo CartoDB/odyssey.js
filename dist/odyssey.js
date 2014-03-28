@@ -169,11 +169,32 @@ function MarkerActions(marker) {
   return _marker;
 }
 
+function PathActions(path) {
+  function _path() {};
+
+  _path.toggleStyle = function(styleDisabled, styleEnabled) {
+    return Action({
+      enter: function() {
+        path.setStyle(styleEnabled);
+      },
+      exit: function() {
+        path.setStyle(styleDisabled);
+      },
+      clear: function() { }
+    });
+  }
+
+  return _path;
+}
+
 
 if (typeof window.L !== 'undefined') {
   L.Marker.addInitHook(function () {
     this.actions = MarkerActions(this);
   });
+  L.Path.addInitHook(function () {
+    this.actions = PathActions(this);
+  })
 }
 module.exports = MarkerActions;
 
@@ -459,7 +480,8 @@ function Trigger(t) {
   t.then = function(t, context) {
     this.trigger = function() {
       if (t.trigger) {
-        t.trigger()
+        t.trigger();
+        if (t.reverse) t.reverse();
       } else if (t.call) {
         t.call(context || self);
       } else {
@@ -1031,7 +1053,7 @@ function Sequential() {
   var current = 0;
   var steps = [];
   var max = 0;
-  var triggers = {}
+  var triggers = {};
 
   function seq() {}
 
@@ -1048,6 +1070,9 @@ function Sequential() {
     var t = Trigger({ 
       check: function() {
         if (n === current && this.trigger) this.trigger();
+      },
+      reverse: function() {
+        current = n;
       }
     });
     max = Math.max(max, n);
