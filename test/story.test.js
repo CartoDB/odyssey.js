@@ -17,12 +17,12 @@ function e() {
 module('story');
 var story, t1, t2, a1, a2, la0;
 QUnit.testStart(function() {
-  story = Odyssey.Story();
-  t1 = Odyssey.Trigger({});
-  t2 = Odyssey.Trigger({});
-  a1 = Odyssey.Action(a);
-  a2 = Odyssey.Action(a)
-  la0 = Odyssey.Action({
+  story = O.Story();
+  t1 = O.Trigger({});
+  t2 = O.Trigger({});
+  a1 = O.Action(a);
+  a2 = O.Action(a)
+  la0 = O.Action({
     enter: a,
     update: function(t) { this.t = t; },
     exit: e
@@ -80,7 +80,7 @@ test('clear', 2, function() {
 
 
 test('Chain', function() {
-  story.addState(t1, Odyssey.Chain(a1, a2));
+  story.addState(t1, O.Chain(a1, a2));
   t1.trigger();
   equal(1, a1.called, "a1 should be called");
   equal(1, a2.called, "a2 should be called");
@@ -89,7 +89,7 @@ test('Chain', function() {
 
 asyncTest('Chain - async', 3, function() {
   var finished = false;
-  var asyncAction = Odyssey.Action({
+  var asyncAction = O.Action({
     enter: function() {
       var self = this;
       this.lastEnterCall = new Date().getTime();
@@ -99,7 +99,7 @@ asyncTest('Chain - async', 3, function() {
       return true;
     }
   });
-  story.addState(t1, Odyssey.Chain(asyncAction, a2).on('finish.test', function() {
+  story.addState(t1, O.Chain(asyncAction, a2).on('finish.test', function() {
     finished = true;
   }));
 
@@ -114,7 +114,7 @@ asyncTest('Chain - async', 3, function() {
 
 test('Parallel', function() {
   var finished = false;
-  story.addState(t1, Odyssey.Parallel(a1, a2).on('finish.test', function() {
+  story.addState(t1, O.Parallel(a1, a2).on('finish.test', function() {
     finished = true;
   }));
   t1.trigger();
@@ -125,7 +125,7 @@ test('Parallel', function() {
 
 asyncTest('Parallel - async', 3, function() {
   var finished = false;
-  var asyncAction = Odyssey.Action({
+  var asyncAction = O.Action({
     enter: function() {
       var self = this;
       this.lastEnterCall = new Date().getTime();
@@ -135,7 +135,7 @@ asyncTest('Parallel - async', 3, function() {
       return true;
     }
   });
-  story.addState(t1, Odyssey.Parallel(asyncAction, a2).on('finish.test', function() {
+  story.addState(t1, O.Parallel(asyncAction, a2).on('finish.test', function() {
     finished = true;
   }));
 
@@ -147,7 +147,7 @@ asyncTest('Parallel - async', 3, function() {
 
 asyncTest('Chain - async', 3, function() {
   var finished = false;
-  var asyncAction = Odyssey.Action({
+  var asyncAction = O.Action({
     enter: function() {
       var self = this;
       this.lastEnterCall = new Date().getTime();
@@ -157,7 +157,7 @@ asyncTest('Chain - async', 3, function() {
       return true;
     }
   });
-  story.addState(t1, Odyssey.Chain(asyncAction, a2).on('finish.test', function() {
+  story.addState(t1, O.Chain(asyncAction, a2).on('finish.test', function() {
     finished = true;
   }));
 
