@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 
-  <link rel="stylesheet" href="../../vendor/leaflet.css" />
   <style>
     body {
       text-align: center;
@@ -35,6 +35,11 @@
     #content {
       padding: 0 40px;
       height: 1500px;
+      text-align:left;
+    }
+    #content h1{
+      text-align: center;
+      margin-top: 50px;
     }
     
   </style>
@@ -60,68 +65,43 @@
   </div> <!-- layout -->
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="../../vendor/leaflet.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../../dist/odyssey.js" charset="UTF-8"></script>
   <script>
 
   var map = L.map('map').setView([0, 0.0], 4);
-    L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+
+  L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
 
 
   var spain = new L.LatLng(40.9218144123785, -3.69140625);
   var brazil = new L.LatLng(-9.871451997300536, -52.5585937);
   var usa = new L.LatLng(38.487994609214795,  -98.96484375);
 
-  var O = Odyssey;
 
   // trigger when  map_pos go out of the screen
-  var edge = Odyssey.Edge(
-    Odyssey.Triggers.Scroll().less('map_pos').offset(0),
-    Odyssey.Triggers.Scroll().greater('map_pos').offset(0)
+  var edge = O.Edge(
+    O.Scroll().less('map_pos').offset(0),
+    O.Scroll().greater('map_pos').offset(0)
   )
 
   var TRIGGER_LINE = 400 + 50;
 
-  /*
-  var story = Odyssey.Story()
+  var story = O.Story()
     .addEvent(
       edge,
-      O.Parallel(
-        O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
-        O.Actions.Debug().log('attach')
-      )
+      O.CSS($('#map_container')).toggleClass('attachTop')
     )
     .addState(
-      O.Triggers.Scroll().within('spain').offset(TRIGGER_LINE),
+      O.Scroll().within('spain').offset(TRIGGER_LINE),
       map.actions.panTo(spain)
     )
     .addState(
-      O.Triggers.Scroll().within('brazil').offset(TRIGGER_LINE), 
+      O.Scroll().within('brazil').offset(TRIGGER_LINE), 
       map.actions.panTo(brazil)
     )
     .addState(
-      O.Triggers.Scroll().within('usa').offset(TRIGGER_LINE),
-      map.actions.panTo(usa)
-    )
-    */
-  var story = Odyssey.Story()
-    .addEvent(
-      edge,
-      O.Parallel(
-        O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
-        O.Actions.Debug().log('attach')
-      )
-    )
-    .addState(
-      O.Triggers.Scroll().within('spain').offset(TRIGGER_LINE),
-      map.actions.panTo(spain)
-    )
-    .addState(
-      O.Triggers.Scroll().within('brazil').offset(TRIGGER_LINE), 
-      map.actions.panTo(brazil)
-    )
-    .addState(
-      O.Triggers.Scroll().within('usa').offset(TRIGGER_LINE),
+      O.Scroll().within('usa').offset(TRIGGER_LINE),
       map.actions.panTo(usa)
     )
 
