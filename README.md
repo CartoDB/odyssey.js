@@ -14,6 +14,11 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 ## Status
 
 * Project launched, 23/01/2014
+* Javascript library tested, 17/02/2014
+* Core map actions added, 27/02/2014
+* Designed/added init templates, 11/03/2014
+* Added initial editor, 12/03/2014
+* Added intro docs, 17/03/2014
 
 We will be documenting future [milestones here](MILESTONES.md)
 
