@@ -214,7 +214,10 @@ Same api than L.popup but you can spcify ``potision`` to 'left' or 'right'
 
 var Action = _dereq_('../../story').Action;
 
-L.DirectionalPopup = L.Popup.extend({
+
+if (typeof window.L !== 'undefined') {
+
+var DirectionalPopup = L.Popup.extend({
     _updatePosition: function() {
         L.Popup.prototype._updatePosition.call(this);
         var offset = L.point(this.options.offset),
@@ -234,6 +237,7 @@ L.DirectionalPopup = L.Popup.extend({
     }
 });
 
+L.DirectionalPopup = DirectionalPopup;
 L.directionalPopup = function (options, source) {
   return new L.DirectionalPopup(options, source);
 };
@@ -262,7 +266,7 @@ function PopupActions(popup) {
       enter: function() {
         popup.openOn(map);
       },
-      
+
       exit: function() {
         map.closePopup(popup);
       }
@@ -274,11 +278,11 @@ function PopupActions(popup) {
 }
 
 
-if (typeof window.L !== 'undefined') {
   L.Popup.addInitHook(function () {
     this.actions = PopupActions(this);
   });
 }
+
 
 },{"../../story":12}],8:[function(_dereq_,module,exports){
 
