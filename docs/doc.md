@@ -30,9 +30,15 @@ _todo_
 
 ## Saving stories
 
+_todo_
+
 ## URL Sharing
 
+_todo_
+
 # Hosting Odyssey stories
+
+_todo_
 
 # Advanced use of the editor
 
@@ -46,7 +52,7 @@ At the top of your markdown document, you can include a configuration block. Dep
 
 ![title](http://i.imgur.com/Q8ruePp.png)
 
-## The action block
+### The action block
 
 You can attach map actions to section elements in your Markdown using the interface. Each time you add one interactively, it is translated into a new block that will actually cause the action. You can write them manually by including the same syntax,
 
@@ -57,22 +63,35 @@ In the example above, the user has created a new section header and added the Od
 
 ## Creating your own templates
 
+_todo_ 
+
 # Using the Javascript libary
 
+
+_todo_
+
+
 ## Basic functions
+
+_todo_
 
 ## Advanced functions
 
 ### YouTube
 
+_todo_
+
 ### Torque
+
+_todo_
 
 ## Custom functions
 
-Writing your own JS
+_todo_
 
+# Odyssey.js development
 
-# Using the editor locally
+## Using the editor locally
 
 ** Step 1: Checkout the code **
 
@@ -97,7 +116,7 @@ python -m SimpleHTTPServer
 
 Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
-# Contributing code
+## Contributing code
 
 ### Improving documentation
 
