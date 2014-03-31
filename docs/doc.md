@@ -68,8 +68,38 @@ _todo_
 # Using the Javascript libary
 
 
-_todo_
+## Getting started
 
+### Story object
+
+**O.Story()**
+
+Will attach each story state to the Odyssey story object. 
+
+```js
+var story = O.Story();
+```
+
+### Sequence object
+
+**O.Sequential()**
+
+The **sequential** object contains the logic for moving forward and backward through the story states attached to your **story** object. 
+
+```js
+var seq = O.Sequential();
+```
+
+### Keys object
+
+** O.Keys()**
+
+The **keys** object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story. 
+
+```js
+O.Keys().left().then(seq.prev, seq);
+O.Keys().right().then(seq.next, seq);
+```
 
 ## Basic functions
 
