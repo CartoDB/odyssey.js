@@ -50,7 +50,7 @@ At the top of your markdown document, you can include a configuration block. Dep
 
 You can attach map actions to section elements in your Markdown using the interface. Each time you add one interactively, it is translated into a new block that will actually cause the action. You can write them manually by including the same syntax,
 
-![action](http://i.imgur.com/6mhW8oP)
+![action](http://i.imgur.com/6mhW8oP.png)
 
 In the example above, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here. 
 ## HTML Templates
