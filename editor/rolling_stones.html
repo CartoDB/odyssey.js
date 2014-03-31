@@ -64,6 +64,8 @@
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="../vendor/leaflet.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
   <script src="markdown.js" charset="UTF-8"></script>
   <script src="actions.js" charset="UTF-8"></script>
   <script>
@@ -112,8 +114,14 @@
     init: function() {
       var map = L.map('map').setView([0, 0.0], 4);
         L.tileLayer('http://0.api.cartocdn.com/base-dark/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
-      var seq = O.Triggers.Sequential();
 
+      // cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/0399bc6a-b5d8-11e3-88e7-0e73339ffa50/viz.json')
+      //   .addTo(map, 1)
+      //   .done(function(){
+      //     console.log('hi')
+      //   })
+        
+      var seq = O.Triggers.Sequential();
       // enanle keys to move
       O.Triggers.Keys().on('map').left().then(seq.next, seq)
       O.Triggers.Keys().on('map').right().then(seq.next, seq)
