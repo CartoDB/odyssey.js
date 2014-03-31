@@ -44,22 +44,13 @@ The Markdown syntax used in the Odyssey Editor uses all the features documented 
 
 At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add inforation to your story. For example, title object can be included this way,
 
-<code>
-    ```
-    - title: "My title here"
-    ```
-</code>
+![title](http://i.imgur.com/Q8ruePp.png)
 
 ## The action block
 
 You can attach map actions to section elements in your Markdown using the interface. Each time you add one interactively, it is translated into a new block that will actually cause the action. You can write them manually by including the same syntax,
 
-<code>
-    # My section header here
-    ```
-    S.map.actions.setView([42.2285, -71.0596],4)
-    ```
-</code>
+![action](http://i.imgur.com/6mhW8oP)
 
 In the example above, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here. 
 ## HTML Templates
