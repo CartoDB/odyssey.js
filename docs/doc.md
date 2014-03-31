@@ -4,6 +4,7 @@
 The odyssey.js library is being developed to help journalists, bloggers, and other people on the web publish stories that combine narratives with maps and map interactions. The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.
 
 # Guidelines
+
 # Quickstart
 
 # Oddysey.Story
@@ -61,7 +62,35 @@ raises `finish` signal when all the tasks has been completed
 # Oddysey.Actions
 # Oddysey.Triggers 
 
-# Contributing
+# Using the editor locally
+
+## Step 1: Checkout the code
+
+```sh
+git clone git@github.com:CartoDB/odyssey.js.git
+cd odyssey.js
+```
+
+## Step 2: Install dependancies
+
+```sh
+npm install
+gem system --update
+gem install compass
+```
+
+## Step 3. Start the server
+
+```
+python -m SimpleHTTPServer
+```
+
+Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
+
+## For developers
+
+### 
+
 
 
 # Custom actions
