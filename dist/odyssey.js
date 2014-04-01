@@ -372,6 +372,12 @@ function Slides(el) {
     }
   }
 
+  slides.hide = function(i) {
+    return Action(function() {
+      _activate(i);
+    });
+  };
+  
   slides.activate = function(i) {
     return Action(function() {
       _activate(i);

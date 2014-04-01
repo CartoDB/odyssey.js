@@ -13,6 +13,20 @@
   <!--[if lte IE 8]>
       <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
   <![endif]-->
+  <style type="text/css">
+  #mushing-vid {
+    position: absolute;
+    width: 400px; height: 280px;
+    left: 50%;
+    top: 20%;
+    margin-left: -200px;
+    z-index: 1000;
+  }
+
+  .hidden {
+    display: none;
+  }
+  </style>
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
@@ -45,7 +59,6 @@
       </div>
       <div class='slide' style='diplay:none'>
           <h1> Mushing Dalzell Gorge </h1>
-          <iframe width="260" height="180" src="//www.youtube.com/embed/jjyItL68iqU?start=24&rel=0&autoplay=1" frameborder="0" allowfullscreen volume="0"></iframe>
       </div>
       <div class='slide' style='diplay:none'>
           <h1> The finish </h1>
@@ -63,6 +76,9 @@
   <div id="credits">
     <span class="title"> The great race</span>
     <span class="author">By Vizzuality using <a href="#">odyssey.js</a><span>
+  </div>
+  <div id="mushing-vid" class="hidden">
+      <iframe width="400" height="280" src="//www.youtube.com/embed/jjyItL68iqU?start=24&rel=0&autoplay=1" frameborder="0" allowfullscreen volume="0"></iframe>
   </div>
   <audio src="http://www.loc.gov/folklife/sampler/audio/AK_T5.mp3" preload="auto" style="display: none" id="paddle-song"></audio>
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
@@ -113,6 +129,7 @@
 
   function main(){
     var audio = O.Audio(document.getElementById("paddle-song"));
+    var vid = O.CSS($("#mushing-vid"));
 
     cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/6fe15eb8-b83b-11e3-b052-0edbca4b5057/viz.json')
           .done(function(layer) {
@@ -166,11 +183,11 @@
           seq.step(3),
           O.Parallel(
             slides.activate(3),
-            map.actions.setZoom(10),
+            map.actions.setZoom(11, {animate: false}),
             O.Sleep(500),
-            map.actions.panTo([62.18601386, -153.03955078], {animate: true, duration:2}),
-            O.Sleep(500),
-            map.actions.panTo([62.29441,-153.3757], {animate: true, duration:10}),
+            map.actions.panTo([62.08711, -152.7252], {animate: false}),
+            // O.Sleep(20),
+            // map.actions.panTo([62.29441, -153.3757], {animate: true, duration:10}),
             O.Sleep(5000)
           )
         )
@@ -179,9 +196,11 @@
           seq.step(4),
           O.Parallel(
             slides.activate(4),
-            map.actions.setZoom(10),
+            vid.toggleClass('hidden'),
+            map.actions.setZoom(11),
             O.Sleep(500),
-            map.actions.panTo([62.18601386, -153.03955078], {animate: true, duration:2})
+            map.actions.panTo([62.29441,-153.3757], {animate: true, duration:15}),
+            O.Sleep(3000)
           )
         )
         .addState(
