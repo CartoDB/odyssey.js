@@ -132,10 +132,32 @@ function MapActions(map) {
     };
   }
 
+  function leaflet_move_method(name) {
+    _map[name] = function() {
+      var args = arguments;
+      return Action({
+        enter: function() {
+          this.moveEnd = function() {
+            map.off('moveend', this.moveEnd, this);
+            this.finish();
+          };
+          map.on('moveend', this.moveEnd, this);
+          map[name].apply(map, args);
+          return true;
+        },
+
+        clear: function() {
+          map.off('moveend', this.moveEnd, this);
+        }
+      });
+    };
+  }
+
+
   // leaflet methods
-  leaflet_method('panTo');
-  leaflet_method('setView');
-  leaflet_method('setZoom');
+  leaflet_move_method('panTo');
+  leaflet_move_method('setView');
+  leaflet_move_method('setZoom');
 
   return _map;
 }
@@ -1442,13 +1464,6 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 
-function noop() {}
-
-process.on = noop;
-process.once = noop;
-process.off = noop;
-process.emit = noop;
-
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
 }
@@ -2055,8 +2070,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("/Users/andrew/Dropbox/workspace/odyssey.js/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":24,"/Users/andrew/Dropbox/workspace/odyssey.js/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":23,"inherits":22}],26:[function(_dereq_,module,exports){
+}).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":24,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":23,"inherits":22}],26:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
