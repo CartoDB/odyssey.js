@@ -196,7 +196,6 @@
           seq.step(4),
           O.Parallel(
             slides.activate(4),
-            slides.hide(4),
             vid.toggleClass('hidden'),
             map.actions.setZoom(11),
             O.Sleep(500),
@@ -208,9 +207,9 @@
           // The Finish
           seq.step(5),
           O.Chain(
+            vid.toggleClass('hidden'),
               slides.activate(5),
               map.actions.setZoom(6),
-              // O.Sleep(30),
               O.Sleep(3000),
               map.actions.panTo([64.5003, -165.4093], {animate: true, duration: 3}),
               O.Sleep(3000),
