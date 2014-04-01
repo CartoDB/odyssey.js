@@ -20,27 +20,33 @@
     <div id="dots"></div>
     <div id="slides">
       <div class='slide' style='diplay:none'>
-          <h1> Iditarod Great Sled Race </h1>
+          <h1> A serum run to Nome</h1>
           <p>
-            Each year...
+            A diphtheria epidemic threatened Nome, especially the Alaska Native children who had no immunity to the "white man's disease", and the nearest quantity of antitoxin was found to be in Anchorage. On January 27, mushers sped from Nenana to Nome to deliver the package and save the lives of the infected village.
           </p>
       </div>
       <div class='slide' style='diplay:none'>
-          <h1> Anchorage </h1>
+          <h1> A race for good </h1>
           <p>
-            The stop here is symbolic, remembering the 1925 rescue mission diphtheria serum to Nome...
+            In the 1925 run, 100 dogs relayed the package 674 miles (1,085 km) from Nenana to Nome. The dogs ran in relays, with no dog running over 100 miles (160 km). The objective was delivering the package.  On February 2 at 5:30 a.m., just five and a half days later, the package arrived in Nome safely. 
           </p>
       </div>
       <div class='slide' style='diplay:none'>
-          <h1> Starting line </h1>
+          <h1>A race is born...</h1>
           <p>
-            On the frozen ice beside the small town of Willow, AK, racers will set off with their teams for the 975 mile trek. 
+            In 1973, almost 50 years later, the modern Iditarod was born. The first race attracted a field of 34 mushers, 22 of whom completed the 1000 mile route.
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1> The start </h1>
+          <p>
+            An honarary start still takes place today in Anchorage, Alaska. The offical start takes place 50 miles north, in a small town known as Willow.
           </p>
       </div>
       <div class='slide' style='diplay:none'>
           <h1> The finish </h1>
           <p>
-            Nome Alaska
+            With over 1000 miles covered, through some of the most rugged winter terrain in the world, the dogs pull their sleds into Nome, Alaska
           </p>
       </div>
     </div>
@@ -54,7 +60,7 @@
     <span class="title"> The great race</span>
     <span class="author">By Andrew Hill using <a href="#">odyssey.js</a><span>
   </div>
-
+  <audio src="http://www.loc.gov/folklife/sampler/audio/AK_T5.mp3" preload="auto" style="display: none" id="paddle-song"></audio>
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
   <script src="../../dist/odyssey.js" charset="UTF-8"></script>
   <script>
@@ -76,87 +82,120 @@
   // create a map
   var map = new L.Map('map', {
     zoomControl: false,
-    center: [61.725235,-160.166247],
-    zoom: 6
+    center: [63.1455, -163.5208],
+    zoom: 2
   });
+// https://a.tiles.mapbox.com/v3//page.html?secure=1#3/35.25/-51.50
 
-  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.jpg', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.9);
+  L.tileLayer('http://{s}.tiles.mapbox.com/v3/cartodb.h0cmgfh8/{z}/{x}/{y}.png').addTo(map).setOpacity(0.9);
 
 
+
+  var iditarod_route;
+
+      // create a sequential trigger
+      var seq = O.Triggers.Sequential();
+
+      // init a story 
+      var story = O.Story();
+
+      // enanle keys to move
+      O.Triggers.Keys().left().then(seq.prev, seq)
+      O.Triggers.Keys().right().then(seq.next, seq)
+
+      click(document.getElementsByClassName('next')).then(seq.next, seq)
+      click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+      var slides = O.Actions.Slides('slides');
+      var progress = O.UI.DotProgress('dots').count(0);
+var mp;
 
   function main(){
-    var iditarod_route;
+    mp = document.getElementById("paddle-song");
+    mp.play();
+
+    var flip = 
+            function(){
+            iditarod_route.getSubLayer(0).show();
+            iditarod_route.getSubLayer(1).hide();
+            }
     cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/6fe15eb8-b83b-11e3-b052-0edbca4b5057/viz.json')
           .done(function(layer) {
             iditarod_route = layer;
-          }).addTo(map)
+            // O.iditarod_route= layer.getSubLayer(0).show(),
+            O.iditarod_route =layer.getSubLayer(1).hide();
 
-    // create a sequential trigger
-    var seq = O.Triggers.Sequential();
 
-    // init a story 
-    var story = O.Story();
+  // var story = O.Story().data([{ zoom:....}]).
 
-    // enanle keys to move
-    O.Triggers.Keys().left().then(seq.prev, seq)
-    O.Triggers.Keys().right().then(seq.next, seq)
+  // O.Parallel(function(d){
+      var audio = O.Audio(mp);
 
-    click(document.getElementsByClassName('next')).then(seq.next, seq)
-    click(document.getElementsByClassName('prev')).then(seq.prev, seq)
-
-    var slides = O.Actions.Slides('slides');
-    var progress = O.UI.DotProgress('dots').count(0);
-    var i = 0;
-        function I(p){if(p){i++;} return i-1}
-
-// var story = O.Story().data([{ zoom:....}]).
-
-// O.Parallel(function(d){
-
-    var story = O.Story()
-      .addState(
-        // Full picture
-        seq.step(0),
-        O.Parallel(
-          map.actions.panTo([63.1455, -163.5208], {animate: false}),
-          map.actions.setZoom(6),
-          slides.activate(0),
-          progress.activate(0)
+      var story = O.Story()
+        .addState(
+          // Full picture
+          seq.step(0),
+          O.Chain(
+            slides.activate(0),
+            O.Sleep(4000),
+            O.Sleep(4000),
+            map.actions.setZoom(6, {animate: true, duration: 2}),
+            progress.activate(0)
+          )
         )
-      )
-      .addState(
-        // Anchorage Alaska: historical start
-        seq.step(1),
-        O.Parallel(
-          map.actions.panTo([61.20282912, -149.86793518], {animate: false}),
-          map.actions.setZoom(10),
-          slides.activate(1)
+        
+        .addState(
+          // Anchorage Alaska: historical start
+          seq.step(1),
+          O.Chain(
+            audio.pause(),
+            // O.actions.Audio.pause(mp),
+            slides.activate(1),
+            map.actions.panTo([61.725235, -150.166247], {animate: false}),
+            O.Sleep(500),
+            map.actions.setZoom(7, {animate: false}),
+            O.Sleep(500),
+            map.actions.panTo([64.264096,-155.511958], {animate: true, duration: 4}),
+            O.Sleep(4),
+            map.actions.panTo([64.499902,-165.41355], {animate: true, duration: 4}),
+            O.Sleep(4000),
+            map.actions.setZoom(5)
+          )
         )
-      )
-      .addState(
-        // Willow start
-        seq.step(2),
-        O.Chain(
-          // map.actions.setZoom(10),
-          slides.activate(2),
-          map.actions.panTo([61.7258, -150.1638], {animate: true, duration: 1})
-        )
-      )
-      .addState(
-        // The Finish
-        seq.step(3),
-        O.Chain(
-            map.actions.setZoom(6),
-            slides.activate(3),
-            // O.Sleep(30),
-            O.Sleep(3000),
-            map.actions.panTo([64.5003, -165.4093], {animate: true, duration: 3}),
-            O.Sleep(3000),
+        .addState(
+          // Anchorage Alaska: historical start
+          seq.step(2),
+          O.Parallel(
+            slides.activate(2),
+            map.actions.panTo([61.20282912, -149.86793518], {animate: false}),
             map.actions.setZoom(10)
+          )
         )
-      )
+        // .addState(
+        //   // Willow start
+        //   seq.step(3),
+        //   O.Chain(
+        //     // map.actions.setZoom(10),
+        //     slides.activate(3),
+        //     map.actions.panTo([61.7258, -150.1638], {animate: true, duration: 1})
+        //   )
+        // )
+        .addState(
+          // The Finish
+          seq.step(3),
+          O.Chain(
+              map.actions.setZoom(6),
+              slides.activate(3),
+              // O.Sleep(30),
+              O.Sleep(3000),
+              map.actions.panTo([64.5003, -165.4093], {animate: true, duration: 3}),
+              O.Sleep(3000),
+              map.actions.setZoom(10)
+          )
+        )
 
-    story.go(0);
+      story.go(0);
+    }).addTo(map)
   }
   window.onload = main;
 
