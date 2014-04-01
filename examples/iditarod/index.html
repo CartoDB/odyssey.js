@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../vendor/leaflet.css" />
+  <link rel="stylesheet" href="../../editor/stylesheets/slides.css" />
+
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+  <![endif]-->
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="slides_container">
+    <div id="dots"></div>
+    <div id="slides">
+      <div class='slide' style='diplay:none'>
+          <h1> Iditarod Great Sled Race </h1>
+          <p>
+            Each year...
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1> Anchorage </h1>
+          <p>
+            The stop here is symbolic, remembering the 1925 rescue mission diphtheria serum to Nome...
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1> Starting line </h1>
+          <p>
+            On the frozen ice beside the small town of Willow, AK, racers will set off with their teams for the 975 mile trek. 
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1> The finish </h1>
+          <p>
+            Nome Alaska
+          </p>
+      </div>
+    </div>
+    <ul id='navButtons'>
+      <li><a class='prev'></a></li>
+      <li><a class='next'></a></li>
+    </ul>
+  </div>
+  <div id="progress"></div>
+  <div id="credits">
+    <span class="title"> The great race</span>
+    <span class="author">By Andrew Hill using <a href="#">odyssey.js</a><span>
+  </div>
+
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+  function click(el) {
+    var element = O.Core.getElement(el);
+    var t = O.Trigger();
+    // TODO: clean properly
+    element.onclick = function() {
+      t.trigger();
+    }
+    return t;
+  }
+
+  var defaultIcon = L.icon({
+      iconUrl: '../icons/circle-stroked-24.png'
+  });
+
+  // create a map
+  var map = new L.Map('map', {
+    zoomControl: false,
+    center: [61.725235,-160.166247],
+    zoom: 6
+  });
+
+  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.jpg', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.9);
+
+
+
+  function main(){
+    var iditarod_route;
+    cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/6fe15eb8-b83b-11e3-b052-0edbca4b5057/viz.json')
+          .done(function(layer) {
+            iditarod_route = layer;
+          }).addTo(map)
+
+    // create a sequential trigger
+    var seq = O.Triggers.Sequential();
+
+    // init a story 
+    var story = O.Story();
+
+    // enanle keys to move
+    O.Triggers.Keys().left().then(seq.prev, seq)
+    O.Triggers.Keys().right().then(seq.next, seq)
+
+    click(document.getElementsByClassName('next')).then(seq.next, seq)
+    click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+    var slides = O.Actions.Slides('slides');
+    var progress = O.UI.DotProgress('dots').count(0);
+    var i = 0;
+        function I(p){if(p){i++;} return i-1}
+
+// var story = O.Story().data([{ zoom:....}]).
+
+// O.Parallel(function(d){
+
+    var story = O.Story()
+      .addState(
+        // Full picture
+        seq.step(0),
+        O.Parallel(
+          map.actions.panTo([63.1455, -163.5208], {animate: false}),
+          map.actions.setZoom(6),
+          slides.activate(0),
+          progress.activate(0)
+        )
+      )
+      .addState(
+        // Anchorage Alaska: historical start
+        seq.step(1),
+        O.Parallel(
+          map.actions.panTo([61.20282912, -149.86793518], {animate: false}),
+          map.actions.setZoom(10),
+          slides.activate(1)
+        )
+      )
+      .addState(
+        // Willow start
+        seq.step(2),
+        O.Chain(
+          // map.actions.setZoom(10),
+          slides.activate(2),
+          map.actions.panTo([61.7258, -150.1638], {animate: true, duration: 1})
+        )
+      )
+      .addState(
+        // The Finish
+        seq.step(3),
+        O.Chain(
+            map.actions.setZoom(6),
+            slides.activate(3),
+            // O.Sleep(30),
+            O.Sleep(3000),
+            map.actions.panTo([64.5003, -165.4093], {animate: true, duration: 3}),
+            O.Sleep(3000),
+            map.actions.setZoom(10)
+        )
+      )
+
+    story.go(0);
+  }
+  window.onload = main;
+
+                  
+  </script>
+</body>
+</html>
