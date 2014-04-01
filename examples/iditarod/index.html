@@ -108,28 +108,15 @@
 
       var slides = O.Actions.Slides('slides');
       var progress = O.UI.DotProgress('dots').count(0);
-var mp;
 
   function main(){
-    mp = document.getElementById("paddle-song");
-    mp.play();
+    var audio = O.Audio(document.getElementById("paddle-song"));
 
-    var flip = 
-            function(){
-            iditarod_route.getSubLayer(0).show();
-            iditarod_route.getSubLayer(1).hide();
-            }
     cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/6fe15eb8-b83b-11e3-b052-0edbca4b5057/viz.json')
           .done(function(layer) {
             iditarod_route = layer;
             // O.iditarod_route= layer.getSubLayer(0).show(),
             O.iditarod_route =layer.getSubLayer(1).hide();
-
-
-  // var story = O.Story().data([{ zoom:....}]).
-
-  // O.Parallel(function(d){
-      var audio = O.Audio(mp);
 
       var story = O.Story()
         .addState(
@@ -137,6 +124,8 @@ var mp;
           seq.step(0),
           O.Chain(
             slides.activate(0),
+            audio.setCurrentTime(30),
+            audio.play(),
             O.Sleep(4000),
             O.Sleep(4000),
             map.actions.setZoom(6, {animate: true, duration: 2}),
@@ -171,15 +160,6 @@ var mp;
             map.actions.setZoom(10)
           )
         )
-        // .addState(
-        //   // Willow start
-        //   seq.step(3),
-        //   O.Chain(
-        //     // map.actions.setZoom(10),
-        //     slides.activate(3),
-        //     map.actions.panTo([61.7258, -150.1638], {animate: true, duration: 1})
-        //   )
-        // )
         .addState(
           // The Finish
           seq.step(3),
