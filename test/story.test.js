@@ -79,15 +79,15 @@ test('clear', 2, function() {
 
 
 
-test('Chain', function() {
-  story.addState(t1, O.Chain(a1, a2));
+test('Step', function() {
+  story.addState(t1, O.Step(a1, a2));
   t1.trigger();
   equal(1, a1.called, "a1 should be called");
   equal(1, a2.called, "a2 should be called");
   ok(a1.lastEnterCall <= a2.lastEnterCall, "a1 should be called before a2");
 })
 
-asyncTest('Chain - async', 3, function() {
+asyncTest('Step - async', 3, function() {
   var finished = false;
   var asyncAction = O.Action({
     enter: function() {
@@ -99,7 +99,7 @@ asyncTest('Chain - async', 3, function() {
       return true;
     }
   });
-  story.addState(t1, O.Chain(asyncAction, a2).on('finish.test', function() {
+  story.addState(t1, O.Step(asyncAction, a2).on('finish.test', function() {
     finished = true;
   }));
 
@@ -145,7 +145,7 @@ asyncTest('Parallel - async', 3, function() {
   setTimeout(function() { ok(finished); start(); }, 1000);
 });
 
-asyncTest('Chain - async', 3, function() {
+asyncTest('Step - async', 3, function() {
   var finished = false;
   var asyncAction = O.Action({
     enter: function() {
@@ -157,7 +157,7 @@ asyncTest('Chain - async', 3, function() {
       return true;
     }
   });
-  story.addState(t1, O.Chain(asyncAction, a2).on('finish.test', function() {
+  story.addState(t1, O.Step(asyncAction, a2).on('finish.test', function() {
     finished = true;
   }));
 
