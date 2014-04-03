@@ -141,7 +141,7 @@
         .addState(
           // Full picture
           seq.step(0),
-          O.Chain(
+          O.Step(
             slides.activate(0),
             audio.setCurrentTime(30),
             audio.play(),
@@ -153,7 +153,7 @@
         .addState(
           // Anchorage Alaska: historical start
           seq.step(1),
-          O.Chain(
+          O.Step(
             audio.pause(),
             // O.actions.Audio.pause(mp),
             slides.activate(1),
@@ -206,7 +206,7 @@
         .addState(
           // The Finish
           seq.step(5),
-          O.Chain(
+          O.Step(
             vid.toggleClass('hidden'),
               slides.activate(5),
               map.actions.setZoom(6),

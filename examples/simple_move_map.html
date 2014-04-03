@@ -90,7 +90,7 @@
       positions.push(pos);
 
       // execute the actions one after another
-      var action = O.Chain(
+      var action = O.Step(
           // move the map to the position
           map.actions.panTo(pos),
           // toggle style for the marker

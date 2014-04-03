@@ -40,7 +40,7 @@
   var map = new L.Map('map', {
     zoomControl: false,
     center: [37, -91],
-    zoom: 6
+    zoom: 3
   });
 
   L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.jpg', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.9);
@@ -56,17 +56,33 @@
   var story = O.Story()
       .addState(
         seq.step(0),
-        map.actions.panTo(spain)
+        O.Step(
+          map.actions.panTo(spain, { animate: true, duration: 2 } ),
+          O.Debug().log("finished Pan")
+        )
+
       )
       .addState(
         seq.step(1),
-        map.actions.panTo(brazil)
+        O.Step(
+          map.actions.setZoom(4, { animate:true, duration: 2}),
+          map.actions.setZoom(2, { animate:true, duration: 2}),
+          map.actions.panTo(brazil)
+        )
       )
       .addState(
         seq.step(2),
-        map.actions.panTo(usa)
+        map.actions.setView(usa, 1)
       )
 
+  map.on('zoomend', function() {
+    console.log('zoomend')
+
+  });
+  map.on('moveend', function() {
+    console.log('movened')
+
+  });
   // Start the story, go to step(0)
   story.go(0);
                        
