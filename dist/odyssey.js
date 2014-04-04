@@ -153,6 +153,45 @@ function MapActions(map) {
     };
   }
 
+  _map.moveLinearTo = function(from, to, options) {
+    var opt = options || { k: 2 };
+    var animationTimer;
+    var posTarget;
+    var delta = 20;
+
+    // leaflet map animation is not being used because
+    // when the action is updated the map just stop the animatin
+    // and start again
+    // the animtion should be smooth
+    return Action({
+
+      enter: function () {
+        posTarget = map.project(map.getCenter());
+        animationTimer = setInterval(function() {
+          var c = map.project(map.getCenter());
+          var px = c.x + (posTarget.x - c.x)*delta*0.001* opt.k;
+          var py = c.y + (posTarget.y - c.y)*delta*0.001* opt.k;
+          map.panTo(map.unproject(L.point(px, py)), { animate: false });
+        }, delta);
+      },
+
+      update: function (t) {
+        var p0 = map.project(from);
+        var p1 = map.project(to);
+        posTarget = p0.add(p1.subtract(p0).multiplyBy(t));
+      },
+
+      exit: function() {
+        clearInterval(animationTimer);
+      },
+
+      clean: function() {
+        this.exit();
+      }
+
+    });
+  };
+
 
   // leaflet methods
   leaflet_move_method('panTo', 'moveend');
@@ -701,20 +740,20 @@ function Parallel () {
 // executes actions serially, waits until the previous task
 // is completed to start with the second and so on
 // usage:
-//    Chain(action1, action2, action3)
+//    Step(action1, action2, action3)
 //
 // raises finish when all the tasks has been completed
 //
-function Chain() {
+function Step() {
 
   var actions = Array.prototype.slice.call(arguments);
   var queue;
 
-  function _Chain() {}
+  function _Step() {}
 
   function next(method) {
     if (queue.length === 0) {
-      _Chain.finish();
+      _Step.finish();
       return;
     }
     var a = queue.pop();
@@ -728,29 +767,29 @@ function Chain() {
     }
   }
 
-  _Chain.enter = function() {
+  _Step.enter = function() {
     // call enter on each action
     queue = actions.slice().reverse();
     next('enter');
     return true;
   }
 
-  _Chain.exit = function() {
+  _Step.exit = function() {
     // call exit on each action
     queue = actions.slice();
     next('exit');
     return true;
   }
 
-  _Chain.clear = function() {
+  _Step.clear = function() {
     for(var i = 0, len = actions.length; i < len; ++i) {
       var a = actions[i];
       a.clear && a.clear();
     }
   }
 
-  _Chain = Action(_Chain);
-  return _Chain;
+  _Step = Action(_Step);
+  return _Step;
 }
 
 // check change between two states and triggers
@@ -778,7 +817,7 @@ module.exports = {
   Story: Story,
   Action: Action,
   Trigger: Trigger,
-  Chain: Chain,
+  Step: Step,
   Parallel: Parallel,
   Edge: Edge
 };
@@ -849,7 +888,7 @@ function Slide(tree, actions, properties) {
   var action;
 
   function compile(context) {
-    action = O.Chain.apply(window, 
+    action = O.Step.apply(window, 
       actions.map(function(o) {
         var f = Function("S", "return " + o + ";");
         return f(context);
@@ -1197,7 +1236,7 @@ function Sequential() {
     }
   }
 
-  seq.step = function(n) {
+  seq.state = seq.step = function(n) {
     if (n in triggers) {
       return triggers[n];
     }
@@ -1260,7 +1299,7 @@ function Video(player) {
     for (var i = 0; i < triggers.length; ++i) {
       var t = triggers[i];
       if (t.start <= seconds && t.end > seconds) {
-        t.trigger((seconds - t.end)/(t.end - t.start));
+        t.trigger((seconds - t.start)/(t.end - t.start));
       }
     }
   }, 100);
