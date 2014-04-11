@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>On the border</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../vendor/leaflet.css" />
+  <link rel="stylesheet" href="../../editor/stylesheets/slides.css" />
+
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style type="text/css">
+  .hidden {
+    display: none;
+  }
+  </style>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="slides_container">
+    <div id="dots"></div>
+    <div id="slides">
+      <div class='slide' style='diplay:none'>
+          <h1> Rio Grande Valley </h1>
+          <p>
+            South Texas (namely RGV) has seen some huge increases in apprehended migrants. That said, the overall number is still near record lows when compared to the past 40 years.
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1> Tuscon </h1>
+          <p>
+             Record low migrants crossing, record high budget, number of deaths seems to only be increasing...
+          </p>
+      </div>
+      <div class='slide' style='diplay:none'>
+          <h1>Del Rio</h1>
+          <p>
+            Del Rio has the highest percentage of unaccompanied juveniles (out of the juveniles). Nearly 87% of juveniles apprehended in DR are unaccompanied. [[RGV has highest percentage of total apprehensions that are juveniles (nearly 13%) ]]
+          </p>
+      </div>
+    </div>
+    <ul id='navButtons'>
+      <li><a class='prev'></a></li>
+      <li><a class='next'></a></li>
+    </ul>
+  </div>
+  <div id="progress"></div>
+  <div id="credits">
+    <span class="title">On the border</span>
+    <span class="author">By Vizzuality using <a href="#">odyssey.js</a><span>
+  </div>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+  function click(el) {
+    var element = O.Core.getElement(el);
+    var t = O.Trigger();
+    // TODO: clean properly
+    element.onclick = function() {
+      t.trigger();
+    }
+    return t;
+  }
+
+  var defaultIcon = L.icon({
+      iconUrl: '../icons/circle-stroked-24.png'
+  });
+
+  // create a map
+  var map = new L.Map('map', {
+    zoomControl: false,
+    center: [26, -100],
+    zoom: 8
+  });
+// https://a.tiles.mapbox.com/v3//page.html?secure=1#3/35.25/-51.50
+
+  L.tileLayer('http://{s}.tiles.mapbox.com/v3/cartodb.h0cmgfh8/{z}/{x}/{y}.png').addTo(map).setOpacity(0.9);
+
+  // create a sequential trigger
+  var seq = O.Triggers.Sequential();
+
+  // init a story 
+  var story = O.Story();
+
+  // enanle keys to move
+  O.Triggers.Keys().left().then(seq.prev, seq)
+  O.Triggers.Keys().right().then(seq.next, seq)
+
+  click(document.getElementsByClassName('next')).then(seq.next, seq)
+  click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+  var slides = O.Actions.Slides('slides');
+  var progress = O.UI.DotProgress('dots').count(0);
+
+  function main(){
+
+    cartodb.createLayer(map, 'http://andrew.cartodb.com/api/v2/viz/6fe15eb8-b83b-11e3-b052-0edbca4b5057/viz.json')
+          .done(function(layer) {
+            iditarod_route = layer;
+            // O.iditarod_route= layer.getSubLayer(0).show(),
+            O.iditarod_route =layer.getSubLayer(1).hide();
+
+      var story = O.Story()
+        .addState(
+          seq.step(0),
+          O.Step(
+            O.Parallel(
+             slides.activate(0),
+             map.actions.panTo([26.117865, -98.315685], {animate: false}),
+             map.actions.setZoom(12),
+             progress.activate(0)
+            )
+          )
+        )
+        .addState(
+          seq.step(1),
+          O.Step(
+            // Activate our HTML slide
+            slides.activate(1),
+            // Zoom out
+            map.actions.setZoom(8),
+            O.Sleep(200),
+            // Pan to our new location
+            map.actions.panTo([31.331829, -110.944962  ], {animate: true, duration: 2}),
+            O.Sleep(500),
+            // Zoom back in
+            map.actions.setZoom(12, {animate: false}),
+            // Update our progress UI (we don't have one yet)
+            progress.activate(1)
+          )
+        )
+        .addState(
+          // Full picture
+          seq.step(2),
+          O.Step(
+            slides.activate(2),
+            // Zoom out
+            map.actions.setZoom(8),
+            O.Sleep(200),
+            // Pan to our new location
+            map.actions.panTo([29.33085, -100.929342], {animate: true, duration: 4}),
+            O.Sleep(500),
+            // Zoom back in
+            map.actions.setZoom(12, {animate: false}),
+            progress.activate(2)
+          )
+        )
+
+      story.go(0);
+    }).addTo(map)
+  }
+  window.onload = main;
+
+                  
+  </script>
+</body>
+</html>
