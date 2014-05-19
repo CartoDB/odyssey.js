@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -100,6 +100,14 @@ body {
   width: 720px;
 }
 /* line 35, ../sass/screen.scss */
+#editor_modal .error {
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 10px 20px;
+  color: #F00;
+  font-size: 12px;
+}
+/* line 43, ../sass/screen.scss */
 #editor_modal div.header {
   background: #ff7373 url("../assets/img/greyBarBkg.png") repeat-y left top;
   color: white;
@@ -113,37 +121,37 @@ body {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 43, ../sass/screen.scss */
+/* line 51, ../sass/screen.scss */
 #editor_modal div.header a.expandButton {
   background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
   padding: 4px 13px;
 }
-/* line 47, ../sass/screen.scss */
+/* line 55, ../sass/screen.scss */
 #editor_modal div.header a.expandButton:hover {
   background-position: 0 -28px;
 }
-/* line 51, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded {
   background-position: -27px 0;
 }
-/* line 54, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded:hover {
   background-position: -27px -28px;
 }
-/* line 60, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 #editor_modal div.header h1 {
   display: inline;
   width: auto;
   margin: 0 0 0 35px;
 }
-/* line 66, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #editor_modal div.header select {
   position: absolute;
   top: 20px;
   right: 20px;
   width: 120px;
 }
-/* line 74, ../sass/screen.scss */
+/* line 82, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   position: absolute;
   top: 58px;
@@ -158,7 +166,7 @@ body {
   padding: 20px 20px 20px 72px;
   overflow-x: hidden;
 }
-/* line 89, ../sass/screen.scss */
+/* line 97, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -170,13 +178,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 98, ../sass/screen.scss */
+/* line 106, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 105, ../sass/screen.scss */
+/* line 113, ../sass/screen.scss */
 #actionDropdown {
   background: white;
   width: 150px;
@@ -184,7 +192,7 @@ body {
   border: 1px solid #888;
   text-align: left;
 }
-/* line 112, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 #actionDropdown li {
   padding: 5px;
   list-style: none;

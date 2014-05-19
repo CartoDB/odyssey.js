@@ -94,6 +94,16 @@ function dialog(context) {
       placeActionButtons(el, this.codemirror);
     });
 
+    context.on('error.editor', function(errors) {
+      var e = el.selectAll('.error').data(errors)
+      e.enter()
+        .append('div')
+        .attr('class', 'error')
+      e.text(String)
+
+      e.exit().remove();
+    })
+
   }
 
   var SLIDE_REGEXP = /^#[^#]+/i;

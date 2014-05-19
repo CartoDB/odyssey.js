@@ -12,6 +12,8 @@ function editor() {
   var body = d3.select(document.body);
   var context = {};
 
+  d3.rebind(context, d3.dispatch('error'), 'on', 'error');
+
   var template = body.select('#template');
   var code_dialog = dialog(context);
 
@@ -51,16 +53,22 @@ function editor() {
   }
 
   function sendCode(_) {
-    iframeWindow.postMessage(JSON.stringify({
+    sendMsg({
       type: 'md',
       code: _
-    }), iframeWindow.location);
+    }, function(err) {
+      if (err) {
+        err = [err]
+      } else {
+        err = []
+      }
+      context.error(err);
+    });
   }
 
   function getAction(_, done) {
     sendMsg({ type: 'get_action', code: _ }, done);
   }
-
 
   code_dialog.on('code.editor', function(code) {
     sendCode(code);

@@ -32,6 +32,14 @@ body{
     width: 720px;
   }
 
+  .error {
+    text-align:center;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 10px 20px;
+    color: #F00;
+    font-size: 12px;
+  }
+
 	div.header {
     background: rgb(255, 115, 115) url("../assets/img/greyBarBkg.png") repeat-y left top;
 	  color: white;
