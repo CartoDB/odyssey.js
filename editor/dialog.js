@@ -166,6 +166,7 @@ function dialog(context) {
       .style({ position: 'absolute' })
       .html('add')
       .on('click', function(d) {
+        d3.event.stopPropagation();
         var self = this;
         open(this, context.actions()).on('click', function(e) {
           context.getAction(e, function(action) {
@@ -174,6 +175,11 @@ function dialog(context) {
           close(self);
         });
       });
+
+    el.on('click.actionbutton', function() {
+      //close popup
+      close();
+    })
 
     // update
     var LINE_HEIGHT = 28;
