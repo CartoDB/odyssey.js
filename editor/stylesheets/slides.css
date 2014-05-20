@@ -178,7 +178,7 @@ a:hover {
 }
 
 /* line 92, ../sass/slides.scss */
-img {
+#slides_container img {
   max-width: 400px;
   margin: 20px 0 20px -40px;
 }

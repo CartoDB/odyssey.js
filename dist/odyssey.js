@@ -6,6 +6,7 @@ e.Triggers = _dereq_('./lib/odyssey/triggers');
 e.Core = _dereq_('./lib/odyssey/core');
 e.Template = _dereq_('./lib/odyssey/template');
 e.UI = _dereq_('./lib/odyssey/ui');
+_dereq_('./lib/odyssey/util');
 
 for (var k in e.Actions) {
   e[k] = e.Actions[k];
@@ -15,7 +16,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":5,"./lib/odyssey/core":12,"./lib/odyssey/story":13,"./lib/odyssey/template":14,"./lib/odyssey/triggers":15,"./lib/odyssey/ui":21}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":5,"./lib/odyssey/core":12,"./lib/odyssey/story":13,"./lib/odyssey/template":14,"./lib/odyssey/triggers":15,"./lib/odyssey/ui":21,"./lib/odyssey/util":23}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -804,14 +805,21 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":26}],14:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":28}],14:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 
 var Template = function(template) {
   var initialized = false;
+
   window.addEventListener("message", function(event) {
     var msg = JSON.parse(event.data);
+    template.editor = true;
+
+    if (!initialized) {
+      configureEditor();
+      initialized = true;
+    }
 
     function sendMsg(_) {
       event.source.postMessage(JSON.stringify({
@@ -840,6 +848,13 @@ var Template = function(template) {
 
   template.init(function() {
   });
+
+  function configureEditor() {
+    // add helpers
+    if (template.map && template.map instanceof L.Map) {
+      new L.CrossHair('http://www.clker.com/cliparts/b/a/b/0/1207156679935151925noxin_crosshairs.svg.med.png', {x: 10, y: 10}).addTo(template.map);
+    }
+  }
 
   window.onload = function() {
     Template.Storage.load(function(md) {
@@ -990,7 +1005,7 @@ function actionsFromMarkdown(md) {
 
 module.exports = Template;
 
-},{"../../vendor/markdown":27}],15:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":29}],15:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -1424,6 +1439,61 @@ module.exports = {
 }
 
 },{"./dotprogress":20}],22:[function(_dereq_,module,exports){
+/**
+ * new L.CrossHair('http://image.com/image', { x: 10, y :10 }).addTo(map)
+ */
+if (typeof window.L !== 'undefined') {
+
+L.CrossHair = L.Control.extend({
+
+  initialize: function(img, size) {
+    this.image = new Image();
+    this.image.onload = L.bind(this._updatePos, this);
+    this.image.src = img;
+    if (size) {
+      this.image.width = size.x;
+      this.image.height = size.y;
+    }
+  },
+
+  _updatePos: function() {
+    if (this._map) {
+      var w = this.image.width >> 1;
+      var h = this.image.height >> 1;
+      w = this._map.getSize().x/2.0 - w;
+      h = this._map.getSize().y/2.0 - h;
+      L.DomUtil.setPosition(this.image, { x: w, y: h });
+    }
+  },
+
+  addTo: function(map) {
+    var r = L.Control.prototype.addTo.call(this, map);
+    // remove leaflet-top and leaflet-right classes
+    this.image.parentNode.setAttribute('class', '');
+    map.on('resize', L.bind(this._updatePos, this));
+    return r;
+  },
+
+  onRemove: function(map) {
+    map.off('resize', null, this);
+  },
+
+  onAdd: function(map) {
+    this._updatePos();
+    return this.image;
+  }
+
+});
+
+}
+
+},{}],23:[function(_dereq_,module,exports){
+
+module.exports = {
+  CrossHair: _dereq_('./crosshair')
+}
+
+},{"./crosshair":22}],24:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1448,7 +1518,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],23:[function(_dereq_,module,exports){
+},{}],25:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1503,14 +1573,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],24:[function(_dereq_,module,exports){
+},{}],26:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],25:[function(_dereq_,module,exports){
+},{}],27:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2100,7 +2170,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":24,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":23,"inherits":22}],26:[function(_dereq_,module,exports){
+},{"./support/isBuffer":26,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":25,"inherits":24}],28:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -2252,7 +2322,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],27:[function(_dereq_,module,exports){
+},{}],29:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -3994,6 +4064,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":25}]},{},[1])
+},{"util":27}]},{},[1])
 (1)
 });
