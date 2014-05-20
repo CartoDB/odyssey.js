@@ -4,7 +4,6 @@ function _t(s) { return s; }
 
 
 var dialog = require('./dialog');
-var dropfile = require('./dropfile');
 var saveAs = require('../vendor/FileSaver');
 
 function editor() {

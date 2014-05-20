@@ -10,12 +10,12 @@ function close(el) {
 function open(el, items) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
-  d.enter().append('div').attr('id', 'actionDropdown').style('position', 'absolute');
+  d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
 
   // update
   var bbox = el.getBoundingClientRect();
   d.style({
-    top: (bbox.top + 15) + "px",
+    top: (bbox.top + 25) + "px",
     left: bbox.left + "px",
   });
 

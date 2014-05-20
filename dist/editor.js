@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.editor=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.editor=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
@@ -11,12 +11,12 @@ function close(el) {
 function open(el, items) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
-  d.enter().append('div').attr('id', 'actionDropdown').style('position', 'absolute');
+  d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
 
   // update
   var bbox = el.getBoundingClientRect();
   d.style({
-    top: (bbox.top + 15) + "px",
+    top: (bbox.top + 25) + "px",
     left: bbox.left + "px",
   });
 
@@ -202,7 +202,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":5,"./dropdown":2}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":4,"./dropdown":2}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -237,53 +237,11 @@ module.exports = dropdown;
 
 },{}],3:[function(_dereq_,module,exports){
 
-function dropfile(node, callback) {
-
-  function handleFileSelect(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-
-    var files = evt.dataTransfer.files; // FileList object.
-    if (files.length) {
-      var reader = new FileReader();
-      callback(reader.readAsText(files[0]));
-    }
-  }
-
-  function handleDragOver(evt) {
-    console.log("over");
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy';
-    node.style.background = "rgba(0, 0, 0, 0.5)";
-    node.style.display = 'block';
-  }
-
-  function handleDragLeave(evt) {
-    console.log("leave");
-    evt.stopPropagation();
-    evt.preventDefault();
-    node.style.display = 'none';
-  }
-
-  var dropZone = node;
-  var w = window;//document.getElementById('template')
-  w.addEventListener('dragover', handleDragOver, false);
-  w.addEventListener('dragleave', handleDragLeave, false);
-  dropZone.addEventListener('drop', handleFileSelect, false);
-
-}
-
-module.exports = dropfile;
-
-},{}],4:[function(_dereq_,module,exports){
-
 //i18n placeholder
 function _t(s) { return s; }
 
 
 var dialog = _dereq_('./dialog');
-var dropfile = _dereq_('./dropfile');
 var saveAs = _dereq_('../vendor/FileSaver');
 
 function editor() {
@@ -389,7 +347,7 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/FileSaver":5,"./dialog":1,"./dropfile":3}],5:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":4,"./dialog":1}],4:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
@@ -644,6 +602,6 @@ if (typeof module !== "undefined" && module !== null) {
   });
 }
 
-},{}]},{},[4])
-(4)
+},{}]},{},[3])
+(3)
 });

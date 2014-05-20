@@ -19,13 +19,24 @@ body{
 }
 
 #editor_modal {
-  background: #ffffff url("../assets/img/greyBarBkg.png") repeat-y left top;
+  background: #fff;
   position: absolute;
   right: 30px;
   top: 30px;
   bottom: 80px;
   width: 452px;
   text-align: left;
+  &:before {
+    content:"";
+    position: absolute;
+    left: 0;
+    width: 55px;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .05);
+    border-right: 1px solid rgba(0, 0, 0, .15);
+  }
+
   @include border-radius(4px, 4px);
 
   &.expanded{
@@ -51,6 +62,8 @@ body{
     a.expandButton{
       background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
       padding: 4px 13px;
+      z-index: 1;
+      position: relative;
 
       &:hover{
         background-position: 0 -28px;
@@ -111,15 +124,75 @@ body{
 }
 
 #actionDropdown {
-  background: white;
+  position: relative;
   width: 150px;
   z-index: 20;
-  border: 1px solid #888;
   text-align: left;
+  border-radius: 4px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+  background: #fff; 
 
-  li {
-    padding: 5px;
-    list-style: none;
-    border-bottom: 1px solid #888;
+  li:last-child {
+    border-bottom: 0px;
+    margin: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
+  li {
+    list-style: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 10px;
+    font-size: 12px;
+    &:hover {
+      cursor: pointer; 
+      background: #f9f9f9;
+    }
+  }
+ li:first-child {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    &:hover:before {
+      border-bottom: 8px solid #f9f9f9;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0px;
+      height: 0;
+      left: 10px;
+      top: -16px;
+      border: 8px solid transparent;
+      border-bottom: 8px solid #fff;
+      z-index: 1
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0px;
+      height: 0;
+      left: 10px;
+      top: -17px;
+      border: 8px solid transparent;
+      border-bottom: 8px solid rgba(0, 0, 0, 0.1);
+    } 
+  } 
+  li:last-child {
+    border-bottom: 0px;
+    margin: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  &.drop-right li:first-child {
+    &:before {
+      right: 10px;
+      left: auto;
+    }
+    &:after {
+      right: 10px;
+      left: auto;
+    } 
+  } 
+
+
+
 }
