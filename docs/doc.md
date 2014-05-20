@@ -48,7 +48,7 @@ The Markdown syntax used in the Odyssey Editor uses all the features documented 
 
 ### Config block
 
-At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add inforation to your story. For example, title object can be included this way,
+At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. For example, title object can be included this way,
 
 ![title](http://i.imgur.com/Q8ruePp.png)
 
