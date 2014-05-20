@@ -8,7 +8,8 @@ ODYSSEY_FILES= \
 	lib/odyssey/template.js \
 	lib/odyssey/actions/*.js \
 	lib/odyssey/actions/leaflet/*.js \
-	lib/odyssey/triggers/*.js 
+	lib/odyssey/triggers/*.js \
+	lib/odyssey/util/*.js 
 
 ODYSSEY_EDITOR_FILES= editor/*.js
 
