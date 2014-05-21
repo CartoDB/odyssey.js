@@ -69,16 +69,6 @@ function dialog(context) {
         });
       });
 
-    /*
-    divHeader.append('select')
-      .html(['torque', 'scroll', 'slides', 'rolling_stones'].map(function(v) {
-        return "<option value='" + v + "'>" + v + "</option>";
-      }).join('\n'))
-      .on('change', function() {
-        evt.template(this.value);
-      });
-    */
-
     var textarea = enter.append('textarea')
       .attr('id', 'code')
       .on('keyup.editor', function() {
