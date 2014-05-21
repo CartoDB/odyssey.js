@@ -7,15 +7,18 @@ function close(el) {
   d.exit().remove();
 }
 
-function open(el, items) {
+function open(el, items, _class) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
-  d.enter().append('div').attr('id', 'actionDropdown').style('position', 'absolute');
+  var ul = d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
+  if (_class) {
+    ul.attr('class', _class);
+  }
 
   // update
   var bbox = el.getBoundingClientRect();
   d.style({
-    top: (bbox.top + 15) + "px",
+    top: (bbox.top + 25) + "px",
     left: bbox.left + "px",
   });
 
@@ -36,7 +39,8 @@ function dialog(context) {
     var enter = codeEditor.enter();
     var divHeader = enter.append('div')
       .attr('class','header');
-
+    var divOptions = enter.append('div')
+      .attr('class','options');
 
     divHeader.append('a')
       .attr('class','expandButton')
@@ -48,7 +52,7 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
-    divHeader.append('a').text('save').on('click', function() {
+    divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue()
 
       // JSZipUtils.getBinaryContent('/odyssey.zip', function(err, data) {
@@ -85,6 +89,23 @@ function dialog(context) {
       }).join('\n'))
       .on('change', function() {
         evt.template(this.value);
+
+    var templates = context.templates().map(function(d) { return d.title; });
+
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
+    divHeader.append('p')
+      .attr('id', 'show_slide')
+      .text(templates[0])
+      .on('click', function(d) {
+        d3.event.stopPropagation();
+        var self = this;
+        open(this, templates, 'drop-right').on('click', function(value) {
+          evt.template(value);
+          close();
+          d3.select(self).text(value);
+        });
       });
 
     var textarea = enter.append('textarea')
@@ -191,6 +212,7 @@ function dialog(context) {
       .style({ position: 'absolute' })
       .html('add')
       .on('click', function(d) {
+        d3.event.stopPropagation();
         var self = this;
         open(this, context.actions()).on('click', function(e) {
           context.getAction(e, function(action) {
@@ -199,6 +221,11 @@ function dialog(context) {
           close(self);
         });
       });
+
+    el.on('click.actionbutton', function() {
+      //close popup
+      close();
+    })
 
     // update
     var LINE_HEIGHT = 28;

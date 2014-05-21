@@ -1,4 +1,4 @@
-/* line 17, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,50 +20,56 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../.rvm/gems/ruby-1.9.3-p194@cartodb/gems/compass-0.12.3/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
-/* line 5, ../sass/screen.scss */
+@font-face {
+  font-family: "staticregular";
+  src: url(/editor/assets/fonts/static-webfont.eot);
+  src: url(/editor/assets/fonts/static-webfont.eot?#iefix) format('embedded-opentype'), url(/editor/assets/fonts/static-webfont.woff) format('woff'), url(/editor/assets/fonts/static-webfont.ttf) format('truetype'), url(/editor/assets/fonts/static-webfont.svg) format('svg');
+}
+
+/* line 7, ../sass/screen.scss */
 body {
   text-align: center;
   margin: 0;
@@ -73,7 +79,7 @@ body {
   background: #EEE;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 #template {
   position: absolute;
   top: 0;
@@ -82,9 +88,9 @@ body {
   height: 100%;
 }
 
-/* line 21, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 #editor_modal {
-  background: white url("../assets/img/greyBarBkg.png") repeat-y left top;
+  background: #fff;
   position: absolute;
   right: 30px;
   top: 30px;
@@ -96,18 +102,39 @@ body {
   border-radius: 4px / 4px;
 }
 /* line 31, ../sass/screen.scss */
+#editor_modal:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 55px;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+/* line 44, ../sass/screen.scss */
 #editor_modal.expanded {
   width: 720px;
 }
-/* line 35, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 #editor_modal .error {
   text-align: center;
-  background-color: rgba(255, 0, 0, 0.2);
-  padding: 10px 20px;
+  background-color: #FFCCCC;
   color: #F00;
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
   font-size: 12px;
+  letter-spacing: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
-/* line 43, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 #editor_modal div.header {
   background: #ff7373 url("../assets/img/greyBarBkg.png") repeat-y left top;
   color: white;
@@ -121,37 +148,55 @@ body {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 51, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #editor_modal div.header a.expandButton {
   background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
   padding: 4px 13px;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
 }
-/* line 55, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 #editor_modal div.header a.expandButton:hover {
   background-position: 0 -28px;
 }
-/* line 59, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded {
   background-position: -27px 0;
 }
-/* line 62, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded:hover {
   background-position: -27px -28px;
 }
-/* line 68, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 #editor_modal div.header h1 {
   display: inline;
   width: auto;
   margin: 0 0 0 35px;
+  font: 19px 'staticregular';
+  text-transform: uppercase;
 }
-/* line 74, ../sass/screen.scss */
-#editor_modal div.header select {
+/* line 102, ../sass/screen.scss */
+#editor_modal div.header #show_slide {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 120px;
+  font: 19px 'staticregular';
+  padding-right: 19px;
+  cursor: pointer;
 }
-/* line 82, ../sass/screen.scss */
+/* line 109, ../sass/screen.scss */
+#editor_modal div.header #show_slide:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 42%;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top: 5px solid #fff;
+}
+/* line 122, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   position: absolute;
   top: 58px;
@@ -163,10 +208,10 @@ body {
   background: transparent;
   font-family: monospace;
   font-size: 14px;
-  padding: 20px 20px 20px 72px;
+  padding: 80px 20px 20px 72px;
   overflow-x: hidden;
 }
-/* line 97, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -178,23 +223,126 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 106, ../sass/screen.scss */
+/* line 146, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 113, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 #actionDropdown {
-  background: white;
+  position: relative;
   width: 150px;
   z-index: 20;
-  border: 1px solid #888;
   text-align: left;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
-/* line 120, ../sass/screen.scss */
+/* line 163, ../sass/screen.scss */
+#actionDropdown li:last-child {
+  border-bottom: 0px;
+  margin: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/* line 169, ../sass/screen.scss */
 #actionDropdown li {
-  padding: 5px;
   list-style: none;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid #f5f5f5;
+  padding: 10px;
+  font-size: 12px;
+}
+/* line 174, ../sass/screen.scss */
+#actionDropdown li:hover {
+  cursor: pointer;
+  background: #f9f9f9;
+}
+/* line 179, ../sass/screen.scss */
+#actionDropdown li:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+/* line 182, ../sass/screen.scss */
+#actionDropdown li:first-child:hover:before {
+  border-bottom: 8px solid #f9f9f9;
+}
+/* line 185, ../sass/screen.scss */
+#actionDropdown li:first-child:before {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: 10px;
+  top: -16px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  z-index: 1;
+}
+/* line 196, ../sass/screen.scss */
+#actionDropdown li:first-child:after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: 10px;
+  top: -17px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid rgba(0, 0, 0, 0.1);
+}
+/* line 207, ../sass/screen.scss */
+#actionDropdown li:last-child {
+  border-bottom: 0px;
+  margin: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/* line 214, ../sass/screen.scss */
+#actionDropdown.drop-right li:first-child:before {
+  right: 10px;
+  left: auto;
+}
+/* line 218, ../sass/screen.scss */
+#actionDropdown.drop-right li:first-child:after {
+  right: 10px;
+  left: auto;
+}
+
+/* line 227, ../sass/screen.scss */
+.options {
+  background: #FAFAFA;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 8px 8px 20px;
+  position: relative;
+  z-index: 1;
+  margin-left: 56px;
+}
+/* line 234, ../sass/screen.scss */
+.options a {
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  display: inline-block;
+  opacity: .8;
+  position: relative;
+  z-index: 1;
+  margin-right: 8px;
+  cursor: pointer;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+/* line 246, ../sass/screen.scss */
+.options a:hover {
+  opacity: 1;
+}
+
+/* line 252, ../sass/screen.scss */
+a.downloadButton {
+  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+}
+
+/* line 256, ../sass/screen.scss */
+a.helpButton {
+  background: transparent url("../assets/img/helpButtonIcon.png") no-repeat 0 0;
 }
