@@ -63,7 +63,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 5, ../sass/screen.scss */
+@font-face {
+  font-family: "staticregular";
+  src: url(/editor/assets/fonts/static-webfont.eot);
+  src: url(/editor/assets/fonts/static-webfont.eot?#iefix) format('embedded-opentype'), url(/editor/assets/fonts/static-webfont.woff) format('woff'), url(/editor/assets/fonts/static-webfont.ttf) format('truetype'), url(/editor/assets/fonts/static-webfont.svg) format('svg');
+}
+
+/* line 7, ../sass/screen.scss */
 body {
   text-align: center;
   margin: 0;
@@ -73,7 +79,7 @@ body {
   background: #EEE;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 #template {
   position: absolute;
   top: 0;
@@ -82,7 +88,7 @@ body {
   height: 100%;
 }
 
-/* line 21, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 #editor_modal {
   background: #fff;
   position: absolute;
@@ -95,7 +101,7 @@ body {
   -moz-border-radius: 4px / 4px;
   border-radius: 4px / 4px;
 }
-/* line 29, ../sass/screen.scss */
+/* line 31, ../sass/screen.scss */
 #editor_modal:before {
   content: "";
   position: absolute;
@@ -106,11 +112,11 @@ body {
   background: rgba(0, 0, 0, 0.05);
   border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
-/* line 42, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 #editor_modal.expanded {
   width: 720px;
 }
-/* line 46, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 #editor_modal .error {
   text-align: center;
   background-color: #FFCCCC;
@@ -128,7 +134,7 @@ body {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-/* line 64, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 #editor_modal div.header {
   background: #ff7373 url("../assets/img/greyBarBkg.png") repeat-y left top;
   color: white;
@@ -142,39 +148,42 @@ body {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 72, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #editor_modal div.header a.expandButton {
   background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
   padding: 4px 13px;
   z-index: 1;
   position: relative;
+  cursor: pointer;
 }
-/* line 78, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 #editor_modal div.header a.expandButton:hover {
   background-position: 0 -28px;
 }
-/* line 82, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded {
   background-position: -27px 0;
 }
-/* line 85, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 #editor_modal div.header a.expandButton.expanded:hover {
   background-position: -27px -28px;
 }
-/* line 91, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 #editor_modal div.header h1 {
   display: inline;
   width: auto;
   margin: 0 0 0 35px;
+  font: 19px 'staticregular';
+  text-transform: uppercase;
 }
-/* line 97, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 #editor_modal div.header select {
   position: absolute;
   top: 20px;
   right: 20px;
   width: 120px;
 }
-/* line 105, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   position: absolute;
   top: 58px;
@@ -189,7 +198,7 @@ body {
   padding: 20px 20px 20px 72px;
   overflow-x: hidden;
 }
-/* line 120, ../sass/screen.scss */
+/* line 125, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -201,13 +210,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 129, ../sass/screen.scss */
+/* line 134, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 136, ../sass/screen.scss */
+/* line 141, ../sass/screen.scss */
 #actionDropdown {
   position: relative;
   width: 150px;
@@ -218,35 +227,35 @@ body {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
-/* line 146, ../sass/screen.scss */
+/* line 151, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 152, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #actionDropdown li {
   list-style: none;
   border-bottom: 1px solid #f5f5f5;
   padding: 10px;
   font-size: 12px;
 }
-/* line 157, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
 #actionDropdown li:hover {
   cursor: pointer;
   background: #f9f9f9;
 }
-/* line 162, ../sass/screen.scss */
+/* line 167, ../sass/screen.scss */
 #actionDropdown li:first-child {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
-/* line 165, ../sass/screen.scss */
+/* line 170, ../sass/screen.scss */
 #actionDropdown li:first-child:hover:before {
   border-bottom: 8px solid #f9f9f9;
 }
-/* line 168, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 #actionDropdown li:first-child:before {
   content: "";
   position: absolute;
@@ -258,7 +267,7 @@ body {
   border-bottom: 8px solid #fff;
   z-index: 1;
 }
-/* line 179, ../sass/screen.scss */
+/* line 184, ../sass/screen.scss */
 #actionDropdown li:first-child:after {
   content: "";
   position: absolute;
@@ -269,19 +278,19 @@ body {
   border: 8px solid transparent;
   border-bottom: 8px solid rgba(0, 0, 0, 0.1);
 }
-/* line 190, ../sass/screen.scss */
+/* line 195, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 197, ../sass/screen.scss */
+/* line 202, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:before {
   right: 10px;
   left: auto;
 }
-/* line 201, ../sass/screen.scss */
+/* line 206, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:after {
   right: 10px;
   left: auto;
