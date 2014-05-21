@@ -1,6 +1,8 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/font-face";
+@include font-face("staticregular", font-files("/editor/assets/fonts/static-webfont.woff", "/editor/assets/fonts/static-webfont.ttf", "/editor/assets/fonts/static-webfont.svg"), "/editor/assets/fonts/static-webfont.eot");
+
 
 body{
   text-align: center;
@@ -74,6 +76,7 @@ body{
       padding: 4px 13px;
       z-index: 1;
       position: relative;
+      cursor: pointer;
 
       &:hover{
         background-position: 0 -28px;
@@ -92,6 +95,8 @@ body{
       display: inline;
       width: auto;
       margin: 0 0 0 35px;
+      font: 19px 'staticregular';
+      text-transform: uppercase;
     }
 
     select{
