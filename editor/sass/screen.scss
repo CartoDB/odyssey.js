@@ -20,6 +20,20 @@ body{
   height: 100%;
 }
 
+
+.splash {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: center;
+
+  .template {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #F00;
+  }
+}
+
 #editor_modal {
   background: #fff;
   position: absolute;

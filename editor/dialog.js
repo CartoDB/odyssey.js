@@ -59,6 +59,7 @@ function dialog(context) {
       saveAs(blob, 'oddysey.md');
     });
 
+<<<<<<< HEAD
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
@@ -68,6 +69,13 @@ function dialog(context) {
 
     var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
       
+=======
+    var templates = context.templates().map(function(d) { return d.title; });
+
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
+>>>>>>> 8aa7a60b149576b714e689e28de78ab389fb0b46
     divHeader.append('p')
       .attr('id', 'show_slide')
       .text(templates[0])
