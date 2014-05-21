@@ -130,7 +130,7 @@ body{
     background: transparent;
     font-family: monospace;
     font-size: 14px;
-    padding: 20px 20px 20px 72px;
+    padding: 80px 20px 20px 72px;
     overflow-x: hidden;
   }
 
@@ -221,6 +221,28 @@ body{
     } 
   } 
 
+}
 
 
+.options {
+  background: #FAFAFA;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 8px 8px 20px;
+  position: relative;
+  z-index: 1;
+  margin-left: 56px;
+}
+
+a.downloadButton{
+  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+  opacity: .8;
+  &:hover {
+    opacity: 1;
+  }
 }

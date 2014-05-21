@@ -39,7 +39,8 @@ function dialog(context) {
     var enter = codeEditor.enter();
     var divHeader = enter.append('div')
       .attr('class','header');
-
+    var divOptions = enter.append('div')
+      .attr('class','options');
 
     divHeader.append('a')
       .attr('class','expandButton')
@@ -51,7 +52,7 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
-    divHeader.append('a').text('save').on('click', function() {
+    divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue()
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
       saveAs(blob, 'oddysey.md');
