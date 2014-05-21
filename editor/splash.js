@@ -9,7 +9,10 @@ function Splash(context) {
       .data([0]);
 
     var div = s.enter().append('div').attr('class', 'splash');
-    var template = div
+    div.append('h1').text('Select your template')
+    div.append('p').text('templates allow you to change the layout of the styory')
+    var templates = div.append('div').attr('class', 'template_list')
+    var template = templates 
       .selectAll('.template').data(context.templates())
       .enter()
         .append('div')
