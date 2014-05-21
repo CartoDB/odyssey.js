@@ -238,18 +238,28 @@ body{
   position: relative;
   z-index: 1;
   margin-left: 56px;
+  a {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    display: inline-block;
+    opacity: .8;
+    position: relative;
+    z-index: 1;
+    margin-right: 8px;
+    cursor: pointer;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 a.downloadButton{
   background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
-  display: inline-block;
-  width: 33px;
-  height: 33px;
-  z-index: 1;
-  position: relative;
-  cursor: pointer;
-  opacity: .8;
-  &:hover {
-    opacity: 1;
-  }
+}
+
+a.helpButton{
+  background: transparent url("../assets/img/helpButtonIcon.png") no-repeat 0 0;
 }

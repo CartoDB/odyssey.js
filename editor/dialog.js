@@ -59,6 +59,10 @@ function dialog(context) {
     });
 
     var templates = context.templates().map(function(d) { return d.title; });
+
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
     divHeader.append('p')
       .attr('id', 'show_slide')
       .text(templates[0])

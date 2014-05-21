@@ -318,19 +318,31 @@ body {
   z-index: 1;
   margin-left: 56px;
 }
-
-/* line 236, ../sass/screen.scss */
-a.downloadButton {
-  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+/* line 234, ../sass/screen.scss */
+.options a {
   display: inline-block;
   width: 33px;
   height: 33px;
-  z-index: 1;
-  position: relative;
-  cursor: pointer;
+  display: inline-block;
   opacity: .8;
+  position: relative;
+  z-index: 1;
+  margin-right: 8px;
+  cursor: pointer;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
 }
-/* line 245, ../sass/screen.scss */
-a.downloadButton:hover {
+/* line 246, ../sass/screen.scss */
+.options a:hover {
   opacity: 1;
+}
+
+/* line 252, ../sass/screen.scss */
+a.downloadButton {
+  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+}
+
+/* line 256, ../sass/screen.scss */
+a.helpButton {
+  background: transparent url("../assets/img/helpButtonIcon.png") no-repeat 0 0;
 }
