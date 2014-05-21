@@ -59,6 +59,10 @@ function dialog(context) {
       saveAs(blob, 'oddysey.md');
     });
 
+
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
     var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
       
     divHeader.append('p')
