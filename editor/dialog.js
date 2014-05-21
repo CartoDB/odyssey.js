@@ -1,6 +1,7 @@
 
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
+var Gist = require('./gist');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -56,6 +57,9 @@ function dialog(context) {
       var md = el.select('textarea').node().codemirror.getValue()
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
       saveAs(blob, 'oddysey.md');
+
+      Gist(md, context.template());
+
     });
 
     var templates = context.templates().map(function(d) { return d.title; });

@@ -37,6 +37,11 @@ function editor() {
     return TEMPLATE_LIST;
   };
 
+  context.template = function(_) {
+    if (_) this._template = _;
+    return this._template;
+  }
+
   var template = body.select('#template');
   var code_dialog = dialog(context);
 
@@ -118,6 +123,7 @@ function editor() {
       context.actions(data);
     });
     if (location.hash.length === 0) {
+      // when there is no code, show template selector splash
       d3.select(document.body).call(Splash(context).on('template', function(t) {
         set_template(t);
         var template_data = context.templates(t);
@@ -131,6 +137,7 @@ function editor() {
 
   function set_template(t) {
     template.attr('src', t + ".html");
+    context.template(t);
   }
 
   code_dialog.on('template.editor', function(t) {
