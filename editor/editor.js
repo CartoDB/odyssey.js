@@ -4,7 +4,20 @@ function _t(s) { return s; }
 
 
 var dialog = require('./dialog');
+var Splash = require('./splash');
 var saveAs = require('../vendor/FileSaver');
+
+var TEMPLATE_LIST =  [{
+    title: 'slides',
+    description: 'the classic one, like using keynote',
+    default: '#slide1\nsome text\n\n#slide2\n more text'
+  }, {
+    title: 'scroll',
+    description: 'the classic one, like using keynote',
+    default: '#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+  }
+];
+
 
 function editor() {
 
@@ -12,6 +25,17 @@ function editor() {
   var context = {};
 
   d3.rebind(context, d3.dispatch('error'), 'on', 'error');
+
+  context.templates = function(_) {
+    if (_) {
+      var t = TEMPLATE_LIST.map(function(d) { return d.title; }).indexOf(_);
+      if (t >= 0) {
+        return TEMPLATE_LIST[t];
+      }
+      return null;
+    }
+    return TEMPLATE_LIST;
+  };
 
   var template = body.select('#template');
   var code_dialog = dialog(context);
@@ -93,6 +117,16 @@ function editor() {
     sendMsg({ type: 'actions' }, function(data) {
       context.actions(data);
     });
+    if (location.hash.length === 0) {
+      d3.select(document.body).call(Splash(context).on('template', function(t) {
+        set_template(t);
+        var template_data = context.templates(t);
+        if (template_data) {
+          sendCode(template_data.default);
+          $editor.call(code_dialog.code(template_data.default));
+        }
+      }));
+    }
   });
 
   function set_template(t) {

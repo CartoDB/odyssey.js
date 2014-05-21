@@ -57,8 +57,7 @@ function dialog(context) {
       saveAs(blob, 'oddysey.md');
     });
 
-    var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
-      
+    var templates = context.templates().map(function(d) { return d.title; });
     divHeader.append('p')
       .attr('id', 'show_slide')
       .text(templates[0])
