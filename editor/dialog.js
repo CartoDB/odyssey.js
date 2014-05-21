@@ -1,6 +1,7 @@
 
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
+var Gist = require('./gist');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -52,32 +53,40 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
+
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var xhr = new XMLHttpRequest();
       var save = saveAs;
       xhr.onload = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-          var md = el.select('textarea').node().codemirror.getValue().replace(/\n/g, '<br \/>');
+          var md_ = el.select('textarea').node().codemirror.getValue().replace(/\n/g, '<br \/>');
 
           var s = xhr.responseText;
           var parser = new DOMParser();
           var doc = parser.parseFromString(s, 'text/html');
           var script = doc.getElementById('odyssey-globals')
-          script.innerHTML = 'window.ODYSSEY_MD = "'+md+'"';
+          script.innerHTML = 'window.ODYSSEY_MD = "'+md_+'"';
 
           var zip = new JSZip();
+          zip.file("oddysey.html", doc.documentElement.innerHTML);
 
-          var blob = new Blob([doc.documentElement.innerHTML], {type: 'text/plain;charset=utf-8'});
-          saveAs(blob, 'oddysey.html');
+          var content = zip.generate({type:"blob"});
+          saveAs(content, "oddysey.zip");
         }
       }
 
       xhr.open('GET', 'slides.html', true);
       xhr.send();
+
+      var md = el.select('textarea').node().codemirror.getValue()
+      Gist(md, context.template());
     });
 
     var templates = context.templates().map(function(d) { return d.title; });
 
+
+    divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+    });
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
