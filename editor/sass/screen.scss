@@ -241,10 +241,11 @@ body{
 .options {
   background: #FAFAFA;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 8px 8px 8px 20px;
+  padding: 8px 8px 6px 20px;
   position: relative;
   z-index: 1;
   margin-left: 56px;
+  text-align: right;
   a {
     display: inline-block;
     width: 33px;
@@ -269,4 +270,8 @@ a.downloadButton{
 
 a.helpButton{
   background: transparent url("../assets/img/helpButtonIcon.png") no-repeat 0 0;
+}
+
+a.shareButton{
+  background: transparent url("../assets/img/shareButtonIcon.png") no-repeat 0 0;
 }

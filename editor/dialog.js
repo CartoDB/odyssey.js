@@ -53,6 +53,7 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
+
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue()
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
@@ -62,11 +63,23 @@ function dialog(context) {
 
     });
 
+<<<<<<< HEAD
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
+
+    divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+    });
+
+    var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
+      
+=======
     var templates = context.templates().map(function(d) { return d.title; });
 
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
+>>>>>>> 8aa7a60b149576b714e689e28de78ab389fb0b46
     divHeader.append('p')
       .attr('id', 'show_slide')
       .text(templates[0])
