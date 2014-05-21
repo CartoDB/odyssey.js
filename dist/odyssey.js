@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var e = _dereq_('./lib/odyssey/story');
 e.Actions = _dereq_('./lib/odyssey/actions');
@@ -842,9 +842,11 @@ var Template = function(template) {
   });
 
   window.onload = function() {
+    var origin = location.pathname.split('/')[1];
+
     Template.Storage.load(function(md) {
       template.update(actionsFromMarkdown(md));
-    });
+    }, origin);
   }
 };
 
@@ -854,12 +856,23 @@ Template.Storage = {
     location.hash = "md/" + btoa(md);
   },
 
-  load: function(done) {
-    var h = location.hash;
-    if (done && h) {
-      var tk = h.split('/');
-      if (tk[0] === '#md') {
-        done(atob(tk.slice(1).join('/')));
+  load: function(done, origin) {
+    if (origin === 'odyssey') {
+      function reqListener () {
+        done(this.responseText);
+      }
+
+      var oReq = new XMLHttpRequest();
+      oReq.onload = reqListener;
+      oReq.open("get", "odyssey.md", true);
+      oReq.send();
+    } else {
+      var h = location.hash;
+      if (done && h) {
+        var tk = h.split('/');
+        if (tk[0] === '#md') {
+          done(atob(tk.slice(1).join('/')));
+        }
       }
     }
   }
@@ -867,14 +880,14 @@ Template.Storage = {
 
 function Slide(tree, actions, properties) {
 
-  var html; 
+  var html;
   var md_tree = tree;
   var properties = properties;
 
   var action;
 
   function compile(context) {
-    action = O.Step.apply(window, 
+    action = O.Step.apply(window,
       actions.map(function(o) {
         try {
           var f = Function("S", "return " + o + ";");
@@ -956,7 +969,7 @@ function md2json(tree) {
       for(var j = 1; j < el.length; ++j) {
         var subel = el[j];
         if (subel[0] === "inlinecode") {
-          slide && slide.actions.push.apply(slide.actions, subel[1].split('\n').filter(function(a) { 
+          slide && slide.actions.push.apply(slide.actions, subel[1].split('\n').filter(function(a) {
             return trim(a) !== "" && !prop_re.exec(a);
           }))
           // props
@@ -967,7 +980,7 @@ function md2json(tree) {
           }
 
           // remove from list
-          el.splice(j, 1); 
+          el.splice(j, 1);
           --j;
         }
       }
@@ -1492,6 +1505,16 @@ process.title = 'browser';
 process.browser = true;
 process.env = {};
 process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -2099,8 +2122,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":24,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":23,"inherits":22}],26:[function(_dereq_,module,exports){
+}).call(this,_dereq_("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":24,"FWaASH":23,"inherits":22}],26:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {

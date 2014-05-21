@@ -4,7 +4,7 @@
   <title>Odyssey.js</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../vendor/leaflet.css" />
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="stylesheets/slides.css" />
 </head>
 <body>
@@ -25,7 +25,7 @@
   </div>
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="../vendor/leaflet.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
   <script>
 
@@ -58,7 +58,7 @@
     init: function() {
       var map = L.map('map').setView([0, 0.0], 4);
       L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', {
-        attribution: 'data OSM - map CartoDB' 
+        attribution: 'data OSM - map CartoDB'
       }).addTo(map);
       var seq = O.Triggers.Sequential();
 
@@ -68,7 +68,7 @@
 
       click(document.getElementsByClassName('next')).then(seq.next, seq)
       click(document.getElementsByClassName('prev')).then(seq.prev, seq)
-      
+
       var slides = O.Actions.Slides('slides');
       var story = O.Story()
 
@@ -99,18 +99,18 @@
         this.progress.step(i).then(this.seq.step(i), this.seq)
 
         var actions = O.Parallel.apply(window, [
-          this.slides.activate(i), 
+          this.slides.activate(i),
           slide(this),
           this.progress.activate(i)
         ]);
-        this.story.addState( 
-          this.seq.step(i), 
+        this.story.addState(
+          this.seq.step(i),
           actions
         )
       }
       this.story.go(this.seq.current());
     }
-    
+
   });
 
   </script>
