@@ -25,8 +25,8 @@ function open(el, items, _class) {
   var drop = dropdown().items(items);
   d.call(drop);
   return drop;
-}
 
+}
 function dialog(context) {
   var code = '';
   var evt = d3.dispatch('code', 'template');
@@ -54,41 +54,9 @@ function dialog(context) {
 
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue()
-
-      // JSZipUtils.getBinaryContent('/odyssey.zip', function(err, data) {
-      //   if(err) {
-      //     console.log(err);
-      //     return;
-      //   }
-
-      //   try {
-      //     var zipr = new JSZip(data);
-      //     showContent(elt, "" + data, zip.file("Hello.txt").asText());
-      //   } catch(e) {
-      //     showError(elt, e);
-      //   }
-      // });
-
-
-      var zip = new JSZip();
-
-      var folder = zip.folder("odyssey"),
-
-      folder.file("odyssey.md", md);
-      folder.folder("odyssey");
-
-      var content = zip.generate({type:"blob"});
-
-      // see FileSaver.js
-      saveAs(content, "odyssey.zip");
+      var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, 'oddysey.md');
     });
-
-    divHeader.append('select')
-      .html(['torque', 'scroll', 'slides', 'rolling_stones'].map(function(v) {
-        return "<option value='" + v + "'>" + v + "</option>";
-      }).join('\n'))
-      .on('change', function() {
-        evt.template(this.value);
 
     var templates = context.templates().map(function(d) { return d.title; });
 
