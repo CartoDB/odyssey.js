@@ -58,17 +58,16 @@ function dialog(context) {
       var md = el.select('textarea').node().codemirror.getValue()
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
       saveAs(blob, 'oddysey.md');
-
       Gist(md, context.template());
 
     });
 
     var templates = context.templates().map(function(d) { return d.title; });
 
-    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
-    });
 
     divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+    });
+    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
     divHeader.append('p')
