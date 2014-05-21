@@ -53,9 +53,27 @@ function dialog(context) {
       .text('Odyssey editor');
 
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
-      var md = el.select('textarea').node().codemirror.getValue()
-      var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, 'oddysey.md');
+      var xhr = new XMLHttpRequest();
+      var save = saveAs;
+      xhr.onload = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var md = el.select('textarea').node().codemirror.getValue().replace(/\n/g, '<br \/>');
+
+          var s = xhr.responseText;
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(s, 'text/html');
+          var script = doc.getElementById('odyssey-globals')
+          script.innerHTML = 'window.ODYSSEY_MD = "'+md+'"';
+
+          var zip = new JSZip();
+
+          var blob = new Blob([doc.documentElement.innerHTML], {type: 'text/plain;charset=utf-8'});
+          saveAs(blob, 'oddysey.html');
+        }
+      }
+
+      xhr.open('GET', 'slides.html', true);
+      xhr.send();
     });
 
     var templates = context.templates().map(function(d) { return d.title; });

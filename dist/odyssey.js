@@ -861,7 +861,7 @@ var Template = function(template) {
 
     Template.Storage.load(function(md) {
       template.update(actionsFromMarkdown(md));
-    }, origin);
+    });
   }
 };
 
@@ -873,7 +873,7 @@ Template.Storage = {
 
   load: function(done) {
     if (window.ODYSSEY_MD) {
-      done(window.ODYSSEY_MD);
+      done(window.ODYSSEY_MD.replace(/<br \/>/g, '\n'));
       return;
     }
 
