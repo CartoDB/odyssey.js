@@ -52,14 +52,18 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
+
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue()
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
       saveAs(blob, 'oddysey.md');
     });
 
-
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
+    });
+
+
+    divOptions.append('a').attr('class', 'shareButton').on('click', function() {
     });
 
     var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
