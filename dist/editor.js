@@ -8,10 +8,13 @@ function close(el) {
   d.exit().remove();
 }
 
-function open(el, items) {
+function open(el, items, _class) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
-  d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
+  var ul = d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
+  if (_class) {
+    ul.attr('class', _class);
+  }
 
   // update
   var bbox = el.getBoundingClientRect();
@@ -54,13 +57,20 @@ function dialog(context) {
       var blob = new Blob([md], {type: "text/plain;charset=utf-8"});
       saveAs(blob, 'oddysey.md');
     });
+
+    var templates = ['torque', 'scroll', 'slides', 'rolling_stones'];
       
-    divHeader.append('select')
-      .html(['torque', 'scroll', 'slides', 'rolling_stones'].map(function(v) {
-        return "<option value='" + v + "'>" + v + "</option>";
-      }).join('\n'))
-      .on('change', function() {
-        evt.template(this.value);
+    divHeader.append('p')
+      .attr('id', 'show_slide')
+      .text(templates[0])
+      .on('click', function(d) {
+        d3.event.stopPropagation();
+        var self = this;
+        open(this, templates, 'drop-right').on('click', function(value) {
+          evt.template(value);
+          close();
+          d3.select(self).text(value);
+        });
       });
 
     var textarea = enter.append('textarea')

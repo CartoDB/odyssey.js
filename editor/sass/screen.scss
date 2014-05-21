@@ -103,7 +103,19 @@ body{
       position: absolute;
       top: 20px;
       right: 20px;
-      width: 120px;
+      font: 19px 'staticregular';
+      padding-right: 19px;
+      cursor: pointer;
+      &:after {
+        content:"";
+        position: absolute;
+        right: 0;
+        top: 42%;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-top: 5px solid #fff;
+      }
     }
 	}
 

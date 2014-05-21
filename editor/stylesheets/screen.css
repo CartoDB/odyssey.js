@@ -177,13 +177,26 @@ body {
   text-transform: uppercase;
 }
 /* line 102, ../sass/screen.scss */
-#editor_modal div.header select {
+#editor_modal div.header #show_slide {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 120px;
+  font: 19px 'staticregular';
+  padding-right: 19px;
+  cursor: pointer;
 }
-/* line 110, ../sass/screen.scss */
+/* line 109, ../sass/screen.scss */
+#editor_modal div.header #show_slide:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 42%;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top: 5px solid #fff;
+}
+/* line 122, ../sass/screen.scss */
 #editor_modal textarea, #editor_modal .CodeMirror {
   position: absolute;
   top: 58px;
@@ -198,7 +211,7 @@ body {
   padding: 20px 20px 20px 72px;
   overflow-x: hidden;
 }
-/* line 125, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #editor_modal .actionButton {
   position: absolute;
   background-color: #d1d1d1;
@@ -210,13 +223,13 @@ body {
   font-size: 8px;
   text-transform: uppercase;
 }
-/* line 134, ../sass/screen.scss */
+/* line 146, ../sass/screen.scss */
 #editor_modal .actionButton:hover {
   background-color: #afafaf;
   cursor: pointer;
 }
 
-/* line 141, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 #actionDropdown {
   position: relative;
   width: 150px;
@@ -227,35 +240,35 @@ body {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
-/* line 151, ../sass/screen.scss */
+/* line 163, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 157, ../sass/screen.scss */
+/* line 169, ../sass/screen.scss */
 #actionDropdown li {
   list-style: none;
   border-bottom: 1px solid #f5f5f5;
   padding: 10px;
   font-size: 12px;
 }
-/* line 162, ../sass/screen.scss */
+/* line 174, ../sass/screen.scss */
 #actionDropdown li:hover {
   cursor: pointer;
   background: #f9f9f9;
 }
-/* line 167, ../sass/screen.scss */
+/* line 179, ../sass/screen.scss */
 #actionDropdown li:first-child {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
-/* line 170, ../sass/screen.scss */
+/* line 182, ../sass/screen.scss */
 #actionDropdown li:first-child:hover:before {
   border-bottom: 8px solid #f9f9f9;
 }
-/* line 173, ../sass/screen.scss */
+/* line 185, ../sass/screen.scss */
 #actionDropdown li:first-child:before {
   content: "";
   position: absolute;
@@ -267,7 +280,7 @@ body {
   border-bottom: 8px solid #fff;
   z-index: 1;
 }
-/* line 184, ../sass/screen.scss */
+/* line 196, ../sass/screen.scss */
 #actionDropdown li:first-child:after {
   content: "";
   position: absolute;
@@ -278,19 +291,19 @@ body {
   border: 8px solid transparent;
   border-bottom: 8px solid rgba(0, 0, 0, 0.1);
 }
-/* line 195, ../sass/screen.scss */
+/* line 207, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 202, ../sass/screen.scss */
+/* line 214, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:before {
   right: 10px;
   left: auto;
 }
-/* line 206, ../sass/screen.scss */
+/* line 218, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:after {
   right: 10px;
   left: auto;
