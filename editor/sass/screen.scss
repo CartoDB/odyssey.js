@@ -139,8 +139,9 @@ body{
   z-index: 20;
   text-align: left;
   border-radius: 4px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, .3);
-  background: #fff; 
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, .2);
 
   li:last-child {
     border-bottom: 0px;

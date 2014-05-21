@@ -214,38 +214,39 @@ body {
   z-index: 20;
   text-align: left;
   border-radius: 4px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
-/* line 145, ../sass/screen.scss */
+/* line 146, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 151, ../sass/screen.scss */
+/* line 152, ../sass/screen.scss */
 #actionDropdown li {
   list-style: none;
   border-bottom: 1px solid #f5f5f5;
   padding: 10px;
   font-size: 12px;
 }
-/* line 156, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #actionDropdown li:hover {
   cursor: pointer;
   background: #f9f9f9;
 }
-/* line 161, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
 #actionDropdown li:first-child {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
-/* line 164, ../sass/screen.scss */
+/* line 165, ../sass/screen.scss */
 #actionDropdown li:first-child:hover:before {
   border-bottom: 8px solid #f9f9f9;
 }
-/* line 167, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 #actionDropdown li:first-child:before {
   content: "";
   position: absolute;
@@ -257,7 +258,7 @@ body {
   border-bottom: 8px solid #fff;
   z-index: 1;
 }
-/* line 178, ../sass/screen.scss */
+/* line 179, ../sass/screen.scss */
 #actionDropdown li:first-child:after {
   content: "";
   position: absolute;
@@ -268,19 +269,19 @@ body {
   border: 8px solid transparent;
   border-bottom: 8px solid rgba(0, 0, 0, 0.1);
 }
-/* line 189, ../sass/screen.scss */
+/* line 190, ../sass/screen.scss */
 #actionDropdown li:last-child {
   border-bottom: 0px;
   margin: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 196, ../sass/screen.scss */
+/* line 197, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:before {
   right: 10px;
   left: auto;
 }
-/* line 200, ../sass/screen.scss */
+/* line 201, ../sass/screen.scss */
 #actionDropdown.drop-right li:first-child:after {
   right: 10px;
   left: auto;
