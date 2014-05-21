@@ -208,7 +208,7 @@ body {
   background: transparent;
   font-family: monospace;
   font-size: 14px;
-  padding: 20px 20px 20px 72px;
+  padding: 80px 20px 20px 72px;
   overflow-x: hidden;
 }
 /* line 137, ../sass/screen.scss */
@@ -307,4 +307,30 @@ body {
 #actionDropdown.drop-right li:first-child:after {
   right: 10px;
   left: auto;
+}
+
+/* line 227, ../sass/screen.scss */
+.options {
+  background: #FAFAFA;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 8px 8px 20px;
+  position: relative;
+  z-index: 1;
+  margin-left: 56px;
+}
+
+/* line 236, ../sass/screen.scss */
+a.downloadButton {
+  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+  opacity: .8;
+}
+/* line 245, ../sass/screen.scss */
+a.downloadButton:hover {
+  opacity: 1;
 }
