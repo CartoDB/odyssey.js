@@ -208,7 +208,7 @@ body{
 
   textarea, .CodeMirror {
     position: absolute;
-    top: 100px;
+    top: 80px;
     bottom: 70px;
     left: 0;
     right: 0;
@@ -326,22 +326,26 @@ body{
 .options {
   background: rgba(0, 0, 0, .02);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 8px 8px 6px 20px;
+  padding: 8px 12px;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  text-align: right;
+  .h-left { float: left; }
+  .h-right { float: right; }
+  li {
+    display: inline-block;
+    margin-left: 8px; 
+    &:first-child { margin: 0;}
+  }
   a {
     display: inline-block;
     width: 33px;
     height: 33px;
     display: inline-block;
     opacity: .8;
-    position: relative;
     z-index: 1;
-    margin-right: 8px;
     cursor: pointer;
     -webkit-transition: opacity .5s;
     transition: opacity .5s;
@@ -361,4 +365,12 @@ a.helpButton{
 
 a.shareButton{
   background: transparent image-url("shareButtonIcon.png") no-repeat 0 0;
+}
+
+a.collapseButton{
+  background: transparent image-url("collapseButtonIcon.png") no-repeat 0 0;
+}
+
+a.expandButton{
+  background: transparent image-url("expandToogleButtonIcon.png") no-repeat 0 0;
 }
