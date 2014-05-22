@@ -1,7 +1,7 @@
 
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
-var Gist = require('./gist');
+var exp = require('./gist');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -55,52 +55,22 @@ function dialog(context) {
 
 
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
-      var md = el.select('textarea').node().codemirror.getValue()
-      Gist(md, context.template());
-
-      queue(2)
-        .defer(request, 'slides.html')
-        .defer(request, 'css/slides.css')
-        .defer(request, '../dist/odyssey.js')
-        .awaitAll(ready);
-
-      function ready(error, results) {
-        var md_ = el.select('textarea').node().codemirror.getValue().replace(/\n/g, '\\n');
-
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(results[0].replace(/..\/dist\//g, 'js\/'), 'text/html');
-        var script = doc.createElement('script');
-        script.innerHTML = 'window.ODYSSEY_MD = "'+md_+'"';
-        doc.body.appendChild(script);
-
-        var zip = new JSZip();
-
-        zip.file('oddysey.html', doc.documentElement.innerHTML);
-        zip.folder('js').file('odyssey.js', results[2]);
-        zip.folder('css').file('slides.css', results[1]);
-
-        var content = zip.generate({ type: 'blob' });
-        saveAs(content, 'oddysey.zip');
-      }
-
-      function request(url, callback) {
-        var req = new XMLHttpRequest;
-        req.open("GET", url, true);
-        req.setRequestHeader("Accept", "application/html");
-        req.onreadystatechange = function() {
-          if (req.readyState === 4) {
-            if (req.status < 300) callback(null, req.responseText);
-            else callback(req.status);
-          }
-        };
-        req.send(null);
-      }
+        var md = el.select('textarea').node().codemirror.getValue();
+        exp.zip(md, context.template(), function(zipBlob) {
+          saveAs(zipBlob, 'oddysey.zip');
+        });
     });
 
     var templates = context.templates().map(function(d) { return d.title; });
 
     divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+      var md = el.select('textarea').node().codemirror.getValue();
+      exp.gist(md, context.template(), function(gist) {
+        console.log(gist);
+        window.open(gist.html_url);
+      });
     });
+
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
@@ -125,7 +95,8 @@ function dialog(context) {
 
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
-        mode: "markdown"
+        mode: "markdown",
+        lineWrapping: true
       });
       this.codemirror.on('change', function(c) {
         evt.code(c.getValue());
