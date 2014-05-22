@@ -109,12 +109,12 @@ body{
 #editor_modal {
   background: #fff;
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 40px;
+  top: 40px;
   bottom: 80px;
   width: 452px;
   text-align: left;
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, .2);
   &:before {
     content:"";
     position: absolute;
@@ -208,8 +208,8 @@ body{
 
   textarea, .CodeMirror {
     position: absolute;
-    top: 58px;
-    bottom: 0;
+    top: 100px;
+    bottom: 70px;
     left: 0;
     right: 0;
     height: auto;
@@ -217,8 +217,20 @@ body{
     background: transparent;
     font-family: monospace;
     font-size: 14px;
-    padding: 80px 20px 20px 72px;
+    padding: 0 20px 0 72px;
     overflow-x: hidden;
+  }
+  .CodeMirror:after {
+    content:"";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 56px;
+    height: 100px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    z-index: 2;
   }
 
   .actionButton {
@@ -312,12 +324,14 @@ body{
 
 
 .options {
-  background: #FAFAFA;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, .02);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 8px 8px 6px 20px;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
-  margin-left: 56px;
   text-align: right;
   a {
     display: inline-block;

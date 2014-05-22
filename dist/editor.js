@@ -2,7 +2,7 @@
 
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
-var Gist = _dereq_('./gist');
+var exp = _dereq_('./gist');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -56,52 +56,22 @@ function dialog(context) {
 
 
     divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
-      var md = el.select('textarea').node().codemirror.getValue()
-      Gist(md, context.template());
-
-      queue(2)
-        .defer(request, 'slides.html')
-        .defer(request, 'css/slides.css')
-        .defer(request, '../dist/odyssey.js')
-        .awaitAll(ready);
-
-      function ready(error, results) {
-        var md_ = el.select('textarea').node().codemirror.getValue().replace(/\n/g, '\\n');
-
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(results[0].replace(/..\/dist\//g, 'js\/'), 'text/html');
-        var script = doc.createElement('script');
-        script.innerHTML = 'window.ODYSSEY_MD = "'+md_+'"';
-        doc.body.appendChild(script);
-
-        var zip = new JSZip();
-
-        zip.file('oddysey.html', doc.documentElement.innerHTML);
-        zip.folder('js').file('odyssey.js', results[2]);
-        zip.folder('css').file('slides.css', results[1]);
-
-        var content = zip.generate({ type: 'blob' });
-        saveAs(content, 'oddysey.zip');
-      }
-
-      function request(url, callback) {
-        var req = new XMLHttpRequest;
-        req.open("GET", url, true);
-        req.setRequestHeader("Accept", "application/html");
-        req.onreadystatechange = function() {
-          if (req.readyState === 4) {
-            if (req.status < 300) callback(null, req.responseText);
-            else callback(req.status);
-          }
-        };
-        req.send(null);
-      }
+        var md = el.select('textarea').node().codemirror.getValue();
+        exp.zip(md, context.template(), function(zipBlob) {
+          saveAs(zipBlob, 'oddysey.zip');
+        });
     });
 
     var templates = context.templates().map(function(d) { return d.title; });
 
     divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+      var md = el.select('textarea').node().codemirror.getValue();
+      exp.gist(md, context.template(), function(gist) {
+        console.log(gist);
+        window.open(gist.html_url);
+      });
     });
+
     divOptions.append('a').attr('class', 'helpButton').on('click', function() {
     });
 
@@ -126,7 +96,8 @@ function dialog(context) {
 
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
-        mode: "markdown"
+        mode: "markdown",
+        lineWrapping: true
       });
       this.codemirror.on('change', function(c) {
         evt.code(c.getValue());
@@ -437,7 +408,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('slides');
+  set_template('scroll');
 
 }
 
@@ -445,40 +416,118 @@ module.exports = editor;
 
 },{"../vendor/FileSaver":6,"./dialog":1,"./splash":5}],4:[function(_dereq_,module,exports){
 
-function Gist(md, template) {
+function processHTML(html, md, transform) {
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(html, 'text/html');
+
+  // transform
+  transform && transform(doc)
+
+  md = md.replace(/\n/g, '\\n');
+  // insert oddyset markdown
+  var script = doc.createElement('script');
+  script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
+  doc.body.appendChild(script);
+  return doc.documentElement.innerHTML;
+}
+
+function files(md, template, callback) {
+  function request(r, callback) {
+    d3.xhr(r).get(callback);
+  }
+  queue(2)
+    .defer(request, template + '.html')
+    .defer(request, 'css/' + template + '.css')
+    .defer(request, '../dist/odyssey.js')
+    .awaitAll(ready);
+
+  function ready(error, results) {
+    results = results.map(function(r) { 
+      return r.responseText;
+    });
+
+    callback({
+      'oddysey.html': processHTML(results[0], md, function(doc) {
+          var js = doc.getElementsByTagName('script');
+          for (var i = 0; i < js.length; ++i) {
+            var src = js[i].getAttribute('src');
+            if (src && src.indexOf('../dist/odyssey.js') === 0) {
+              js[i].setAttribute("src", "js/odyssey.js");
+              return
+            }
+          }
+       }),
+      'js/odyssey.js': results[2],
+      'css/slides.css': results[1]
+    });
+  }
+}
+
+function zip(md, template, callback) {
+  files(md, template, function(contents) {
+      var zip = new JSZip();
+      for (var f in contents) {
+        zip.file(f, contents[f]);
+      }
+      callback(zip.generate({ type: 'blob' }));
+  });
+}
+
+function Gist(md, template, callback) {
 
   var gistData = null;
 
-  d3.xhr( template + ".html").get(function(err, xhr) {
-    var html = xhr.responseText;
-    html = html.replace('</body>', '<scri' + 'pt src="slides.js"></scri' + 'pt></body>');
-    createGist(html);
-  });
+  var s = location.pathname.split('/');
+  var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
+  function relocateAssets(doc) {
+    var js = doc.getElementsByTagName('script');
+    for (var i = 0; i < js.length; ++i) {
+      var src = js[i].getAttribute('src');
+      if (src && src.indexOf('http') !== 0) {
+        js[i].setAttribute("src", relocate_url + src);
+      }
+    }
 
-  function createGist(html)  {
-    d3.xhr('https://api.github.com/gists')
-      .header("Content-Type", "application/json")
-      .post(JSON.stringify({
+    var css = doc.getElementsByTagName('link');
+    for (var i = 0; i < css.length; ++i) {
+      var href = css[i].getAttribute('href');
+      if (href && href.indexOf('http') !== 0) {
+        css[i].setAttribute("href", relocate_url + href);
+      }
+    }
+  }
+
+  d3.xhr(template + ".html").get(function(err, xhr) {
+    var html = xhr.responseText;
+    var payload = {
         "description": "Odyssey.js template",
         "public": true,
         "files": {
-          "slides.js": {
-            "content": "window.ODYSSEY_MD ='" + md + "';"
-          },
-          "index.html": {
-            "content": html
+          'index.html': {
+            content: processHTML(html, md, relocateAssets)
           }
         }
-      }), function(err, xhr) {
+    };
+
+    d3.xhr('https://api.github.com/gists')
+      .header("Content-Type", "application/json")
+      .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        console.log(gist.url);
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
+        console.log(gist);
+        callback({
+          url: gist.url,
+          html_url: BLOCKS + gist.id
+        });
       });
-  }
+  });
 
 }
 
-window.Gist = Gist;
-module.exports = Gist;
+module.exports = {
+  gist: Gist,
+  zip: zip
+}
 
 },{}],5:[function(_dereq_,module,exports){
 
