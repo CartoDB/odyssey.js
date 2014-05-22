@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6{
   font-family: ProximaNovaBold, Sans-serif;
   color: #333;
   font-size: 45px;
-  text-transform: uppercase;
+  // text-transform: uppercase;
 
   &:after{
     display: block;
@@ -87,8 +87,9 @@ a{
 }
 
 #slides_container img{
-  max-width: 400px;
-  margin: 20px 0 20px -40px;
+	//max-width: 400px;
+	margin: 20px -40px 20px -40px;
+	width: 125%;
 }
 
 ul#navButtons{

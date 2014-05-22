@@ -5,25 +5,44 @@
 @include font-face("AleoBold", font-files("aleo-bold-webfont.woff", "aleo-bold-webfont.ttf", "aleo-bold-webfont.svg"), "aleo-bold-webfont.eot");
 @include font-face("ProximaNovaBold", font-files("ProximaNova-bold.woff", "ProximaNova-bold.ttf", "ProximaNova-bold.svg"), "ProximaNova-bold.eot");
 
-body { text-align: center; background: #EEE; }
+body { text-align: center; min-height: 100%; background: #fff; }
+html { min-height: 100%; }
 
-#layout {
-	width: 768px;
+
+
+#layout { 
+	width: 100%; 
 	margin: 0px auto;
-  padding-top: 70px;
   background: #FFF;
-  height: 2000px;
+}
+
+#header {
+  padding: 40px;
+  h1 {
+    font: 40px 'AleoBold';
+    color: #333;
+  }
+  h2 {
+    font: 16px/26px 'AleoRegular';
+    color: #666;
+    margin-top: 12px; 
+  }
 }
 
 #map_pos {
   height: 400px;
 
   #map_container{
-  	&.attachTop { position: fixed; width: 768px; top: 0; }
+  	&.attachTop {
+      position: fixed;
+      width: 100%;
+      top: 0; 
+      box-shadow: 0 2px 2px rgba(0, 0, 0 ,.2);
+    }
   }
 }
 
 #content {
-  padding: 0 40px;
-  height: 1500px;
+  padding: 40px;
+
 }
