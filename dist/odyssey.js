@@ -873,7 +873,7 @@ Template.Storage = {
 
   load: function(done) {
     if (window.ODYSSEY_MD) {
-      done(window.ODYSSEY_MD.replace(/<br \/>/g, '\n'));
+      done(window.ODYSSEY_MD);
       return;
     }
 
