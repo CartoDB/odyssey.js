@@ -5,5 +5,7 @@
 dist
 node_modules
 design
+.ruby-version
+.DS_Store
 
 *.scssc
