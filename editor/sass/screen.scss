@@ -1,8 +1,16 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
-@import "compass/css3/font-face";
-@include font-face("staticregular", font-files("/editor/assets/fonts/static-webfont.woff", "/editor/assets/fonts/static-webfont.ttf", "/editor/assets/fonts/static-webfont.svg"), "/editor/assets/fonts/static-webfont.eot");
 
+@font-face {
+  font-family: 'staticregular';
+  src: font-url('static-webfont.eot');
+  src: font-url('static-webfont.eot?#iefix') format('embedded-opentype'),
+       font-url('static-webfont.woff') format('woff'),
+       font-url('static-webfont.ttf') format('truetype'),
+       font-url('static-webfont.svg#staticregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body{
   text-align: center;
@@ -13,8 +21,8 @@ body{
 }
 
 #template {
-  position: absolute; 
-  top: 0; 
+  position: absolute;
+  top: 0;
   left: 0;
   width:100%;
   height: 100%;
@@ -63,7 +71,7 @@ body{
     > li {
       width: 262px;
       height: 227px;
-      color: #444;
+      color: #444;
       background: #fff;
       border-radius: 4px;
       display: inline-block;
@@ -95,7 +103,7 @@ body{
       &:first-child { margin: 0; }
     }
   }
-  
+
 }
 
 #editor_modal {
@@ -142,7 +150,7 @@ body{
   }
 
 	div.header {
-    background: rgb(255, 115, 115) url("../assets/img/greyBarBkg.png") repeat-y left top;
+    background: rgb(255, 115, 115) image-url("greyBarBkg.png") repeat-y left top;
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
@@ -150,7 +158,7 @@ body{
     @include border-top-radius(4px);
 
     a.expandButton{
-      background: transparent url("../assets/img/expandButtonIcon.png") no-repeat 0 0;
+      background: transparent image-url("expandButtonIcon.png") no-repeat 0 0;
       padding: 4px 13px;
       z-index: 1;
       position: relative;
@@ -161,7 +169,7 @@ body{
       }
 
       &.expanded{
-        background-position: -27px 0; 
+        background-position: -27px 0;
 
         &:hover{
           background-position: -27px -28px;
@@ -220,7 +228,7 @@ body{
     color: #FFF;
     font-size: 8px;
     text-transform: uppercase;
-    
+
     &:hover{
       background-color: rgb(175, 175, 175);
       cursor: pointer;
@@ -250,7 +258,7 @@ body{
     padding: 10px;
     font-size: 12px;
     &:hover {
-      cursor: pointer; 
+      cursor: pointer;
       background: #f9f9f9;
     }
   }
@@ -280,8 +288,8 @@ body{
       top: -17px;
       border: 8px solid transparent;
       border-bottom: 8px solid rgba(0, 0, 0, 0.1);
-    } 
-  } 
+    }
+  }
   li:last-child {
     border-bottom: 0px;
     margin: 0;
@@ -296,8 +304,8 @@ body{
     &:after {
       right: 10px;
       left: auto;
-    } 
-  } 
+    }
+  }
 
 }
 
@@ -329,13 +337,13 @@ body{
 }
 
 a.downloadButton{
-  background: transparent url("../assets/img/downloadButtonIcon.png") no-repeat 0 0;
+  background: transparent image-url("downloadButtonIcon.png") no-repeat 0 0;
 }
 
 a.helpButton{
-  background: transparent url("../assets/img/helpButtonIcon.png") no-repeat 0 0;
+  background: transparent image-url("helpButtonIcon.png") no-repeat 0 0;
 }
 
 a.shareButton{
-  background: transparent url("../assets/img/shareButtonIcon.png") no-repeat 0 0;
+  background: transparent image-url("shareButtonIcon.png") no-repeat 0 0;
 }

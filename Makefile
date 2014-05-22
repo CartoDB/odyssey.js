@@ -9,7 +9,7 @@ ODYSSEY_FILES= \
 	lib/odyssey/actions/*.js \
 	lib/odyssey/actions/leaflet/*.js \
 	lib/odyssey/triggers/*.js \
-	lib/odyssey/util/*.js 
+	lib/odyssey/util/*.js
 
 ODYSSEY_EDITOR_FILES= editor/*.js
 
@@ -25,5 +25,5 @@ dist/editor.js: $(ODYSSEY_EDITOR_FILES) $(VENDOR_FILES)
 vendor/d3.custom.js:
 	node_modules/smash/smash node_modules/d3/src/start.js node_modules/d3/src/event/dispatch.js node_modules/d3/src/core/rebind.js node_modules/d3/src/end.js > $@
 
-clean: 
+clean:
 	rm -rf dist/*

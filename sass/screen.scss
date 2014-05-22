@@ -1,0 +1,53 @@
+@import "_fonts";
+@import "compass/reset";
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.inner {
+  max-width: 940px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 100px 0;
+
+  + .section {
+    border-top: 1px solid rgba(#35454B, .2);
+    border-top: 1px solid #ccc;
+  }
+}
+
+.section_title {
+  @extend .staticregular;
+  margin-bottom: 20px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.footer {
+  padding: 100px 0;
+  background: #35454B;
+  color: #999;
+  color: rgba(#fff, .5);
+}
+
+.footer-title {
+  @extend .section_title;
+  color: #fff;
+}
+
+.footer-description {
+  margin-bottom: 10px;
+
+  a {
+    color: #999;
+    color: rgba(#fff, .5);
+  }
+}

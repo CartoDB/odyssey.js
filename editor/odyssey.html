@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Odyssey.js</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-  <link rel="stylesheet" href="css/slides.css" />
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">
+  <link rel="stylesheet" href="stylesheets/slides.css">
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
@@ -13,20 +11,22 @@
     <div id="dots"></div>
     <div id="slides">
     </div>
-    <ul id='navButtons'>
-      <li><a class='prev'></a></li>
-      <li><a class='next'></a></li>
+    <ul id="navButtons">
+      <li><a class="prev"></a></li>
+      <li><a class="next"></a></li>
     </ul>
   </div>
   <div id="progress"></div>
   <div id="credits">
     <span class="title" id="title">MY PROJECT NAME</span>
     <span class="author">By <b id="author">name</b> using <a href="#">odyssey.js</a><span>
-  </div>
+  </span></span></div>
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
+
+  <script id="odyssey-globals">window.ODYSSEY_MD = "#slide1<br />some text<br /><br />#slide2<br /> more text"</script>
 
   <script>
 
@@ -118,6 +118,7 @@
   });
 
   </script>
-</body>
-</html>
 
+
+
+</body>
