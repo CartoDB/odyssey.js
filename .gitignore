@@ -2,7 +2,6 @@
 .swp
 .swo
 .saas-cache
-dist
 node_modules
 design
 .ruby-version
