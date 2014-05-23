@@ -8,19 +8,23 @@ function close(el) {
   d.exit().remove();
 }
 
-function open(el, items, _class) {
+function open(el, items, _class, offset) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
   var ul = d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
   if (_class) {
-    ul.attr('class', _class);
+    d3.selectAll('#actionDropdown').attr('class', _class);
+  } else {
+    d3.selectAll('#actionDropdown').attr('class', '');
   }
+
+  offset = offset || { x: 0, y: 0 }
 
   // update
   var bbox = el.getBoundingClientRect();
   d.style({
-    top: (bbox.top + 25) + "px",
-    left: bbox.left + "px",
+    top: (bbox.top + 25 + offset.y) + "px",
+    left: (bbox.left + offset.x) + "px",
   });
 
   var drop = dropdown().items(items);
@@ -70,6 +74,17 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
 
+      if (el.style('bottom') === 'auto') {
+        el.style('bottom', '80px').style('height', 'auto');
+        el.selectAll('.actionButton').style("visibility", "visible");
+        d3.select(this).classed('expandButton', false);
+
+      } else {
+        el.style('bottom', 'auto').style('height', '119px');
+        d3.select(this).classed('expandButton', true);
+        el.selectAll('.actionButton').style("visibility", "hidden");
+      }
+
     });
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
@@ -83,7 +98,7 @@ function dialog(context) {
       var md = el.select('textarea').node().codemirror.getValue();
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
-        window.open(gist.html_url);
+        //window.open(gist.html_url);
       });
     });
 
@@ -95,7 +110,7 @@ function dialog(context) {
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
-        open(this, templates, 'drop-right').on('click', function(value) {
+        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
           evt.template(value);
           close();
           d3.select(self).text(value);
@@ -108,10 +123,25 @@ function dialog(context) {
         evt.code(this.value);
       });
 
+    function debounce(fn, t) {
+      var i;
+      return function() {
+        var args = arguments;
+        clearTimeout(i);
+        i = setTimeout(function() { fn.apply(window, arguments); }, t);
+      }
+    }
+
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
         mode: "markdown",
         lineWrapping: true
+      });
+      var showActions = debounce(function() { placeActionButtons(el, codemirror); }, 500);
+      var hideActions = debounce(function() { el.selectAll('.actionButton').remove(); }, 20);
+      codemirror.on('scroll',  function() {
+        showActions();
+        hideActions();
       });
       this.codemirror.on('change', function(c) {
         evt.code(c.getValue());
@@ -223,7 +253,7 @@ function dialog(context) {
     })
 
     // update
-    var LINE_HEIGHT = 28;
+    var LINE_HEIGHT = 38;
     buttons.style({
       top: function(d) { return (d.pos - LINE_HEIGHT) + "px"; },
       left: 16 + "px"
