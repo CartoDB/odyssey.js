@@ -93,10 +93,25 @@ function dialog(context) {
         evt.code(this.value);
       });
 
+    function debounce(fn, t) {
+      var i;
+      return function() {
+        var args = arguments;
+        clearTimeout(i);
+        i = setTimeout(function() { fn.apply(window, arguments); }, t);
+      }
+    }
+
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
         mode: "markdown",
         lineWrapping: true
+      });
+      var showActions = debounce(function() { placeActionButtons(el, codemirror); }, 500);
+      var hideActions = debounce(function() { el.selectAll('.actionButton').remove(); }, 20);
+      codemirror.on('scroll',  function() {
+        showActions();
+        hideActions();
       });
       this.codemirror.on('change', function(c) {
         evt.code(c.getValue());
@@ -208,7 +223,7 @@ function dialog(context) {
     })
 
     // update
-    var LINE_HEIGHT = 28;
+    var LINE_HEIGHT = 38;
     buttons.style({
       top: function(d) { return (d.pos - LINE_HEIGHT) + "px"; },
       left: 16 + "px"
