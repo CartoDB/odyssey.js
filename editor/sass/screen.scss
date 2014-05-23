@@ -42,7 +42,7 @@ body{
 
 .splash {
   position: absolute;
-  z-index: 2;
+  z-index: 7;
   top: 0; bottom: 0; left: 0; right: 0;
   background: #000;
   background: rgba(0, 0, 0, 0.9);
@@ -357,7 +357,7 @@ body{
   .h-right { float: right; }
   li {
     display: inline-block;
-    margin-left: 8px; 
+    margin-left: 8px;
     &:first-child { margin: 0;}
   }
   a {
