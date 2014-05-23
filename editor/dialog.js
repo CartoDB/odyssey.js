@@ -57,20 +57,12 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
-
-
-
     var templates = context.templates().map(function(d) { return d.title; });
-
-
 
     var help = divOptions.append('ul').attr('class', 'h-left');
     help.append('li').append('a').attr('class', 'helpButton');
 
-
-
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
-
 
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
 
@@ -114,6 +106,10 @@ function dialog(context) {
         });
       });
 
+    context.on('template_change.editor', function(t) {
+      divHeader.select('#show_slide').text(t);
+    });
+
     var textarea = enter.append('textarea')
       .attr('id', 'code')
       .on('keyup.editor', function() {
@@ -141,8 +137,11 @@ function dialog(context) {
         hideActions();
       });
       this.codemirror.on('change', function(c) {
-        evt.code(c.getValue());
-        placeActionButtons(el, codemirror);
+        // change is raised at the beginning with any real change
+        if (c.getValue()) {
+          evt.code(c.getValue());
+          placeActionButtons(el, codemirror);
+        }
       });
     });
 

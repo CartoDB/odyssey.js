@@ -24,7 +24,7 @@ function editor() {
   var body = d3.select(document.body);
   var context = {};
 
-  d3.rebind(context, d3.dispatch('error'), 'on', 'error');
+  d3.rebind(context, d3.dispatch('error', 'template_change'), 'on', 'error', 'template_change');
 
   context.templates = function(_) {
     if (_) {
@@ -37,9 +37,25 @@ function editor() {
     return TEMPLATE_LIST;
   };
 
+  context.save = function(_) {
+    if (this.code() && this.template()) {
+      O.Template.Storage.save(this.code(), this.template());
+    }
+  }
+
   context.template = function(_) {
-    if (_) this._template = _;
+    if (_) {
+      if (this._template !== _) {
+        this._template = _;
+        this.template_change(_);
+      }
+    }
     return this._template;
+  }
+
+  context.code = function(_) {
+    if (_) this._code = _;
+    return this._code;
   }
 
   var template = body.select('#template');
@@ -100,7 +116,8 @@ function editor() {
 
   code_dialog.on('code.editor', function(code) {
     sendCode(code);
-    O.Template.Storage.save(code);
+    context.code(code);
+    context.save();
   });
 
   context.sendCode = sendCode;
@@ -115,8 +132,9 @@ function editor() {
 
   template.on('load', function() {
     iframeWindow = template.node().contentWindow;
-    O.Template.Storage.load(function(md) {
+    O.Template.Storage.load(function(md, template) {
       sendCode(md);
+      set_template(template);
       $editor.call(code_dialog.code(md));
     });
     sendMsg({ type: 'actions' }, function(data) {
@@ -136,15 +154,19 @@ function editor() {
   });
 
   function set_template(t) {
-    template.attr('src', t + ".html");
-    context.template(t);
+    var html_url = t + ".html";
+    if (template.attr('src') !== html_url) {
+      template.attr('src', t + ".html");
+      context.template(t);
+      context.save();
+    }
   }
 
   code_dialog.on('template.editor', function(t) {
     set_template(t);
   });
 
-  set_template('scroll');
+  //set_template('scroll');
 
 }
 
