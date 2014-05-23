@@ -13,7 +13,9 @@ function open(el, items, _class, offset) {
   // enter
   var ul = d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
   if (_class) {
-    ul.attr('class', _class);
+    d3.selectAll('#actionDropdown').attr('class', _class);
+  } else {
+    d3.selectAll('#actionDropdown').attr('class', '');
   }
 
   offset = offset || { x: 0, y: 0 }
