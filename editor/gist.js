@@ -1,35 +1,113 @@
 
-function Gist(md, template) {
+function processHTML(html, md, transform) {
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(html, 'text/html');
+
+  // transform
+  transform && transform(doc)
+
+  md = md.replace(/\n/g, '\\n');
+  // insert oddyset markdown
+  var script = doc.createElement('script');
+  script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
+  doc.body.appendChild(script);
+  return doc.documentElement.innerHTML;
+}
+
+function files(md, template, callback) {
+  function request(r, callback) {
+    d3.xhr(r).get(callback);
+  }
+  queue(2)
+    .defer(request, template + '.html')
+    .defer(request, 'css/' + template + '.css')
+    .defer(request, '../dist/odyssey.js')
+    .awaitAll(ready);
+
+  function ready(error, results) {
+    results = results.map(function(r) { 
+      return r.responseText;
+    });
+
+    callback({
+      'oddysey.html': processHTML(results[0], md, function(doc) {
+          var js = doc.getElementsByTagName('script');
+          for (var i = 0; i < js.length; ++i) {
+            var src = js[i].getAttribute('src');
+            if (src && src.indexOf('../dist/odyssey.js') === 0) {
+              js[i].setAttribute("src", "js/odyssey.js");
+              return
+            }
+          }
+       }),
+      'js/odyssey.js': results[2],
+      'css/slides.css': results[1]
+    });
+  }
+}
+
+function zip(md, template, callback) {
+  files(md, template, function(contents) {
+      var zip = new JSZip();
+      for (var f in contents) {
+        zip.file(f, contents[f]);
+      }
+      callback(zip.generate({ type: 'blob' }));
+  });
+}
+
+function Gist(md, template, callback) {
 
   var gistData = null;
 
-  d3.xhr( template + ".html").get(function(err, xhr) {
-    var html = xhr.responseText;
-    html = html.replace('</body>', '<scri' + 'pt src="slides.js"></scri' + 'pt></body>');
-    createGist(html);
-  });
+  var s = location.pathname.split('/');
+  var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
+  function relocateAssets(doc) {
+    var js = doc.getElementsByTagName('script');
+    for (var i = 0; i < js.length; ++i) {
+      var src = js[i].getAttribute('src');
+      if (src && src.indexOf('http') !== 0) {
+        js[i].setAttribute("src", relocate_url + src);
+      }
+    }
 
-  function createGist(html)  {
-    d3.xhr('https://api.github.com/gists')
-      .header("Content-Type", "application/json")
-      .post(JSON.stringify({
+    var css = doc.getElementsByTagName('link');
+    for (var i = 0; i < css.length; ++i) {
+      var href = css[i].getAttribute('href');
+      if (href && href.indexOf('http') !== 0) {
+        css[i].setAttribute("href", relocate_url + href);
+      }
+    }
+  }
+
+  d3.xhr(template + ".html").get(function(err, xhr) {
+    var html = xhr.responseText;
+    var payload = {
         "description": "Odyssey.js template",
         "public": true,
         "files": {
-          "slides.js": {
-            "content": "window.ODYSSEY_MD ='" + md + "';"
-          },
-          "index.html": {
-            "content": html
+          'index.html': {
+            content: processHTML(html, md, relocateAssets)
           }
         }
-      }), function(err, xhr) {
+    };
+
+    d3.xhr('https://api.github.com/gists')
+      .header("Content-Type", "application/json")
+      .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        console.log(gist.url);
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
+        console.log(gist);
+        callback({
+          url: gist.url,
+          html_url: BLOCKS + gist.id
+        });
       });
-  }
+  });
 
 }
 
-window.Gist = Gist;
-module.exports = Gist;
+module.exports = {
+  gist: Gist,
+  zip: zip
+}

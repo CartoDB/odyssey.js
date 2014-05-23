@@ -5,25 +5,68 @@
 @include font-face("AleoBold", font-files("aleo-bold-webfont.woff", "aleo-bold-webfont.ttf", "aleo-bold-webfont.svg"), "aleo-bold-webfont.eot");
 @include font-face("ProximaNovaBold", font-files("ProximaNova-bold.woff", "ProximaNova-bold.ttf", "ProximaNova-bold.svg"), "ProximaNova-bold.eot");
 
-body { text-align: center; background: #EEE; }
+body { text-align: center; min-height: 100%; background: #fff; }
+html { min-height: 100%; }
 
-#layout {
-	width: 768px;
+
+
+#layout { 
+	width: 100%; 
 	margin: 0px auto;
-  padding-top: 70px;
   background: #FFF;
-  height: 2000px;
 }
 
+#header {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  h1 {
+    font: 40px 'AleoBold';
+    color: #333;
+  }
+  h2 {
+    font: 16px/26px 'AleoRegular';
+    color: #666;
+    margin-top: 12px; 
+  }
+}
+#map { width: 100%; height: 100%; }
+
 #map_pos {
-  height: 400px;
+  height: 20%;
 
   #map_container{
-  	&.attachTop { position: fixed; width: 768px; top: 0; }
+      height: 250px;
+  	&.attachTop {
+      height: 150px;
+      position: fixed;
+      width: 100%;
+      top: 0; 
+      box-shadow: 0 2px 2px rgba(0, 0, 0 ,.2);
+    }
   }
 }
 
 #content {
-  padding: 0 40px;
-  height: 1500px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  min-height: 1800px;
+  img { width: 100%; margin: 20px 0;}
+  > div {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px dotted #ccc;
+    &:first-child { margin: 0; padding: 0; border: 0; }
+  }
+  h1 {
+    font: 20px 'AleoBold';
+    color: #333;
+  }
+  p {
+    font: 16px/26px 'AleoRegular';
+    color: #666;
+    margin-top: 12px; 
+  }
 }

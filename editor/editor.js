@@ -144,7 +144,7 @@ function editor() {
     set_template(t);
   });
 
-  set_template('slides');
+  set_template('scroll');
 
 }
 
