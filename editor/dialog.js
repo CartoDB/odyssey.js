@@ -54,16 +54,32 @@ function dialog(context) {
       .text('Odyssey editor');
 
 
-    divOptions.append('a').attr('class', 'downloadButton').on('click', function() {
+
+
+    var templates = context.templates().map(function(d) { return d.title; });
+
+
+
+    var help = divOptions.append('ul').attr('class', 'h-left');
+    help.append('li').append('a').attr('class', 'helpButton');
+
+
+
+    var optionsMap = divOptions.append('ul').attr('class', 'h-right');
+
+
+    optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
+
+    });
+
+    optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
         var md = el.select('textarea').node().codemirror.getValue();
         exp.zip(md, context.template(), function(zipBlob) {
           saveAs(zipBlob, 'oddysey.zip');
         });
     });
 
-    var templates = context.templates().map(function(d) { return d.title; });
-
-    divOptions.append('a').attr('class', 'shareButton').on('click', function() {
+    optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue();
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
@@ -71,8 +87,7 @@ function dialog(context) {
       });
     });
 
-    divOptions.append('a').attr('class', 'helpButton').on('click', function() {
-    });
+
 
     divHeader.append('p')
       .attr('id', 'show_slide')
