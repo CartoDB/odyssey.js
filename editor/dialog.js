@@ -69,8 +69,11 @@ function dialog(context) {
       if (el.style('bottom') === 'auto') {
         el.style('bottom', '80px').style('height', 'auto');
         el.selectAll('.actionButton').style("visibility", "visible");
+        d3.select(this).classed('expandButton', false);
+
       } else {
         el.style('bottom', 'auto').style('height', '119px');
+        d3.select(this).classed('expandButton', true);
         el.selectAll('.actionButton').style("visibility", "hidden");
       }
 
