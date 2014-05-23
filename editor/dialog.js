@@ -8,7 +8,7 @@ function close(el) {
   d.exit().remove();
 }
 
-function open(el, items, _class) {
+function open(el, items, _class, offset) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([0]);
   // enter
   var ul = d.enter().append('ul').attr('id', 'actionDropdown').style('position', 'absolute');
@@ -16,11 +16,13 @@ function open(el, items, _class) {
     ul.attr('class', _class);
   }
 
+  offset = offset || { x: 0, y: 0 }
+
   // update
   var bbox = el.getBoundingClientRect();
   d.style({
-    top: (bbox.top + 25) + "px",
-    left: bbox.left + "px",
+    top: (bbox.top + 25 + offset.y) + "px",
+    left: (bbox.left + offset.x) + "px",
   });
 
   var drop = dropdown().items(items);
@@ -70,6 +72,14 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
 
+      if (el.style('bottom') === 'auto') {
+        el.style('bottom', '80px').style('height', 'auto');
+        el.selectAll('.actionButton').style("visibility", "visible");
+      } else {
+        el.style('bottom', 'auto').style('height', '119px');
+        el.selectAll('.actionButton').style("visibility", "hidden");
+      }
+
     });
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
@@ -83,7 +93,7 @@ function dialog(context) {
       var md = el.select('textarea').node().codemirror.getValue();
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
-        window.open(gist.html_url);
+        //window.open(gist.html_url);
       });
     });
 
@@ -95,7 +105,7 @@ function dialog(context) {
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
-        open(this, templates, 'drop-right').on('click', function(value) {
+        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
           evt.template(value);
           close();
           d3.select(self).text(value);
