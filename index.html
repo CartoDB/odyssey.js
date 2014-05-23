@@ -26,29 +26,74 @@
 <body>
   <div class="offcanvas">
     <div class="offcanvas-inner">
-      <header class="header">
-        <div class="inner">
+      <div class="offcanvas-collapse">
+        <div class="offcanvas-collapse-inner">
+          <div class="offcanvas-menu">
+            <h3 class="offcanvas-title">Javascript API</h3>
+            <ul>
+              <li><a href="#">Install</a></li>
+              <li><a href="#">Quick start</a></li>
+              <li><a href="#">API</a></li>
+            </ul>
+          </div>
+
+          <div class="offcanvas-menu">
+            <h3 class="offcanvas-title">Editor</h3>
+            <ul>
+              <li><a href="#">Start a new history</a></li>
+              <li><a href="#">Create a custom action in javascript</a></li>
+              <li><a href="#">Add new actions to Editor menu</a></li>
+              <li><a href="#">Create a story from scratch</a></li>
+              <li><a href="#">Export a story as HTML</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <header class="header h-valign">
+        <div class="inner h-valigned">
+          <div class="header-inner inner-l h-valign">
+            <a href="/#menu" class="header-menu menu-link h-valigned"></a>
+          </div>
+          <div class="header-inner inner-r h-valign">
+            <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span>
+            </a>
+          </div>
+
           <h1 class="site-title">ODYSSEY</h1>
-          <p class="site-description">Built for designers, journalist and non-technical people can tell their stories</p>
+          <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
           <p class="site-links">
-            <a href="/editor/editor.html">New story</a>
-            <a href="#">Documentation</a>
+            <a href="/editor/editor.html" class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
+            <a href="#" class="button button-l h-valign"><span class="h-valigned">Documentation</span></a>
           </p>
         </div>
       </header>
 
-      <nav class="navbar">
-        <a href="/" class="navbar-logo">ODYSSEY</a>
-        <a href="/#menu" class="navbar-menu"></a>
-        <a href="#" class="download-link">Download</a>
+      <nav class="navbar h-valign">
+        <div class="inner h-valigned">
+          <div class="navbar-inner inner-l h-valign">
+            <a href="/#menu" class="navbar-menu menu-link h-valigned"></a>
+          </div>
+
+          <a href="/" class="navbar-title">ODYSSEY</a>
+
+          <div class="navbar-inner inner-r h-valign">
+            <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span></a>
+          </div>
+        </div>
       </nav>
 
       <div class="content">
         <div class="inner">
-          <section class="section">
-            <img src="img/choose.png" alt="" />
-            <h2 class="section-title">Choose a template</h2>
-            <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
+          <section class="section" id="choose">
+            <div class="col h-lalign">
+              <img src="img/choose.png" alt="" />
+            </div>
+
+            <div class="col">
+              <h2 class="section-title">Choose a template</h2>
+              <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
+            </div>
           </section>
 
           <section class="section">
@@ -56,14 +101,43 @@
             <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
             <p class="section-description">Framer Generator is a desktop app that imports the resources and folder hierarchy from Photoshop files (Sketch coming soon). Import your design and immediately start to add interaction and animation.</p>
 
-            <img src="img/discover.png" alt="" />
+            <div class="tips">
+              <img src="img/discover.png" alt="" />
+
+              <ul>
+                <li class="tip tip-l">
+                  <i class="tips-tip-l"></i>
+                  <h3 class="tip-title">Title</h3>
+                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+                </li>
+
+                <li class="tip tip-t">
+                  <i class="tips-tip-t"></i>
+                  <h3 class="tip-title">Title</h3>
+                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+                </li>
+
+                <li class="tip tip-r">
+                  <i class="tips-tip-r"></i>
+                  <h3 class="tip-title">Title</h3>
+                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+                </li>
+
+                <li class="tip tip-r2">
+                  <i class="tips-tip-r2"></i>
+                  <h3 class="tip-title">Title</h3>
+                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+                </li>
+              </ul>
+            </div>
           </section>
 
           <section class="section">
-            <h2 class="section-title">Start use odyssey</h2>
+            <h2 class="section-title">Start using odyssey</h2>
             <p class="section-links">
-              <a href="/editor/editor.html">New story</a>
-              <a href="#">Documentation</a>
+              <a href="/editor/editor.html" class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
+              <a href="#" class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
+              <a href="#"></a>
             </p>
           </section>
         </div>
