@@ -1,0 +1,151 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
+@import 'icons/*.png';
+@include all-icons-sprites;
+
+.h-valign:before {
+  display: inline-block;
+  vertical-align: middle;
+  content: "";
+  height: 100%;
+  margin-left: -5px;
+}
+
+.h-lalign {
+  float: left;
+}
+
+.h-ralign {
+  float: right;
+}
+
+.h-valigned {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.h-title {
+  @extend .staticregular;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.i-download {
+  display: block;
+  width: 33px;
+  height: 33px;
+  @include icons-sprite('download');
+
+  &:hover {
+    @include icons-sprite('download-hover');
+  }
+}
+
+.button {
+  @extend .h-title;
+  display: inline-block;
+  width: 108px;
+  height: 35px;
+  border: 2px solid #fff;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  @include border-radius(3px);
+  @include transition(all .15s ease-out);
+
+  &:hover,
+  &.button-primary {
+    background: #fff;
+    color: #444;
+  }
+
+  &.button-primary {
+    height: 39px;
+    width: 112px;
+    border: 0;
+    background: rgba(#fff, .9);
+    color: #444;
+
+    &.button-l {
+      width: 184px;
+      height: 59px;
+    }
+
+    &:hover {
+      background: #fff;
+    }
+  }
+
+  &.button-primary:hover {
+    background: #fff;
+  }
+
+  &.button-l {
+    width: 180px;
+    height: 55px;
+  }
+
+  + .button {
+    margin-left: 60px;
+  }
+
+  &.button-pink {
+    border-color: #FF7373;
+    color: #FF7373;
+
+    &:hover {
+      background: #FF7373;
+      color: #fff;
+    }
+
+    &.button-primary {
+      background: #FF7373;
+      color: #fff;
+
+      &:hover {
+        background: darken(#FF7373, 5%);
+      }
+    }
+  }
+}
+
+.header-inner,
+.navbar-inner {
+  position: absolute;
+  top: 0;
+  height: 90px;
+}
+
+.inner-l {
+  left: 30px;
+}
+
+.inner-r {
+  right: 30px;
+}
+
+@media (max-width: 640px) {
+  .download-link {
+    width: auto;
+  }
+
+  .show-mobile {
+    display: inline-block;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .show-mobile {
+    display: none;
+  }
+
+  .hide-mobile {
+    display: inline-block;
+  }
+}
