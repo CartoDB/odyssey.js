@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <header class="header h-valign">
+      <header class="header h-valign" id="header">
         <div class="inner h-valigned">
           <div class="header-inner inner-l h-valign">
             <a href="/#menu" class="header-menu menu-link h-valigned"></a>
@@ -64,7 +64,7 @@
           <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
           <p class="site-links">
             <a href="/editor/editor.html" class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
-            <a href="#" class="button button-l h-valign"><span class="h-valigned">Documentation</span></a>
+            <a href="#" class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
           </p>
         </div>
       </header>
@@ -155,6 +155,25 @@
 
   <script src="js/vendor/jquery-1.11.1.min.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+
+
+    window.addEventListener("load", function load(event){
+        var header = document.querySelector("#header");
+        var intFrameHeight = window.innerHeight;
+        header.style.height=intFrameHeight+'px';
+    });
+
+    window.addEventListener("resize", function load(event){
+        var header = document.querySelector("#header");
+        var intFrameHeight = window.innerHeight;
+        header.style.height=intFrameHeight+'px';
+    });
+
+
+  </script>
+
 
   <!-- TODO: analytics -->
   <script>
