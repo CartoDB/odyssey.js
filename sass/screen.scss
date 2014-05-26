@@ -113,13 +113,218 @@ body {
 
 .header {
   color: #fff;
-  background: image-url('header-bkg.png') center;
+  background: image-url('header-bkg.jpg') center;
   @include background-size(cover);
-
+  position: relative;
   .inner {
     max-width: 640px;
   }
 }
+
+
+@keyframes animation_point {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes animation_point {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@-webkit-keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    -ms-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+
+.header-animation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  .point {
+    border: 2px solid rgba(#fff, .5);
+    border-radius: 50%;
+    background: rgba(#fff, .3);
+    display: inline-block;
+    position: absolute;
+    top: -32px;
+    opacity: 0;
+
+  }
+  .point-01 {
+    width: 36px; 
+    height: 36px;
+    left: 33%;
+    top: 80%;
+    animation-duration: .5s;
+    animation-name: animation_point;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-name: animation_point;
+    -webkit-animation-fill-mode: forwards;
+    animation-delay: 1.2s;
+    -webkit-animation-delay: 1.2s;    
+  }
+  .point-02 {
+    width: 26px; 
+    height: 26px;
+    left: 59%;
+    top: 54%;
+    animation-duration: .5s;
+    animation-name: animation_point;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-name: animation_point;
+    -webkit-animation-fill-mode: forwards;
+    
+    animation-delay: 1.4s;
+    -webkit-animation-delay: 1.4s;
+  }
+
+  .point-03 {
+    width: 18px;
+    height: 18px;
+    left: 80.5%;
+    top: 27.5%;
+    animation-duration: .5s;
+    animation-name: animation_point;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-name: animation_point;
+    -webkit-animation-fill-mode: forwards;
+
+    animation-delay: 1.6s;
+    -webkit-animation-delay: 1.6s;
+  }
+
+  .point-04 {
+    width: 12px;
+    height: 12px;
+    left: 61.5%;
+    top: 21.5%;
+    animation-duration: .5s;
+    animation-name: animation_point;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-name: animation_point;
+    -webkit-animation-fill-mode: forwards;
+    
+    animation-delay: 1.8s;
+    -webkit-animation-delay: 1.8s;
+  }
+
+  .point-highlight {
+    opacity: 1; 
+    width: 31px; 
+    height: 49px;
+    border: 0;
+    background-color: transparent;
+    background: image-url('icon-highlight.png')  no-repeat;
+    border-radius: 0;
+    left: 20%;
+    top: 62%;
+    animation-duration: 1s;
+    animation-name: bounceInDown;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: bounceInDown;
+    -webkit-animation-fill-mode: forwards;
+    
+    animation-delay: .3s;
+    -webkit-animation-delay: .3s;
+
+  }
+  .line-01 {
+    position: absolute;
+    left: 21.5%;
+    top: 66.5%;
+    width: 12.5%;
+    height: 128px;
+    transform: rotate(0.5turn);
+    -webkit-transform: rotate(7deg);
+    overflow: hidden;
+  }
+
+  .path {
+    stroke-dasharray: 100;
+    animation: path 5s linear;
+  }
+
+  @keyframes path {
+    to {
+      stroke-dashoffset: 1000;
+    }
+  }
+  @-webkit-keyframes path {
+    to {
+      stroke-dashoffset: 1000;
+    }
+  }
+
+}
+
 
 .site-title {
   display: inline-block;
