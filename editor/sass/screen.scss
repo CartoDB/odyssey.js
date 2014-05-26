@@ -1,5 +1,7 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
 
 @font-face {
   font-family: 'staticregular';
@@ -93,13 +95,10 @@ body{
       font: normal 17px 'staticregular';
       color: #EC6258;
       border-radius: 4px;
-      -webkit-transition: all .3s;
-      transition: all .3s;
+      @include transition(all .15s ease-in-out);
       text-decoration: none;
-    }
 
-    &:hover {
-      .button-template {
+      &:hover {
         background: #EC6258;
         color: #fff;
       }
@@ -394,4 +393,20 @@ a.collapseButton{
 
 a.expandButton{
   background: transparent image-url("expandToogleButtonIcon.png") no-repeat 0 0;
+}
+
+.shareInput {
+  width: 360px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  outline: none;
+  font: 14px/31px Helvetica, Arial;
+  @include border-radius(4px);
+  color: #333;
+  @include transition(all .15s ease-in-out);
+
+  &:focus {
+    border: 1px solid #ccc;
+  }
 }
