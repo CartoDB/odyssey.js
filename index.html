@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Odyssey.js</title>
-  <meta name="viewport" content="width=device-width">
-  <meta name="description" content="Built for designers, journalist and non-technical people can tell their stories">
-  <link rel="canonical" href="/">
+---
+layout: default
+---
 
-  <link rel="stylesheet" href="/css/main.css">
-  
-</head>
-
-
-<body>
-  <div class="offcanvas">
+<div class="offcanvas">
   <div class="offcanvas-inner">
     <div class="offcanvas-collapse">
       <div class="offcanvas-collapse-inner">
@@ -81,8 +66,8 @@
         <h1 class="site-title">ODYSSEY</h1>
         <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
         <p class="site-links">
-          <a href='/editor/editor.html' class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
-          <a href='/documentation' class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
+          <a href='{{ "/editor/editor.html" | prepend: site.baseurl }}' class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
+          <a href='{{ "/documentation" | prepend: site.baseurl }}' class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
         </p>
       </div>
     </header>
@@ -153,8 +138,8 @@
         <section class="section">
           <h2 class="section-title">Start using odyssey</h2>
           <p class="section-links">
-            <a href='/editor/editor.html' class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
-            <a href='/documentation' class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
+            <a href='{{ "/editor/editor.html" | prepend: site.baseurl }}' class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
+            <a href='{{ "/documentation" | prepend: site.baseurl }}' class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
             <a href="#"></a>
           </p>
         </section>
@@ -170,20 +155,3 @@
     </div>
   </div>
 </div>
-
-
-  <script src='/js/vendor/jquery-1.11.1.min.js'></script>
-  <script src='/js/main.js'></script>
-
-  <!-- TODO: analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create','UA-XXXXX-X');
-    ga('send', 'pageview');
-  </script>
-</body>
-</html>

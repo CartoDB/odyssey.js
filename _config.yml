@@ -1,0 +1,15 @@
+# Site settings
+title: Odyssey.js
+description: "Built for designers, journalist and non-technical people can tell their stories"
+baseurl: "/odyssey.js"
+url: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+encoding: utf-8
+
+# Assets
+sass:
+  sass_dir: _sass
+  style: :compressed

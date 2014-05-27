@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+{% include head.html %}
+<body>
+  <header class="navbar">
+    <div class="nav-header">
+      <p class="nav-brand">
+        <span class="brand"><a href='{{ "/index.html" | prepend: site.baseurl }}'>CartoDB</a></span> Documentation
+      </p>
+
+      <a href="#" class="nav-button"></a>
+    </div>
+
+    <nav class="nav-collapse">
+      <ul class="nav-menu">
+        <li class="selected"><a href='{{ "/index.html" | prepend: site.baseurl }}'>Home</a></li>
+        <li><a href='{{ "/documentation" | prepend: site.baseurl }}'>Documentation</a></li>
+      </ul>
+    </nav>
+
+    <!-- form class="nav-search">
+      <input type="text" name="search" />
+    </form -->
+  </header>
+
+  <section class="content">
+    <nav class="nav">
+      <div class="nav-inner">
+      </div>
+    </nav>
+
+    <article class="inner">
+      {{ content }}
+    </article>
+  </section>
+
+  <script src='{{ "/js/vendor/jquery-1.11.1.min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/jquery.mousewheel.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/jquery.jscrollpane.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/waypoints.min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/docs.js" | prepend: site.baseurl }}'></script>
+</body>
+</html>
