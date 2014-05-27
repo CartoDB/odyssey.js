@@ -177,7 +177,7 @@ body {
   }
 
   100% {
-    opacity: 1;
+    opacity: .8;
     -webkit-transform: scale(1);
     transform: scale(1);
   }
@@ -193,7 +193,7 @@ body {
 
 
   100% {
-    opacity: 1;
+    opacity: .8;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
@@ -400,7 +400,7 @@ body {
   left: 328px;
   top: 618px;
   overflow: hidden;
-  opacity: .5;
+  opacity: .3;
 
   -webkit-animation-name: fadeInLeft;
   -webkit-animation-duration: .5s;
@@ -418,7 +418,7 @@ body {
 .line-2 {
   height: 236px;
   width: 0;
-  opacity: .5;
+  opacity: .3;
   animation-fill-mode: forwards;
   position: absolute;
   left: 530px;
@@ -441,7 +441,7 @@ body {
 .line-3 {
   height: 200px;
   width: 0;
-  opacity: .5;
+  opacity: .3;
   position: absolute;
   left: 747px;
   top: 313px;
@@ -464,7 +464,7 @@ body {
 .line-4 {
   height: 200px;
   width: 0;
-  opacity: .5;
+  opacity: .3;
   position: absolute;
   right: 470px;
   top: 190px;

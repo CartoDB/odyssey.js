@@ -134,7 +134,7 @@ body{
   bottom: 80px;
   width: 452px;
   text-align: left;
-  border: 1px solid rgba(0, 0, 0, .2);
+  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
   &:before {
     content:"";
     position: absolute;

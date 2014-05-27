@@ -60,7 +60,9 @@ function dialog(context) {
     var templates = context.templates().map(function(d) { return d.title; });
 
     var help = divOptions.append('ul').attr('class', 'h-left');
-    help.append('li').append('a').attr('class', 'helpButton');
+
+    help.append('li').append('a').attr('class', 'helpButton').attr('xlink:href', function() { return '/'}).on('click', function(){
+    });
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
