@@ -6,213 +6,174 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Odyssey</title>
-  <!-- TODO: metas -->
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="">
-  <meta name="author" content="CartoDB">
-  <meta name="DC.title" content="Odyssey.js">
-  <meta property="og:title" content="Odyssey.js"/>
-  <meta property="og:description" content=""/>
-  <meta property="og:type" content="Visualization"/>
-  <meta property="og:url" content="/"/>
+  <title>Odyssey.js</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Built for designers, journalist and non-technical people can tell their stories">
+  <link rel="canonical" href="/">
 
-  <link rel="shortcut icon" href="favicon.ico">
-
-  <link rel="stylesheet" href="screen.css">
-  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  <link rel="stylesheet" href="/css/main.css">
+  
 </head>
+
+
 <body>
   <div class="offcanvas">
-    <div class="offcanvas-inner">
-      <div class="offcanvas-collapse">
-        <div class="offcanvas-collapse-inner">
-          <div class="offcanvas-menu">
-            <h3 class="offcanvas-title">Javascript API</h3>
-            <ul>
-              <li><a href="#">Install</a></li>
-              <li><a href="#">Quick start</a></li>
-              <li><a href="#">API</a></li>
-            </ul>
-          </div>
-
-          <div class="offcanvas-menu">
-            <h3 class="offcanvas-title">Editor</h3>
-            <ul>
-              <li><a href="#">Start a new history</a></li>
-              <li><a href="#">Create a custom action in javascript</a></li>
-              <li><a href="#">Add new actions to Editor menu</a></li>
-              <li><a href="#">Create a story from scratch</a></li>
-              <li><a href="#">Export a story as HTML</a></li>
-            </ul>
-          </div>
+  <div class="offcanvas-inner">
+    <div class="offcanvas-collapse">
+      <div class="offcanvas-collapse-inner">
+        <div class="offcanvas-menu">
+          <h3 class="offcanvas-title">Javascript API</h3>
+          <ul>
+            <li><a href="#">Install</a></li>
+            <li><a href="#">Quick start</a></li>
+            <li><a href="#">API</a></li>
+          </ul>
         </div>
-      </div>
 
-      <header class="header h-valign" id="header">
-        <div class="header-animation">
-         <span class="point point-01"></span>
-         <span class="point point-02"></span>
-         <span class="point point-03"></span>
-         <!--<span class="point point-04"></span>-->
-         <span class="point point-highlight"></span>
-         <div class="line">
-            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="177px" height="143px" viewBox="0 0 102.078 68.611" enable-background="new 0 0 102.078 68.611"
-                 xml:space="preserve">
-                  <line class="path" fill="none" stroke-width="1" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="2.482" y1="3.179" x2="100.418" y2="67.521"/>
-            </svg>
-          </div>
-         <div class="line-2">
-              <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="242px" stroke-width="2"  height="236px" viewBox="0 0 242 236" enable-background="new 0 0 242 236" xml:space="preserve">
-                    <line fill="none" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="0" y1="236" x2="242" y2="0"/>
-              </svg>
-         </div>
-         <div class="line-3">
-              <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="242px" stroke-width="2"  height="236px" viewBox="0 0 242 236" enable-background="new 0 0 242 236" xml:space="preserve">
-                    <line fill="none" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="0" y1="236" x2="242" y2="0"/>
-              </svg>
-         </div>
-         <!--
-         <div class="line-4">
-            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="177px" height="143px" viewBox="0 0 102.078 68.611" enable-background="new 0 0 102.078 68.611"
-                 xml:space="preserve">
-                  <line class="path" fill="none" stroke-width="1" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="2.482" y1="3.179" x2="100.418" y2="67.521"/>
-            </svg>
-          </div>-->
-
-       </div>
-
-
-        <div class="inner h-valigned">
-          <div class="header-inner inner-l h-valign">
-            <a href="/#menu" class="header-menu menu-link h-valigned"></a>
-          </div>
-          <div class="header-inner inner-r h-valign">
-            <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span>
-            </a>
-          </div>
-
-          <h1 class="site-title">ODYSSEY</h1>
-          <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
-          <p class="site-links">
-            <a href="/editor/editor.html" class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
-            <a href="#" class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
-          </p>
-        </div>
-      </header>
-
-      <nav class="navbar h-valign">
-        <div class="inner h-valigned">
-          <div class="navbar-inner inner-l h-valign">
-            <a href="/#menu" class="navbar-menu menu-link h-valigned"></a>
-          </div>
-
-          <a href="/" class="navbar-title">ODYSSEY</a>
-
-          <div class="navbar-inner inner-r h-valign">
-            <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span></a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="content">
-        <div class="inner">
-          <section class="section" id="choose">
-            <div class="col h-lalign">
-              <img src="img/choose.png" alt="" />
-            </div>
-
-            <div class="col">
-              <h2 class="section-title">Choose a template</h2>
-              <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
-            </div>
-          </section>
-
-          <section class="section">
-            <h2 class="section-title">Discover our features</h2>
-            <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
-            <p class="section-description">Framer Generator is a desktop app that imports the resources and folder hierarchy from Photoshop files (Sketch coming soon). Import your design and immediately start to add interaction and animation.</p>
-
-            <div class="tips">
-              <img src="img/discover.png" alt="" />
-
-              <ul>
-                <li class="tip tip-l">
-                  <i class="tips-tip-l"></i>
-                  <h3 class="tip-title">Title</h3>
-                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
-                </li>
-
-                <li class="tip tip-t">
-                  <i class="tips-tip-t"></i>
-                  <h3 class="tip-title">Title</h3>
-                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
-                </li>
-
-                <li class="tip tip-r">
-                  <i class="tips-tip-r"></i>
-                  <h3 class="tip-title">Title</h3>
-                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
-                </li>
-
-                <li class="tip tip-r2">
-                  <i class="tips-tip-r2"></i>
-                  <h3 class="tip-title">Title</h3>
-                  <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="section">
-            <h2 class="section-title">Start using odyssey</h2>
-            <p class="section-links">
-              <a href="/editor/editor.html" class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
-              <a href="#" class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
-              <a href="#"></a>
-            </p>
-          </section>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="inner">
-          <h3 class="footer-title">Odyssey</h3>
-          <p class="footer-description">is open source — a product developed by <a href="http://cartodb.com">cartodb.com</a></p>
-          <p class="footer-description">copyright © 2014</p>
+        <div class="offcanvas-menu">
+          <h3 class="offcanvas-title">Editor</h3>
+          <ul>
+            <li><a href="#">Start a new history</a></li>
+            <li><a href="#">Create a custom action in javascript</a></li>
+            <li><a href="#">Add new actions to Editor menu</a></li>
+            <li><a href="#">Create a story from scratch</a></li>
+            <li><a href="#">Export a story as HTML</a></li>
+          </ul>
         </div>
       </div>
     </div>
+
+    <header class="header h-valign" id="header">
+      <div class="header-animation">
+        <span class="point point-01"></span>
+        <span class="point point-02"></span>
+        <span class="point point-03"></span>
+        <span class="point point-highlight"></span>
+
+        <div class="line">
+          <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="177px" height="143px" viewBox="0 0 102.078 68.611" enable-background="new 0 0 102.078 68.611" xml:space="preserve">
+            <line class="path" fill="none" stroke-width="1" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="2.482" y1="3.179" x2="100.418" y2="67.521"/>
+          </svg>
+        </div>
+
+        <div class="line-2">
+          <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="242px" stroke-width="2"  height="236px" viewBox="0 0 242 236" enable-background="new 0 0 242 236" xml:space="preserve">
+            <line fill="none" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="0" y1="236" x2="242" y2="0"/>
+          </svg>
+        </div>
+        <div class="line-3">
+          <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="242px" stroke-width="2"  height="236px" viewBox="0 0 242 236" enable-background="new 0 0 242 236" xml:space="preserve">
+            <line fill="none" stroke="#FDFDFE" stroke-linecap="square" stroke-miterlimit="10"  x1="0" y1="236" x2="242" y2="0"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="inner h-valigned">
+        <div class="header-inner inner-l h-valign">
+          <a href="/#menu" class="header-menu menu-link h-valigned"></a>
+        </div>
+
+        <div class="header-inner inner-r h-valign">
+          <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span>
+          </a>
+        </div>
+
+        <h1 class="site-title">ODYSSEY</h1>
+        <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
+        <p class="site-links">
+          <a href='/editor/editor.html' class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
+          <a href='/documentation' class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
+        </p>
+      </div>
+    </header>
+
+    <nav class="navbar h-valign">
+      <div class="inner h-valigned">
+        <div class="navbar-inner inner-l h-valign">
+          <a href="/#menu" class="navbar-menu menu-link h-valigned"></a>
+        </div>
+
+        <a href="/" class="navbar-title">ODYSSEY</a>
+
+        <div class="navbar-inner inner-r h-valign">
+          <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="inner">
+        <section class="section" id="choose">
+          <div class="col h-lalign">
+            <img src="img/choose.png" alt="" />
+          </div>
+
+          <div class="col">
+            <h2 class="section-title">Choose a template</h2>
+            <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Discover our features</h2>
+          <p class="section-description">Framer is a JavaScript framework that makes creating realistic prototypes a breeze – complete with filters, spring physics and full 3D effects.</p>
+          <p class="section-description">Framer Generator is a desktop app that imports the resources and folder hierarchy from Photoshop files (Sketch coming soon). Import your design and immediately start to add interaction and animation.</p>
+
+          <div class="tips">
+            <img src="img/discover.png" alt="" />
+
+            <ul>
+              <li class="tip tip-l">
+                <i></i>
+                <h3 class="tip-title">Title</h3>
+                <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+              </li>
+
+              <li class="tip tip-t">
+                <i></i>
+                <h3 class="tip-title">Title</h3>
+                <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+              </li>
+
+              <li class="tip tip-r">
+                <i></i>
+                <h3 class="tip-title">Title</h3>
+                <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+              </li>
+
+              <li class="tip tip-r2">
+                <i></i>
+                <h3 class="tip-title">Title</h3>
+                <p class="tip-description">Framer is a JavaScript framework that makes creating realistic</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Start using odyssey</h2>
+          <p class="section-links">
+            <a href='/editor/editor.html' class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
+            <a href='/documentation' class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
+            <a href="#"></a>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="inner">
+        <h3 class="footer-title">Odyssey</h3>
+        <p class="footer-description">is open source — a product developed by <a href="http://cartodb.com">cartodb.com</a></p>
+        <p class="footer-description">Copyright © 2014</p>
+      </div>
+    </div>
   </div>
-
-  <script src="js/vendor/jquery-1.11.1.min.js"></script>
-  <script src="js/main.js"></script>
-
-  <script>
+</div>
 
 
-
-
-    window.addEventListener("load", function load(event){
-        var header = document.querySelector("#header");
-        var intFrameHeight = window.innerHeight;
-        header.style.height=intFrameHeight+'px';
-    });
-
-    window.addEventListener("resize", function load(event){
-        var header = document.querySelector("#header");
-        var intFrameHeight = window.innerHeight;
-        header.style.height=intFrameHeight+'px';
-    });
-
-
-  </script>
-
+  <script src='/js/vendor/jquery-1.11.1.min.js'></script>
+  <script src='/js/main.js'></script>
 
   <!-- TODO: analytics -->
   <script>

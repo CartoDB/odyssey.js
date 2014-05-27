@@ -15,6 +15,7 @@ function open(el, items, _class, offset) {
   if (_class) {
     d3.selectAll('#actionDropdown').attr('class', _class);
   } else {
+    debugger;
     d3.selectAll('#actionDropdown').attr('class', '');
   }
 
