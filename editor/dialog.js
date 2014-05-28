@@ -16,7 +16,6 @@ function open(el, items, _class, offset) {
   if (_class) {
     d3.selectAll('#actionDropdown').attr('class', _class);
   } else {
-    debugger;
     d3.selectAll('#actionDropdown').attr('class', '');
   }
 
@@ -184,23 +183,59 @@ function dialog(context) {
   var SLIDE_REGEXP = /^#[^#]+/i;
   var ACTIONS_BLOCK_REGEXP = /\s*```/i;
 
+  function getLines(codemirror, i, j) {
+    var lines = '';
+    for(var k = i; k < j; ++k) {
+      lines += codemirror.getLine(k) + '\n';
+    }
+    return lines;
+  }
+
   // adds action to slideNumber.
   // creates it if the slide does not have any action
   function addAction(codemirror, slideNumer, action) {
-    // search for a actions block
+    // parse properties from the new actions to next compare with
+    // the current ones in the slide
+    var currentActions = O.Template.parseProperties(action);
     var currentLine;
     var c = 0;
+    var blockStart;
+
+    // search for a actions block
     for (var i = slideNumer + 1; i < codemirror.lineCount(); ++i) {
       var line = codemirror.getLineHandle(i).text;
       if (ACTIONS_BLOCK_REGEXP.exec(line)) {
         if (++c === 2) {
-          // inser in the previous line
+          // parse current slide properties
+          var slideActions = O.Template.parseProperties(getLines(codemirror, blockStart, i));
+          var updatedActions = {};
+
+          // search for the same in the slides
+          for (var k in currentActions) {
+            if (k in slideActions) {
+              updatedActions[k] = currentActions[k];
+            }
+          }
+
+          // remove the ones that need update
+          for (var k in updatedActions) {
+            for (var linePos = blockStart + 1; linePos < i; ++linePos) {
+              if (k in O.Template.parseProperties(codemirror.getLine(linePos))) {
+                codemirror.removeLine(linePos);
+                i -= 1;
+              }
+            }
+          }
+
+          // insert in the previous line
           currentLine = codemirror.getLineHandle(i);
           codemirror.setLine(i, action + "\n" + currentLine.text);
           return;
+        } else {
+          blockStart = i;
         }
       } else if(SLIDE_REGEXP.exec(line)) {
-        // not found, inser a block
+        // not found, insert a block
         currentLine = codemirror.getLineHandle(slideNumer);
         codemirror.setLine(slideNumer, currentLine.text + "\n```\n" + action +"\n```\n");
         return;
