@@ -1,178 +1,177 @@
-// docs.Views.Home = cdb.core.View.extend({
-//   el: document,
+var Docs = {
+  initialize: function() {
+    this.$el = $('body');
+    this.navHeight = $('.navbar').outerHeight()
+    this.$nav = $('.nav');
+    this.$content = $('.content');
 
-//   events: {
-//     'scroll': '_onScroll',
-//     'resize': '_onResize'
-//   },
+    this._initViews();
+    this._initBindings();
+  },
 
-//   initialize: function() {
-//     _.bindAll(this, '_onScroll', '_onResize', '_buildToc');
+  _initViews: function() {
+    this._buildToc(function() {
+      if (location.hash) {
+        that._onResize();
 
-//     this.navHeight = this.$('.navbar').outerHeight()
-//     this.$nav = this.$('.nav');
-//     this.$content = this.$('.content');
+        if (!that.$content.hasClass('sticky')) {
+          that.$content.addClass('sticky');
+        }
 
-//     this._initViews();
-//     this._initBindings();
-//   },
+        that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+      }
+    });
 
-//   _initViews: function() {
-//     var that = this;
+    var $inner_ = this.$content.find('.inner');
+    $inner_.find('h2, h3, h4').waypoint(this._waypoint, { offset: 40 });
+  },
 
-//     this.navbar = new docs.ui.Views.Navbar();
+  _onScroll: function() {
+    var that = this;
 
-//     this._buildToc(function() {
-//       if (location.hash) {
-//         that._onResize();
+    if (!this.built) return;
 
-//         if (!that.$content.hasClass('sticky')) {
-//           that.$content.addClass('sticky');
-//         }
+    var pos = this.$el.scrollTop();
 
-//         that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-//       }
-//     });
+    if (pos >= this.navHeight) {
+      this._onResize();
 
-//     var $inner_ = this.$content.find('.inner');
-//     $inner_.find('h2, h3, h4').waypoint(this._waypoint);
-//   },
+      if (!this.$content.hasClass('sticky')) {
+        this.$content.addClass('sticky');
+      }
 
-//   _waypoint: function(ev, direction) {
-//     var $active = $(this);
+      if (!this.scrolled) {
+        this.scrolled = true;
 
-//     $('.nav').find('a[href="#' + $active.attr('id') + '"]')
-//       .closest('li')
-//       .addClass('selected');
+        that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+      }
+    } else if (pos < this.navHeight) {
+      this.init = true;
 
-//       if (direction === "up") {
-//         $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
-//       }
+      this._onResize();
 
-//       if (!$active.length) { $active.end('h2'); }
+      this.$nav.addClass('sticky');
 
-//       var id_ = $active.attr('id');
+      if (this.$content.hasClass('sticky')) {
+        this.$content.removeClass('sticky');
+      }
 
-//       $('.nav').find('.selected')
-//         .removeClass('selected');
+      if (this.scrolled) {
+        this.api && this.api.destroy();
+        this.scrolled = false;
+      }
+    }
+  },
 
-//       $('.nav').find('a[href="#' + id_ + '"]')
-//         .addClass('selected')
-//         .closest('.item')
-//         .addClass('selected')
-//         .find('h3 a')
-//         .addClass('selected');
-//   },
+  _onResize: function() {
+    var offset = this.$content.hasClass('sticky') ? 0 : this.$el.scrollTop()-this.navHeight;
 
-//   _initBindings: function() {
-//     var that = this;
+    var h = $(window).outerHeight()+offset;
 
-//     this.$nav.find('a').on('click', function(e) {
-//       e.preventDefault();
+    this.$nav.height(h);
+  },
 
-//       that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
-//     });
-//   },
+  _buildToc: function(callback) {
+    var $item = $('<ul class="fixed">'),
+      $el,
+      title,
+      link;
 
-//   _goTo: function($el, opt, callback) {
-//     if ($el) {
-//       var speed  = (opt && opt.speed)  || 150;
-//       var delay  = (opt && opt.delay)  || 0;
-//       var margin = (opt && opt.margin) || 0;
+    this.$content.find('h2').each(function() {
+      $el = $(this);
+      title = $el.text();
+      link = "#" + $el.attr("id");
 
-//       $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
+      var $subItem = $('<li class="item">'),
+        $subEl,
+        subTitle,
+        subLink;
 
-//       callback && callback();
-//     }
-//   },
+      $subItem.append("<h3><a href='"+link+"'>"+title+"</a></h3>");
 
-//   _onScroll: function() {
-//     var that = this;
+      var $subSubItem= $('<ul>');
 
-//     if (!this.built) return;
+      $subItem.append($subSubItem);
 
-//     var pos = this.$el.scrollTop();
+      $(this).nextAll('h4, h3, h2').each(function(j) {
+        if ($(this).is('h2')) return false;
 
-//     if (pos >= this.navHeight) {
-//       this._onResize();
+        $subEl = $(this);
+        subTitle = $subEl.text();
+        subLink = "#" + $subEl.attr("id");
 
-//       if (!this.$content.hasClass('sticky')) {
-//         this.$content.addClass('sticky');
-//       }
+        var klass = $(this).is('h4') ? 'indent' : '';
+        $subSubItem.append("<li class='"+klass+"'><a href='"+subLink+"'>"+subTitle+"</a></li>");
+      });
 
-//       if (!this.scrolled) {
-//         this.scrolled = true;
+      $item.append($subItem);
+    });
 
-//         that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-//       }
-//     } else if (pos < this.navHeight) {
-//       this.init = true;
+    var $nav_inner = this.$nav.find(".nav-inner");
 
-//       this._onResize();
+    $nav_inner.prepend($item);
+    $nav_inner.find('.item').first().find('h3 a').addClass('selected');
 
-//       this.$nav.addClass('sticky');
+    this.built = true;
+    callback && callback();
+  },
 
-//       if (this.$content.hasClass('sticky')) {
-//         this.$content.removeClass('sticky');
-//       }
+  _waypoint: function(ev, direction) {
+    var $active = $(this);
 
-//       if (this.scrolled) {
-//         this.api && this.api.destroy();
-//         this.scrolled = false;
-//       }
-//     }
-//   },
+    $('.nav').find('a[href="#' + $active.attr('id') + '"]')
+      .closest('li')
+      .addClass('selected');
 
-//   _onResize: function() {
-//     var offset = this.$content.hasClass('sticky') ? 0 : this.$el.scrollTop()-this.navHeight;
+      if (direction === "up") {
+        $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
+      }
 
-//     var h = $(window).outerHeight()+offset;
+      if (!$active.length) { $active.end('h2'); }
 
-//     this.$nav.height(h);
-//   },
+      var id_ = $active.attr('id');
 
-//   _buildToc: function(callback) {
-//     var $item = $('<ul class="fixed">'),
-//       $el,
-//       title,
-//       link;
+      $('.nav').find('.selected')
+        .removeClass('selected');
 
-//     this.$content.find('h2').each(function() {
-//       $el = $(this);
-//       title = $el.text();
-//       link = "#" + $el.attr("id");
+      $('.nav').find('a[href="#' + id_ + '"]')
+        .addClass('selected')
+        .closest('.item')
+        .addClass('selected')
+        .find('h3 a')
+        .addClass('selected');
+  },
+  _initBindings: function() {
+    var that = this;
 
-//       var $subItem = $('<li class="item">'),
-//         $subEl,
-//         subTitle,
-//         subLink;
+    $(window)
+      .on('scroll', function() {
+        that._onScroll();
+      })
+      .on('resize', function() {
+        that._onScroll();
+      });
 
-//       $subItem.append("<h3><a href='"+link+"'>"+title+"</a></h3>");
+    this.$nav.find('a').on('click', function(e) {
+      e.preventDefault();
 
-//       var $subSubItem= $('<ul>');
+      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
+    });
+  },
 
-//       $subItem.append($subSubItem);
+  _goTo: function($el, opt, callback) {
+    if ($el) {
+      var speed  = (opt && opt.speed)  || 150;
+      var delay  = (opt && opt.delay)  || 0;
+      var margin = (opt && opt.margin) || 0;
 
-//       $(this).nextAll('h4, h3, h2').each(function(j) {
-//         if ($(this).is('h2')) return false;
+      $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
 
-//         $subEl = $(this);
-//         subTitle = $subEl.text();
-//         subLink = "#" + $subEl.attr("id");
+      callback && callback();
+    }
+  }
+}
 
-//         var klass = $(this).is('h4') ? 'indent' : '';
-//         $subSubItem.append("<li class='"+klass+"'><a href='"+subLink+"'>"+subTitle+"</a></li>");
-//       });
-
-//       $item.append($subItem);
-//     });
-
-//     var $nav_inner = this.$nav.find(".nav-inner");
-
-//     $nav_inner.prepend($item);
-//     $nav_inner.find('.item').first().find('h3 a').addClass('selected');
-
-//     this.built = true;
-//     callback && callback();
-//   }
-// });
+$(function() {
+  Docs.initialize();
+});
