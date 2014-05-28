@@ -5,10 +5,12 @@ function Splash(context) {
 
   function _splash() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([0]);
 
-    var div = s.enter().append('div').attr('class', 'splash h-valign');
+    var div = s.enter().append('div')
+      .attr('id', 'template_selector')
+      .attr('class', 'splash h-valign');
 
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
@@ -49,7 +51,7 @@ function Splash(context) {
 
   _splash.close = function() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([]);
     s.exit().remove();
   }

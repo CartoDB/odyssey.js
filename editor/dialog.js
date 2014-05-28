@@ -2,6 +2,7 @@
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
 var exp = require('./gist');
+var share_dialog = require('./share_dialog');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -94,6 +95,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
+        share_dialog(gist.html_url);
       });
     });
 
