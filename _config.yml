@@ -8,4 +8,3 @@ url: ""
 markdown: kramdown
 permalink: pretty
 encoding: utf-8
-highlighter: pygments
