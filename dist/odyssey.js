@@ -808,6 +808,19 @@ module.exports = {
 },{"../../vendor/d3.custom":28}],14:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
+var mapActions = {
+    'move map to current position': function() {
+      var center = this.map.getCenter()
+      return '- center: [' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']\n- zoom: ' + this.map.getZoom()
+    },
+    'show marker at current position': function() {
+      var center = this.map.getCenter()
+      return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+    },
+    'sleep': function() {
+      return "O.Actions.Sleep(1000)";
+    }
+};
 
 var Template = function(template) {
   var initialized = false;
@@ -837,17 +850,32 @@ var Template = function(template) {
         sendMsg(e.message);
       }
     } else if (msg.type === 'actions') {
-      sendMsg(Object.keys(template.actions));
+      var actions = [];
+      if (template.map && template.map instanceof L.Map) {
+        for (var k in mapActions) {
+          actions.push(k);
+        }
+      }
+      if (template.actions) {
+        for (var k in template.actions) {
+          actions.push(k);
+        }
+      }
+
+      sendMsg(actions);
     } else if (msg.type === 'get_action') {
-      sendMsg(template.actions[msg.code].call(template))
+      if (msg.code in mapActions) {
+        sendMsg(mapActions[msg.code].call(template));
+      } else {
+        sendMsg(template.actions[msg.code].call(template));
+      }
     } else if (msg.type === 'code') {
       //TODO: error management
       sendMsg(eval(msg.code));
     }
   }, false);
 
-  template.init(function() {
-  });
+  template.init(function() { });
 
   function configureEditor() {
     // add helpers
@@ -965,7 +993,7 @@ function trim(x) {
   return x.replace(/^\s+|\s+$/gm,'');
 }
 
-var prop_re = /^-([^:]+):(.*)/
+var prop_re = /^-([^:]+):(.*)/;
 function parseProperties(code) {
   var props = {};
   var lines = code.split('\n');
@@ -1034,11 +1062,14 @@ function md2json(tree) {
 }
 
 
+// return a list of Slide objects
 function actionsFromMarkdown(md) {
   var md_tree = markdown.parse(md);
   return md2json(md_tree);
 }
 
+
+Template.parseProperties = parseProperties;
 
 module.exports = Template;
 
