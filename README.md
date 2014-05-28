@@ -24,7 +24,7 @@ We will be documenting future [milestones here](MILESTONES.md)
 
 ## Examples
 
-Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/examples/quick-start-example.html)
+Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/editor/editor.html)
 
 ## Contributing
 
