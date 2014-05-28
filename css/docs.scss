@@ -138,6 +138,20 @@ em { font-style: italic; }
     font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
   }
 
+  code {
+    background-color: #F8F8F8;
+    border: 1px solid #DDD;
+    @include border-radius(3px);
+    overflow: auto;
+    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  pre > code {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
     h2 { margin: 16px 0 22px 0; font: 24px/30px 'Proxima Nova Th'; }
     h3 { margin: 16px 0 22px 0; font: 20px/24px 'Proxima Nova Th'; }
     h4 { margin: 16px 0 22px 0; font: 16px/20px 'Proxima Nova Th'; }
@@ -371,11 +385,23 @@ em { font-style: italic; }
     &:after { visibility: hidden; }
 
     pre, code {
-      background-color: #F8F8F8;
       margin-bottom: 38px;
       padding: 20px;
+      background-color: #F8F8F8;
       border: 1px solid #DDD;
       @include border-radius(3px);
+      overflow: auto;
+      font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+    }
+
+    code {
+      padding: 2px;
+    }
+
+    pre > code {
+      border: none;
+      padding: 0;
+      background: transparent;
     }
 
     > div {
