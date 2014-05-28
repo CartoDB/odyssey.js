@@ -171,27 +171,26 @@
   </div>
 </div>
 
+<script>
+
+  window.addEventListener("load", function load(event){
+      var header = document.querySelector("#header");
+      var intFrameHeight = window.innerHeight;
+      header.style.height=intFrameHeight+'px';
+  });
+
+  window.addEventListener("resize", function load(event){
+      var header = document.querySelector("#header");
+      var intFrameHeight = window.innerHeight;
+      header.style.height=intFrameHeight+'px';
+  });
+
+
+</script>
+
 
   <script src='/odyssey.js/js/vendor/jquery-1.11.1.min.js'></script>
   <script src='/odyssey.js/js/main.js'></script>
-
-  <script>
-  
-    window.addEventListener("load", function load(event){
-        var header = document.querySelector("#header");
-        var intFrameHeight = window.innerHeight;
-        header.style.height=intFrameHeight+'px';
-    });
-  
-    window.addEventListener("resize", function load(event){
-        var header = document.querySelector("#header");
-        var intFrameHeight = window.innerHeight;
-        header.style.height=intFrameHeight+'px';
-    });
-  
-  
-  </script>
-
 
   <!-- TODO: analytics -->
   <script>
