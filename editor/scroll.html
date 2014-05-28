@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="css/scroll.css" />
+
+</head>
+<body>
+  <div id="layout">
+    <div id="header">
+    </div>
+    <div id="map_pos">
+      <div id="map_container">
+        <div id="map"></div>
+      </div>
+    </div>
+    <div id="content">
+    </div>
+
+
+
+    
+  </div> <!-- layout -->
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!--<script src="../../vendor/leaflet.js"></script>-->
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+
+  O.Template({
+
+    actions: {
+      'move map to': function() {
+        var center = this.map.getCenter()
+        return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
+      },
+      'show marker': function() {
+        var center = this.map.getCenter()
+        return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+      },
+      'sleep': function() {
+        return "O.Actions.Sleep(1000)";
+      }
+    },
+
+    init: function() {
+      var map = L.map('map').setView([0, 0.0], 4);
+        L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+      var story = O.Story()
+
+      this.map = map;
+      this.story = story;
+
+      // trigger when  map_pos go out of the screen
+      this.edge = O.Edge(
+        O.Triggers.Scroll().less('map_pos').offset(0),
+        O.Triggers.Scroll().greater('map_pos').offset(0)
+      )
+    },
+
+    update: function(actions) {
+      this.story.clear();
+
+      var TRIGGER_LINE = 400 + 50;
+      this.story.addEvent(
+        this.edge,
+        O.Parallel(
+          O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
+          O.Actions.Debug().log('attach')
+        )
+      )
+
+      // create content
+      var content = ''
+      $('#header').html(actions[0].html());
+      for(var i = 1; i < actions.length; ++i) {
+        var slide = actions[i];
+        content += "<div id='s_" + i +"'>" + slide.html() + "</div>";
+      }
+      $('#content').html(content);
+
+      for(var i = 1; i < actions.length; ++i) {
+        var slide = actions[i];
+        this.story.addState(
+          O.Triggers.Scroll().within('s_' + i).offset(TRIGGER_LINE),
+          slide(this)
+        )
+      }
+    }
+
+  });
+
+
+
+  </script>
+</body>
+</html>
+
