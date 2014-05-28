@@ -23,10 +23,6 @@ wget -O editor/fonts/static-webfont.ttf https://raw.githubusercontent.com/CartoD
 wget -O editor/fonts/static-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.svg
 wget -O editor/fonts/static-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.woff
 wget -O editor/fonts/static-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.eot
-wget -O editor/fonts/aleo-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-webfont.ttf
-wget -O editor/fonts/aleo-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-webfont.svg
-wget -O editor/fonts/aleo-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-webfont.woff
-wget -O editor/fonts/aleo-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-webfont.eot
 wget -O editor/fonts/aleo-regular-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.ttf
 wget -O editor/fonts/aleo-regular-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.svg
 wget -O editor/fonts/aleo-regular-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.woff
@@ -35,10 +31,10 @@ wget -O editor/fonts/aleo-bold-webfont.ttf https://raw.githubusercontent.com/Car
 wget -O editor/fonts/aleo-bold-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.svg
 wget -O editor/fonts/aleo-bold-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.woff
 wget -O editor/fonts/aleo-bold-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.eot
-wget -O editor/fonts/ProximaNova-Bold.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.ttf
-wget -O editor/fonts/ProximaNova-Bold.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.svg
-wget -O editor/fonts/ProximaNova-Bold.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.woff
-wget -O editor/fonts/ProximaNova-Bold.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.eot
+wget -O editor/fonts/ProximaNova-bold.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.ttf
+wget -O editor/fonts/ProximaNova-bold.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.svg
+wget -O editor/fonts/ProximaNova-bold.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.woff
+wget -O editor/fonts/ProximaNova-bold.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.eot
 
 mkdir -p editor/css
 wget -O editor/css/screen.css https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/css/screen.css
