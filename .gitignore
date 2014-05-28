@@ -2,3 +2,4 @@ _site
 .DS_Store
 .ruby-version
 .sass-cache/
+node_modules/
