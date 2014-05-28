@@ -1,0 +1,516 @@
+@import '_reset';
+@import '_fonts';
+@import '_helpers';
+
+@import "vendor/_jquery.jscrollpane";
+@import "vendor/_syntax";
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #545454;
+}
+
+html { min-width: $small-width; }
+
+img { display: block; padding: 0; margin: 0; -ms-interpolation-mode: bicubic; }
+img:-moz-broken { line-height: 11px; overflow: hidden; }
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+// header
+
+.navbar {
+  @extend %clearfix;
+  position: relative;
+  min-width: $small-width;
+  padding: 20px;
+  background: #35454B;
+}
+
+.nav-brand {
+  display: inline-block;
+  font: 14px 'Proxima Nova Lt';
+  color: #fff;
+  width: 203px;
+  text-transform: uppercase;
+}
+
+.navbar-title {
+  @extend %h-title;
+  margin-right: 34px;
+  font-size: 40px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-header,
+.nav-menu {
+  float: left;
+}
+
+.nav-menu {
+  margin-right: 20px;
+
+  > li {
+    display: inline-block;
+    font: 700 12px 'Proxima Nova Rg';
+    margin-left: 12px;
+  }
+  > li a {
+    color: #eee;
+    text-decoration: none;
+    display: block;
+    padding: 14px 24px;
+    -webkit-transition: color .5s;
+    transition: color .5s;
+    text-transform: uppercase;
+  }
+  > li a:hover { color: #fff; }
+  .selected a { background: rgba(0, 0, 0, .1); @include border-radius(50px); }
+  .selected a:hover { color: #fff; }
+}
+
+.nav-search {
+  display: inline-block;
+  background: #6197C8;
+  @include border-radius(4px);
+  padding: 9px 16px;
+}
+.navbar input[type="text"] {
+  background: none; border: 0;
+  font: 14px 'Proxima Nova Lt';
+  color: #B0CBE3;
+}
+.navbar input[type="text"]:focus {
+  outline: none
+}
+
+
+
+
+
+
+// content
+
+.inner {
+  display: block;
+  padding: 40px 0;
+  position: absolute;
+  margin-left: 265px;
+  color: #333;
+
+  .content {
+    @extend %clearfix;
+  }
+
+  .sticky & {
+    margin-left: 265px;
+  }
+
+  &:after {
+    content:"";
+    width: 45%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #F8F8F8;
+    border-left: 1px solid #EEEEEE;
+  }
+
+  > div {
+    > div {
+      @extend %clearfix;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  pre, code {
+    overflow: auto;
+    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code {
+    background-color: #F8F8F8;
+    border: 1px solid #DDD;
+    @include border-radius(3px);
+    overflow: auto;
+    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  pre > code {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
+    h2 { margin: 16px 0 22px 0; font: 24px/30px 'Proxima Nova Th'; }
+    h3 { margin: 16px 0 22px 0; font: 20px/24px 'Proxima Nova Th'; }
+    h4 { margin: 16px 0 22px 0; font: 16px/20px 'Proxima Nova Th'; }
+    h1 { margin: 22px 0 22px 0; font: 32px/34px 'Proxima Nova Th'; }
+    a { color: #FF7373; text-decoration: none; &:hover{text-decoration:underline;}}
+    p { font: 18px/28px 'Proxima Nova Lt'; margin-bottom: 24px; }
+    ol, ul { font: 18px/28px 'Proxima Nova Lt'; }
+    li { margin: 0 40px 12px 0; }
+    li p { float: none; }
+    ul { list-style-type: square; margin: 0 0 20px 30px; }
+    ol { list-style-type: lower-hexadecimal; margin: 0 0 20px 30px; }
+    h2,
+    p,
+    h1,
+    table,
+    ol,
+    ul,
+    h3,
+    h4
+    {
+      float: left;
+      display: inline;
+      width: 50%;
+      clear:left;
+    }
+}
+
+  .inner-code {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 32px 0 0 0;
+    clear:both;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 32px;
+  }
+
+  .inner table {
+    clear:left;
+    width: 50%;
+    float:left;
+    margin-bottom: 38px;
+    font: 18px/28px 'Proxima Nova Lt';
+  }
+  .inner table td {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 12px 12px 12px 0;
+  }
+
+
+
+
+// code
+.code { float:right; width: 41%; margin-right: 2%; }
+  .code-info {
+    float: left; display: inline; width: 50%
+    h2, p { width: 100%; }
+  }
+  .code-txt {
+    clear:both;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    @include  border-radius(4px);
+  }
+
+
+
+
+// navigation
+
+.tabs {
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e5e5e5;
+  display: inline-block;
+  margin-bottom: 24px;
+  width: 80%;
+  li {
+    border-left: 1px solid #CCCCCC;
+    display: inline-block;
+    margin-left: -4px;
+    width: 33.3%;
+    text-align: center;
+    font: 14px 'Proxima Nova Rg';
+    -webkit-transition: background .5s;
+    transition: background .5s;
+  }
+  li:hover {
+    background: #ddd;
+  }
+  li a {
+    display: block;
+    padding: 8px  0;
+    text-decoration: none;
+    color: #858585;
+  }
+    li.active { background: #ccc; }
+    li.active a { color: #000; }
+    li:first-child { border: 0; margin: 0; }
+}
+
+
+
+
+// navigation
+
+.nav {
+  position: relative;
+  top: 0;
+  float: left;
+  display: inline;
+  width: 225px;
+  border-right: 1px solid #eee;
+  margin-right: 40px;
+}
+
+.sticky .nav {
+  position: fixed;
+}
+
+.nav-inner {
+  min-width: 225px;
+  position: relative;
+  height: 100%;
+  outline: none;
+
+  .fixed {
+    padding: 40px 30px 40px 20px;
+    font: 14px 'Proxima Nova Lt';
+
+    .item {
+      &.selected ul {
+        display: block;
+      }
+
+      > ul {
+        display: none;
+      }
+    }
+    > li ul, > li h3 { margin-bottom: 18px;  }
+    > li ul a {
+      display: block;
+      line-height: 1.5;
+      color: #878787;
+      -webkit-transition: color .5s;
+      transition: color .5s;
+      &.selected {
+        font-weight: 200;
+        color: #222;
+        border-left: 4px solid #FF7373;
+        margin-left: -24px;
+        padding-left: 20px;
+      }
+    }
+
+    > li ul li {
+      margin-left: 4px;
+      margin-bottom: 10px;
+    }
+    > li ul a{
+      .selected {
+        font-weight: 200;
+      }
+
+      &:hover { color: #000; }
+    }
+    > li ul > .indent {
+      padding-left: 12px;
+
+      .selected {
+        margin-left: -36px;
+        padding-left: 32px;
+      }
+    }
+  }
+
+  h3 {
+    font: 200 16px 'Proxima Nova Rg';
+  }
+
+  .selected:before {
+    content:"";
+    width: 4px;
+    height: 20px;
+    position: absolute;
+    left: -20px;
+    background: #397DBA;
+    margin-top: -2px;
+  }
+  a {
+    color:#878787;
+    text-decoration: none;
+
+    &.selected {
+      font-weight: 700;
+      color:#333;
+    }
+  }
+}
+
+.nav-button {
+  display: none;
+  float: right;
+  width: 21px;
+  height: 18px;
+  margin-top: 10px;
+  background: image-url('mobile-nav.png');
+  text-indent: -9000px;
+}
+
+
+
+// Media queries
+
+@media (max-width: $max-width) {
+  .nav-menu > li {
+    margin-left: 0;
+  }
+  .nav-menu > li a {
+    padding: 14px;
+  }
+}
+
+@media (max-width: $big-width) {
+  .code-txt { background: #f5f5f5; }
+
+  .inner {
+    margin: 0 20px 0 265px;
+
+    &:after { visibility: hidden; }
+
+    pre, code {
+      margin-bottom: 38px;
+      padding: 20px;
+      background-color: #F8F8F8;
+      border: 1px solid #DDD;
+      @include border-radius(3px);
+      overflow: auto;
+      font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+    }
+
+    code {
+      padding: 2px;
+    }
+
+    pre > code {
+      border: none;
+      padding: 0;
+      background: transparent;
+    }
+
+    > div {
+      > p,
+      h1,
+      h2,
+      h3,
+      h4,
+      table,
+      ol,
+      ul {
+        display: block;
+        width: auto;
+      }
+    }
+  }
+
+  .code-info { float: none; display: block; width: 100%; }
+
+  .code {
+    clear: both;
+    float: none;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+}
+
+.jspTrack,
+.jspVerticalBar {
+  background: transparent;
+}
+
+.jspVerticalBar {
+  width: 1px;
+}
+
+.jspHorizontalBar {
+  height: 1px;
+}
+
+.jspTrack {
+  background: #eee;
+}
+
+.jspDrag {
+  background: #FF7373;
+}
+
+@media (max-width: $large-width) {
+  .hdr input[type="text"] { width: 44px; }
+}
+
+@media (min-width: $medium-width) {
+  .nav-collapse {
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+  }
+}
+
+@media (max-width: $medium-width) {
+  .inner {
+    margin: 0 20px;
+
+    .sticky & {
+      margin: 0 20px;
+    }
+
+    .fixed {
+      margin: 0 20px;
+    }
+  }
+
+  .nav-header,
+  .nav-menu {
+    float: none;
+  }
+
+  .nav { display: none; }
+
+  .nav-header {
+    @extend %clearfix;
+  }
+
+  .nav-brand {
+    float: left;
+  }
+
+  .nav-button {
+    display: block;
+    position: absolute;
+    top: 21px;
+    right: 20px;
+  }
+
+  .nav-search { display: none; }
+
+  .nav-collapse {
+    overflow: hidden;
+    height: 1px;
+  }
+
+  .nav-menu {
+    margin: 30px 0 0;
+
+    li {
+      display: block;
+    }
+  }
+}
+
+.line-numbers {
+  display: none;
+}
