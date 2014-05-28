@@ -23,7 +23,10 @@
         <a href="/" class="navbar-title">ODYSSEY</a>
       </p>
 
-      <a href="#" class="nav-button"></a>
+      <div class="header-inner inner-r h-valign">
+        <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span>
+        </a>
+      </div>
     </div>
 
     <nav class="nav-collapse">
@@ -53,9 +56,9 @@
 
 <p>The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.</p>
 
-<p>** Warning **</p>
+<p><strong>Warning</strong></p>
 
-<p>** We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :) **</p>
+<p><strong>We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)</strong></p>
 
 <h2 id="using-the-editor">Using the editor</h2>
 
@@ -123,9 +126,11 @@
 
 <p>Will attach each story state to the Odyssey story object.</p>
 
-<p><code>js
-var story = O.Story();
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> story = O.Story();
+</pre></div>
+</div>
+</div>
 
 <h4 id="sequence-object">Sequence object</h4>
 
@@ -133,20 +138,24 @@ var story = O.Story();
 
 <p>The <strong>sequential</strong> object contains the logic for moving forward and backward through the story states attached to your <strong>story</strong> object.</p>
 
-<p><code>js
-var seq = O.Sequential();
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> seq = O.Sequential();
+</pre></div>
+</div>
+</div>
 
 <h4 id="keys-object">Keys object</h4>
 
-<p>** O.Keys()**</p>
+<p><strong>O.Keys()</strong></p>
 
 <p>The <strong>keys</strong> object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.</p>
 
-<p><code>js
-O.Keys().left().then(seq.prev, seq);
-O.Keys().right().then(seq.next, seq);
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>O.Keys().left().then(seq.prev, seq);
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>O.Keys().right().then(seq.next, seq);
+</pre></div>
+</div>
+</div>
 
 <h3 id="basic-functions">Basic functions</h3>
 
@@ -170,26 +179,32 @@ O.Keys().right().then(seq.next, seq);
 
 <h3 id="using-the-editor-locally">Using the editor locally</h3>
 
-<p>** Step 1: Checkout the code **</p>
+<p><strong>Step 1: Checkout the code</strong></p>
 
-<p><code>sh
-git clone git@github.com:CartoDB/odyssey.js.git
-cd odyssey.js
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>git clone git@github.com:CartoDB/odyssey.js.git
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>cd odyssey.js
+</pre></div>
+</div>
+</div>
 
-<p>** Step 2: Install dependancies **</p>
+<p><strong>Step 2: Install dependancies</strong></p>
 
-<p><code>sh
-npm install
-gem system --update
-gem install compass
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>npm install
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>gem system --update
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>gem install compass
+</pre></div>
+</div>
+</div>
 
-<p>** Step 3. Start the server **</p>
+<p><strong>Step 3. Start the server</strong></p>
 
-<p><code>sh
-python -m SimpleHTTPServer
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>python -m SimpleHTTPServer
+</pre></div>
+</div>
+</div>
 
 <p>Now go to <a href="http://locahost:8000/editor/editor.html">http://locahost:8000/editor/editor.html</a></p>
 
@@ -205,10 +220,12 @@ python -m SimpleHTTPServer
 
 <p>First, change into the editor and start compass.</p>
 
-<p><code>sh
-editor/
-compass watch
-</code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>editor/
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>compass watch
+</pre></div>
+</div>
+</div>
 
 <p>Next, start the server as above and go to <a href="http://locahost:8000/editor/editor.html">http://locahost:8000/editor/editor.html</a></p>
 
@@ -227,9 +244,11 @@ which state is the active one.</p>
 <p>Adds a new state to the story. <code>action</code> will be called when <code>trigger</code> is triggered. <code>action</code>
 <code>enter</code> method is only called when the story enters in this state.</p>
 
-<p><code>
-  Story().addState(trigger, action);
- </code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>Story().addState(trigger, action);
+</pre></div>
+</div>
+</div>
 
 <h4 id="oddyseystoryaddlinearstatetrigger-action">Oddysey.Story.addLinearState(trigger, action)</h4>
 <p>Does the same than <code>addState</code> but in this case <code>update</code> method in the <code>action</code> is called every time
@@ -245,13 +264,15 @@ the trigger is updated</p>
 
 <p>executes actions serially, waits until the previous task is completed to start with the second and so on</p>
 
-<p><code>
-  var chain = Chain(action1, action2, action3)
-  chain.on('finish.app', function() {
-    console.log("all tasks performed");
-  });
-  Story().addState(trigger, chain);
- </code></p>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> chain = Chain(action1, action2, action3)
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>chain.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">finish.app</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span>() {
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  console.log(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">all tasks performed</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>});
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>Story().addState(trigger, chain);
+</pre></div>
+</div>
+</div>
 
 <p>raises <code>finish</code> signal when all the tasks has been completed</p>
 
@@ -259,21 +280,25 @@ the trigger is updated</p>
 
 <p>executes actions in parallel</p>
 
-<pre><code>```
-var chain = Parallel(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
-```
-</code></pre>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> chain = Parallel(action1, action2, action3)
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>chain.on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">finish.app</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span>() {
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  console.log(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">all tasks performed</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>});
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>Story().addState(trigger, chain);
+</pre></div>
+</div>
+</div>
 
 <p>raises <code>finish</code> signal when all the tasks has been completed</p>
 
 <h3 id="oddyseyactions">Oddysey.Actions</h3>
-<p>### Oddysey.Triggers
-### Custom actions
-### Custom triggers</p>
+
+<h3 id="oddyseytriggers">Oddysey.Triggers</h3>
+
+<h3 id="custom-actions">Custom actions</h3>
+
+<h3 id="custom-triggers">Custom triggers</h3>
 
     </article>
   </section>

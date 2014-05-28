@@ -10,6 +10,8 @@ var Docs = {
   },
 
   _initViews: function() {
+    var that = this;
+
     this._buildToc(function() {
       if (location.hash) {
         that._onResize();
@@ -23,7 +25,11 @@ var Docs = {
     });
 
     var $inner_ = this.$content.find('.inner');
-    $inner_.find('h2, h3, h4').waypoint(this._waypoint, { offset: 40 });
+    $inner_.find('h2, h3, h4').waypoint(function(direction) {
+      that._waypoint(direction, this);
+
+      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+    }, { offset: 40 });
   },
 
   _onScroll: function() {
@@ -116,8 +122,8 @@ var Docs = {
     callback && callback();
   },
 
-  _waypoint: function(ev, direction) {
-    var $active = $(this);
+  _waypoint: function(direction, el) {
+    var $active = $(el);
 
     $('.nav').find('a[href="#' + $active.attr('id') + '"]')
       .closest('li')
@@ -141,6 +147,7 @@ var Docs = {
         .find('h3 a')
         .addClass('selected');
   },
+
   _initBindings: function() {
     var that = this;
 
