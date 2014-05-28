@@ -22,6 +22,14 @@
   border-radius: $radius;
 }
 
+@mixin box-shadow($shadow1, $shadow2) {
+  -webkit-box-shadow: $shadow1, $shadow2;
+  -moz-box-shadow: $shadow1, $shadow2;
+  -ms-box-shadow: $shadow1, $shadow2;
+  -o-box-shadow: $shadow1, $shadow2;
+  box-shadow: $shadow1, $shadow2;
+}
+
 $max-width: 1100px;
 $big-width: 1024px;
 $large-width: 900px;
@@ -89,6 +97,7 @@ $small-width: 320px;
   border: 1px solid #fff;
   font-size: 14px;
   color: #fff;
+  text-align: center;
   text-decoration: none;
   @include border-radius(3px);
   @include transition(all .15s ease-out);

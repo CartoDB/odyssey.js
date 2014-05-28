@@ -6,6 +6,7 @@
 @import '_helpers';
 
 @import "vendor/_jquery.jscrollpane";
+@import "vendor/_syntax";
 
 body {
   text-rendering: optimizeLegibility;
@@ -19,6 +20,9 @@ html { min-width: $small-width; }
 
 img { display: block; padding: 0; margin: 0; -ms-interpolation-mode: bicubic; }
 img:-moz-broken { line-height: 11px; overflow: hidden; }
+
+strong { font-weight: 700; }
+em { font-style: italic; }
 
 // header
 
@@ -97,10 +101,14 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
 
 .inner {
   display: block;
-  overflow: hidden;
   padding: 40px 0;
-  position: relative;
+  position: absolute;
+  margin-left: 265px;
   color: #333;
+
+  .content {
+    @extend %clearfix;
+  }
 
   .sticky & {
     margin-left: 265px;
@@ -116,11 +124,25 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
     background: #F8F8F8;
     border-left: 1px solid #EEEEEE;
   }
+
+  > div {
+    > div {
+      @extend %clearfix;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  pre, code {
+    overflow: auto;
+    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  }
+
     h2 { margin: 16px 0 22px 0; font: 24px/30px 'Proxima Nova Th'; }
     h3 { margin: 16px 0 22px 0; font: 20px/24px 'Proxima Nova Th'; }
     h4 { margin: 16px 0 22px 0; font: 16px/20px 'Proxima Nova Th'; }
     h1 { margin: 22px 0 22px 0; font: 32px/34px 'Proxima Nova Th'; }
-    a { color: #3B7EBB; text-decoration: none; &:hover{text-decoration:underline;}}
+    a { color: #FF7373; text-decoration: none; &:hover{text-decoration:underline;}}
     p { font: 18px/28px 'Proxima Nova Lt'; margin-bottom: 24px; }
     ol, ul { font: 18px/28px 'Proxima Nova Lt'; }
     li { margin: 0 40px 12px 0; }
@@ -266,7 +288,7 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
       &.selected {
         font-weight: 200;
         color: #222;
-        border-left: 4px solid #397DBA;
+        border-left: 4px solid #FF7373;
         margin-left: -24px;
         padding-left: 20px;
       }
@@ -344,20 +366,30 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
   .code-txt { background: #f5f5f5; }
 
   .inner {
-    margin: 0 20px;
+    margin: 0 20px 0 265px;
 
     &:after { visibility: hidden; }
 
-    > p,
-    h1,
-    h2,
-    h3,
-    h4,
-    table,
-    ol,
-    ul {
-      display: block;
-      width: auto;
+    pre, code {
+      background-color: #F8F8F8;
+      margin-bottom: 38px;
+      padding: 20px;
+      border: 1px solid #DDD;
+      @include border-radius(3px);
+    }
+
+    > div {
+      > p,
+      h1,
+      h2,
+      h3,
+      h4,
+      table,
+      ol,
+      ul {
+        display: block;
+        width: auto;
+      }
     }
   }
 
@@ -389,7 +421,7 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
 }
 
 .jspDrag {
-  background: #397DBA;
+  background: #FF7373;
 }
 
 @media (max-width: $large-width) {
@@ -406,8 +438,16 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
 }
 
 @media (max-width: $medium-width) {
-  .inner.fixed {
+  .inner {
     margin: 0 20px;
+
+    .sticky & {
+      margin: 0 20px;
+    }
+
+    .fixed {
+      margin: 0 20px;
+    }
   }
 
   .nav-header,
@@ -446,4 +486,8 @@ img:-moz-broken { line-height: 11px; overflow: hidden; }
       display: block;
     }
   }
+}
+
+.line-numbers {
+  display: none;
 }

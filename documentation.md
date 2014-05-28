@@ -14,9 +14,9 @@ While at its heart, this project is about the Javascript library, we have also d
 
 The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.
 
-** Warning **
+**Warning**
 
-** We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :) **
+**We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)**
 
 ## Using the editor
 
@@ -83,9 +83,9 @@ _todo_
 
 Will attach each story state to the Odyssey story object.
 
-```js
+~~~javascript
 var story = O.Story();
-```
+~~~
 
 #### Sequence object
 
@@ -93,20 +93,20 @@ var story = O.Story();
 
 The **sequential** object contains the logic for moving forward and backward through the story states attached to your **story** object.
 
-```js
+~~~javascript
 var seq = O.Sequential();
-```
+~~~
 
 #### Keys object
 
-** O.Keys()**
+**O.Keys()**
 
 The **keys** object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
 
-```js
+~~~javascript
 O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
-```
+~~~
 
 ### Basic functions
 
@@ -130,26 +130,26 @@ _todo_
 
 ### Using the editor locally
 
-** Step 1: Checkout the code **
+**Step 1: Checkout the code**
 
-```sh
+~~~sh
 git clone git@github.com:CartoDB/odyssey.js.git
 cd odyssey.js
-```
+~~~
 
-** Step 2: Install dependancies **
+**Step 2: Install dependancies**
 
-```sh
+~~~sh
 npm install
 gem system --update
 gem install compass
-```
+~~~
 
-** Step 3. Start the server **
+**Step 3. Start the server**
 
-```sh
+~~~sh
 python -m SimpleHTTPServer
-```
+~~~
 
 Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
@@ -165,10 +165,10 @@ You can add to or edit this file by editing the [Markdown](http://daringfireball
 
 First, change into the editor and start compass.
 
-```sh
+~~~sh
 editor/
 compass watch
-```
+~~~
 
 Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
@@ -190,9 +190,9 @@ which state is the active one.
 Adds a new state to the story. `action` will be called when `trigger` is triggered. `action`
 `enter` method is only called when the story enters in this state.
 
-  ```
-  Story().addState(trigger, action);
-  ```
+~~~javascript
+Story().addState(trigger, action);
+~~~
 
 #### Oddysey.Story.addLinearState(trigger, action)
 Does the same than `addState` but in this case `update` method in the `action` is called every time
@@ -201,21 +201,21 @@ the trigger is updated
 #### Oddysey.Story.go(action_index[, options])
 
 Move story to desired state
-  * ``action_index``: base 0 index of state
-  * ``options``: todo
+  * `action_index`: base 0 index of state
+  * `options`: todo
 
 
 #### Oddysey.Chain
 
 executes actions serially, waits until the previous task is completed to start with the second and so on
 
-  ```
-  var chain = Chain(action1, action2, action3)
-  chain.on('finish.app', function() {
-    console.log("all tasks performed");
-  });
-  Story().addState(trigger, chain);
-  ```
+~~~javascript
+var chain = Chain(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+Story().addState(trigger, chain);
+~~~
 
 raises `finish` signal when all the tasks has been completed
 
@@ -223,17 +223,20 @@ raises `finish` signal when all the tasks has been completed
 
 executes actions in parallel
 
-    ```
-    var chain = Parallel(action1, action2, action3)
-    chain.on('finish.app', function() {
-      console.log("all tasks performed");
-    });
-    Story().addState(trigger, chain);
-    ```
+~~~javascript
+var chain = Parallel(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+Story().addState(trigger, chain);
+~~~
 
 raises `finish` signal when all the tasks has been completed
 
 ### Oddysey.Actions
+
 ### Oddysey.Triggers
+
 ### Custom actions
+
 ### Custom triggers
