@@ -3,6 +3,7 @@
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
 var exp = _dereq_('./gist');
+var share_dialog = _dereq_('./share_dialog');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -95,6 +96,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
+        share_dialog(gist.html_url);
       });
     });
 
@@ -275,7 +277,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":6,"./dropdown":2,"./gist":4}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":7,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -483,7 +485,7 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/FileSaver":6,"./dialog":1,"./splash":5}],4:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":7,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
 
 function processHTML(html, md, transform) {
   var parser = new DOMParser();
@@ -600,16 +602,45 @@ module.exports = {
 
 },{}],5:[function(_dereq_,module,exports){
 
+function share_dialog(url) {
+  //var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='http://piensaenpixel.cartodb.com/viz/7e3ff036-e26c-11e3-bbdb-0e10bcd91c2b/embed_map?title=true&description=true&search=false&shareable=true&cartodb_logo=true&layer_selector=false&legends=false&scrollwheel=true&fullscreen=true&sublayer_options=1&sql=' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
+
+  // show the dialog
+  var s = d3.select('#share_dialog').style('display', 'block');
+
+  function close() {
+    s.style('display', 'none');
+  }
+  // update url 
+  s.selectAll('input').attr('value', url);
+
+  // bind events for copy and close on ESP press
+  s.selectAll('a')
+    .on('click', close)
+    .on("keydown", function() {
+      if (d3.event.e.which === 27) {
+        close();
+      }
+    })
+
+}
+
+module.exports = share_dialog
+
+},{}],6:[function(_dereq_,module,exports){
+
 function Splash(context) {
 
   var evt = d3.dispatch('template')
 
   function _splash() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([0]);
 
-    var div = s.enter().append('div').attr('class', 'splash h-valign');
+    var div = s.enter().append('div')
+      .attr('id', 'template_selector')
+      .attr('class', 'splash h-valign');
 
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
@@ -650,7 +681,7 @@ function Splash(context) {
 
   _splash.close = function() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([]);
     s.exit().remove();
   }
@@ -661,7 +692,7 @@ function Splash(context) {
 
 module.exports = Splash
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
