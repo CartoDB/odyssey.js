@@ -150,12 +150,36 @@ em { font-style: italic; }
     background: transparent;
   }
 
-    h2 { margin: 16px 0 22px 0; font: 24px/30px 'Proxima Nova Th'; }
-    h3 { margin: 16px 0 22px 0; font: 20px/24px 'Proxima Nova Th'; }
-    h4 { margin: 16px 0 22px 0; font: 16px/20px 'Proxima Nova Th'; }
+    h2 {
+      margin: 0 0 22px 0;
+      font: 22px/30px 'staticregular';
+      color: #333;
+      text-transform: uppercase;
+      position: relative;
+      &:before {
+        content:"";
+        width:75px;
+        height: 1px;
+        display: block;
+        background: #CCCBCB;
+        margin-bottom: 15px;
+      }
+    }
+    h3, h4 {
+      margin: 30px 0 22px 0; 
+      font: 18px/30px 'staticregular';
+      text-transform: uppercase;
+      color: #333;
+    }
+
     h1 { margin: 22px 0 22px 0; font: 32px/34px 'Proxima Nova Th'; }
     a { color: #FF7373; text-decoration: none; &:hover{text-decoration:underline;}}
-    p { font: 18px/28px 'Proxima Nova Lt'; margin-bottom: 24px; }
+    p {
+      font: 16px/28px 'Helvetica Neu', Helvetica, Arial;
+      margin-bottom: 15px; 
+      color: #555;
+      + h2 { margin-top: 60px; }
+    }
     ol, ul { font: 18px/28px 'Proxima Nova Lt'; }
     li { margin: 0 40px 12px 0; }
     li p { float: none; }
