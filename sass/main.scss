@@ -15,7 +15,7 @@ body {
 
 .inner {
   max-width: 940px;
-  padding: 0 10px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -30,7 +30,8 @@ body {
   &.active {
     .offcanvas-inner,
     .navbar {
-      left: 320px;
+
+      left: 240px;
     }
   }
 }
@@ -45,9 +46,8 @@ body {
 
 .offcanvas-collapse {
   position: absolute;
-  top: 0; left: -320px;
-  width: 260px;
-  padding: 30px;
+  top: 0;
+  padding: 30px 20px;
   text-align: left;
   font-size: 14px;
   color: #fff;
@@ -55,7 +55,8 @@ body {
 
 .offcanvas-collapse-inner {
   position: fixed;
-  top: 47px; left: 30px;
+  top: 47px; left: 20px;
+  width: 200px;
 }
 
 .offcanvas-menu {
