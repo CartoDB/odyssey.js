@@ -99,20 +99,6 @@ Experts can create and use custom Templates with Odyssey. If you are interested 
 **TODO**
 **Add link to correct section below when prepared**
 
-## Publishing stories
-
-### URL Sharing
-
-_todo_
-
-### Publishing on the internet
-
-_todo_
-
-### Downloading your stories
-
-_todo_
-
 ## Advanced use of the editor
 
 ### Config block
