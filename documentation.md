@@ -2,7 +2,7 @@
 layout: documentation
 title: 'Odyssey.js · Documentation'
 css_assets:
-  - /css/docs.css
+  - "/css/docs.css"
 ---
 
 
@@ -38,7 +38,7 @@ _todo_
 
 _todo_
 
-## Publishing Odyssey stories
+### Publishing on the internet
 
 _todo_
 
@@ -52,11 +52,15 @@ _todo_
 
 At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. These values must go in a code block defined as you can see on the right. Here is a list of all the configuration values that are available:
 
-`title`: Title of your story
-
-~~~
+~~~md
+```
 - title: This is my story title
+- author: Odyssey master
+```
 ~~~
+
+- title: _Title of your story_
+- author: _Name of the story author_
 
 ### The actions block
 
@@ -65,15 +69,23 @@ You can attach map actions to section elements in your Markdown using the interf
 ~~~md
 # Title of the section
 ```
-
+- center: [10.000, -10.000]
+- zoom: 6
+L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
 ```
 ~~~
 
-In the example above, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here.
+In the example on the right, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here just by adding new javascript code.
+
+#### List of prebuilt options
+
+- center: _[lat,lon]_
+- zoom: _zoom level_
+- sleep: _miliseconds_
 
 ### Markdown syntax
 
-The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation. There are primary additions we have included to make Odyssey.js work:
+The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
 ### HTML Templates
 
@@ -85,11 +97,15 @@ _todo_
 
 ## Using the Javascript libary
 
-### Getting started
+_todo intro_
+
+~~~javascript
+//TODO: SIMPLE EXAMPLE
+~~~
+
+### API documentation
 
 #### Story object
-
-**O.Story()**
 
 Will attach each story state to the Odyssey story object.
 
@@ -97,11 +113,10 @@ Will attach each story state to the Odyssey story object.
 var story = O.Story();
 ~~~
 
+
 #### Sequence object
 
-**O.Sequential()**
-
-The **sequential** object contains the logic for moving forward and backward through the story states attached to your **story** object.
+The `sequential` object contains the logic for moving forward and backward through the story states attached to your story` object.
 
 ~~~javascript
 var seq = O.Sequential();
@@ -109,9 +124,7 @@ var seq = O.Sequential();
 
 #### Keys object
 
-**O.Keys()**
-
-The **keys** object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
+The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
 
 ~~~javascript
 O.Keys().left().then(seq.prev, seq);

@@ -22,7 +22,7 @@ This would be solved once we migrate to `2.0`, already in `jekyll2` branch, [pen
 To start the server type the next command in your shell:
 
 ```
-jekyll serve -w
+jekyll serve --baseurl '' -w
 ```
 
 And access normally in your browser to the next address:
@@ -34,8 +34,6 @@ In order to download the dist files needed, type in the terminal:
 ```
 ./update_odyssey_dist_files.sh
 ```
-
-*Remember to remove `baseurl: "/odyssey.js"` in `_config.yml`*
 
 ## Deploy
 
