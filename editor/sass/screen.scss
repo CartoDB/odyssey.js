@@ -231,9 +231,20 @@ body{
       font: 14px 'staticregular';
       cursor: pointer;
       display: inline-block;
-      border: 2px solid #fff;
       border-radius: 4px;
-      padding: 2px 12px; 
+      &:after {
+        content:"";
+        display: inline-block;
+        width: 25px;
+        height: 26px;
+        vertical-align: middle;
+        background: image-url("EditButtonIcon.png") no-repeat 0 0;
+        margin-left: 8px;
+        opacity: .6;
+      }
+      &:hover:after {
+        opacity: 1;
+      }
     }
 	}
 

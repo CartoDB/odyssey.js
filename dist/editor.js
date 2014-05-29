@@ -120,8 +120,7 @@ function dialog(context) {
 
     divHeader.append('p')
       .attr('id', 'show_slide')
-      //.text(templates[0])
-      .text('change template')
+      .text(templates[0])
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
