@@ -3,15 +3,8 @@ var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
 var exp = require('./gist');
 var share_dialog = require('./share_dialog');
+var debounce = require('./utils').debounce;
 
-function debounce(fn, t) {
-  var i;
-  return function() {
-    var args = arguments;
-    clearTimeout(i);
-    i = setTimeout(function() { fn.apply(window, args); }, t);
-  }
-}
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);

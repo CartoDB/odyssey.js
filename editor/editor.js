@@ -7,6 +7,8 @@ var dialog = require('./dialog');
 var Splash = require('./splash');
 var saveAs = require('../vendor/FileSaver');
 var saveAs = require('../vendor/DOMParser');
+var utils = require('./utils');
+
 
 var TEMPLATE_LIST =  [{
     title: 'slides',
@@ -38,11 +40,11 @@ function editor() {
     return TEMPLATE_LIST;
   };
 
-  context.save = function(_) {
+  context.save = utils.debounce(function(_) {
     if (this.code() && this.template()) {
       O.Template.Storage.save(this.code(), this.template());
     }
-  }
+  }, 100, context);
 
   context.template = function(_) {
     if (_) {
