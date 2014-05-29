@@ -4,6 +4,15 @@ var saveAs = require('../vendor/FileSaver');
 var exp = require('./gist');
 var share_dialog = require('./share_dialog');
 
+function debounce(fn, t) {
+  var i;
+  return function() {
+    var args = arguments;
+    clearTimeout(i);
+    i = setTimeout(function() { fn.apply(window, args); }, t);
+  }
+}
+
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
   d.exit().remove();
@@ -123,14 +132,11 @@ function dialog(context) {
         evt.code(this.value);
       });
 
-    function debounce(fn, t) {
-      var i;
-      return function() {
-        var args = arguments;
-        clearTimeout(i);
-        i = setTimeout(function() { fn.apply(window, arguments); }, t);
-      }
-    }
+    var sendCode = debounce(function(code) {
+      evt.code(code);
+    }, 100);
+
+
 
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
@@ -146,7 +152,7 @@ function dialog(context) {
       this.codemirror.on('change', function(c) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
-          evt.code(c.getValue());
+          sendCode(c.getValue());
           placeActionButtons(el, codemirror);
         }
       });
