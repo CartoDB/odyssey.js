@@ -10,11 +10,11 @@ var saveAs = require('../vendor/FileSaver');
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'the classic one, like using keynote',
-    default: '#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
   }, {
     title: 'scroll',
     description: 'the classic one, like using keynote',
-    default: '#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
 

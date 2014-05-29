@@ -6,7 +6,7 @@ function processHTML(html, md, transform) {
   // transform
   transform && transform(doc)
 
-  md = md.replace(/\n/g, '\\n');
+  md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
   // insert oddyset markdown
   var script = doc.createElement('script');
   script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
@@ -36,7 +36,7 @@ function files(md, template, callback) {
             var src = js[i].getAttribute('src');
             if (src && src.indexOf('../dist/odyssey.js') === 0) {
               js[i].setAttribute("src", "js/odyssey.js");
-              return
+              return;
             }
           }
        }),
