@@ -54,23 +54,30 @@ em { font-style: italic; }
 
 .nav-menu {
   margin-right: 20px;
+  margin-top: 6px;
+  margin-left: 44px;
 
   > li {
     display: inline-block;
-    font: 700 12px 'Proxima Nova Rg';
-    margin-left: 12px;
+    font: bold 14px 'Helvetica Neu', Helvetica, Arial;
+    margin-right: 40px;
+    text-transform: uppercase;
   }
   > li a {
     color: #eee;
     text-decoration: none;
     display: block;
-    padding: 14px 24px;
+    padding: 7px 0;
     -webkit-transition: color .5s;
     transition: color .5s;
     text-transform: uppercase;
   }
   > li a:hover { color: #fff; }
-  .selected a { background: rgba(0, 0, 0, .1); @include border-radius(50px); }
+  .selected a { 
+    border-bottom:1px solid #FF7373;
+
+
+  }
   .selected a:hover { color: #fff; }
 }
 
