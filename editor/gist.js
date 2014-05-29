@@ -25,7 +25,7 @@ function files(md, template, callback) {
     .awaitAll(ready);
 
   function ready(error, results) {
-    results = results.map(function(r) { 
+    results = results.map(function(r) {
       return r.responseText;
     });
 
@@ -57,13 +57,12 @@ function zip(md, template, callback) {
 }
 
 function Gist(md, template, callback) {
-
   var gistData = null;
 
   var s = location.pathname.split('/');
   var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
-  function relocateAssets(doc) {
-    var js = doc.getElementsByTagName('script');
+  function relocateAssets() {
+    var js = document.getElementsByTagName('script');
     for (var i = 0; i < js.length; ++i) {
       var src = js[i].getAttribute('src');
       if (src && src.indexOf('http') !== 0) {
@@ -71,7 +70,7 @@ function Gist(md, template, callback) {
       }
     }
 
-    var css = doc.getElementsByTagName('link');
+    var css = document.getElementsByTagName('link');
     for (var i = 0; i < css.length; ++i) {
       var href = css[i].getAttribute('href');
       if (href && href.indexOf('http') !== 0) {

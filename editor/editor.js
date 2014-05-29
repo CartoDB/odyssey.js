@@ -6,6 +6,7 @@ function _t(s) { return s; }
 var dialog = require('./dialog');
 var Splash = require('./splash');
 var saveAs = require('../vendor/FileSaver');
+var saveAs = require('../vendor/DOMParser');
 
 var TEMPLATE_LIST =  [{
     title: 'slides',

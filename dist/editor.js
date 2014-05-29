@@ -328,7 +328,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":7,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":8,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -370,6 +370,7 @@ function _t(s) { return s; }
 var dialog = _dereq_('./dialog');
 var Splash = _dereq_('./splash');
 var saveAs = _dereq_('../vendor/FileSaver');
+var saveAs = _dereq_('../vendor/DOMParser');
 
 var TEMPLATE_LIST =  [{
     title: 'slides',
@@ -541,7 +542,7 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/FileSaver":7,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
+},{"../vendor/DOMParser":7,"../vendor/FileSaver":8,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
 
 function processHTML(html, md, transform) {
   var parser = new DOMParser();
@@ -569,7 +570,7 @@ function files(md, template, callback) {
     .awaitAll(ready);
 
   function ready(error, results) {
-    results = results.map(function(r) { 
+    results = results.map(function(r) {
       return r.responseText;
     });
 
@@ -601,13 +602,12 @@ function zip(md, template, callback) {
 }
 
 function Gist(md, template, callback) {
-
   var gistData = null;
 
   var s = location.pathname.split('/');
   var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
-  function relocateAssets(doc) {
-    var js = doc.getElementsByTagName('script');
+  function relocateAssets() {
+    var js = document.getElementsByTagName('script');
     for (var i = 0; i < js.length; ++i) {
       var src = js[i].getAttribute('src');
       if (src && src.indexOf('http') !== 0) {
@@ -615,7 +615,7 @@ function Gist(md, template, callback) {
       }
     }
 
-    var css = doc.getElementsByTagName('link');
+    var css = document.getElementsByTagName('link');
     for (var i = 0; i < css.length; ++i) {
       var href = css[i].getAttribute('href');
       if (href && href.indexOf('http') !== 0) {
@@ -761,6 +761,54 @@ function Splash(context) {
 module.exports = Splash
 
 },{}],7:[function(_dereq_,module,exports){
+/*
+ * DOMParser HTML extension
+ * 2012-09-04
+ *
+ * By Eli Grey, http://eligrey.com
+ * Public domain.
+ * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+ */
+
+/*! @source https://gist.github.com/1129031 */
+/*global document, DOMParser*/
+
+(function(DOMParser) {
+  "use strict";
+
+  var
+    DOMParser_proto = DOMParser.prototype
+  , real_parseFromString = DOMParser_proto.parseFromString
+  ;
+
+  // Firefox/Opera/IE throw errors on unsupported types
+  try {
+    // WebKit returns null on unsupported types
+    if ((new DOMParser).parseFromString("", "text/html")) {
+      // text/html parsing is natively supported
+      return;
+    }
+  } catch (ex) {}
+
+  DOMParser_proto.parseFromString = function(markup, type) {
+    if (/^\s*text\/html\s*(?:;|$)/i.test(type)) {
+      var
+        doc = document.implementation.createHTMLDocument("")
+      ;
+            if (markup.toLowerCase().indexOf('<!doctype') > -1) {
+              doc.documentElement.innerHTML = markup;
+            }
+            else {
+              doc.body.innerHTML = markup;
+            }
+      return doc;
+    } else {
+      return real_parseFromString.apply(this, arguments);
+    }
+  };
+}(DOMParser));
+
+},{}],8:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
