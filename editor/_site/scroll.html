@@ -57,6 +57,7 @@
         this.edge,
         O.Parallel(
           O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
+          O.Actions.CSS($('#content')).toggleClass('attachMap'),
           O.Actions.Debug().log('attach')
         )
       )

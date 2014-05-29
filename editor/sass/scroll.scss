@@ -17,7 +17,7 @@ html { min-height: 100%; }
 }
 
 #header {
-    padding: 40px;
+    padding: 20px 0;
     max-width: 800px;
     margin: 0 auto;
   h1 {
@@ -54,6 +54,9 @@ html { min-height: 100%; }
   text-align: left;
   min-height: 1800px;
   img { max-width: 100%; margin: 20px 0; }
+  &.attachMap {
+    margin-top: 150px;
+  }
   > div {
     margin-top: 40px;
     padding-top: 40px;
@@ -98,3 +101,41 @@ html { min-height: 100%; }
 
 
 }
+
+
+div#credits{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-color: #FFF;
+  border-top: 1px solid #e5e5e5;
+  a { color: #ff7373; }
+  span{
+    padding: 13px 0 0 0;
+    position: absolute;
+    font-size: 12px;
+    text-transform: uppercase;
+
+    &.title{
+      left: 40px;
+      font-family: ProximaNovaBold, Sans-serif;
+      color: #333;
+    }
+
+    &.author{
+      right: 40px;
+      font-family: AleoRegular, Serif;
+      color: #999;
+      letter-spacing: 2px;
+      font-size: 10px;
+      text-align: right;
+    }
+
+  }
+}
+
+
+
+
