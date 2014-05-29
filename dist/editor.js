@@ -4,6 +4,8 @@ var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
 var exp = _dereq_('./gist');
 var share_dialog = _dereq_('./share_dialog');
+var debounce = _dereq_('./utils').debounce;
+
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -139,14 +141,11 @@ function dialog(context) {
         evt.code(this.value);
       });
 
-    function debounce(fn, t) {
-      var i;
-      return function() {
-        var args = arguments;
-        clearTimeout(i);
-        i = setTimeout(function() { fn.apply(window, arguments); }, t);
-      }
-    }
+    var sendCode = debounce(function(code) {
+      evt.code(code);
+    }, 100);
+
+
 
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
@@ -162,7 +161,7 @@ function dialog(context) {
       this.codemirror.on('change', function(c) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
-          evt.code(c.getValue());
+          sendCode(c.getValue());
           placeActionButtons(el, codemirror);
         }
       });
@@ -328,7 +327,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":8,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":4,"./share_dialog":5,"./utils":7}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -371,15 +370,17 @@ var dialog = _dereq_('./dialog');
 var Splash = _dereq_('./splash');
 var saveAs = _dereq_('../vendor/FileSaver');
 var saveAs = _dereq_('../vendor/DOMParser');
+var utils = _dereq_('./utils');
+
 
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'the classic one, like using keynote',
-    default: '#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
   }, {
     title: 'scroll',
     description: 'the classic one, like using keynote',
-    default: '#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
 
@@ -402,11 +403,11 @@ function editor() {
     return TEMPLATE_LIST;
   };
 
-  context.save = function(_) {
+  context.save = utils.debounce(function(_) {
     if (this.code() && this.template()) {
       O.Template.Storage.save(this.code(), this.template());
     }
-  }
+  }, 100, context);
 
   context.template = function(_) {
     if (_) {
@@ -542,7 +543,27 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/DOMParser":7,"../vendor/FileSaver":8,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
+},{"../vendor/DOMParser":8,"../vendor/FileSaver":9,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
+function relocateAssets(doc) {
+  var s = location.pathname.split('/');
+  var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
+
+  var js = doc.getElementsByTagName('script');
+  for (var i = 0; i < js.length; ++i) {
+    var src = js[i].getAttribute('src');
+    if (src && src.indexOf('http') !== 0) {
+      js[i].setAttribute("src", relocate_url + src);
+    }
+  }
+
+  var css = doc.getElementsByTagName('link');
+  for (var i = 0; i < css.length; ++i) {
+    var href = css[i].getAttribute('href');
+    if (href && href.indexOf('http') !== 0) {
+      css[i].setAttribute("href", relocate_url + href);
+    }
+  }
+}
 
 function processHTML(html, md, transform) {
   var parser = new DOMParser();
@@ -551,7 +572,7 @@ function processHTML(html, md, transform) {
   // transform
   transform && transform(doc)
 
-  md = md.replace(/\n/g, '\\n');
+  md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
   // insert oddyset markdown
   var script = doc.createElement('script');
   script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
@@ -575,16 +596,7 @@ function files(md, template, callback) {
     });
 
     callback({
-      'oddysey.html': processHTML(results[0], md, function(doc) {
-          var js = doc.getElementsByTagName('script');
-          for (var i = 0; i < js.length; ++i) {
-            var src = js[i].getAttribute('src');
-            if (src && src.indexOf('../dist/odyssey.js') === 0) {
-              js[i].setAttribute("src", "js/odyssey.js");
-              return
-            }
-          }
-       }),
+      'oddysey.html': processHTML(results[0], md, relocateAssets),
       'js/odyssey.js': results[2],
       'css/slides.css': results[1]
     });
@@ -603,26 +615,6 @@ function zip(md, template, callback) {
 
 function Gist(md, template, callback) {
   var gistData = null;
-
-  var s = location.pathname.split('/');
-  var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
-  function relocateAssets() {
-    var js = document.getElementsByTagName('script');
-    for (var i = 0; i < js.length; ++i) {
-      var src = js[i].getAttribute('src');
-      if (src && src.indexOf('http') !== 0) {
-        js[i].setAttribute("src", relocate_url + src);
-      }
-    }
-
-    var css = document.getElementsByTagName('link');
-    for (var i = 0; i < css.length; ++i) {
-      var href = css[i].getAttribute('href');
-      if (href && href.indexOf('http') !== 0) {
-        css[i].setAttribute("href", relocate_url + href);
-      }
-    }
-  }
 
   d3.xhr(template + ".html").get(function(err, xhr) {
     var html = xhr.responseText;
@@ -761,6 +753,21 @@ function Splash(context) {
 module.exports = Splash
 
 },{}],7:[function(_dereq_,module,exports){
+
+function debounce(fn, t, ctx) {
+  var i;
+  return function() {
+    var args = arguments;
+    clearTimeout(i);
+    i = setTimeout(function() { fn.apply(ctx || window, args); }, t);
+  }
+}
+
+module.exports = {
+  debounce: debounce
+}
+
+},{}],8:[function(_dereq_,module,exports){
 /*
  * DOMParser HTML extension
  * 2012-09-04
@@ -808,7 +815,7 @@ module.exports = Splash
   };
 }(DOMParser));
 
-},{}],8:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
