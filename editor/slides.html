@@ -102,7 +102,9 @@
     },
 
     changeSlide: function(n) {
-      this.story.go(n);
+      if (this.seq.current() !== n) {
+        this.story.go(n);
+      }
     }
 
   });
