@@ -7,5 +7,7 @@ design
 .ruby-version
 .DS_Store
 .sass-cache/
+.sass-cache/
+_site/
 
 *.scssc
