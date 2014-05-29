@@ -121,9 +121,24 @@ The config block is a control element at the top of your story's Markdown docume
 - title: "_Title of your story_"
 - author: "_Name of the story author_"
 
+### Chapters
+
+Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the ```#```` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
+
+~~~md
+```
+# The escape
+
+But as the sun was rising from the 
+fair sea into the firmament...
+```
+~~~
+
 ### The Actions block
 
-You can attach map actions to section elements in your Markdown using the interface. Each time you add an h1 element (defined by a single #), it is translated into a section and an 'add' button appears right on the left. By clicking on that button, you can add different actions or just add them manually by including the same syntax.
+At the heart of Odyssey are **Actions**. For each chapter of your story, you can attribute one or many actions to unfold. Each time you add a new chapter, an **add** button appears in the editor on the left chapter's starting line. You can click the add button to create new actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
+
+You can also add actions manually once you get a hang of the syntax. The code shown here demonstrates what a chapter title and action block will look like in the editor.
 
 ~~~md
 # Title of the section
@@ -134,21 +149,17 @@ L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
 ```
 ~~~
 
-In the example on the right, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here just by adding new javascript code.
+See the Actions section for a complete list of available actions and their descriptions.
 
-#### List of prebuilt options
+**TODO**
+**Add an Actions section at the main level of Documentation**
 
-- center: _[lat,lon]_
-- zoom: _zoom level_
-- sleep: _miliseconds_
+## Actions
 
-### HTML Templates
-
-_todo_
-
-### Creating your own templates
-
-_todo_
+**TODO**
+**Add a list of all available actions**
+**Include an indication of which templates they are available in**
+**Link to Custom Actions section in the JavaScript section below**
 
 ## Using the Javascript libary
 
@@ -157,6 +168,18 @@ _todo intro_
 ~~~javascript
 //TODO: SIMPLE EXAMPLE
 ~~~
+
+## Custom templates
+
+**TODO**
+**Document the core pieces of a template.**
+**Describe the JS necessary to include a
+
+## Custom Actions
+
+**TODO**
+**Document the core pieces of a template.**
+**Describe the JS necessary to include a
 
 ### API documentation
 
