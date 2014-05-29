@@ -19,7 +19,12 @@
     </div>
     <div id="content">
     </div>
-    
+    <div id="credits">
+      <span class="title" id="title">MY PROJECT NAME</span>
+      <span class="author">By <b id="author">name</b> using <a href="#">odyssey.js</a><span>
+    </div>
+
+
   </div> <!-- layout -->
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -42,6 +47,7 @@
       this.map = map;
       this.story = story;
 
+
       // trigger when  map_pos go out of the screen
       this.edge = O.Edge(
         O.Triggers.Scroll().less('map_pos').offset(0),
@@ -57,6 +63,7 @@
         this.edge,
         O.Parallel(
           O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
+          O.Actions.CSS($('#content')).toggleClass('attachMap'),
           O.Actions.Debug().log('attach')
         )
       )
