@@ -63,7 +63,7 @@ At the top of your markdown document, you can include a configuration block. Dep
 You can attach map actions to section elements in your Markdown using the interface. Each time you add an h1 element (defined by a single #), it is translated into a section and an 'add' button appears right on the left. By clicking on that button, you can add different actions or just add them manually by including the same syntax.
 
 ~~~md
-# Title of the section 
+# Title of the section
 ```
 
 ```
