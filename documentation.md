@@ -30,50 +30,55 @@ _todo_
 
 1. _Slides_
 2. _Scrolling_
-2. _Rolling Stones_
 3. _Torque_
 
 ## Publishing stories
-
-### Saving stories
-
-_todo_
 
 ### URL Sharing
 
 _todo_
 
-## Hosting Odyssey stories
+## Publishing Odyssey stories
+
+_todo_
+
+### Downloading your stories
 
 _todo_
 
 ## Advanced use of the editor
 
-### Markdown syntax
+### Config block
 
-The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation. There are primary additions we have included to make Odyssey.js work:
+At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. These values must go in a code block defined as you can see on the right. Here is a list of all the configuration values that are available:
 
-#### Config block
+`title`: Title of your story
 
-At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. For example, title object can be included this way,
+~~~
+- title: This is my story title
+~~~
 
-![title](http://i.imgur.com/Q8ruePp.png)
-
-#### The action block
+### The action block
 
 You can attach map actions to section elements in your Markdown using the interface. Each time you add one interactively, it is translated into a new block that will actually cause the action. You can write them manually by including the same syntax,
 
 ![action](http://i.imgur.com/6mhW8oP.png)
 
 In the example above, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here.
+
+### Markdown syntax
+
+The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation. There are primary additions we have included to make Odyssey.js work:
+
 ### HTML Templates
+
+_todo_
 
 ### Creating your own templates
 
 _todo_
 
 ## Using the Javascript libary
-
 
 ### Getting started
 

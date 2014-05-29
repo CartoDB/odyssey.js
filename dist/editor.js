@@ -120,7 +120,8 @@ function dialog(context) {
 
     divHeader.append('p')
       .attr('id', 'show_slide')
-      .text(templates[0])
+      //.text(templates[0])
+      .text('change template')
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
@@ -131,9 +132,10 @@ function dialog(context) {
         });
       });
 
+      /*
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });
+    });*/
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')
@@ -374,12 +376,12 @@ var utils = _dereq_('./utils');
 
 
 var TEMPLATE_LIST =  [{
-    title: 'slides',
-    description: 'the classic one, like using keynote',
+    title: 'Slides',
+    description: 'Display visualization chapters like slides in a presentation',
     default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
   }, {
-    title: 'scroll',
-    description: 'the classic one, like using keynote',
+    title: 'Scroll',
+    description: 'Create a visualization that changes as your reader moves through your narrative',
     default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
@@ -705,7 +707,7 @@ function Splash(context) {
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
     inner_content.append('h1').text('Select your template')
-    inner_content.append('p').text('templates allow you to change the layout of the styory')
+    inner_content.append('p').text('Templates give you different ways to unfold you story')
     var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
 
 
