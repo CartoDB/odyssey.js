@@ -1,178 +1,184 @@
-// docs.Views.Home = cdb.core.View.extend({
-//   el: document,
+var Docs = {
+  initialize: function() {
+    this.$el = $('body');
+    this.navHeight = $('.navbar').outerHeight()
+    this.$nav = $('.nav');
+    this.$content = $('.content');
 
-//   events: {
-//     'scroll': '_onScroll',
-//     'resize': '_onResize'
-//   },
+    this._initViews();
+    this._initBindings();
+  },
 
-//   initialize: function() {
-//     _.bindAll(this, '_onScroll', '_onResize', '_buildToc');
+  _initViews: function() {
+    var that = this;
 
-//     this.navHeight = this.$('.navbar').outerHeight()
-//     this.$nav = this.$('.nav');
-//     this.$content = this.$('.content');
+    this._buildToc(function() {
+      if (location.hash) {
+        that._onResize();
 
-//     this._initViews();
-//     this._initBindings();
-//   },
+        if (!that.$content.hasClass('sticky')) {
+          that.$content.addClass('sticky');
+        }
 
-//   _initViews: function() {
-//     var that = this;
+        that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+      }
+    });
 
-//     this.navbar = new docs.ui.Views.Navbar();
+    var $inner_ = this.$content.find('.inner');
+    $inner_.find('h2, h3, h4').waypoint(function(direction) {
+      that._waypoint(direction, this);
 
-//     this._buildToc(function() {
-//       if (location.hash) {
-//         that._onResize();
+      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+    }, { offset: 40 });
+  },
 
-//         if (!that.$content.hasClass('sticky')) {
-//           that.$content.addClass('sticky');
-//         }
+  _onScroll: function() {
+    var that = this;
 
-//         that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-//       }
-//     });
+    if (!this.built) return;
 
-//     var $inner_ = this.$content.find('.inner');
-//     $inner_.find('h2, h3, h4').waypoint(this._waypoint);
-//   },
+    var pos = this.$el.scrollTop();
 
-//   _waypoint: function(ev, direction) {
-//     var $active = $(this);
+    if (pos >= this.navHeight) {
+      this._onResize();
 
-//     $('.nav').find('a[href="#' + $active.attr('id') + '"]')
-//       .closest('li')
-//       .addClass('selected');
+      if (!this.$content.hasClass('sticky')) {
+        this.$content.addClass('sticky');
+      }
 
-//       if (direction === "up") {
-//         $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
-//       }
+      if (!this.scrolled) {
+        this.scrolled = true;
 
-//       if (!$active.length) { $active.end('h2'); }
+        that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+      }
+    } else if (pos < this.navHeight) {
+      this.init = true;
 
-//       var id_ = $active.attr('id');
+      this._onResize();
 
-//       $('.nav').find('.selected')
-//         .removeClass('selected');
+      this.$nav.addClass('sticky');
 
-//       $('.nav').find('a[href="#' + id_ + '"]')
-//         .addClass('selected')
-//         .closest('.item')
-//         .addClass('selected')
-//         .find('h3 a')
-//         .addClass('selected');
-//   },
+      if (this.$content.hasClass('sticky')) {
+        this.$content.removeClass('sticky');
+      }
 
-//   _initBindings: function() {
-//     var that = this;
+      if (this.scrolled) {
+        this.api && this.api.destroy();
+        this.scrolled = false;
+      }
+    }
+  },
 
-//     this.$nav.find('a').on('click', function(e) {
-//       e.preventDefault();
+  _onResize: function() {
+    var offset = this.$content.hasClass('sticky') ? 0 : this.$el.scrollTop()-this.navHeight;
 
-//       that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
-//     });
-//   },
+    var h = $(window).outerHeight()+offset;
 
-//   _goTo: function($el, opt, callback) {
-//     if ($el) {
-//       var speed  = (opt && opt.speed)  || 150;
-//       var delay  = (opt && opt.delay)  || 0;
-//       var margin = (opt && opt.margin) || 0;
+    this.$nav.height(h);
+  },
 
-//       $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
+  _buildToc: function(callback) {
+    var $item = $('<ul class="fixed">'),
+      $el,
+      title,
+      link;
 
-//       callback && callback();
-//     }
-//   },
+    this.$content.find('h2').each(function() {
+      $el = $(this);
+      title = $el.text();
+      link = "#" + $el.attr("id");
 
-//   _onScroll: function() {
-//     var that = this;
+      var $subItem = $('<li class="item">'),
+        $subEl,
+        subTitle,
+        subLink;
 
-//     if (!this.built) return;
+      $subItem.append("<h3><a href='"+link+"'>"+title+"</a></h3>");
 
-//     var pos = this.$el.scrollTop();
+      var $subSubItem= $('<ul>');
 
-//     if (pos >= this.navHeight) {
-//       this._onResize();
+      $subItem.append($subSubItem);
 
-//       if (!this.$content.hasClass('sticky')) {
-//         this.$content.addClass('sticky');
-//       }
+      $(this).nextAll('h4, h3, h2').each(function(j) {
+        if ($(this).is('h2')) return false;
 
-//       if (!this.scrolled) {
-//         this.scrolled = true;
+        $subEl = $(this);
+        subTitle = $subEl.text();
+        subLink = "#" + $subEl.attr("id");
 
-//         that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-//       }
-//     } else if (pos < this.navHeight) {
-//       this.init = true;
+        var klass = $(this).is('h4') ? 'indent' : '';
+        $subSubItem.append("<li class='"+klass+"'><a href='"+subLink+"'>"+subTitle+"</a></li>");
+      });
 
-//       this._onResize();
+      $item.append($subItem);
+    });
 
-//       this.$nav.addClass('sticky');
+    var $nav_inner = this.$nav.find(".nav-inner");
 
-//       if (this.$content.hasClass('sticky')) {
-//         this.$content.removeClass('sticky');
-//       }
+    $nav_inner.prepend($item);
+    $nav_inner.find('.item').first().find('h3 a').addClass('selected');
 
-//       if (this.scrolled) {
-//         this.api && this.api.destroy();
-//         this.scrolled = false;
-//       }
-//     }
-//   },
+    this.built = true;
+    callback && callback();
+  },
 
-//   _onResize: function() {
-//     var offset = this.$content.hasClass('sticky') ? 0 : this.$el.scrollTop()-this.navHeight;
+  _waypoint: function(direction, el) {
+    var $active = $(el);
 
-//     var h = $(window).outerHeight()+offset;
+    $('.nav').find('a[href="#' + $active.attr('id') + '"]')
+      .closest('li')
+      .addClass('selected');
 
-//     this.$nav.height(h);
-//   },
+      if (direction === "up") {
+        $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
+      }
 
-//   _buildToc: function(callback) {
-//     var $item = $('<ul class="fixed">'),
-//       $el,
-//       title,
-//       link;
+      if (!$active.length) { $active.end('h2'); }
 
-//     this.$content.find('h2').each(function() {
-//       $el = $(this);
-//       title = $el.text();
-//       link = "#" + $el.attr("id");
+      var id_ = $active.attr('id');
 
-//       var $subItem = $('<li class="item">'),
-//         $subEl,
-//         subTitle,
-//         subLink;
+      $('.nav').find('.selected')
+        .removeClass('selected');
 
-//       $subItem.append("<h3><a href='"+link+"'>"+title+"</a></h3>");
+      $('.nav').find('a[href="#' + id_ + '"]')
+        .addClass('selected')
+        .closest('.item')
+        .addClass('selected')
+        .find('h3 a')
+        .addClass('selected');
+  },
 
-//       var $subSubItem= $('<ul>');
+  _initBindings: function() {
+    var that = this;
 
-//       $subItem.append($subSubItem);
+    $(window)
+      .on('scroll', function() {
+        that._onScroll();
+      })
+      .on('resize', function() {
+        that._onScroll();
+      });
 
-//       $(this).nextAll('h4, h3, h2').each(function(j) {
-//         if ($(this).is('h2')) return false;
+    this.$nav.find('a').on('click', function(e) {
+      e.preventDefault();
 
-//         $subEl = $(this);
-//         subTitle = $subEl.text();
-//         subLink = "#" + $subEl.attr("id");
+      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
+    });
+  },
 
-//         var klass = $(this).is('h4') ? 'indent' : '';
-//         $subSubItem.append("<li class='"+klass+"'><a href='"+subLink+"'>"+subTitle+"</a></li>");
-//       });
+  _goTo: function($el, opt, callback) {
+    if ($el) {
+      var speed  = (opt && opt.speed)  || 150;
+      var delay  = (opt && opt.delay)  || 0;
+      var margin = (opt && opt.margin) || 0;
 
-//       $item.append($subItem);
-//     });
+      $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
 
-//     var $nav_inner = this.$nav.find(".nav-inner");
+      callback && callback();
+    }
+  }
+}
 
-//     $nav_inner.prepend($item);
-//     $nav_inner.find('.item').first().find('h3 a').addClass('selected');
-
-//     this.built = true;
-//     callback && callback();
-//   }
-// });
+$(function() {
+  Docs.initialize();
+});

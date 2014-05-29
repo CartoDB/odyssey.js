@@ -3,6 +3,7 @@
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
 var exp = _dereq_('./gist');
+var share_dialog = _dereq_('./share_dialog');
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -16,7 +17,6 @@ function open(el, items, _class, offset) {
   if (_class) {
     d3.selectAll('#actionDropdown').attr('class', _class);
   } else {
-    debugger;
     d3.selectAll('#actionDropdown').attr('class', '');
   }
 
@@ -92,13 +92,29 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue();
+
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
+        share_dialog(gist.html_url);
+      });
+
+      var client = new ZeroClipboard(document.getElementById("copy-button"), {
+        moviePath: "../vendor/ZeroClipboard.swf"
+      });
+
+      client.on("load", function(client) {
+        client.on('datarequested', function(client) {
+          var input = document.getElementById('shareInput');
+
+          client.setText(input.value);
+        });
+
+        client.on("complete", function(client, args) {
+          this.textContent = "Copied!";
+        });
       });
     });
-
-
 
     divHeader.append('p')
       .attr('id', 'show_slide')
@@ -183,23 +199,59 @@ function dialog(context) {
   var SLIDE_REGEXP = /^#[^#]+/i;
   var ACTIONS_BLOCK_REGEXP = /\s*```/i;
 
+  function getLines(codemirror, i, j) {
+    var lines = '';
+    for(var k = i; k < j; ++k) {
+      lines += codemirror.getLine(k) + '\n';
+    }
+    return lines;
+  }
+
   // adds action to slideNumber.
   // creates it if the slide does not have any action
   function addAction(codemirror, slideNumer, action) {
-    // search for a actions block
+    // parse properties from the new actions to next compare with
+    // the current ones in the slide
+    var currentActions = O.Template.parseProperties(action);
     var currentLine;
     var c = 0;
+    var blockStart;
+
+    // search for a actions block
     for (var i = slideNumer + 1; i < codemirror.lineCount(); ++i) {
       var line = codemirror.getLineHandle(i).text;
       if (ACTIONS_BLOCK_REGEXP.exec(line)) {
         if (++c === 2) {
-          // inser in the previous line
+          // parse current slide properties
+          var slideActions = O.Template.parseProperties(getLines(codemirror, blockStart, i));
+          var updatedActions = {};
+
+          // search for the same in the slides
+          for (var k in currentActions) {
+            if (k in slideActions) {
+              updatedActions[k] = currentActions[k];
+            }
+          }
+
+          // remove the ones that need update
+          for (var k in updatedActions) {
+            for (var linePos = blockStart + 1; linePos < i; ++linePos) {
+              if (k in O.Template.parseProperties(codemirror.getLine(linePos))) {
+                codemirror.removeLine(linePos);
+                i -= 1;
+              }
+            }
+          }
+
+          // insert in the previous line
           currentLine = codemirror.getLineHandle(i);
           codemirror.setLine(i, action + "\n" + currentLine.text);
           return;
+        } else {
+          blockStart = i;
         }
       } else if(SLIDE_REGEXP.exec(line)) {
-        // not found, inser a block
+        // not found, insert a block
         currentLine = codemirror.getLineHandle(slideNumer);
         codemirror.setLine(slideNumer, currentLine.text + "\n```\n" + action +"\n```\n");
         return;
@@ -239,12 +291,13 @@ function dialog(context) {
       .attr('class', 'actionButton')
       .style({ position: 'absolute' })
       .html('add')
-      .on('click', function(d) {
+      .on('click', function(d, i) {
         d3.event.stopPropagation();
         var self = this;
         open(this, context.actions()).on('click', function(e) {
           context.getAction(e, function(action) {
             addAction(codemirror, d.line, action);
+            context.changeSlide(i);
           });
           close(self);
         });
@@ -275,7 +328,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":6,"./dropdown":2,"./gist":4}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":7,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -425,6 +478,10 @@ function editor() {
     sendMsg({ type: 'get_action', code: _ }, done);
   }
 
+  function changeSlide(_) {
+    sendMsg({ type: 'change_slide', slide: _ });
+  }
+
   code_dialog.on('code.editor', function(code) {
     sendCode(code);
     context.code(code);
@@ -439,6 +496,7 @@ function editor() {
     return this;
   };
   context.getAction = getAction;
+  context.changeSlide = changeSlide;
 
 
   template.on('load', function() {
@@ -483,7 +541,7 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/FileSaver":6,"./dialog":1,"./splash":5}],4:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":7,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
 
 function processHTML(html, md, transform) {
   var parser = new DOMParser();
@@ -600,16 +658,57 @@ module.exports = {
 
 },{}],5:[function(_dereq_,module,exports){
 
+function share_dialog(url) {
+  //var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='http://piensaenpixel.cartodb.com/viz/7e3ff036-e26c-11e3-bbdb-0e10bcd91c2b/embed_map?title=true&description=true&search=false&shareable=true&cartodb_logo=true&layer_selector=false&legends=false&scrollwheel=true&fullscreen=true&sublayer_options=1&sql=' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
+
+  // show the dialog
+  var s = d3.select('#share_dialog').style('display', 'block');
+
+  function close() {
+    s.style('display', 'none');
+  }
+
+  var input = s.select('#shareInput');
+
+  // update url
+  input.attr('value', url);
+
+  // select input on click
+  input.on("click", function() {
+    this.select();
+  });
+
+  // bind events for copy and close on ESP press
+  s.selectAll('#closeButton')
+    .on('click', function() {
+      d3.event.preventDefault();
+      close();
+    });
+
+  d3.select("body")
+    .on("keydown", function() {
+      if (d3.event.which === 27) {
+        close();
+      }
+    });
+}
+
+module.exports = share_dialog
+
+},{}],6:[function(_dereq_,module,exports){
+
 function Splash(context) {
 
   var evt = d3.dispatch('template')
 
   function _splash() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([0]);
 
-    var div = s.enter().append('div').attr('class', 'splash h-valign');
+    var div = s.enter().append('div')
+      .attr('id', 'template_selector')
+      .attr('class', 'splash h-valign');
 
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
@@ -650,7 +749,7 @@ function Splash(context) {
 
   _splash.close = function() {
     var s = d3.select(document.body)
-      .selectAll('.splash')
+      .selectAll('#template_selector')
       .data([]);
     s.exit().remove();
   }
@@ -661,7 +760,7 @@ function Splash(context) {
 
 module.exports = Splash
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24

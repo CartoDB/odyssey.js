@@ -1,39 +1,40 @@
-## About
+## Develop
 
-The odyssey.js library is being developed to help journalists, bloggers, and other people on the web publish stories that combine narratives with maps and map interactions. The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.
+We use Compass to organize and work with stylesheets.
 
-[![Build Status](https://travis-ci.org/CartoDB/odyssey.js.png)](https://travis-ci.org/CartoDB/odyssey.js)
+To compile the project's sass files into css:
 
-## Goals
+```
+compass compile
+```
 
-* Create a simple JavaScript library that links page elements to slippy map interactions
-* Provide an API interface to the JavaScript library that makes use and customization easy
-* Prototype and test multiple map interaction methods for storytelling
-* Develop basic interface for creating new documents using the odyssey.js library
+To watch the project for changes and compile whenever it does:
 
-## Status
+```
+compass watch
+```
 
-* Project launched, 23/01/2014
-* Javascript library tested, 17/02/2014
-* Core map actions added, 27/02/2014
-* Designed/added init templates, 11/03/2014
-* Added initial editor, 12/03/2014
-* Added intro docs, 17/03/2014
+This would be solved once we migrate to `2.0`, already in `jekyll2` branch, [pending gh-pages support](https://github.com/github/pages-gem/pull/63).
 
-We will be documenting future [milestones here](MILESTONES.md)
 
-## Examples
+### Working with Jekyll
 
-Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/examples/quick-start-example.html)
+To start the server type the next command in your shell:
 
-## Contributing
+```
+jekyll serve -w
+```
 
-If you are interested in helping us develop the project, see [CONTRIBUTING](CONTRIBUTING.md) for more information.
+And access normally in your browser to the next address:
 
-## License 
+http://0.0.0.0:4000
 
-Odyssey.js is available under a [BSD 3-clause license](LICENSE)
+In order to download the dist files needed, type in the terminal:
 
-## Support
+```
+./update_odyssey_dist_files.sh
+```
 
-Odyssey.js was made possible by a grant from the Knight Foundation. 
+## Deploy
+
+Deploy to `gh-pages` and the website will be available in http://cartodb.github.io/odyssey.js

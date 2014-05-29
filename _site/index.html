@@ -9,9 +9,10 @@
   <title>Odyssey.js</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="Built for designers, journalist and non-technical people can tell their stories">
-  <link rel="canonical" href="/odyssey.js/">
+  <link rel="canonical" href="/">
 
-  <link rel="stylesheet" href="/odyssey.js/css/main.css">
+  
+    <link rel="stylesheet" href="/css/main.css">
   
 </head>
 
@@ -81,8 +82,8 @@
         <h1 class="site-title">ODYSSEY</h1>
         <p class="site-description">Built for designers, journalist and<br />non-technical people can tell their stories</p>
         <p class="site-links">
-          <a href='/odyssey.js/editor/editor.html' class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
-          <a href='/odyssey.js/documentation' class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
+          <a href='/editor/editor.html' class="button button-l button-primary h-valign"><span class="h-valigned">New story</span></a>
+          <a href='/documentation' class="button button-l h-valign btn-documentation"><span class="h-valigned">Documentation</span></a>
         </p>
       </div>
     </header>
@@ -153,8 +154,8 @@
         <section class="section">
           <h2 class="section-title">Start using odyssey</h2>
           <p class="section-links">
-            <a href='/odyssey.js/editor/editor.html' class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
-            <a href='/odyssey.js/documentation' class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
+            <a href='/editor/editor.html' class="button button-pink button-primary button-l h-valign"><span class="h-valigned">New story</span></a>
+            <a href='/documentation' class="button button-pink button-l h-valign"><span class="h-valigned">Documentation</span></a>
             <a href="#"></a>
           </p>
         </section>
@@ -171,26 +172,9 @@
   </div>
 </div>
 
-<script>
 
-  window.addEventListener("load", function load(event){
-      var header = document.querySelector("#header");
-      var intFrameHeight = window.innerHeight;
-      header.style.height=intFrameHeight+'px';
-  });
-
-  window.addEventListener("resize", function load(event){
-      var header = document.querySelector("#header");
-      var intFrameHeight = window.innerHeight;
-      header.style.height=intFrameHeight+'px';
-  });
-
-
-</script>
-
-
-  <script src='/odyssey.js/js/vendor/jquery-1.11.1.min.js'></script>
-  <script src='/odyssey.js/js/main.js'></script>
+  <script src='/js/vendor/jquery-1.11.1.min.js'></script>
+  <script src='/js/main.js'></script>
 
   <!-- TODO: analytics -->
   <script>
@@ -202,5 +186,23 @@
     ga('create','UA-XXXXX-X');
     ga('send', 'pageview');
   </script>
+
+  <script>
+  
+    window.addEventListener("load", function load(event){
+        var header = document.querySelector("#header");
+        var intFrameHeight = window.innerHeight;
+        header.style.height=intFrameHeight+'px';
+    });
+  
+    window.addEventListener("resize", function load(event){
+        var header = document.querySelector("#header");
+        var intFrameHeight = window.innerHeight;
+        header.style.height=intFrameHeight+'px';
+    });
+  
+  
+  </script>
+  
 </body>
 </html>

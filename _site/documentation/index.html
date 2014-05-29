@@ -9,11 +9,10 @@
   <title>Odyssey.js · Documentation</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="Built for designers, journalist and non-technical people can tell their stories">
-  <link rel="canonical" href="/odyssey.js/documentation/">
+  <link rel="canonical" href="/documentation/">
 
-  <link rel="stylesheet" href="/odyssey.js/css/main.css">
   
-    <link rel="stylesheet" href="/odyssey.js/css/docs.css">
+    <link rel="stylesheet" href="/css/docs.css">
   
 </head>
 
@@ -21,16 +20,19 @@
   <header class="navbar">
     <div class="nav-header">
       <p class="nav-brand">
-        <span class="brand"><a href='/odyssey.js/index.html'>CartoDB</a></span> Documentation
+        <a href="/" class="navbar-title">ODYSSEY</a>
       </p>
 
-      <a href="#" class="nav-button"></a>
+      <div class="header-inner inner-r h-valign">
+        <a href="#" class="download-link button h-valigned h-valign"><span class="h-valigned hide-mobile">Download</span><span class="h-valigned show-mobile"><i class="i-download"></i></span>
+        </a>
+      </div>
     </div>
 
     <nav class="nav-collapse">
       <ul class="nav-menu">
-        <li class="selected"><a href='/odyssey.js/index.html'>Home</a></li>
-        <li><a href='/odyssey.js/documentation'>Documentation</a></li>
+        <li class="selected"><a href='/index.html'>Home</a></li>
+        <li><a href='/documentation'>Documentation</a></li>
       </ul>
     </nav>
 
@@ -46,7 +48,8 @@
     </nav>
 
     <article class="inner">
-      <h1 id="introduction">Introduction</h1>
+      <div class="content">
+        <h2 id="introduction">Introduction</h2>
 
 <p>Odyssey.js is being developed to help journalists, bloggers, and other people on the web publish stories that combine narratives with maps and map interactions. Odyssey.js is a Javascript library that simplifies the process of linking narratives, movies, and interaction with specific changes and actions on a map. The library simplifies a lot of the code it would take to write many common as well as innovative ways of adding maps to storytelling.</p>
 
@@ -54,17 +57,17 @@
 
 <p>The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.</p>
 
-<p>** Warning **</p>
+<p><strong>Warning</strong></p>
 
-<p>** We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :) **</p>
+<p><strong>We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)</strong></p>
 
-<h1 id="using-the-editor">Using the editor</h1>
+<h2 id="using-the-editor">Using the editor</h2>
 
 <p>The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>. We have included a small number of webpage templates for you to use to prototype your stories.</p>
 
 <p><img src="http://i.imgur.com/i0c3bLL.gif" width="100%" /></p>
 
-<h2 id="default-templates">Default templates</h2>
+<h3 id="default-templates">Default templates</h3>
 
 <p><em>todo</em></p>
 
@@ -75,214 +78,207 @@
   <li><em>Torque</em></li>
 </ol>
 
-<h1 id="publishing-stories">Publishing stories</h1>
+<h2 id="publishing-stories">Publishing stories</h2>
 
-<h2 id="saving-stories">Saving stories</h2>
-
-<p><em>todo</em></p>
-
-<h2 id="url-sharing">URL Sharing</h2>
+<h3 id="saving-stories">Saving stories</h3>
 
 <p><em>todo</em></p>
 
-<h1 id="hosting-odyssey-stories">Hosting Odyssey stories</h1>
+<h3 id="url-sharing">URL Sharing</h3>
 
 <p><em>todo</em></p>
 
-<h1 id="advanced-use-of-the-editor">Advanced use of the editor</h1>
+<h2 id="hosting-odyssey-stories">Hosting Odyssey stories</h2>
 
-<h2 id="markdown-syntax">Markdown syntax</h2>
+<p><em>todo</em></p>
+
+<h2 id="advanced-use-of-the-editor">Advanced use of the editor</h2>
+
+<h3 id="markdown-syntax">Markdown syntax</h3>
 
 <p>The Markdown syntax used in the Odyssey Editor uses all the features documented int the <a href="http://daringfireball.net/projects/markdown/syntax">Daring Fireball</a> documentation. There are primary additions we have included to make Odyssey.js work:</p>
 
-<h3 id="config-block">Config block</h3>
+<h4 id="config-block">Config block</h4>
 
 <p>At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. For example, title object can be included this way,</p>
 
 <p><img src="http://i.imgur.com/Q8ruePp.png" alt="title" /></p>
 
-<h3 id="the-action-block">The action block</h3>
+<h4 id="the-action-block">The action block</h4>
 
 <p>You can attach map actions to section elements in your Markdown using the interface. Each time you add one interactively, it is translated into a new block that will actually cause the action. You can write them manually by including the same syntax,</p>
 
 <p><img src="http://i.imgur.com/6mhW8oP.png" alt="action" /></p>
 
 <p>In the example above, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on <a href="http://leafletjs.com/">Leaflet</a>, so you can perform most actions possible in leaflet here.
-## HTML Templates</p>
+### HTML Templates</p>
 
-<h2 id="creating-your-own-templates">Creating your own templates</h2>
+<h3 id="creating-your-own-templates">Creating your own templates</h3>
 
 <p><em>todo</em></p>
 
-<h1 id="using-the-javascript-libary">Using the Javascript libary</h1>
+<h2 id="using-the-javascript-libary">Using the Javascript libary</h2>
 
-<h2 id="getting-started">Getting started</h2>
+<h3 id="getting-started">Getting started</h3>
 
-<h3 id="story-object">Story object</h3>
+<h4 id="story-object">Story object</h4>
 
 <p><strong>O.Story()</strong></p>
 
 <p>Will attach each story state to the Odyssey story object.</p>
 
-<p><code>js
-var story = O.Story();
-</code></p>
+<pre><code class="language-javascript">var story = O.Story();
+</code></pre>
 
-<h3 id="sequence-object">Sequence object</h3>
+<h4 id="sequence-object">Sequence object</h4>
 
 <p><strong>O.Sequential()</strong></p>
 
 <p>The <strong>sequential</strong> object contains the logic for moving forward and backward through the story states attached to your <strong>story</strong> object.</p>
 
-<p><code>js
-var seq = O.Sequential();
-</code></p>
+<pre><code class="language-javascript">var seq = O.Sequential();
+</code></pre>
 
-<h3 id="keys-object">Keys object</h3>
+<h4 id="keys-object">Keys object</h4>
 
-<p>** O.Keys()**</p>
+<p><strong>O.Keys()</strong></p>
 
 <p>The <strong>keys</strong> object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.</p>
 
-<p><code>js
-O.Keys().left().then(seq.prev, seq);
+<pre><code class="language-javascript">O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
-</code></p>
+</code></pre>
 
-<h2 id="basic-functions">Basic functions</h2>
-
-<p><em>todo</em></p>
-
-<h2 id="advanced-functions">Advanced functions</h2>
-
-<h3 id="youtube">YouTube</h3>
+<h3 id="basic-functions">Basic functions</h3>
 
 <p><em>todo</em></p>
 
-<h3 id="torque">Torque</h3>
+<h3 id="advanced-functions">Advanced functions</h3>
+
+<h4 id="youtube">YouTube</h4>
 
 <p><em>todo</em></p>
 
-<h2 id="custom-functions">Custom functions</h2>
+<h4 id="torque">Torque</h4>
 
 <p><em>todo</em></p>
 
-<h1 id="odysseyjs-development">Odyssey.js development</h1>
+<h3 id="custom-functions">Custom functions</h3>
 
-<h2 id="using-the-editor-locally">Using the editor locally</h2>
+<p><em>todo</em></p>
 
-<p>** Step 1: Checkout the code **</p>
+<h2 id="odysseyjs-development">Odyssey.js development</h2>
 
-<p><code>sh
-git clone git@github.com:CartoDB/odyssey.js.git
+<h3 id="using-the-editor-locally">Using the editor locally</h3>
+
+<p><strong>Step 1: Checkout the code</strong></p>
+
+<pre><code class="language-sh">git clone git@github.com:CartoDB/odyssey.js.git
 cd odyssey.js
-</code></p>
+</code></pre>
 
-<p>** Step 2: Install dependancies **</p>
+<p><strong>Step 2: Install dependancies</strong></p>
 
-<p><code>sh
-npm install
+<pre><code class="language-sh">npm install
 gem system --update
 gem install compass
-</code></p>
+</code></pre>
 
-<p>** Step 3. Start the server **</p>
+<p><strong>Step 3. Start the server</strong></p>
 
-<p><code>sh
-python -m SimpleHTTPServer
-</code></p>
+<pre><code class="language-sh">python -m SimpleHTTPServer
+</code></pre>
 
 <p>Now go to <a href="http://locahost:8000/editor/editor.html">http://locahost:8000/editor/editor.html</a></p>
 
-<h2 id="contributing-code">Contributing code</h2>
+<h3 id="contributing-code">Contributing code</h3>
 
-<h3 id="improving-documentation">Improving documentation</h3>
+<h4 id="improving-documentation">Improving documentation</h4>
 
 <p>Now go to <a href="http://locahost:8000/docs/index.html">http://locahost:8000/docs/index.html</a></p>
 
 <p>You can add to or edit this file by editing the <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> in the file <code>docs/doc.md</code>.</p>
 
-<h3 id="developing-the-editor">Developing the Editor</h3>
+<h4 id="developing-the-editor">Developing the Editor</h4>
 
 <p>First, change into the editor and start compass.</p>
 
-<p><code>sh
-editor/
+<pre><code class="language-sh">editor/
 compass watch
-</code></p>
+</code></pre>
 
 <p>Next, start the server as above and go to <a href="http://locahost:8000/editor/editor.html">http://locahost:8000/editor/editor.html</a></p>
 
-<h3 id="submitting-improvements">Submitting improvements</h3>
+<h4 id="submitting-improvements">Submitting improvements</h4>
 
 <p>Send a pull request to the original Odyssey.js repository!</p>
 
-<h1 id="old-content">Old content</h1>
+<h2 id="old-content">Old content</h2>
 
-<h2 id="oddyseystory">Oddysey.Story</h2>
+<h3 id="oddyseystory">Oddysey.Story</h3>
 
 <p>controls the state of the story managing the states. Each story contains states and triggers control
 which state is the active one.</p>
 
-<h3 id="oddyseystoryaddstatetrigger-action">Oddysey.Story.addState(trigger, action)</h3>
+<h4 id="oddyseystoryaddstatetrigger-action">Oddysey.Story.addState(trigger, action)</h4>
 <p>Adds a new state to the story. <code>action</code> will be called when <code>trigger</code> is triggered. <code>action</code>
 <code>enter</code> method is only called when the story enters in this state.</p>
 
-<p><code>
-  Story().addState(trigger, action);
- </code></p>
+<pre><code class="language-javascript">Story().addState(trigger, action);
+</code></pre>
 
-<h3 id="oddyseystoryaddlinearstatetrigger-action">Oddysey.Story.addLinearState(trigger, action)</h3>
+<h4 id="oddyseystoryaddlinearstatetrigger-action">Oddysey.Story.addLinearState(trigger, action)</h4>
 <p>Does the same than <code>addState</code> but in this case <code>update</code> method in the <code>action</code> is called every time
 the trigger is updated</p>
 
-<h3 id="oddyseystorygoactionindex-options">Oddysey.Story.go(action_index[, options])</h3>
+<h4 id="oddyseystorygoactionindex-options">Oddysey.Story.go(action_index[, options])</h4>
 
 <p>Move story to desired state
   * <code>action_index</code>: base 0 index of state
   * <code>options</code>: todo</p>
 
-<h3 id="oddyseychain">Oddysey.Chain</h3>
+<h4 id="oddyseychain">Oddysey.Chain</h4>
 
 <p>executes actions serially, waits until the previous task is completed to start with the second and so on</p>
 
-<p><code>
-  var chain = Chain(action1, action2, action3)
-  chain.on('finish.app', function() {
-    console.log("all tasks performed");
-  });
-  Story().addState(trigger, chain);
- </code></p>
-
-<p>raises <code>finish</code> signal when all the tasks has been completed</p>
-
-<h3 id="oddyseyparalel">Oddysey.Paralel</h3>
-
-<p>executes actions in parallel</p>
-
-<pre><code>```
-var chain = Parallel(action1, action2, action3)
+<pre><code class="language-javascript">var chain = Chain(action1, action2, action3)
 chain.on('finish.app', function() {
   console.log("all tasks performed");
 });
 Story().addState(trigger, chain);
-```
 </code></pre>
 
 <p>raises <code>finish</code> signal when all the tasks has been completed</p>
 
-<h2 id="oddyseyactions">Oddysey.Actions</h2>
-<p>## Oddysey.Triggers
-## Custom actions
-## Custom triggers</p>
+<h4 id="oddyseyparalel">Oddysey.Paralel</h4>
 
+<p>executes actions in parallel</p>
+
+<pre><code class="language-javascript">var chain = Parallel(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+Story().addState(trigger, chain);
+</code></pre>
+
+<p>raises <code>finish</code> signal when all the tasks has been completed</p>
+
+<h3 id="oddyseyactions">Oddysey.Actions</h3>
+
+<h3 id="oddyseytriggers">Oddysey.Triggers</h3>
+
+<h3 id="custom-actions">Custom actions</h3>
+
+<h3 id="custom-triggers">Custom triggers</h3>
+
+      </div>
     </article>
   </section>
 
-  <script src='/odyssey.js/js/vendor/jquery-1.11.1.min.js'></script>
-  <script src='/odyssey.js/js/vendor/jquery.mousewheel.js'></script>
-  <script src='/odyssey.js/js/vendor/jquery.jscrollpane.js'></script>
-  <script src='/odyssey.js/js/vendor/waypoints.min.js'></script>
-  <script src='/odyssey.js/js/docs.js'></script>
+  <script src='/js/vendor/jquery-1.11.1.min.js'></script>
+  <script src='/js/vendor/jquery.mousewheel.js'></script>
+  <script src='/js/vendor/jquery.jscrollpane.js'></script>
+  <script src='/js/vendor/waypoints.min.js'></script>
+  <script src='/js/docs.js'></script>
 </body>
 </html>
