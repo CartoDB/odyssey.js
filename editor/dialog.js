@@ -275,12 +275,13 @@ function dialog(context) {
       .attr('class', 'actionButton')
       .style({ position: 'absolute' })
       .html('add')
-      .on('click', function(d) {
+      .on('click', function(d, i) {
         d3.event.stopPropagation();
         var self = this;
         open(this, context.actions()).on('click', function(e) {
           context.getAction(e, function(action) {
             addAction(codemirror, d.line, action);
+            context.changeSlide(i);
           });
           close(self);
         });

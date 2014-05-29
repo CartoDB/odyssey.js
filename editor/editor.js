@@ -114,6 +114,10 @@ function editor() {
     sendMsg({ type: 'get_action', code: _ }, done);
   }
 
+  function changeSlide(_) {
+    sendMsg({ type: 'change_slide', slide: _ });
+  }
+
   code_dialog.on('code.editor', function(code) {
     sendCode(code);
     context.code(code);
@@ -128,6 +132,7 @@ function editor() {
     return this;
   };
   context.getAction = getAction;
+  context.changeSlide = changeSlide;
 
 
   template.on('load', function() {
