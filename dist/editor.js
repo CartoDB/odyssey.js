@@ -711,7 +711,7 @@ function Splash(context) {
     var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
 
 
-    var template = templates 
+    var template = templates
       .selectAll('.template').data(context.templates())
       .enter()
         .append('li')
@@ -731,7 +731,7 @@ function Splash(context) {
           })
 
     template
-        .append('a').text('SELECT').attr('class', 'button-template')
+      .append('a').text('SELECT').attr('class', 'button-template')
 
 
     template.on('click', function(d) {

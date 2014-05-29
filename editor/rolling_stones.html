@@ -18,9 +18,9 @@
       font-size: 45px;
 
     }*/
-  
+
     #map {
-      position: absolute; 
+      position: absolute;
       top: 0; left: 0;
       width:100%;
       height: 100%;
@@ -81,8 +81,8 @@
 
     function render() {
       var html = '<ul>';
-      for(var i = 0; i < count; ++i) { 
-        html += '<li><a href="#' + i + '"></a></li>'; 
+      for(var i = 0; i < count; ++i) {
+        html += '<li><a href="#' + i + '"></a></li>';
       }
       html += "</ul>";
       element.innerHTML = html;
@@ -120,7 +120,7 @@
       //   .done(function(){
       //     console.log('hi')
       //   })
-        
+
       var seq = O.Triggers.Sequential();
       // enanle keys to move
       O.Triggers.Keys().on('map').left().then(seq.next, seq)
@@ -155,18 +155,18 @@
         document.getElementById('slides').innerHTML += tmpl;
 
         var actions = O.Parallel.apply(window, [
-          this.slides.activate(i), 
+          this.slides.activate(i),
           slide(this),
           this.progress.activate(i)
         ]);
-        this.story.addState( 
-          this.seq.step(i), 
+        this.story.addState(
+          this.seq.step(i),
           actions
         )
       }
       this.story.go(this.seq.current());
     }
-    
+
   });
 
   </script>
