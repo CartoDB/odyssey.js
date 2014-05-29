@@ -375,11 +375,11 @@ var utils = _dereq_('./utils');
 
 
 var TEMPLATE_LIST =  [{
-    title: 'Slides',
+    title: 'slides',
     description: 'Display visualization chapters like slides in a presentation',
     default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
   }, {
-    title: 'Scroll',
+    title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
     default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
