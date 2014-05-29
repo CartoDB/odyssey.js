@@ -34,15 +34,15 @@ _todo_
 
 ## Publishing stories
 
-### Saving stories
-
-_todo_
-
 ### URL Sharing
 
 _todo_
 
-## Hosting Odyssey stories
+## Publishing Odyssey stories
+
+_todo_
+
+### Downloading your stories
 
 _todo_
 
@@ -50,9 +50,13 @@ _todo_
 
 ### Config block
 
-At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. For example, title object can be included this way,
+At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. These values must go in a code block defined as you can see on the right. Here is a list of all the configuration values that are available:
 
-![title](http://i.imgur.com/Q8ruePp.png)
+`title`: Title of your story
+
+~~~
+- title: This is my story title
+~~~
 
 ### The action block
 
