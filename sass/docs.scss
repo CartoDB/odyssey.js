@@ -136,12 +136,14 @@ em { font-style: italic; }
   }
 
   code {
-    color: #93A1A1;
+    /*color: #93A1A1;*/
+    color: #666;
     background-color: #F8F8F8;
     border: 1px solid #DDD;
     @include border-radius(3px);
     overflow: auto;
     font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+    padding: 4px; 
   }
 
   pre > code {
@@ -316,7 +318,7 @@ pre {
     margin-bottom: 35px;
   }
   .fixed {
-    padding: 40px 30px 40px 20px;
+    padding: 61px 30px 40px 20px;
     font: 14px 'Helvetica Neu', Helvetica, Arial;
 
     .item {
