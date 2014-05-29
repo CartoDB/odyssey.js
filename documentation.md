@@ -5,26 +5,72 @@ css_assets:
   - "/css/docs.css"
 ---
 
+## How it works
 
-## Introduction
+Odyssey.js is an open-source tool that allows you to combine maps, narratives, and other multimedia into a beautiful story. Creating new stories is simple, requiring nothing more than a modern web-browser and an idea. You enhance the narrative and multimedia of your stories using Actions (e.g. map movements, video and sound control, or the display or new content) that will let you tell your story in an exciting new way. Use our Templates to control the overall look and feel of your story in beautifully designed layouts.
 
-Odyssey.js is being developed to help journalists, bloggers, and other people on the web publish stories that combine narratives with maps and map interactions. Odyssey.js is a Javascript library that simplifies the process of linking narratives, movies, and interaction with specific changes and actions on a map. The library simplifies a lot of the code it would take to write many common as well as innovative ways of adding maps to storytelling.
+Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Soundcloud, and Twitter based Actions, if you can help let us know!
 
-While at its heart, this project is about the Javascript library, we have also developed an easy to use editing tool so you can quickly prototype or even build webpages to tell your stories. The editor will allow you to create pretty advanced online maps and stories without writing anything more advanced than [Markdown](http://daringfireball.net/projects/markdown/syntax).
-
-The library is open source and freely available to use in your projects. It is initially being built to work with most modern browsers.
+The library is open source and freely available to use in your projects. 
 
 **Warning**
 
 **We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)**
 
-## Using the editor
+## Quick start
+
+#### Create a new Story
+
+On the [homepage](../), click the button to create a new story or go [here](../editor/editor.html)
+
+#### Name your project
+
+Change the top level data in the editor. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
+
+~~~md
+```
+- title: "10 years later..."
+- author: "Homer"
+```
+~~~
+
+#### Add story content
+
+Stories are broken down into _chapters_. Each chapter begins with a _title_ and then can contain a mix of headlines, text and other Markdown elements (images, links, etc.). Here is an example of one chapter,
+
+~~~md
+```
+# The beginning
+
+Tell me, O muse, of that ingenious 
+hero who travelled far
+```
+~~~
+
+#### Publish your story
+
+There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
+
+**TODO**
+**Include annotated image of the publish options**
+
+#### Embed it on your site
+
+**TODO**
+**Include iframe link on the gist publish dialog**
+**After that, add this section plus screenshots**
+
+#### Save and return to your story
+
+You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
+
+## Using the Editor
 
 The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates for you to use to prototype your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
-### Default templates
+### Default Templates
 
 _todo_
 

@@ -594,7 +594,7 @@ body {
     display: block;
     width: 15px;
     height: 178px;
-    background: url('../img/tips/tip-t.png') center;
+    background: url('../img/tips/tip-t.png') top center;
   }
 }
 
@@ -665,6 +665,8 @@ body {
 }
 
 @media (max-width: 640px) {
+  .download-link.button { width: 37px; }
+
   .tips {
     margin-top: 60px;
 
@@ -728,7 +730,41 @@ body {
 
 
 @media(max-width: 500px) {
+
+  .header .inner {
+    margin-left: 0;
+    margin-right: 0;
+  }
   .header-animation {
     margin-left: -58%;
   }
+  h-valigned {
+   margin-left: -5px;
+  }
+  .site-description {
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+
+  .header-inner, .navbar-inner {  
+    height: 70px;
+  }
+  .inner-l {
+    left: 20px;
+  }
+  .inner-r {
+    right: 25px;
+  }
+  .site-title { margin-top: 100px; }
+  .navbar { height: 72px; }
+  .navbar-title { font-size: 24px; }
+  .content .inner { margin-left: 15px; margin-right: 15px; }
+  .col img { margin-bottom: 20px; }
+  .section { padding: 50px 0;}
+  .tips li:last-child { margin-bottom: 0; }
+
+}
+
+@media(max-width: 360px) {
+  .header-animation { display: none; }
 }

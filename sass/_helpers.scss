@@ -97,12 +97,15 @@ $small-width: 320px;
   border: 1px solid #fff;
   font-size: 14px;
   color: #fff;
-  font-family: "Proxima Nova Sb";
+  font-family: "Helvetica Neu", Helvetica;
+  font-weight: bold;
   text-align: center;
   text-decoration: none;
   @include border-radius(3px);
   @include transition(all .15s ease-out);
-
+  &.download-link {
+    width: 150px;
+  }
   &:hover,
   &.button-primary {
     background: #fff;
