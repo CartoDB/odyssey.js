@@ -53,6 +53,10 @@ body {
   color: #fff;
 }
 
+.active .offcanvas-collapse-inner {
+  z-index: 2;
+}
+
 .offcanvas-collapse-inner {
   position: fixed;
   top: 47px; left: 20px;
