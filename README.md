@@ -35,6 +35,9 @@ In order to download the dist files needed, type in the terminal:
 ./update_odyssey_dist_files.sh
 ```
 
+*Remember to remove `baseurl: "/odyssey.js"` in `_config.yml`*
+
 ## Deploy
 
 Deploy to `gh-pages` and the website will be available in http://cartodb.github.io/odyssey.js
+*Remember to add `baseurl: "/odyssey.js"` in `_config.yml`*
