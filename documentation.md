@@ -54,6 +54,12 @@ There are a few options for publishing your story. The first is to publish it di
 **TODO**
 **Include annotated image of the publish options**
 
+#### Embed it on your site
+
+**TODO**
+**Include iframe link on the gist publish dialog**
+**After that, add this section plus screenshots**
+
 #### Save and return to your story
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
