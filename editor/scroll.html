@@ -52,7 +52,7 @@
     update: function(actions) {
       this.story.clear();
 
-      var TRIGGER_LINE = 400 + 50;
+      var TRIGGER_LINE = this.map.getSize().y + 50;
       this.story.addEvent(
         this.edge,
         O.Parallel(

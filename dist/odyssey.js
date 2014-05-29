@@ -861,7 +861,6 @@ var Template = function(template) {
           actions.push(k);
         }
       }
-
       sendMsg(actions);
     } else if (msg.type === 'get_action') {
       if (msg.code in mapActions) {
@@ -870,8 +869,9 @@ var Template = function(template) {
         sendMsg(template.actions[msg.code].call(template));
       }
     } else if (msg.type === 'code') {
-      //TODO: error management
       sendMsg(eval(msg.code));
+    } else if (msg.type === 'change_slide') {
+      template.changeSlide && template.changeSlide(msg.slide);
     }
   }, false);
 

@@ -46,6 +46,8 @@ wget -O vendor/d3.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master
 wget -O vendor/codemirror-markdown.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/codemirror-markdown.js
 wget -O vendor/jszip.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jszip.js
 wget -O vendor/jszip-utils.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jszip-utils.js
+wget -O vendor/ZeroClipboard.min.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/ZeroClipboard.min.js
+wget -O vendor/ZeroClipboard.swf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/ZeroClipboard.swf
 
 mkdir -p vendor/codemirror
 wget -O vendor/codemirror/codemirror.css https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/codemirror/codemirror.css
