@@ -91,14 +91,29 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue();
+
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
         share_dialog(gist.html_url);
       });
+
+      var client = new ZeroClipboard(document.getElementById("copy-button"), {
+        moviePath: "../vendor/ZeroClipboard.swf"
+      });
+
+      client.on("load", function(client) {
+        client.on('datarequested', function(client) {
+          var input = document.getElementById('shareInput');
+
+          client.setText(input.value);
+        });
+
+        client.on("complete", function(client, args) {
+          this.textContent = "Copied!";
+        });
+      });
     });
-
-
 
     divHeader.append('p')
       .attr('id', 'show_slide')

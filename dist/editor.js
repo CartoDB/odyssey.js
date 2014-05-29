@@ -92,14 +92,29 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
       var md = el.select('textarea').node().codemirror.getValue();
+
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
         share_dialog(gist.html_url);
       });
+
+      var client = new ZeroClipboard(document.getElementById("copy-button"), {
+        moviePath: "../vendor/ZeroClipboard.swf"
+      });
+
+      client.on("load", function(client) {
+        client.on('datarequested', function(client) {
+          var input = document.getElementById('shareInput');
+
+          client.setText(input.value);
+        });
+
+        client.on("complete", function(client, args) {
+          this.textContent = "Copied!";
+        });
+      });
     });
-
-
 
     divHeader.append('p')
       .attr('id', 'show_slide')
@@ -276,12 +291,13 @@ function dialog(context) {
       .attr('class', 'actionButton')
       .style({ position: 'absolute' })
       .html('add')
-      .on('click', function(d) {
+      .on('click', function(d, i) {
         d3.event.stopPropagation();
         var self = this;
         open(this, context.actions()).on('click', function(e) {
           context.getAction(e, function(action) {
             addAction(codemirror, d.line, action);
+            context.changeSlide(i);
           });
           close(self);
         });
@@ -462,6 +478,10 @@ function editor() {
     sendMsg({ type: 'get_action', code: _ }, done);
   }
 
+  function changeSlide(_) {
+    sendMsg({ type: 'change_slide', slide: _ });
+  }
+
   code_dialog.on('code.editor', function(code) {
     sendCode(code);
     context.code(code);
@@ -476,6 +496,7 @@ function editor() {
     return this;
   };
   context.getAction = getAction;
+  context.changeSlide = changeSlide;
 
 
   template.on('load', function() {
@@ -646,18 +667,30 @@ function share_dialog(url) {
   function close() {
     s.style('display', 'none');
   }
-  // update url 
-  s.selectAll('input').attr('value', url);
+
+  var input = s.select('#shareInput');
+
+  // update url
+  input.attr('value', url);
+
+  // select input on click
+  input.on("click", function() {
+    this.select();
+  });
 
   // bind events for copy and close on ESP press
-  s.selectAll('a')
-    .on('click', close)
+  s.selectAll('#closeButton')
+    .on('click', function() {
+      d3.event.preventDefault();
+      close();
+    });
+
+  d3.select("body")
     .on("keydown", function() {
-      if (d3.event.e.which === 27) {
+      if (d3.event.which === 27) {
         close();
       }
-    })
-
+    });
 }
 
 module.exports = share_dialog

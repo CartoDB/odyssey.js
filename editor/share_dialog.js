@@ -8,18 +8,30 @@ function share_dialog(url) {
   function close() {
     s.style('display', 'none');
   }
-  // update url 
-  s.selectAll('input').attr('value', url);
+
+  var input = s.select('#shareInput');
+
+  // update url
+  input.attr('value', url);
+
+  // select input on click
+  input.on("click", function() {
+    this.select();
+  });
 
   // bind events for copy and close on ESP press
-  s.selectAll('a')
-    .on('click', close)
+  s.selectAll('#closeButton')
+    .on('click', function() {
+      d3.event.preventDefault();
+      close();
+    });
+
+  d3.select("body")
     .on("keydown", function() {
-      if (d3.event.e.which === 27) {
+      if (d3.event.which === 27) {
         close();
       }
-    })
-
+    });
 }
 
 module.exports = share_dialog

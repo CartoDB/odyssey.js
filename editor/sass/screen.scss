@@ -67,11 +67,23 @@ body{
   }
 
   .splash_inner, .inner-template {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
   }
   .inner-template { margin: 0 30px}
 
+  .closeButton {
+    position: absolute;
+    top: 11px; right: 11px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 
   h1 {
     font:  31px 'staticregular';
@@ -97,8 +109,10 @@ body{
       border-radius: 4px;
       @include transition(all .15s ease-in-out);
       text-decoration: none;
+      outline: none;
 
-      &:hover {
+      &:hover,
+      &.zeroclipboard-is-hover {
         background: #EC6258;
         color: #fff;
       }
@@ -124,6 +138,10 @@ body{
     }
   }
 
+}
+
+#copy-button {
+  width: 65px;
 }
 
 #editor_modal {
