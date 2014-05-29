@@ -9,7 +9,7 @@ css_assets:
 
 Odyssey.js is an open-source tool that allows you to combine maps, narratives, and other multimedia into a beautiful story. Creating new stories is simple, requiring nothing more than a modern web-browser and an idea. You enhance the narrative and multimedia of your stories using Actions (e.g. map movements, video and sound control, or the display or new content) that will let you tell your story in an exciting new way. Use our Templates to control the overall look and feel of your story in beautifully designed layouts.
 
-Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Soundcloud, and Twitter based Actions, if you can help let us know!
+Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Vimeo, Soundcloud, and Twitter based Actions, if you can help let us know!
 
 The library is open source and freely available to use in your projects. 
 
@@ -64,19 +64,40 @@ There are a few options for publishing your story. The first is to publish it di
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
 
-## Using the Editor
+## The Odyssey Editor
 
-The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates for you to use to prototype your stories.
+The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
-### Default Templates
+### Templates
 
-_todo_
+Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
 
-1. _Slides_
-2. _Scrolling_
-3. _Torque_
+#### Slide template
+
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
+
+#### Scrolling template
+
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
+
+#### Torque template
+
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
+
+#### Custom templates
+
+Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the section,
+
+**TODO**
+**Add link to correct section below when prepared**
 
 ## Publishing stories
 
