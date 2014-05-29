@@ -101,21 +101,27 @@ Experts can create and use custom Templates with Odyssey. If you are interested 
 
 ## Advanced use of the editor
 
+### Markdown syntax
+
+The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+
 ### Config block
 
-At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. These values must go in a code block defined as you can see on the right. Here is a list of all the configuration values that are available:
+The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage. 
+
+#### Available options
 
 ~~~md
 ```
-- title: This is my story title
-- author: Odyssey master
+- title: "This is my story title"
+- author: "Odyssey master"
 ```
 ~~~
 
-- title: _Title of your story_
-- author: _Name of the story author_
+- title: "_Title of your story_"
+- author: "_Name of the story author_"
 
-### The actions block
+### The Actions block
 
 You can attach map actions to section elements in your Markdown using the interface. Each time you add an h1 element (defined by a single #), it is translated into a section and an 'add' button appears right on the left. By clicking on that button, you can add different actions or just add them manually by including the same syntax.
 
@@ -135,10 +141,6 @@ In the example on the right, the user has created a new section header and added
 - center: _[lat,lon]_
 - zoom: _zoom level_
 - sleep: _miliseconds_
-
-### Markdown syntax
-
-The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
 ### HTML Templates
 
