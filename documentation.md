@@ -9,7 +9,7 @@ css_assets:
 
 Odyssey.js is an open-source tool that allows you to combine maps, narratives, and other multimedia into a beautiful story. Creating new stories is simple, requiring nothing more than a modern web-browser and an idea. You enhance the narrative and multimedia of your stories using Actions (e.g. map movements, video and sound control, or the display or new content) that will let you tell your story in an exciting new way. Use our Templates to control the overall look and feel of your story in beautifully designed layouts.
 
-Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Soundcloud, and Twitter based Actions, if you can help let us know!
+Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Vimeo, Soundcloud, and Twitter based Actions, if you can help let us know!
 
 The library is open source and freely available to use in your projects. 
 
@@ -64,53 +64,81 @@ There are a few options for publishing your story. The first is to publish it di
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
 
-## Using the Editor
+## The Odyssey Editor
 
-The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates for you to use to prototype your stories.
+The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
-### Default Templates
+### Templates
 
-_todo_
+Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
 
-1. _Slides_
-2. _Scrolling_
-3. _Torque_
+#### Slide template
 
-## Publishing stories
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
 
-### URL Sharing
+#### Scrolling template
 
-_todo_
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
 
-### Publishing on the internet
+#### Torque template
 
-_todo_
+**todo**
+_describe this template and how it controls the flow of your story_
+_provide a link to an example (created using only the editor)_
 
-### Downloading your stories
+#### Custom templates
 
-_todo_
+Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the section,
+
+**TODO**
+**Add link to correct section below when prepared**
 
 ## Advanced use of the editor
 
+### Markdown syntax
+
+The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+
 ### Config block
 
-At the top of your markdown document, you can include a configuration block. Depending on the template you use, this can add information to your story. These values must go in a code block defined as you can see on the right. Here is a list of all the configuration values that are available:
+The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage. 
+
+#### Available options
 
 ~~~md
 ```
-- title: This is my story title
-- author: Odyssey master
+- title: "This is my story title"
+- author: "Odyssey master"
 ```
 ~~~
 
-- title: _Title of your story_
-- author: _Name of the story author_
+- title: "_Title of your story_"
+- author: "_Name of the story author_"
 
-### The actions block
+### Chapters
 
-You can attach map actions to section elements in your Markdown using the interface. Each time you add an h1 element (defined by a single #), it is translated into a section and an 'add' button appears right on the left. By clicking on that button, you can add different actions or just add them manually by including the same syntax.
+Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the ```#```` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
+
+~~~md
+```
+# The escape
+
+But as the sun was rising from the 
+fair sea into the firmament...
+```
+~~~
+
+### The Actions block
+
+At the heart of Odyssey are **Actions**. For each chapter of your story, you can attribute one or many actions to unfold. Each time you add a new chapter, an **add** button appears in the editor on the left chapter's starting line. You can click the add button to create new actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
+
+You can also add actions manually once you get a hang of the syntax. The code shown here demonstrates what a chapter title and action block will look like in the editor.
 
 ~~~md
 # Title of the section
@@ -121,25 +149,17 @@ L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
 ```
 ~~~
 
-In the example on the right, the user has created a new section header and added the Odyssey action to move the map to a new center and zoom. Odyssey.js is built on [Leaflet](http://leafletjs.com/), so you can perform most actions possible in leaflet here just by adding new javascript code.
+See the Actions section for a complete list of available actions and their descriptions.
 
-#### List of prebuilt options
+**TODO**
+**Add an Actions section at the main level of Documentation**
 
-- center: _[lat,lon]_
-- zoom: _zoom level_
-- sleep: _miliseconds_
+## Actions
 
-### Markdown syntax
-
-The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
-
-### HTML Templates
-
-_todo_
-
-### Creating your own templates
-
-_todo_
+**TODO**
+**Add a list of all available actions**
+**Include an indication of which templates they are available in**
+**Link to Custom Actions section in the JavaScript section below**
 
 ## Using the Javascript libary
 
@@ -148,6 +168,18 @@ _todo intro_
 ~~~javascript
 //TODO: SIMPLE EXAMPLE
 ~~~
+
+## Custom templates
+
+**TODO**
+**Document the core pieces of a template.**
+**Describe the JS necessary to include a
+
+## Custom Actions
+
+**TODO**
+**Document the core pieces of a template.**
+**Describe the JS necessary to include a
 
 ### API documentation
 
