@@ -4,6 +4,8 @@ var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
 var exp = _dereq_('./gist');
 var share_dialog = _dereq_('./share_dialog');
+var debounce = _dereq_('./utils').debounce;
+
 
 function close(el) {
   var d = d3.select(document.body).selectAll('#actionDropdown').data([]);
@@ -118,7 +120,8 @@ function dialog(context) {
 
     divHeader.append('p')
       .attr('id', 'show_slide')
-      .text(templates[0])
+      //.text(templates[0])
+      .text('change template')
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
@@ -129,9 +132,10 @@ function dialog(context) {
         });
       });
 
+      /*
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });
+    });*/
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')
@@ -139,14 +143,11 @@ function dialog(context) {
         evt.code(this.value);
       });
 
-    function debounce(fn, t) {
-      var i;
-      return function() {
-        var args = arguments;
-        clearTimeout(i);
-        i = setTimeout(function() { fn.apply(window, arguments); }, t);
-      }
-    }
+    var sendCode = debounce(function(code) {
+      evt.code(code);
+    }, 100);
+
+
 
     textarea.each(function() {
       var codemirror = this.codemirror = CodeMirror.fromTextArea(this, {
@@ -162,7 +163,7 @@ function dialog(context) {
       this.codemirror.on('change', function(c) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
-          evt.code(c.getValue());
+          sendCode(c.getValue());
           placeActionButtons(el, codemirror);
         }
       });
@@ -328,7 +329,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":8,"./dropdown":2,"./gist":4,"./share_dialog":5}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":4,"./share_dialog":5,"./utils":7}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -371,15 +372,17 @@ var dialog = _dereq_('./dialog');
 var Splash = _dereq_('./splash');
 var saveAs = _dereq_('../vendor/FileSaver');
 var saveAs = _dereq_('../vendor/DOMParser');
+var utils = _dereq_('./utils');
+
 
 var TEMPLATE_LIST =  [{
-    title: 'slides',
-    description: 'the classic one, like using keynote',
-    default: '#slide1\nsome text\n\n#slide2\n more text'
+    title: 'Slides',
+    description: 'Display visualization chapters like slides in a presentation',
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
   }, {
-    title: 'scroll',
-    description: 'the classic one, like using keynote',
-    default: '#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    title: 'Scroll',
+    description: 'Create a visualization that changes as your reader moves through your narrative',
+    default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
 
@@ -402,11 +405,11 @@ function editor() {
     return TEMPLATE_LIST;
   };
 
-  context.save = function(_) {
+  context.save = utils.debounce(function(_) {
     if (this.code() && this.template()) {
       O.Template.Storage.save(this.code(), this.template());
     }
-  }
+  }, 100, context);
 
   context.template = function(_) {
     if (_) {
@@ -542,7 +545,7 @@ function editor() {
 
 module.exports = editor;
 
-},{"../vendor/DOMParser":7,"../vendor/FileSaver":8,"./dialog":1,"./splash":6}],4:[function(_dereq_,module,exports){
+},{"../vendor/DOMParser":8,"../vendor/FileSaver":9,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
 
 function processHTML(html, md, transform) {
   var parser = new DOMParser();
@@ -551,7 +554,7 @@ function processHTML(html, md, transform) {
   // transform
   transform && transform(doc)
 
-  md = md.replace(/\n/g, '\\n');
+  md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
   // insert oddyset markdown
   var script = doc.createElement('script');
   script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
@@ -581,7 +584,7 @@ function files(md, template, callback) {
             var src = js[i].getAttribute('src');
             if (src && src.indexOf('../dist/odyssey.js') === 0) {
               js[i].setAttribute("src", "js/odyssey.js");
-              return
+              return;
             }
           }
        }),
@@ -713,7 +716,7 @@ function Splash(context) {
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
     inner_content.append('h1').text('Select your template')
-    inner_content.append('p').text('templates allow you to change the layout of the styory')
+    inner_content.append('p').text('Templates give you different ways to unfold you story')
     var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
 
 
@@ -761,6 +764,21 @@ function Splash(context) {
 module.exports = Splash
 
 },{}],7:[function(_dereq_,module,exports){
+
+function debounce(fn, t, ctx) {
+  var i;
+  return function() {
+    var args = arguments;
+    clearTimeout(i);
+    i = setTimeout(function() { fn.apply(ctx || window, args); }, t);
+  }
+}
+
+module.exports = {
+  debounce: debounce
+}
+
+},{}],8:[function(_dereq_,module,exports){
 /*
  * DOMParser HTML extension
  * 2012-09-04
@@ -808,7 +826,7 @@ module.exports = Splash
   };
 }(DOMParser));
 
-},{}],8:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../vendor/leaflet.css" />
+  <style>
+    body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Georgia;
+      background: #EEE;
+    }
+    h2 {
+      font-weight: normal;
+    }
+    #slides{
+      position: absolute; 
+      top: 0; left: 0;
+    }
+    #map {
+      position: absolute; 
+      top: 0; left: 0;
+      width:100%;
+      height: 100%;
+    }
+    #content {
+      padding: 0 40px;
+      height: 1500px;
+    }
+    
+  </style>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100%"></div>
+    </div>
+    <div id="slides">
+      <div class="slide">
+        <h1 id="spain"> Spain </h1>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+    <div class="slide">
+      <h1 id="brazil"> Brazil </h1>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+    <div class="slide">
+      <h1 id="usa"> USA</h1>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="../../vendor/leaflet.js"></script>
+  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+  var map = L.map('map').setView([0, 0.0], 4);
+    L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+
+
+  var spain = new L.LatLng(40.9218144123785, -3.69140625);
+  var brazil = new L.LatLng(-9.871451997300536, -52.5585937);
+  var usa = new L.LatLng(38.487994609214795,  -98.96484375);
+
+  var O = Odyssey;
+
+  var seq = O.Triggers.Sequential();
+
+  // enanle keys to move
+  O.Triggers.Keys().left().then(seq.next, seq)
+  O.Triggers.Keys().right().then(seq.next, seq)
+
+  var slides = O.Actions.Slides('slides');
+  var story = Odyssey.Story()
+    .addState(
+      seq.step(0),
+      O.Parallel(
+        map.actions.panTo(spain),
+        slides.activate(0)
+      )
+    )
+    .addState(
+      seq.step(1),
+      O.Parallel(
+        map.actions.panTo(brazil),
+        slides.activate(1)
+      )
+    )
+    .addState(
+      seq.step(2),
+      O.Parallel(
+        map.actions.panTo(usa),
+        slides.activate(2)
+      )
+    )
+
+  story.go(0);
+  </script>
+</body>
+</html>
+

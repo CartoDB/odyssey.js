@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+
+  <style>
+    body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Georgia;
+      background: #EEE;
+    }
+    h2 {
+      font-weight: normal;
+    }
+    #layout {
+      width: 768px;
+      margin: 0px auto;
+      padding-top: 70px;
+      background: #FFF;
+      height: 2000px;
+    }
+    #map_pos {
+      height: 400px;
+    }
+    .attachTop {
+      position: fixed;
+      width: 768px;
+      top: 0; 
+    }
+    #content {
+      padding: 0 40px;
+      height: 1500px;
+      text-align:left;
+    }
+    #content h1{
+      text-align: center;
+      margin-top: 50px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="layout">
+    <h1>This is a nice story</h1>
+    <h2>really really really really nice</h2>
+    <div id="map_pos">
+      <div id="map_container">
+        <div id="map" style="width: 100%; height: 400px"></div>
+      </div>
+    </div>
+    <div id="content">
+      <h1 id="spain"> Spain </h1>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+      <h1 id="brazil"> Brazil </h1>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+      <h1 id="usa"> USA</h1>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+  </div> <!-- layout -->
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+  var map = L.map('map').setView([0, 0.0], 4);
+
+  L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+
+
+  var spain = new L.LatLng(40.9218144123785, -3.69140625);
+  var brazil = new L.LatLng(-9.871451997300536, -52.5585937);
+  var usa = new L.LatLng(38.487994609214795,  -98.96484375);
+
+
+  // trigger when  map_pos go out of the screen
+  var edge = O.Edge(
+    O.Scroll().less('map_pos').offset(0),
+    O.Scroll().greater('map_pos').offset(0)
+  )
+
+  var TRIGGER_LINE = 400 + 50;
+
+  var story = O.Story()
+    .addEvent(
+      edge,
+      O.CSS($('#map_container')).toggleClass('attachTop')
+    )
+    .addState(
+      O.Scroll().within('spain').offset(TRIGGER_LINE),
+      map.actions.panTo(spain)
+    )
+    .addState(
+      O.Scroll().within('brazil').offset(TRIGGER_LINE), 
+      map.actions.panTo(brazil)
+    )
+    .addState(
+      O.Scroll().within('usa').offset(TRIGGER_LINE),
+      map.actions.panTo(usa)
+    )
+
+  story.go(0);
+  </script>
+</body>
+</html>
+

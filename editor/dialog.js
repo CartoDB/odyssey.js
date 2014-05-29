@@ -119,7 +119,8 @@ function dialog(context) {
 
     divHeader.append('p')
       .attr('id', 'show_slide')
-      .text(templates[0])
+      //.text(templates[0])
+      .text('change template')
       .on('click', function(d) {
         d3.event.stopPropagation();
         var self = this;
@@ -130,9 +131,10 @@ function dialog(context) {
         });
       });
 
+      /*
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });
+    });*/
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')

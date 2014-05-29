@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+
+  <style>
+    html,body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Georgia;
+      background: #EEE;
+      height: 100%;
+    }
+    #map { width: 100%; height: 100%; }
+    #ytapiplayer {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 500px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+ <div id="map"> </div>
+
+ <div id="ytapiplayer"></div>
+ <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+ <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+ <script src="../dist/odyssey.js" charset="UTF-8"></script>
+
+
+  <script>
+
+  var icon = L.icon({ iconUrl: 'icons/circle-24.png' })
+  var start = [33.3390583333, -103.787756667]
+  var parachute = [33.346835, -103.779868333]
+  var landing = [33.3564666667, -103.786706667]
+
+  // create a map
+  var map = L.map('map').setView(start, 13);
+  L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.3);
+
+  // load youtube video
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+  // start the story when the video is ready
+  function onPlayerReady(event) {
+
+    var video = O.Video(player);
+    // create a story 
+    var story = O.Story()
+    story
+    .addState(video.between(0, 24), 
+      O.Parallel(
+        map.actions.panTo(start),
+        L.marker(start, { icon: icon }).actions.addRemove(map)
+      )
+    )
+    .addState(video.between(24, 61), O.Debug().log("falling"))
+    .addState(video.between(61, 70), 
+      O.Parallel(
+        map.actions.panTo(parachute),
+        L.marker(parachute, { icon: icon }).actions.addRemove(map)
+      )
+    )
+    .addState(video.between(71, 74), O.Debug().log("parachute"))
+    .addState(video.between(74, 84),
+      O.Parallel(
+        map.actions.panTo(landing),
+        L.marker(landing, { icon: icon }).actions.addRemove(map)
+      )
+    )
+
+    story.go(0);
+  }
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('ytapiplayer', {
+      height: '390',
+      width: '640',
+      videoId: '2RR-tzGOyi0',
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+                                                  
+
+  </script>
+</body>
+</html>
+

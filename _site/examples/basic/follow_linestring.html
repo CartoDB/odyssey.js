@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Follow the vertices of GeoJSON linestrings</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+
+  <style>
+    html,body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Georgia;
+      background: #EEE;
+      height: 100%;
+    }
+    #map { width: 100%; height: 100%; }    
+  </style>
+</head>
+<body>
+ <div id="map"> </div>
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+
+  var defaultIcon = L.icon({
+      iconUrl: '../icons/circle-stroked-24.png'
+  });
+
+  // create a map
+  var map = new L.Map('map', {
+    zoomControl: false,
+    center: [40.731711,-73.940105],
+    zoom: 17
+  });
+
+  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.jpg', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.9);
+
+  // create a sequential trigger
+  var seq = O.Sequential();
+
+  // init a story 
+  var story = O.Story();
+
+  function main(){
+    $.getJSON('data/linestring.geojson', function(data) {
+
+      // Optional to add the linestring to the map
+      L.geoJson(data, {
+          style: function (feature) {
+              return {color: "#ff0000"};
+          }
+        }).addTo(map);
+
+      // parse each vertice of the linestring and create 
+      // an action for it
+      for (var i = 0; i < data.features[0].geometry.coordinates.length; ++i) {
+        var stop = data.features[0].geometry.coordinates[i];
+        var pos = [stop[1], stop[0]];
+
+        // add the action to our story
+        story.addState(
+          seq.step(i), 
+          map.actions.panTo(pos, {animate: true, duration: 5})
+        );
+      }
+
+      // Start the story, go to step(0)
+      story.go(0);
+
+      // Finally, let's add a trigger to autoadvance the trip
+      // along our linestring
+      setInterval(function() {
+          seq.next()
+      }, 200);
+    });
+  }
+  window.onload = main;
+
+                       
+
+  </script>
+</body>
+</html>
+

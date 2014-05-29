@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+
+  <style>
+    html,body {
+      text-align: center;
+      margin: 0; padding: 0;
+      font-family: Georgia;
+      background: #EEE;
+      height: 100%;
+    }
+    #map { width: 100%; height: 100%; }
+
+    .odyssey-popup-lateral 
+    .leaflet-popup-content-wrapper {
+      background: none;
+      box-shadow:none;
+      text-align: left;
+      border-top: 3px solid #000;
+      border-radius: 0;
+    }
+    .odyssey-popup-lateral 
+    .leaflet-popup-tip-container {
+      display:none;
+    }
+
+    .odyssey-popup-lateral 
+    .leaflet-popup-content {
+      margin: 0;
+    }
+
+    
+  </style>
+</head>
+<body>
+ <div id="map"> </div>
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+  <script>
+
+
+  var defaultIcon = L.icon({
+      iconUrl: 'icons/circle-stroked-24.png'
+  });
+
+  // create a map
+  var map = L.map('map').setView([0, 0.0], 15);
+  L.tileLayer('http://tile.stamen.com/terrain-lines/{z}/{x}/{y}.png', { attribution: 'data OSM - map stamen' }).addTo(map).setOpacity(0.3);
+
+  // create a sequential trigger
+  var seq = O.Sequential();
+
+  // when press left mode to next
+  O.Keys().left().then(seq.prev, seq)
+  O.Keys().right().then(seq.next, seq)
+
+  // create a story 
+  var story = O.Story()
+
+  // fetch data from a geojson file
+  $.getJSON('my_places.geojson', function(data) {
+    var disabledStyle = {
+        color: '#F00',
+        fillColor:   "#F00",
+        radius:      4,
+        weight:      0,
+        fillOpacity: 0.5
+    }
+    var enabledStyle = {
+        color: '#F00',
+        fillColor:   "#F00",
+        radius:      8,
+        weight:      0,
+        fillOpacity: 0.8
+    }
+
+    var positions = []
+    // load stops
+    for (var i = 0; i < data.features.length; ++i) {
+      var stop = data.features[i];
+      var pos = [stop.geometry.coordinates[1], stop.geometry.coordinates[0]]
+      positions.push(pos);
+
+      // execute the actions one after another
+      var action = O.Step(
+          // move the map to the position
+          map.actions.panTo(pos),
+          // toggle style for the marker
+          L.circleMarker(pos, disabledStyle)
+            .addTo(map)
+            .actions.toggleStyle(disabledStyle, enabledStyle),
+          O.Sleep(500),
+          new L.DirectionalPopup({
+            closeButton: false,
+            className: 'odyssey-popup-lateral',
+            offset:[30, 0],
+            position: 'right'
+          })
+          .setLatLng(pos)
+          .setContent("<h1>" + stop.properties.description + "</h1><p>more text</p>")
+          .actions.openClose(map)
+
+      );
+      story.addState(seq.step(i), action)
+    }
+
+    // add a polyline to give context
+    L.polyline (positions, {
+          color:        "#F00",
+          weight:       2,
+          opacity:      0.5,
+          smoothFactor: 1,
+          clickable:    false
+    }).addTo (map);
+
+    story.go(0);
+  });
+                                                  
+
+  </script>
+</body>
+</html>
+
