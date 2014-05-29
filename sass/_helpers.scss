@@ -97,6 +97,7 @@ $small-width: 320px;
   border: 1px solid #fff;
   font-size: 14px;
   color: #fff;
+  font-family: "Proxima Nova Sb";
   text-align: center;
   text-decoration: none;
   @include border-radius(3px);
@@ -109,7 +110,7 @@ $small-width: 320px;
   }
 
   &.button-primary {
-    height: 39px;
+    height: 36px;
     width: 112px;
     border: 0;
     background: rgba(#fff, .9);
@@ -199,4 +200,8 @@ $small-width: 320px;
   .hide-mobile {
     display: inline-block;
   }
+}
+
+.margin-top-s{
+  margin-top: 16px; 
 }
