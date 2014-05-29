@@ -159,29 +159,30 @@ See the Actions section for a complete list of available actions and their descr
 **TODO**
 **Add a list of all available actions**
 **Include an indication of which templates they are available in**
-**Link to Custom Actions section in the JavaScript section below**
 
-## Using the Javascript libary
+#### Map Actions
 
-_todo intro_
+_Move to_ - **todo**
 
-~~~javascript
-//TODO: SIMPLE EXAMPLE
-~~~
+_Zoom to_ - **todo**
 
-## Custom templates
+#### Control Actions
 
-**TODO**
-**Document the core pieces of a template.**
-**Describe the JS necessary to include a
+_Sleep_ - **todo**
 
-## Custom Actions
+#### Data Actions
 
-**TODO**
-**Document the core pieces of a template.**
-**Describe the JS necessary to include a
+_Show marker_ - **todo**
 
-### API documentation
+#### Torque Actions
+
+_Play_ - **todo**
+
+_Pause_ - **todo**
+
+_Insert time_ - **todo**
+
+## Javascript API
 
 #### Story object
 
@@ -227,9 +228,35 @@ _todo_
 
 _todo_
 
-## Odyssey.js development
+## Contributing code
 
-### Using the editor locally
+#### Improving documentation
+
+Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
+
+You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file ```docs/doc.md```.
+
+#### Developing the Editor
+
+First, change into the editor and start compass.
+
+~~~sh
+editor/
+compass watch
+~~~
+
+Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
+
+#### Submitting improvements
+
+Send a pull request to the original Odyssey.js repository!
+
+
+## Developers 
+
+_todo intro_
+
+### Run locally
 
 **Step 1: Checkout the code**
 
@@ -254,30 +281,33 @@ python -m SimpleHTTPServer
 
 Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
-### Contributing code
+### Custom templates
 
-#### Improving documentation
+Authoring new templates can be useful if you want to deploy new stories with a custom look and feel or if you have a new story type you want to contribute back to the Odyssey project for others to use. 
 
-Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
+**TODO**
+_describe the rest of how to author a template_
 
-You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file ```docs/doc.md```.
+**Adding to Odyssey**
 
-#### Developing the Editor
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section below. **TODO, make link to Contributing live**
 
-First, change into the editor and start compass.
+### Custom Actions
 
-~~~sh
-editor/
-compass watch
-~~~
+**Action format**
 
-Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
+_TODO_
+_actions are written in this format... yada yada_
 
-#### Submitting improvements
+**Using locally**
 
-Send a pull request to the original Odyssey.js repository!
+_you can test your new actions locally by rebuilding the libarary_
+_todo_
+_steps for compile_
 
+**Adding to Odyssey**
 
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section below. **TODO, make link to Contributing live**
 
 
 ## Old content
