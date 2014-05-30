@@ -184,6 +184,16 @@ _Show marker_ - **todo**
 
 _Show infowindow_ - **todo** (ask @javisantana when this will be ready)
 
+#### Video actions
+
+**todo** ask @javisantana when this will be ready. 
+
+#### Audio actions
+
+**todo** _html5audio_
+
+**pending** _soundcloud_
+
 #### Torque Actions
 
 _Play_ - **todo**
