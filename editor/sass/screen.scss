@@ -102,9 +102,10 @@ body{
   .template_list {
     .button-template {
       display: inline-block;
+      margin-top: 2px;
       border: 2px solid #EC6258;
       padding: 8px 16px;
-      font: normal 17px 'staticregular';
+      font: normal 17px/23px 'staticregular';
       color: #EC6258;
       border-radius: 4px;
       @include transition(all .15s ease-in-out);
@@ -418,8 +419,9 @@ a.expandButton{
 }
 
 .shareInput {
-  width: 360px;
-  margin-right: 10px;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
   border: 1px solid #ddd;
   padding: 5px;
   outline: none;
@@ -430,5 +432,56 @@ a.expandButton{
 
   &:focus {
     border: 1px solid #ccc;
+  }
+}
+
+.input_field {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 360px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.mode_menu {
+  position: absolute;
+  top: 4px; right: -10px;
+  width: 120px;
+  background: #fff;
+
+  li {
+    &.first a {
+      @include border-right-radius(3px);
+    }
+
+    &.last a {
+      @include border-left-radius(3px);
+    }
+
+    &.selected a,
+    a:hover {
+      background: #FF7373;
+      color: #fff;
+    }
+
+    &.selected a:hover {
+      background: darken(#FF7373, 5%);
+    }
+  }
+
+  a {
+    display: block;
+    float: right;
+    width: 55px;
+    margin-left: 1px;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 39px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #eee;
+    color: #FF7373;
+    @include transition(all .15s ease-in-out);
   }
 }
