@@ -665,7 +665,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  .download-link.button { width: 37px; }
+  .button.download-link { width: 37px; }
 
   .tips {
     margin-top: 60px;
@@ -746,7 +746,7 @@ body {
     font-size: 14px;
   }
 
-  .header-inner, .navbar-inner {  
+  .header-inner, .navbar-inner {
     height: 70px;
   }
   .inner-l {
