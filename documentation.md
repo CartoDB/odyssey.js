@@ -156,11 +156,11 @@ See the Actions section for a complete list of available actions and their descr
 **TODO**
 **Add an Actions section at the main level of Documentation**
 
-## Images
+### Images
 
 **TODO** explain how to add images in the markdown
 
-## Links
+### Links
 
 **TODO** how to add links to your Markdown text
 
