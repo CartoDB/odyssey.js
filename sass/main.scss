@@ -53,10 +53,15 @@ body {
   color: #fff;
 }
 
+.active .offcanvas-collapse-inner {
+  z-index: 2;
+}
+
 .offcanvas-collapse-inner {
   position: fixed;
   top: 47px; left: 20px;
   width: 200px;
+  z-index: -1;
 }
 
 .offcanvas-menu {
@@ -534,7 +539,7 @@ body {
 
 .section-title {
   @extend %h-title;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 22px;
 }
 
@@ -600,7 +605,7 @@ body {
 
 .tip-r {
   position: absolute;
-  top: 54px; right: -225px;
+  top: 116px; right: -225px;
   width: 200px;
   text-align: left;
 

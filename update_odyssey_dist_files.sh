@@ -17,6 +17,8 @@ wget -O editor/img/greyBarBkg.png https://raw.githubusercontent.com/CartoDB/odys
 wget -O editor/img/helpButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/helpButtonIcon.png
 wget -O editor/img/navBtns.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/navBtns.png
 wget -O editor/img/expandToogleButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/expandToogleButtonIcon.png
+wget -O editor/img/EditButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/EditButtonIcon.png
+
 
 mkdir -p editor/fonts
 wget -O editor/fonts/static-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.ttf
