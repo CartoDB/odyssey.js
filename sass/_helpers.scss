@@ -182,9 +182,7 @@ $small-width: 320px;
 }
 
 @media (max-width: 640px) {
-  .button.download-link {
-    width: auto;
-  }
+  .button.download-link { width: 37px; }
 
   .show-mobile {
     display: inline-block;

@@ -129,9 +129,9 @@ var Docs = {
       .closest('li')
       .addClass('selected');
 
-      if (direction === "up") {
-        $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
-      }
+      // if (direction === "up") {
+      //   $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
+      // }
 
       if (!$active.length) { $active.end('h2'); }
 

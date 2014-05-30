@@ -61,19 +61,21 @@ em { font-style: italic; }
     display: inline-block;
     font: bold 14px 'Helvetica Neu', Helvetica, Arial;
     margin-right: 40px;
+    margin-left: 0;
     text-transform: uppercase;
   }
+
   > li a {
     color: #eee;
     text-decoration: none;
     display: block;
-    padding: 7px 0;
-    -webkit-transition: color .5s;
-    transition: color .5s;
+    padding: 14px;
+    -webkit-transition: color .15s ease-in-out;
+    transition: color .15s ease-in-out;
     text-transform: uppercase;
   }
   > li a:hover { color: #fff; }
-  .selected a { 
+  .selected a {
     border-bottom:1px solid #FF7373;
 
 
@@ -103,11 +105,16 @@ em { font-style: italic; }
 
 // content
 
+#content {
+  background: #f8f8f8;
+}
+
 .inner {
+  background: #fff;
   display: block;
-  padding: 40px 0;
-  position: absolute;
-  margin-left: 265px;
+  padding: 40px 30px;
+  position: relative;
+  margin-left: 225px;
   color: #333;
 
   .content {
@@ -115,31 +122,38 @@ em { font-style: italic; }
   }
 
   .sticky & {
-    margin-left: 265px;
+    margin-left: 225px;
   }
 
-  &:after {
-    content:"";
-    width: 45%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: #F8F8F8;
-    border-left: 1px solid #EEEEEE;
-  }
-
-  > div {
-    > div {
-      @extend %clearfix;
-      position: relative;
-      z-index: 1;
-    }
-  }
+  // &:after {
+  //   content:"";
+  //   width: 45%;
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   background: #F8F8F8;
+  //   border-left: 1px solid #EEEEEE;
+  // }
 
   pre, code {
     overflow: auto;
     font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+    margin-bottom: 38px;
+    padding: 20px;
+    background-color: #F8F8F8;
+    border: 1px solid #DDD;
+    @include border-radius(3px);
+  }
+
+  code {
+    padding: 2px;
+  }
+
+  pre > code {
+    border: none;
+    padding: 0;
+    background: transparent;
   }
 
   code {
@@ -150,7 +164,7 @@ em { font-style: italic; }
     @include border-radius(3px);
     overflow: auto;
     font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
-    padding: 4px; 
+    padding: 4px;
   }
 
   pre > code {
@@ -175,7 +189,7 @@ em { font-style: italic; }
       }
     }
     h3, h4 {
-      margin: 30px 0 22px 0; 
+      margin: 30px 0 22px 0;
       font: 18px/30px 'staticregular';
       text-transform: uppercase;
       color: #333;
@@ -185,13 +199,13 @@ em { font-style: italic; }
     a { color: #FF7373; text-decoration: none; &:hover{text-decoration:underline;}}
     p {
       font: 16px/28px 'Helvetica Neu', Helvetica, Arial;
-      margin-bottom: 15px; 
+      margin-bottom: 15px;
       color: #555;
       + h2 { margin-top: 60px; }
     }
-    ol, ul { 
+    ol, ul {
       font: 16px/28px 'Helvetica Neu', Helvetica, Arial;
-      margin-bottom: 15px; 
+      margin-bottom: 15px;
       color: #555;
       + h2 { margin-top: 60px; }
     }
@@ -210,7 +224,7 @@ em { font-style: italic; }
     {
       float: left;
       display: inline;
-      width: 50%;
+      // width: 50%;
       clear:left;
     }
 }
@@ -244,9 +258,9 @@ em { font-style: italic; }
 pre {
   position: relative;
   z-index: 1;
-  float:right;
-  width: 41%;
-  margin-right: 2%;
+  clear: both;
+  width: 100%;
+  margin-bottom: 32px;
 }
 
   .code-info {
@@ -280,8 +294,8 @@ pre {
     width: 33.3%;
     text-align: center;
     font: 14px 'Proxima Nova Rg';
-    -webkit-transition: background .5s;
-    transition: background .5s;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
   }
   li:hover {
     background: #ddd;
@@ -303,8 +317,9 @@ pre {
 // navigation
 
 .nav {
-  position: relative;
-  top: 0;
+  background: #fff;
+  position: absolute;
+  top: 91px;
   float: left;
   display: inline;
   width: 225px;
@@ -314,6 +329,7 @@ pre {
 
 .sticky .nav {
   position: fixed;
+  top: 0;
 }
 
 .nav-inner {
@@ -321,7 +337,7 @@ pre {
   position: relative;
   height: 100%;
   outline: none;
-  .item { 
+  .item {
     margin-bottom: 35px;
   }
   .fixed {
@@ -342,8 +358,8 @@ pre {
       display: block;
       line-height: 1.5;
       color: #878787;
-      -webkit-transition: color .5s;
-      transition: color .5s;
+      -webkit-transition: color .15s ease-in-out;
+      transition: color .15s ease-in-out;
       &.selected {
         font-weight: 200;
         color: #222;
@@ -427,7 +443,6 @@ pre {
 
 @media (max-width: $max-width) {
   .nav-menu > li {
-    margin-left: 0;
   }
   .nav-menu > li a {
     padding: 14px;
@@ -438,29 +453,7 @@ pre {
   .code-txt { background: #f5f5f5; }
 
   .inner {
-    margin: 0 20px 0 265px;
-
     &:after { visibility: hidden; }
-
-    pre, code {
-      margin-bottom: 38px;
-      padding: 20px;
-      background-color: #F8F8F8;
-      border: 1px solid #DDD;
-      @include border-radius(3px);
-      overflow: auto;
-      font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
-    }
-
-    code {
-      padding: 2px;
-    }
-
-    pre > code {
-      border: none;
-      padding: 0;
-      background: transparent;
-    }
 
     > div {
       > p,
@@ -478,13 +471,6 @@ pre {
   }
 
   .code-info { float: none; display: block; width: 100%; }
-
-  pre {
-    clear: both;
-    float: none;
-    width: 100%;
-    margin-bottom: 32px;
-  }
 }
 
 .jspTrack,
@@ -512,6 +498,12 @@ pre {
   .hdr input[type="text"] { width: 44px; }
 }
 
+@media (min-width: 640px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
 @media (min-width: $medium-width) {
   .nav-collapse {
     display: block!important;
@@ -519,11 +511,37 @@ pre {
     padding-bottom: 0;
     overflow: visible!important;
   }
+
+  .hide-mobile {
+    display: inline-block;
+  }
+}
+
+@media (min-width: $max-width) {
+  .inner {
+    border-right: 1px solid #EEE;
+    max-width: 861px;
+  }
 }
 
 @media (max-width: $medium-width) {
+  .button.download-link { width: 37px; }
+
+  .show-mobile {
+    display: inline-block;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+
+  #content {
+    background: #fff;
+  }
+
   .inner {
     margin: 0 20px;
+    padding: 40px 0;
 
     .sticky & {
       margin: 0 20px;
@@ -557,21 +575,29 @@ pre {
   }
 
   .nav-search { display: none; }
-
-  .nav-collapse {
-    overflow: hidden;
-    height: 1px;
-  }
-
-  .nav-menu {
-    margin: 30px 0 0;
-
-    li {
-      display: block;
-    }
-  }
 }
 
 .line-numbers {
   display: none;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    position: relative;
+  }
+
+  .nav-header {
+    @extend %clearfix;
+    height: 51px;
+  }
+
+  .nav-menu {
+    margin: 30px 0 0;
+  }
+
+  .inner-r {
+    top: auto;
+    bottom: 0;
+  }
+
 }
