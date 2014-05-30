@@ -19,6 +19,8 @@ The library is open source and freely available to use in your projects.
 
 ## Quick start
 
+**TODO** Create a quickstart video. Very simple, starting at editor and creating a story and publishing as a gist. Narrate and make it short (4 minutes) and possible to watch on its own.
+
 #### Create a new Story
 
 On the [homepage](../), click the button to create a new story or go [here](../editor/editor.html)
@@ -211,7 +213,6 @@ Will attach each story state to the Odyssey story object.
 ~~~javascript
 var story = O.Story();
 ~~~
-
 
 #### Sequence object
 
