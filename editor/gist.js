@@ -86,12 +86,11 @@ function Gist(md, template, callback) {
       .header("Content-Type", "application/json")
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/'
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
         console.log(gist);
         callback({
-          gist_url: gist.url,
-          html_url: BLOCKS + 'raw/' + gist.id,
-          url: BLOCKS + gist.id
+          url: gist.url,
+          html_url: BLOCKS + gist.id,
         });
       });
   });

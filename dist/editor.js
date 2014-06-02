@@ -98,7 +98,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
-        share_dialog(gist.gist_url, gist.html_url, gist.url);
+        share_dialog(gist.url, gist.html_url);
       });
 
       var client = new ZeroClipboard(document.getElementById("copy-button"), {
@@ -633,12 +633,11 @@ function Gist(md, template, callback) {
       .header("Content-Type", "application/json")
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/'
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
         console.log(gist);
         callback({
-          gist_url: gist.url,
-          html_url: BLOCKS + 'raw/' + gist.id,
-          url: BLOCKS + gist.id
+          url: gist.url,
+          html_url: BLOCKS + gist.id,
         });
       });
   });
@@ -652,7 +651,7 @@ module.exports = {
 
 },{}],5:[function(_dereq_,module,exports){
 
-function share_dialog(gist_url, html_url, url) {
+function share_dialog(url, html_url) {
   var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
 
   // show the dialog
@@ -683,8 +682,6 @@ function share_dialog(gist_url, html_url, url) {
       var type = d3.select(this).attr("data-embed");
 
       if (type === 'url') {
-        input.attr('value', url);
-      } else if (type === 'embed_url') {
         input.attr('value', html_url);
       } else if (type === 'iframe') {
         input.attr('value', share_iframe);

@@ -1,5 +1,5 @@
 
-function share_dialog(gist_url, html_url, url) {
+function share_dialog(url, html_url) {
   var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
 
   // show the dialog
@@ -30,8 +30,6 @@ function share_dialog(gist_url, html_url, url) {
       var type = d3.select(this).attr("data-embed");
 
       if (type === 'url') {
-        input.attr('value', url);
-      } else if (type === 'embed_url') {
         input.attr('value', html_url);
       } else if (type === 'iframe') {
         input.attr('value', share_iframe);
