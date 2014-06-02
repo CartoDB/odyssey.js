@@ -381,7 +381,7 @@ var TEMPLATE_LIST =  [{
   }, {
     title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
 

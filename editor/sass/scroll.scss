@@ -38,7 +38,6 @@ html { min-height: 100%; }
   #map_container{
       height: 250px;
   	&.attachTop {
-      height: 150px;
       position: fixed;
       width: 100%;
       top: 0;
@@ -55,7 +54,7 @@ html { min-height: 100%; }
   min-height: 1800px;
   img { max-width: 100%; margin: 20px 0; }
   &.attachMap {
-    margin-top: 150px;
+    margin-top: 250px;
   }
   > div {
     margin-top: 40px;
