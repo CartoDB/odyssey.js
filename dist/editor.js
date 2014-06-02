@@ -136,6 +136,9 @@ function dialog(context) {
       divHeader.select('#show_slide').text(t);
     });*/
 
+    var actions_bar = enter.append('div')
+      .attr('id', 'actions_bar');
+
     var textarea = enter.append('textarea')
       .attr('id', 'code')
       .on('keyup.editor', function() {
@@ -153,7 +156,8 @@ function dialog(context) {
         mode: "markdown",
         lineWrapping: true
       });
-      var showActions = debounce(function() { placeActionButtons(el, codemirror); }, 500);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      var showActions = debounce(function() { placeActionButtons(codemirror_wrap, codemirror); }, 500);
       var hideActions = debounce(function() { el.selectAll('.actionButton').remove(); }, 20);
       codemirror.on('scroll',  function() {
         showActions();
@@ -163,7 +167,8 @@ function dialog(context) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
           sendCode(c.getValue());
-          placeActionButtons(el, codemirror);
+          var codemirror_wrap = el.select('.CodeMirror-wrap');
+          placeActionButtons(codemirror_wrap, codemirror);
         }
       });
     });
@@ -181,7 +186,8 @@ function dialog(context) {
     // update
     codeEditor.each(function(d) {
       this.codemirror.setValue(d);
-      placeActionButtons(el, this.codemirror);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      placeActionButtons(codemirror_wrap, this.codemirror);
     });
 
     context.on('error.editor', function(errors) {
@@ -272,7 +278,7 @@ function dialog(context) {
     codemirror.eachLine(function(a) {
       if (SLIDE_REGEXP.exec(a.text)) {
          positions.push({
-           pos: codemirror.heightAtLine(lineNumber),
+           pos: codemirror.heightAtLine(lineNumber)-66, // header height
            line: lineNumber
          });
       }
