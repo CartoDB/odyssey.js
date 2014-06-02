@@ -56,6 +56,10 @@
     update: function(actions) {
       this.story.clear();
 
+      // update footer title and author
+      document.getElementById('title').innerHTML = actions.global.title;
+      document.getElementById('author').innerHTML = actions.global.author;
+
       var TRIGGER_LINE = this.map.getSize().y + 50;
       this.story.addEvent(
         this.edge,
