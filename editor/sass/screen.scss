@@ -154,6 +154,8 @@ body{
   width: 452px;
   text-align: left;
   box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+  min-height: 330px;
+
   &:before {
     content:"";
     position: absolute;
