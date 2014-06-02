@@ -121,23 +121,24 @@ function dialog(context) {
       });
     });
 
-    divHeader.append('p')
+    divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
-      .on('click', function(d) {
-        d3.event.stopPropagation();
-        var self = this;
-        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
-          evt.template(value);
-          close();
-          d3.select(self).text(value);
-        });
-      });
+      .attr('href', '/odyssey.js/editor/editor.html')
+      // .on('click', function(d) {
+      //   d3.event.stopPropagation();
+      //   var self = this;
+      //   open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
+      //     evt.template(value);
+      //     close();
+      //     d3.select(self).text(value);
+      //   });
+      // });
 
-      /*
+
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });*/
+    });
 
     var actions_bar = enter.append('div')
       .attr('id', 'actions_bar');
