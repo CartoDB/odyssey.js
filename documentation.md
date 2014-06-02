@@ -38,7 +38,7 @@ Change the top level data in the editor. Change the _title_ and the _author_. Yo
 
 #### Add story content
 
-Stories are broken down into _chapters_. Each chapter begins with a _title_ and then can contain a mix of headlines, text and other Markdown elements (images, links, etc.). Here is an example of one chapter,
+Stories are broken down into _chapters_. Each chapter begins with a _title_ and then can contain a mix of headlines, text and other Markdown elements (images, links, etc.). Here is an example of one chapter:
 
 ~~~md
 ```
@@ -96,7 +96,7 @@ _provide a link to an example (created using only the editor)_
 
 #### Custom templates
 
-Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the section,
+Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the following section: **link**
 
 **TODO**
 **Add link to correct section below when prepared**
@@ -121,7 +121,7 @@ The config block is a control element at the top of your story's Markdown docume
 
 ### Markdown syntax
 
-The Markdown syntax used in the Odyssey Editor uses all the features documented int the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+The Markdown syntax used in the Odyssey Editor uses all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
 ### Chapters
 
@@ -138,7 +138,7 @@ fair sea into the firmament...
 
 ### The Actions block
 
-At the heart of Odyssey are **Actions**. For each chapter of your story, you can attribute one or many actions to unfold. Each time you add a new chapter, an **add** button appears in the editor on the left chapter's starting line. You can click the add button to create new actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
+At the heart of Odyssey are **Actions**. For each chapter of your story, you can add one or many actions to unfold when the reader arrives. Each time you add a new chapter, an **add** button appears in the editor to the left of the chapter's starting line. You can click the add button to create new Actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
 
 You can also add actions manually once you get a hang of the syntax. The code shown here demonstrates what a chapter title and action block will look like in the editor.
 
@@ -311,7 +311,7 @@ _describe the rest of how to author a template_
 
 **Adding to Odyssey**
 
-If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section below. **TODO, make link to Contributing live**
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above for how to contribute. **TODO, make link to Contributing live**
 
 ### Custom Actions
 
@@ -328,7 +328,7 @@ _steps for compile_
 
 **Adding to Odyssey**
 
-If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section below. **TODO, make link to Contributing live**
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above. **TODO, make link to Contributing live**
 
 
 ## Old content
