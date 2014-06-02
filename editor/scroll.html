@@ -79,12 +79,17 @@
       }
       $('#content').html(content);
 
+      // first slide is the header, skip it
       for(var i = 1; i < actions.length; ++i) {
         var slide = actions[i];
         this.story.addState(
           O.Triggers.Scroll().within('s_' + i).offset(TRIGGER_LINE),
           slide(this)
         )
+      }
+
+      if(window.scrollY === 0) {
+        this.story.go(0);
       }
     }
 
