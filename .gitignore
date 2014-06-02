@@ -1,13 +1,11 @@
 .idea
 .swp
 .swo
-.saas-cache
+*/.sass-cache/
+.sass-cache/
 node_modules
 design
 .ruby-version
 .DS_Store
-.sass-cache/
-.sass-cache/
 _site/
-
-*.scssc
+_config.yml
