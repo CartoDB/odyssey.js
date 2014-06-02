@@ -158,7 +158,22 @@ See the Actions section for a complete list of available actions and their descr
 
 ### Images
 
-**TODO** explain how to add images in the markdown
+Adding images in Markdown is simple, and you have a few options. The first is the following:
+~~~md
+![Alt text](/path/to/img.jpg)
+~~~
+Here, the "Alt text" will appear when you hover, and the image path or URL is specified in the parentheses. 
+
+If you want to use a defined image reference, you can also do that. The markdown would look like:
+~~~md
+![Alt text][id]
+~~~
+Here, the Alt text is the same as above, but the ```[id]``` is the name of a defined image reference which you have named elsewhere. It would look something like:
+~~~
+[id]: url/to/image  "Optional title attribute"
+~~~
+
+Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size.
 
 ### Links
 
