@@ -64,8 +64,7 @@ function dialog(context) {
 
     var help = divOptions.append('ul').attr('class', 'h-left');
 
-    help.append('li').append('a').attr('class', 'helpButton').attr('xlink:href', function() { return '/'}).on('click', function(){
-    });
+    help.append('li').append('a').attr('class', 'helpButton').attr('href', '/odyssey.js/documentation');
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
