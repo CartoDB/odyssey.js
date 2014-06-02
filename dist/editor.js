@@ -122,7 +122,7 @@ function dialog(context) {
       });
     });
 
-    divHeader.append('p')
+    divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
       .attr('href', '/odyssey.js/editor/editor.html')
@@ -136,10 +136,10 @@ function dialog(context) {
       //   });
       // });
 
-      /*
+
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });*/
+    });
 
     var actions_bar = enter.append('div')
       .attr('id', 'actions_bar');
