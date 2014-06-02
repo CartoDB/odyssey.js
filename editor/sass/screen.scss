@@ -251,8 +251,8 @@ body{
 
   textarea, .CodeMirror {
     position: absolute;
-    top: 80px;
-    bottom: 70px;
+    top: 66px;
+    bottom: 53px;
     left: 0;
     right: 0;
     height: auto;
@@ -260,7 +260,7 @@ body{
     background: transparent;
     font-family: monospace;
     font-size: 14px;
-    padding: 0 20px 0 72px;
+    padding: 20px 20px 20px 72px;
     overflow-x: hidden;
   }
   .CodeMirror:after {
