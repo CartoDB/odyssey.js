@@ -177,7 +177,21 @@ Finally, you can also use simple HTML <img> tags if you wish to edit attributes 
 
 ### Links
 
-**TODO** how to add links to your Markdown text
+In Markdown, there are two ways to add links. Both are similar to how you add images, which we described above. The simplest way is to add links inline. Your markdown would look like:
+~~~md
+This is [an example](http://example.com/ "Title") inline link.
+~~~
+Here, the text in brackets would be the active link. The URL is placed within parentheses and can also be a relative path to a local resource. The Title is entirely optional, and can be left out.
+
+You can also use a reference-style link, which would look like:
+~~~md
+This is [an example][id] reference-style link.
+~~~
+Here, the first text in parentheses would be the link, and the second text is a label refering to the label you have defined elsewhere in your document. The definition of your label (i.e. assigning it a URL to visit) would look like:
+~~~
+[id]: http://example.com/  "Optional Title Here"
+~~~
+
 
 ## Actions
 
