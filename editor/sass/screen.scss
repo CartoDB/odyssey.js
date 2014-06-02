@@ -447,7 +447,7 @@ a.expandButton{
 .mode_menu {
   position: absolute;
   top: 4px; right: -10px;
-  width: 120px;
+  width: 170px;
   background: #fff;
 
   li {
@@ -461,12 +461,12 @@ a.expandButton{
 
     &.selected a,
     a:hover {
-      background: #FF7373;
+      background: #EC6258;
       color: #fff;
     }
 
     &.selected a:hover {
-      background: darken(#FF7373, 5%);
+      background: darken(#EC6258, 5%);
     }
   }
 

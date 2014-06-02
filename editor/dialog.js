@@ -97,7 +97,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
-        share_dialog(gist.url, gist.html_url);
+        share_dialog(gist.gist_url, gist.html_url, gist.url);
       });
 
       var client = new ZeroClipboard(document.getElementById("copy-button"), {

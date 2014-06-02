@@ -98,7 +98,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
-        share_dialog(gist.html_url);
+        share_dialog(gist.gist_url, gist.html_url, gist.url);
       });
 
       var client = new ZeroClipboard(document.getElementById("copy-button"), {
@@ -633,11 +633,12 @@ function Gist(md, template, callback) {
       .header("Content-Type", "application/json")
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
+        var BLOCKS = 'http://bl.ocks.org/anonymous/'
         console.log(gist);
         callback({
-          url: gist.url,
-          html_url: BLOCKS + gist.id
+          gist_url: gist.url,
+          html_url: BLOCKS + 'raw/' + gist.id,
+          url: BLOCKS + gist.id
         });
       });
   });
@@ -651,8 +652,8 @@ module.exports = {
 
 },{}],5:[function(_dereq_,module,exports){
 
-function share_dialog(url) {
-  //var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='http://piensaenpixel.cartodb.com/viz/7e3ff036-e26c-11e3-bbdb-0e10bcd91c2b/embed_map?title=true&description=true&search=false&shareable=true&cartodb_logo=true&layer_selector=false&legends=false&scrollwheel=true&fullscreen=true&sublayer_options=1&sql=' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
+function share_dialog(gist_url, html_url, url) {
+  var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
 
   // show the dialog
   var s = d3.select('#share_dialog').style('display', 'block');
@@ -664,12 +665,32 @@ function share_dialog(url) {
   var input = s.select('#shareInput');
 
   // update url
-  input.attr('value', url);
+  input.attr('value', share_iframe);
 
   // select input on click
   input.on("click", function() {
     this.select();
   });
+
+  // toggle iframe url
+  s.selectAll('#mode_menu a')
+    .on('click', function() {
+      d3.event.preventDefault();
+
+      s.selectAll('#mode_menu li').classed("selected", false);
+      d3.select(this.parentNode).classed("selected", true);
+
+      var type = d3.select(this).attr("data-embed");
+
+      if (type === 'url') {
+        input.attr('value', url);
+      } else if (type === 'embed_url') {
+        input.attr('value', html_url);
+      } else if (type === 'iframe') {
+        input.attr('value', share_iframe);
+      }
+    });
+
 
   // bind events for copy and close on ESP press
   s.selectAll('#closeButton')
