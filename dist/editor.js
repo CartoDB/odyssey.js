@@ -98,7 +98,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
-        share_dialog(gist.gist_url, gist.html_url, gist.url);
+        share_dialog(gist.url, gist.html_url);
       });
 
       var client = new ZeroClipboard(document.getElementById("copy-button"), {
@@ -136,6 +136,9 @@ function dialog(context) {
       divHeader.select('#show_slide').text(t);
     });*/
 
+    var actions_bar = enter.append('div')
+      .attr('id', 'actions_bar');
+
     var textarea = enter.append('textarea')
       .attr('id', 'code')
       .on('keyup.editor', function() {
@@ -153,7 +156,8 @@ function dialog(context) {
         mode: "markdown",
         lineWrapping: true
       });
-      var showActions = debounce(function() { placeActionButtons(el, codemirror); }, 500);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      var showActions = debounce(function() { placeActionButtons(codemirror_wrap, codemirror); }, 500);
       var hideActions = debounce(function() { el.selectAll('.actionButton').remove(); }, 20);
       codemirror.on('scroll',  function() {
         showActions();
@@ -163,7 +167,8 @@ function dialog(context) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
           sendCode(c.getValue());
-          placeActionButtons(el, codemirror);
+          var codemirror_wrap = el.select('.CodeMirror-wrap');
+          placeActionButtons(codemirror_wrap, codemirror);
         }
       });
     });
@@ -181,7 +186,8 @@ function dialog(context) {
     // update
     codeEditor.each(function(d) {
       this.codemirror.setValue(d);
-      placeActionButtons(el, this.codemirror);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      placeActionButtons(codemirror_wrap, this.codemirror);
     });
 
     context.on('error.editor', function(errors) {
@@ -272,7 +278,7 @@ function dialog(context) {
     codemirror.eachLine(function(a) {
       if (SLIDE_REGEXP.exec(a.text)) {
          positions.push({
-           pos: codemirror.heightAtLine(lineNumber),
+           pos: codemirror.heightAtLine(lineNumber)-66, // header height
            line: lineNumber
          });
       }
@@ -633,12 +639,11 @@ function Gist(md, template, callback) {
       .header("Content-Type", "application/json")
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/'
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/'
         console.log(gist);
         callback({
-          gist_url: gist.url,
-          html_url: BLOCKS + 'raw/' + gist.id,
-          url: BLOCKS + gist.id
+          url: gist.url,
+          html_url: BLOCKS + gist.id,
         });
       });
   });
@@ -652,7 +657,7 @@ module.exports = {
 
 },{}],5:[function(_dereq_,module,exports){
 
-function share_dialog(gist_url, html_url, url) {
+function share_dialog(url, html_url) {
   var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
 
   // show the dialog
@@ -683,8 +688,6 @@ function share_dialog(gist_url, html_url, url) {
       var type = d3.select(this).attr("data-embed");
 
       if (type === 'url') {
-        input.attr('value', url);
-      } else if (type === 'embed_url') {
         input.attr('value', html_url);
       } else if (type === 'iframe') {
         input.attr('value', share_iframe);
