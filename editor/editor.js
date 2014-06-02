@@ -5,8 +5,7 @@ function _t(s) { return s; }
 
 var dialog = require('./dialog');
 var Splash = require('./splash');
-var saveAs = require('../vendor/FileSaver');
-var saveAs = require('../vendor/DOMParser');
+var DOMParser = require('../vendor/DOMParser');
 var utils = require('./utils');
 
 

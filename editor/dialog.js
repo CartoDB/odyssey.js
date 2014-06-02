@@ -85,8 +85,13 @@ function dialog(context) {
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
         var md = el.select('textarea').node().codemirror.getValue();
-        exp.zip(md, context.template(), function(zipBlob) {
-          saveAs(zipBlob, 'oddysey.zip');
+        exp.zip(md, context.template(), function(zip) {
+          saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
+
+          // var link = document.createElement("a");
+          // link.download = 'odyssey.zip';
+          // link.href = "data:application/zip;base64," + zip.generate({type:"base64"});
+          // link.click();
         });
     });
 
