@@ -130,10 +130,10 @@ function dialog(context) {
         });
       });
 
-      /*
+
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });*/
+    });
 
     var actions_bar = enter.append('div')
       .attr('id', 'actions_bar');
