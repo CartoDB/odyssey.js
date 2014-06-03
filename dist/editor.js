@@ -2,6 +2,7 @@
 
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
+var Splash = _dereq_('./splash');
 var exp = _dereq_('./gist');
 var share_dialog = _dereq_('./share_dialog');
 var debounce = _dereq_('./utils').debounce;
@@ -125,15 +126,13 @@ function dialog(context) {
     divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
-      // .attr('href', '/odyssey.js/editor/editor.html')
+      .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
         d3.event.stopPropagation();
-        var self = this;
-        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
-          evt.template(value);
-          close();
-          d3.select(self).text(value);
-        });
+        d3.select(document.body).call(Splash(context).on('template', function(t) {
+          evt.template(t);
+        }));
+
       });
 
 
@@ -339,7 +338,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":4,"./share_dialog":5,"./utils":7}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":4,"./share_dialog":5,"./splash":6,"./utils":7}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -431,7 +430,11 @@ function editor() {
   }
 
   context.code = function(_) {
-    if (_) this._code = _;
+
+    if (_) {
+      this._code = _;
+      console.log("code", _);
+    }
     return this._code;
   }
 
@@ -522,12 +525,15 @@ function editor() {
     sendMsg({ type: 'actions' }, function(data) {
       context.actions(data);
     });
-    if (location.hash.length === 0) {
-      // when there is no code, show template selector splash
+
+    // when there is no code, show template selector splash
+    if (!context.code() && location.hash.length === 0) {
       d3.select(document.body).call(Splash(context).on('template', function(t) {
-        set_template(t);
+
         var template_data = context.templates(t);
         if (template_data) {
+          context.code(template_data.default);
+          set_template(t);
           sendCode(template_data.default);
           $editor.call(code_dialog.code(template_data.default));
         }
@@ -758,14 +764,13 @@ function Splash(context) {
           })
 
     template
-      .append('a').text('SELECT').attr('class', 'button-template')
-
-
-    template.on('click', function(d) {
-      evt.template(d.title);
-      _splash.close()
-    })
-
+      .append('a').text('SELECT').attr('class', 'button-template').on('click', function(d) {
+        d3.event.preventDefault();
+        // debugger;
+        console.log(evt.template(d.title))
+        evt.template(d.title);
+        _splash.close()
+      })
   }
 
   _splash.close = function() {
@@ -792,8 +797,18 @@ function debounce(fn, t, ctx) {
   }
 }
 
+function set_template(t) {
+  var html_url = t + ".html";
+  if (template.attr('src') !== html_url) {
+    template.attr('src', t + ".html");
+    context.template(t);
+    context.save();
+  }
+}
+
 module.exports = {
-  debounce: debounce
+  debounce: debounce,
+  set_template: set_template
 }
 
 },{}],8:[function(_dereq_,module,exports){

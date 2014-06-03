@@ -1,6 +1,7 @@
 
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
+var Splash = require('./splash');
 var exp = require('./gist');
 var share_dialog = require('./share_dialog');
 var debounce = require('./utils').debounce;
@@ -124,15 +125,13 @@ function dialog(context) {
     divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
-      // .attr('href', '/odyssey.js/editor/editor.html')
+      .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
         d3.event.stopPropagation();
-        var self = this;
-        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
-          evt.template(value);
-          close();
-          d3.select(self).text(value);
-        });
+        d3.select(document.body).call(Splash(context).on('template', function(t) {
+          evt.template(t);
+        }));
+
       });
 
 

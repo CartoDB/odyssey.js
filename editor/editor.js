@@ -56,7 +56,11 @@ function editor() {
   }
 
   context.code = function(_) {
-    if (_) this._code = _;
+
+    if (_) {
+      this._code = _;
+      console.log("code", _);
+    }
     return this._code;
   }
 
@@ -147,12 +151,15 @@ function editor() {
     sendMsg({ type: 'actions' }, function(data) {
       context.actions(data);
     });
-    if (location.hash.length === 0) {
-      // when there is no code, show template selector splash
+
+    // when there is no code, show template selector splash
+    if (!context.code() && location.hash.length === 0) {
       d3.select(document.body).call(Splash(context).on('template', function(t) {
-        set_template(t);
+
         var template_data = context.templates(t);
         if (template_data) {
+          context.code(template_data.default);
+          set_template(t);
           sendCode(template_data.default);
           $editor.call(code_dialog.code(template_data.default));
         }
