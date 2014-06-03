@@ -1313,7 +1313,7 @@ function Sequential() {
     if (n in triggers) {
       return triggers[n];
     }
-    var t = Trigger({ 
+    var t = Trigger({
       check: function() {
         if (n === current && this.trigger) this.trigger();
       },
@@ -1341,7 +1341,15 @@ function Sequential() {
     return seq;
   };
 
-  seq.current = function() {
+  seq.current = function(_) {
+    if (_) {
+      var c = Math.max(Math.min(max, _), 0);
+      if (c !== current) {
+        current = c;
+        update();
+      }
+      return this;
+    }
     return current;
   };
 

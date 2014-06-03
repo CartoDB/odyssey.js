@@ -49,6 +49,7 @@ body{
   background: #000;
   background: rgba(0, 0, 0, 0.9);
   text-align: center;
+  min-width: 800px;
   .share_template {
     background: #fff;
     padding: 40px;
@@ -111,6 +112,7 @@ body{
       @include transition(all .15s ease-in-out);
       text-decoration: none;
       outline: none;
+      cursor: pointer;
 
       &:hover,
       &.zeroclipboard-is-hover {
@@ -127,7 +129,6 @@ body{
       border-radius: 4px;
       display: inline-block;
       margin-left: 10px;
-      cursor: pointer;
       text-align: center;
 
 

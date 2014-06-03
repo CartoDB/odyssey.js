@@ -41,7 +41,6 @@ function Splash(context) {
     template
       .append('a').text('SELECT').attr('class', 'button-template').on('click', function(d) {
         d3.event.preventDefault();
-        // debugger;
         console.log(evt.template(d.title))
         evt.template(d.title);
         _splash.close()
