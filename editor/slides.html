@@ -103,9 +103,7 @@
     },
 
     changeSlide: function(n) {
-      if (this.seq.current() !== n) {
-        this.story.go(n);
-      }
+      this.seq.current(n);
     }
 
   });
