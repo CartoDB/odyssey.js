@@ -73,14 +73,19 @@ function dialog(context) {
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
 
       if (el.style('bottom') === 'auto') {
+        el.select('.CodeMirror').style('padding', '20px 20px 20px 72px');
+        el.style('bottom', 'auto').style('min-height', '330px');
         el.style('bottom', '80px').style('height', 'auto');
         el.selectAll('.actionButton').style("visibility", "visible");
         d3.select(this).classed('expandButton', false);
-
+        el.select('#actions_bar').classed('collapseActions', false);
       } else {
+        el.style('bottom', 'auto').style('min-height', '0');
         el.style('bottom', 'auto').style('height', '119px');
         d3.select(this).classed('expandButton', true);
         el.selectAll('.actionButton').style("visibility", "hidden");
+        el.select('#actions_bar').classed('collapseActions', true);
+        el.select('.CodeMirror').style('padding', '0');
       }
 
     });

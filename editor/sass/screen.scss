@@ -182,12 +182,14 @@ body{
   }
 
 	div.header {
+    position: relative;
     background: rgb(255, 115, 115);
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
 	  padding: 22px 20px 20px 16px;
     @include border-top-radius(4px);
+    z-index: 10;
 
     a.expandButton{
       background: transparent image-url("expandButtonIcon.png") no-repeat 0 0;
@@ -279,6 +281,13 @@ body{
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f2f2f2', endColorstr='#f2f2f2', GradientType=0 ); /* IE6-9 */
       z-index: 3;
       pointer-events: none;
+    }
+
+    &.collapseActions {
+      &:before,
+      &:after {
+        display: none;
+      }
     }
   }
 
