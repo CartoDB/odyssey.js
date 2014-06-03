@@ -20,8 +20,8 @@
     <div id="content">
     </div>
     <div id="credits">
-      <span class="title" id="title">MY PROJECT NAME</span>
-      <span class="author"><b id="author">By name using</b> <a href="#">odyssey.js</a><span>
+      <span class="title" id="title">Title</span>
+      <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
     </div>
   </div> <!-- layout -->
 
@@ -57,8 +57,12 @@
       this.story.clear();
 
       // update footer title and author
-      document.getElementById('title').innerHTML = actions.global.title;
-      document.getElementById('author').innerHTML = actions.global.author;
+      var title_ = actions.global.title === undefined ? '' : actions.global.title,
+          author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+      document.getElementById('title').innerHTML = title_;
+      document.getElementById('author').innerHTML = author_;
+      document.title = title_ + " | " + author_ +' Odyssey.js';
 
       var TRIGGER_LINE = this.map.getSize().y + 50;
       this.story.addEvent(
