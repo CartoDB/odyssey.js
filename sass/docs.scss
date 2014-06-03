@@ -112,7 +112,7 @@ em { font-style: italic; }
 .inner {
   background: #fff;
   display: block;
-  padding: 40px 30px;
+  padding: 40px;
   position: relative;
   margin-left: 225px;
   color: #333;
@@ -175,7 +175,7 @@ em { font-style: italic; }
 
     h2 {
       margin: 0 0 22px 0;
-      font: 22px/30px 'staticregular';
+      font: 26px/30px 'staticregular';
       color: #333;
       text-transform: uppercase;
       position: relative;
@@ -189,9 +189,9 @@ em { font-style: italic; }
       }
     }
     h3, h4 {
-      margin: 30px 0 22px 0;
-      font: 18px/30px 'staticregular';
-      text-transform: uppercase;
+      margin: 15px 0;
+      font: bold 18px/30px 'Helvetica Neu', Helvetica;
+      /* text-transform: uppercase; */
       color: #333;
     }
 
