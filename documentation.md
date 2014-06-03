@@ -11,7 +11,7 @@ Odyssey.js is an open-source tool that allows you to combine maps, narratives, a
 
 Experts can also add custom Templates and Actions by following our contribution guide. We are excited about adding YouTube, Vimeo, Soundcloud, and Twitter based Actions, if you can help let us know!
 
-The library is open source and freely available to use in your projects. 
+The library is open source and freely available to use in your projects.
 
 **Warning**
 
@@ -44,7 +44,7 @@ Stories are broken down into _chapters_. Each chapter begins with a _title_ and 
 ```
 # The beginning
 
-Tell me, O muse, of that ingenious 
+Tell me, O muse, of that ingenious
 hero who travelled far
 ```
 ~~~
@@ -105,7 +105,7 @@ Experts can create and use custom Templates with Odyssey. If you are interested 
 
 ### Config block
 
-The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage. 
+The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage.
 
 #### Available options
 
@@ -131,7 +131,7 @@ Chapters define each section of your story and allow you to perform new Actions 
 ```
 # The escape
 
-But as the sun was rising from the 
+But as the sun was rising from the
 fair sea into the firmament...
 ```
 ~~~
@@ -159,16 +159,21 @@ See the Actions section for a complete list of available actions and their descr
 ### Images
 
 Adding images in Markdown is simple, and you have a few options. The first is the following:
+
 ~~~md
 ![Alt text](/path/to/img.jpg)
 ~~~
-Here, the "Alt text" will appear when you hover, and the image path or URL is specified in the parentheses. 
+
+Here, the "Alt text" will appear when you hover, and the image path or URL is specified in the parentheses.
 
 If you want to use a defined image reference, you can also do that. The markdown would look like:
+
 ~~~md
 ![Alt text][id]
 ~~~
+
 Here, the Alt text is the same as above, but the ```[id]``` is the name of a defined image reference which you have named elsewhere. It would look something like:
+
 ~~~
 [id]: url/to/image  "Optional title attribute"
 ~~~
@@ -178,19 +183,24 @@ Finally, you can also use simple HTML <img> tags if you wish to edit attributes 
 ### Links
 
 In Markdown, there are two ways to add links. Both are similar to how you add images, which we described above. The simplest way is to add links inline. Your markdown would look like:
+
 ~~~md
 This is [an example](http://example.com/ "Title") inline link.
 ~~~
+
 Here, the text in brackets would be the active link. The URL is placed within parentheses and can also be a relative path to a local resource. The Title is entirely optional, and can be left out.
 
 You can also use a reference-style link, which would look like:
+
 ~~~md
 This is [an example][id] reference-style link.
 ~~~
-Here, the first text in parentheses would be the link, and the second text is a label refering to the label you have defined elsewhere in your document. The definition of your label (i.e. assigning it a URL to visit) would look like:
-~~~
-[id]: http://example.com/  "Optional Title Here"
 
+Here, the first text in parentheses would be the link, and the second text is a label refering to the label you have defined elsewhere in your document. The definition of your label (i.e. assigning it a URL to visit) would look like:
+
+~~~md
+[id]: http://example.com/  "Optional Title Here"
+~~~
 
 ## Actions
 
@@ -216,7 +226,7 @@ _Show infowindow_ - **todo** (ask @javisantana when this will be ready)
 
 #### Video actions
 
-**todo** ask @javisantana when this will be ready. 
+**todo** ask @javisantana when this will be ready.
 
 #### Audio actions
 
@@ -301,7 +311,7 @@ Next, start the server as above and go to [http://locahost:8000/editor/editor.ht
 Send a pull request to the original Odyssey.js repository!
 
 
-## Developers 
+## Developers
 
 _todo intro_
 
@@ -332,7 +342,7 @@ Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/
 
 ### Custom templates
 
-Authoring new templates can be useful if you want to deploy new stories with a custom look and feel or if you have a new story type you want to contribute back to the Odyssey project for others to use. 
+Authoring new templates can be useful if you want to deploy new stories with a custom look and feel or if you have a new story type you want to contribute back to the Odyssey project for others to use.
 
 **TODO**
 _describe the rest of how to author a template_
