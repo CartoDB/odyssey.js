@@ -54,12 +54,6 @@
         });
       }
 
-      _torque.setDuration = function(duration) {
-        layer.stop();
-        layer.setDuration(duration);
-        layer.play()
-      }
-
       return _torque;
     }
 
@@ -106,32 +100,30 @@
       update: function(actions) {
         var self = this;
 
+        this.torqueLayer && this.torqueLayer.remove();
+debugger;
         if (!this.torqueLayer) {
-          // cartodb.createLayer(this.map, actions.global.vizjson)
-          //   .done(function(layer) {
-          //     actions.global.duration && layer.setDuration(actions.global.duration);
-
-          //     self.map.addLayer(layer);
-
-          //     self.torqueLayer = layer;
-          //     self.torqueLayer.actions = torque(self.torqueLayer);
-          //   }).on('error', function(err) {
-          //     console.log("some error occurred: " + err);
-          //   });
-
           cartodb.createVis('map', actions.global.vizjson)
             .done(function(vis, layers) {
               self.map = vis.getNativeMap();
-              actions.global.duration && vis.getLayers()[1].setDuration(actions.global.duration);
 
-              self.torqueLayer = vis.getLayers()[1];
+              self.torqueLayer = layers[1];
               self.torqueLayer.actions = torque(self.torqueLayer);
+
+              actions.global.duration && self.torqueLayer.setDuration(actions.global.duration);
+            })
+            .error(function(err) {
+              console.log(err);
             });
 
           return;
         }
 
-        actions.global.duration && torque(this.torqueLayer).setDuration(actions.global.duration);
+        if (actions.global.duration) {
+          this.torqueLayer.stop();
+          this.torqueLayer.setDuration(actions.global.duration);
+          this.torqueLayer.play()
+        }
 
         this.story.clear();
 
