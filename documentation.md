@@ -243,6 +243,8 @@ Here, the first text in parentheses would be the link, and the second text is a 
 
 ### Install
 
+
+
 ### Quick start
 
 ### Story object
@@ -271,29 +273,278 @@ the trigger is updated.
 Move story to the desired state
 
   - `action_index`: base 0 index of state
-  - `options`: todo
+  - `options`: 
+    - reverse: boolean, default false. Set it to true to call ``reverse`` method in the trigger when
+      the state is set
 
 ~~~javascript
-Story().go(1, [TODO]);
+// this goes to the second state in the story
+Story().go(1);
 ~~~
 
+#### state()
 
-### Sequence object
+returns the current state number, 0 based index
 
-The `sequential` object contains the logic for moving forward and backward through the story states attached to your story` object.
+### O.Action
+
+function that converts a function or object into an action.
+
+```javascript
+var hideDivAction = O.Action(function() {
+    $('#element').hide()
+});
+
+// this hides #element when right key is pressed
+story.addAction(O.Keys().right(), hideDivAction)
+```
+
+More advanced actions can be created. For example, let's define one that shows an element when the story enters in
+the state and hides it when leaves it:
+
+```javascript
+var showHideAction = O.Action({
+    enter: function() {
+        $('#element').show()
+    },
+
+    exit: function() {
+        $('#element').hide()
+    }
+});
+
+story.addState(O.Keys().right(), showHideAction)
+```
+
+but the right way to define these actions would be:
+
+```javascript
+function ShowHideAction(el) {
+    return O.Action({
+        enter: function() {
+            el.show()
+        },
+
+        exit: function() {
+            el.hide()
+        }
+    });
+}
+
+story.addState(O.Keys().right(), ShowHideAction($('#element')))
+```
+
+### O.Trigger(obj)
+
+function that creates trigger that can raise actions
+
+the followint example creates a a trigger that is raised every 3 seconds:
+
+```javascript
+function IntervalTrigger() {
+    t = O.Trigger();
+    setInterval(funtion() {
+        t.trigger();
+    }, 3000)
+    return t;
+}
+
+// enter will be printed only once since when the story is in a 
+// state if the trigger is raised again it has no effect
+story.addState(IntervalTrigger(), O.Debug().log('enter')); 
+```
+
+#### Trigger.trigger([t])
+
+raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
+
+### O.Step(action1, action2, ...)
+
+executes actions serially, waits until the previous task is completed to start with the second and so on
 
 ~~~javascript
-var seq = O.Sequential();
+var step = O.Step(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+Story().addState(trigger, chain);
 ~~~
 
-### Keys object
+raises `finish` signal when all the tasks has been completed
+
+the following example shows how to include a Sleep between actions
+
+```javascript
+story
+    .addState(O.Keys().right(), O.Step(
+        O.Debug().log('rigth key pressed'),
+        O.Sleep(1000),
+        O.Debug().log('this is printed after 1 second')
+    ))
+```
+
+### O.Parallel(action1, action2, ...)
+
+executes actions in parallel
+
+~~~javascript
+var parallel = Parallel(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+O.Story().addState(trigger, parallel);
+~~~
+
+raises `finish` signal when all the tasks has been completed
+
+### O.Sequence
+
+The `sequential` object contains the logic for moving forward and backward through the story states attached to your story object.
+
+~~~javascript
+var seq = O.Sequence();
+O.Story()
+    .addState(seq.step(0), action1);
+    .addState(seq.step(1), action2);
+
+seq.next() // raises action1
+seq.next() // raises action2
+~~~
+#### Sequence.step(n)
+generates a trigger which is raised when the sequence moves to state ``n``
+
+#### Sequence.next
+goes to the nextstate
+
+#### Sequence.prev
+goes to the prev state
+
+#### Sequence.current([number])
+sets (triggers) or gets the current step
+
+### O.Keys
 
 The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
+
+~~~javascript
+O.Story()
+    .addState(O.Keys().left(), action1);
+    .addState(O.Keys().right(), action1);
+~~~
+
+it can be used to moved a ``O.Sequence``:
 
 ~~~javascript
 O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
 ~~~
+
+#### right()
+returns a trigger that is raised when user press right key
+
+#### left()
+returns a trigger that is raised when user press left key
+
+
+### O.Scroll
+manages page scroll
+
+~~~javascript
+// action will be called when the scroll is within the vertical scape of #myelement
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), action) 
+~~~
+
+#### within(element)
+returns a trigger which is raised when the scroll is within the vertical space of that element. 
+For example, if #div_element with style "position: absolute; top: 400px" the trigger will be raised
+when the scroll of the page is 400px
+
+Optionally an ``offset`` can be set:
+~~~javascript
+// in this case the trigger will be raised when the scroll of the page is at 200px
+O.Story()
+    .addState(O.Scroll().within($('#myelement').offset(200), action) 
+~~~
+
+``element`` can be a DOMElement or a jQuery object
+
+#### less(element)
+returns a trigger which is raised when the scroll is less than the element position in pixels
+``element`` can be a DOMElement or a jQuery object
+
+#### greater(element)
+returns a trigger which is raised when the scroll is greater than the element position in pixels
+``element`` can be a DOMElement or a jQuery object
+
+### O.Leaflet.Map
+contains actions to manage Leaflet Map object. This is included as a leaflet map pluggin, so can be
+used from ``actions`` attribute of ``L.Map``
+~~~javascript
+
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), map.actions.panTo([37.1, -92]);
+~~~
+
+#### panTo(latlng)
+see Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
+#### setView
+see Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
+#### setZoom
+see Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
+
+
+### O.Leaflet.Marker
+creates actions to manage leaflet markers. It can be used as a leaflet pluggin using ``actions`` attribute
+in ``L.Marker`` instance
+
+~~~javascript
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), L.marker([37.1, -92]).actions.addTo(map))
+~~~
+
+#### addTo(map)
+creates an action that adds the marker instance to the specified ``map``
+
+#### addRemove(map)
+creates an action that adds the marker instance to the specified ``map`` when the story enters in
+the action and removes when the story leaves it.
+
+### icon(iconEnabled, iconDisabled)
+creates an action that changes the icon of a marker
+~~~javascript
+var marker = L.marker([0, 0])
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), marker.actions.icon('enabled.png', 'disabled.png')
+~~~
+
+
+### O.Leaflet.Popup
+creates actions to manage [leaflet popups](http://leafletjs.com/reference.html#popup) (infowindows). It can be used as a leaflet pluggin using ``actions`` attribute
+
+~~~javascript
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+var popup = L.popup().setLatLng(latlng).setContent('<p>popup for action1</p>')
+
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), popup.actions.openOn(map));
+~~~
+
+#### openOn(map)
+returns an action that opens the popup in the specified ``map``
+see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation
+
 
 ### Basic functions
 
@@ -395,40 +646,4 @@ _steps for compile_
 If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above. **TODO, make link to Contributing live**
 
 
-## Old content
 
-#### Oddysey.Chain
-
-executes actions serially, waits until the previous task is completed to start with the second and so on
-
-~~~javascript
-var chain = Chain(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
-~~~
-
-raises `finish` signal when all the tasks has been completed
-
-#### Oddysey.Paralel
-
-executes actions in parallel
-
-~~~javascript
-var chain = Parallel(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
-~~~
-
-raises `finish` signal when all the tasks has been completed
-
-### Oddysey.Actions
-
-### Oddysey.Triggers
-
-### Custom actions
-
-### Custom triggers
