@@ -132,7 +132,7 @@ function dialog(context) {
       .text(templates[0])
       .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
-        d3.event.stopPropagation();
+        d3.event.preventDefault();
         d3.select(document.body).call(Splash(context).on('template', function(t) {
           evt.template(t);
         }));

@@ -133,7 +133,7 @@ function dialog(context) {
       .text(templates[0])
       .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
-        d3.event.stopPropagation();
+        d3.event.preventDefault();
         d3.select(document.body).call(Splash(context).on('template', function(t) {
           evt.template(t);
         }));
@@ -399,7 +399,7 @@ var TEMPLATE_LIST =  [{
   }, {
     title: 'torque',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '```\n-title: "Title"\n-author: "Name"\n-vizjson: "http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json"\n-duration: "512"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n-vizjson: "http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json"\n-duration: 30\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
   }
 ];
 

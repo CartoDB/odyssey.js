@@ -98,7 +98,7 @@
         var slides = O.Actions.Slides('slides');
         var story = O.Story()
 
-        this.map = map;
+        // this.map = map;
         this.story = story;
         this.slides = slides;
       },
@@ -107,22 +107,31 @@
         var self = this;
 
         if (!this.torqueLayer) {
-          cartodb.createLayer(this.map, actions.global.vizjson)
-            .done(function(layer) {
-              actions.global.duration && layer.setDuration(actions.global.duration);
+          // cartodb.createLayer(this.map, actions.global.vizjson)
+          //   .done(function(layer) {
+          //     actions.global.duration && layer.setDuration(actions.global.duration);
 
-              self.map.addLayer(layer);
+          //     self.map.addLayer(layer);
 
-              self.torqueLayer = layer;
+          //     self.torqueLayer = layer;
+          //     self.torqueLayer.actions = torque(self.torqueLayer);
+          //   }).on('error', function(err) {
+          //     console.log("some error occurred: " + err);
+          //   });
+
+          cartodb.createVis('map', actions.global.vizjson)
+            .done(function(vis, layers) {
+              self.map = vis.getNativeMap();
+              actions.global.duration && vis.getLayers()[1].setDuration(actions.global.duration);
+
+              self.torqueLayer = vis.getLayers()[1];
               self.torqueLayer.actions = torque(self.torqueLayer);
-            }).on('error', function(err) {
-              console.log("some error occurred: " + err);
             });
 
           return;
         }
 
-        actions.global.duration && torque(self.torqueLayer).setDuration(actions.global.duration);
+        actions.global.duration && torque(this.torqueLayer).setDuration(actions.global.duration);
 
         this.story.clear();
 
