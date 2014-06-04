@@ -151,7 +151,41 @@ L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
 ```
 ~~~
 
-See the Actions section for a complete list of available actions and their descriptions.
+See the list below for a complete list of available actions and their descriptions.
+
+#### Map Actions
+
+_Move to_ - **todo**
+
+_Zoom to_ - **todo**
+
+#### Control Actions
+
+_Sleep_ - **todo**
+
+#### Data Actions
+
+_Show marker_ - **todo**
+
+_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
+
+#### Video actions
+
+**todo** ask @javisantana when this will be ready.
+
+#### Audio actions
+
+**todo** _html5audio_
+
+**pending** _soundcloud_
+
+#### Torque Actions
+
+_Play_ - **todo**
+
+_Pause_ - **todo**
+
+_Insert time_ - **todo**
 
 **TODO**
 **Add an Actions section at the main level of Documentation**
@@ -202,57 +236,46 @@ Here, the first text in parentheses would be the link, and the second text is a 
 [id]: http://example.com/  "Optional Title Here"
 ~~~
 
-## Actions
-
-**TODO**
-**Add a list of all available actions**
-**Include an indication of which templates they are available in**
-
-#### Map Actions
-
-_Move to_ - **todo**
-
-_Zoom to_ - **todo**
-
-#### Control Actions
-
-_Sleep_ - **todo**
-
-#### Data Actions
-
-_Show marker_ - **todo**
-
-_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
-
-#### Video actions
-
-**todo** ask @javisantana when this will be ready.
-
-#### Audio actions
-
-**todo** _html5audio_
-
-**pending** _soundcloud_
-
-#### Torque Actions
-
-_Play_ - **todo**
-
-_Pause_ - **todo**
-
-_Insert time_ - **todo**
-
 ## Javascript API
 
-#### Story object
+### Install
 
-Will attach each story state to the Odyssey story object.
+### Quick start
+
+### Story object
+
+Will attach each story state to the Odyssey story object. Controls the state of the story managing the states. Each story contains states and triggers control which state is the active one.
 
 ~~~javascript
 var story = O.Story();
 ~~~
 
-#### Sequence object
+#### addState(trigger, action)
+
+Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is only called when the story enters in this state.
+
+~~~javascript
+Story().addState(trigger, action);
+~~~
+
+#### addLinearState(trigger, action)
+
+Does the same than `addState` but in this case `update` method in the `action` is called every time
+the trigger is updated.
+
+#### go(action_index,[ options])
+
+Move story to the desired state
+
+  - `action_index`: base 0 index of state
+  - `options`: todo
+
+~~~javascript
+Story().go(1, [TODO]);
+~~~
+
+
+### Sequence object
 
 The `sequential` object contains the logic for moving forward and backward through the story states attached to your story` object.
 
@@ -260,7 +283,7 @@ The `sequential` object contains the logic for moving forward and backward throu
 var seq = O.Sequential();
 ~~~
 
-#### Keys object
+### Keys object
 
 The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
 
@@ -275,11 +298,11 @@ _todo_
 
 ### Advanced functions
 
-#### YouTube
+### YouTube
 
 _todo_
 
-#### Torque
+### Torque
 
 _todo_
 
@@ -289,13 +312,13 @@ _todo_
 
 ## Contributing code
 
-#### Improving documentation
+### Improving documentation
 
 Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file ```docs/doc.md```.
 
-#### Developing the Editor
+### Developing the Editor
 
 First, change into the editor and start compass.
 
@@ -370,30 +393,6 @@ If you are particularly happy with your template and think it could be useful fo
 
 
 ## Old content
-
-### Oddysey.Story
-
-controls the state of the story managing the states. Each story contains states and triggers control
-which state is the active one.
-
-#### Oddysey.Story.addState(trigger, action)
-Adds a new state to the story. `action` will be called when `trigger` is triggered. `action`
-`enter` method is only called when the story enters in this state.
-
-~~~javascript
-Story().addState(trigger, action);
-~~~
-
-#### Oddysey.Story.addLinearState(trigger, action)
-Does the same than `addState` but in this case `update` method in the `action` is called every time
-the trigger is updated
-
-#### Oddysey.Story.go(action_index[, options])
-
-Move story to desired state
-  * `action_index`: base 0 index of state
-  * `options`: todo
-
 
 #### Oddysey.Chain
 
