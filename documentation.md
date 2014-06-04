@@ -21,9 +21,9 @@ The library is open source and freely available to use in your projects.
 
 **TODO** Create a quickstart video. Very simple, starting at editor and creating a story and publishing as a gist. Narrate and make it short (4 minutes) and possible to watch on its own.
 
-#### Create a new Story
+### Create a new Story
 
-On the [homepage](../), click the button to create a new story or go [here](../editor/editor.html)
+If you want to start using the on-line editor, go to the [homepage](../), click the button to create a new story or just go [here](../editor/editor.html).
 
 #### Name your project
 
@@ -49,20 +49,20 @@ hero who travelled far
 ```
 ~~~
 
-#### Publish your story
+### Publish your story
 
 There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
 
 **TODO**
 **Include annotated image of the publish options**
 
-#### Embed it on your site
+### Embed it on your site
 
 **TODO**
 **Include iframe link on the gist publish dialog**
 **After that, add this section plus screenshots**
 
-#### Save and return to your story
+### Save and return to your story
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
 
@@ -72,29 +72,32 @@ The Odyssey Editor allows you to link map changes and movements to different ele
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
-### Templates
+### Hosted Templates
 
 Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
 
 #### Slide template
 
+The slide template acts like a keynote presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the next/prev buttons or by pressing the cursor keys. This is perfect for stories that have not too much text and where the map is the principal element of them.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
 #### Scrolling template
 
+The scrolling template is based on your page scroll. The story moves on as you scroll around the page. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
 #### Torque template
 
+Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. Perfect for annotating animated stories.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
-#### Custom templates
+### Custom templates
 
 Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the following section: **link**
 
@@ -329,7 +332,7 @@ compass watch
 
 Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
-#### Submitting improvements
+### Submitting improvements
 
 Send a pull request to the original Odyssey.js repository!
 
