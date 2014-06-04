@@ -99,10 +99,6 @@ em { font-style: italic; }
 }
 
 
-
-
-
-
 // content
 
 #content {
@@ -125,7 +121,6 @@ em { font-style: italic; }
     margin-left: 225px;
   }
 
-
   pre, code {
     overflow: auto;
     font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
@@ -147,7 +142,6 @@ em { font-style: italic; }
   }
 
   code {
-    /*color: #93A1A1;*/
     color: #666;
     background-color: #F8F8F8;
     border: 1px solid #DDD;
@@ -178,11 +172,13 @@ em { font-style: italic; }
         margin-bottom: 15px;
       }
     }
-    h3, h4 {
+    h3, h4{
       margin: 15px 0;
       font: bold 18px/30px 'Helvetica Neu', Helvetica;
-      /* text-transform: uppercase; */
       color: #333;
+    }
+    h4{
+      font: bold 15px/24px 'Helvetica Neu', Helvetica;
     }
 
     h1 { margin: 22px 0 22px 0; font: 32px/34px 'Proxima Nova Th'; }
@@ -219,32 +215,32 @@ em { font-style: italic; }
     }
 }
 
-  .inner-code {
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    padding: 32px 0 0 0;
-    clear:both;
-    position: relative;
-    z-index: 2;
-    margin-bottom: 32px;
-  }
+.inner-code {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 32px 0 0 0;
+  clear:both;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 32px;
+}
 
-  .inner table {
-    clear:left;
-    width: 50%;
-    float:left;
-    margin-bottom: 38px;
-    font: 18px/28px 'Proxima Nova Lt';
-  }
-  .inner table td {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 12px 12px 12px 0;
-  }
+.inner table {
+  clear:left;
+  width: 50%;
+  float:left;
+  margin-bottom: 38px;
+  font: 18px/28px 'Proxima Nova Lt';
+}
 
-
+.inner table td {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 12px 12px 12px 0;
+}
 
 
 // code
+
 pre {
   position: relative;
   z-index: 1;
@@ -253,19 +249,18 @@ pre {
   margin-bottom: 32px;
 }
 
-  .code-info {
-    float: left; display: inline; width: 50%
-    h2, p { width: 100%; }
-  }
-  .code-txt {
-    clear:both;
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 20px;
-    @include  border-radius(4px);
-  }
+.code-info {
+  float: left; display: inline; width: 50%
+  h2, p { width: 100%; }
+}
 
-
+.code-txt {
+  clear:both;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  @include  border-radius(4px);
+}
 
 
 // navigation
@@ -300,11 +295,6 @@ pre {
     li.active a { color: #000; }
     li:first-child { border: 0; margin: 0; }
 }
-
-
-
-
-// navigation
 
 .nav {
   background: #fff;
@@ -371,11 +361,12 @@ pre {
       &:hover { color: #000; }
     }
     > li ul > .indent {
-      padding-left: 12px;
+      font-size: 13px;
+      padding-left: 17px;
 
       .selected {
-        margin-left: -36px;
-        padding-left: 32px;
+        margin-left: -41px;
+        padding-left: 37px;
         font-weight: bold;
         color: #666;
       }
