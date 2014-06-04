@@ -8,16 +8,6 @@ function debounce(fn, t, ctx) {
   }
 }
 
-function set_template(t) {
-  var html_url = t + ".html";
-  if (template.attr('src') !== html_url) {
-    template.attr('src', t + ".html");
-    context.template(t);
-    context.save();
-  }
-}
-
 module.exports = {
-  debounce: debounce,
-  set_template: set_template
+  debounce: debounce
 }

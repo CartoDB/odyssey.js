@@ -475,7 +475,7 @@ function getElement(el) {
         return getElement($(el));
       }
     }
-  } 
+  }
   if (el instanceof NodeList || el instanceof HTMLCollection) {
     return el[0];
   } else if (el instanceof Element) {
@@ -955,7 +955,7 @@ function Slide(tree, actions, prop) {
   }
 
   /*
-   * there are special propertues like pos, marker and so 
+   * there are special propertues like pos, marker and so
    * on that should become actions
    */
   function propertiesToActions() {
