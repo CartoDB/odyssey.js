@@ -56,11 +56,13 @@ There are a few options for publishing your story. The first is to publish it di
 **TODO**
 **Include annotated image of the publish options**
 
-### Embed it on your site
+### Publish it on your site
 
-**TODO**
-**Include iframe link on the gist publish dialog**
-**After that, add this section plus screenshots**
+In the **Share** options for your story, you can select the third option, _IFRAME_.
+
+<img src="http://i.imgur.com/lj9DCQ9.gif" width="100%" />
+
+After you have selected iFrame, you can use this code to embed your story on your website or blog. 
 
 ### Save and return to your story
 
@@ -231,11 +233,15 @@ If you want to use a defined image reference, you can also do that. The markdown
 
 Here, the Alt text is the same as above, but the [id] is the name of a defined image reference which you have named elsewhere. It would look something like:
 
-~~~
+~~~md
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
-Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size.
+Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example:
+
+~~~md
+<img width="200px" src="http://imgur.com/69Gxjih.jpg" />
+~~~
 
 ### Links
 
@@ -272,11 +278,11 @@ Grab dist/odyssey.js and add it at the end of your `<body>` element in your html
 
 ### Quick start
 
-**TODO: DO THIS**
+**TODO**
 
 ### Story object
 
-Will attach each story state to the Odyssey story object. Controls the state of the story managing the states. Each story contains states and triggers control which state is the active one.
+The main object in Odyssey.js is the Story object. You can initialize a new story object as follows:
 
 ~~~javascript
 var story = O.Story();

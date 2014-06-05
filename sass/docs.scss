@@ -108,7 +108,7 @@ em { font-style: italic; }
 .inner {
   background: #fff;
   display: block;
-  padding: 40px;
+  padding: 40px 50px;
   position: relative;
   margin-left: 225px;
   color: #333;
@@ -129,6 +129,7 @@ em { font-style: italic; }
     background-color: #F8F8F8;
     border: 1px solid #DDD;
     @include border-radius(3px);
+    + h2 { margin-top: 60px; }
   }
 
   code {
@@ -139,6 +140,7 @@ em { font-style: italic; }
     border: none;
     padding: 0;
     background: transparent;
+
   }
 
   code {
