@@ -30,10 +30,10 @@ If you want to start using the on-line editor, go to the [homepage](../), click 
 Change the top level data in the editor. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
 
 ~~~md
-```
+
 - title: "10 years later..."
 - author: "Homer"
-```
+
 ~~~
 
 #### Add story content
@@ -41,12 +41,12 @@ Change the top level data in the editor. Change the _title_ and the _author_. Yo
 Stories are broken down into _chapters_. Each chapter begins with a _title_ and then can contain a mix of headlines, text and other Markdown elements (images, links, etc.). Here is an example of one chapter:
 
 ~~~md
-```
+
 # The beginning
 
 Tell me, O muse, of that ingenious
 hero who travelled far
-```
+
 ~~~
 
 ### Publish your story
@@ -113,10 +113,10 @@ The config block is a control element at the top of your story's Markdown docume
 #### Available options
 
 ~~~md
-```
+
 - title: "This is my story title"
 - author: "Odyssey master"
-```
+
 ~~~
 
 - title: "_Title of your story_"
@@ -128,15 +128,15 @@ The Markdown syntax used in the Odyssey Editor uses all the features documented 
 
 ### Chapters
 
-Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the ```#```` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
+Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the #` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
 
 ~~~md
-```
+
 # The escape
 
 But as the sun was rising from the
 fair sea into the firmament...
-```
+
 ~~~
 
 ### The Actions block
@@ -147,11 +147,11 @@ You can also add actions manually once you get a hang of the syntax. The code sh
 
 ~~~md
 # Title of the section
-```
+
 - center: [10.000, -10.000]
 - zoom: 6
 L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
-```
+
 ~~~
 
 See the list below for a complete list of available actions and their descriptions.
@@ -209,7 +209,7 @@ If you want to use a defined image reference, you can also do that. The markdown
 ![Alt text][id]
 ~~~
 
-Here, the Alt text is the same as above, but the ```[id]``` is the name of a defined image reference which you have named elsewhere. It would look something like:
+Here, the Alt text is the same as above, but the [id] is the name of a defined image reference which you have named elsewhere. It would look something like:
 
 ~~~
 [id]: url/to/image  "Optional title attribute"
@@ -243,6 +243,11 @@ Here, the first text in parentheses would be the link, and the second text is a 
 
 ### Install
 
+grab dist/odyssey.js and use it with
+
+~~~html
+<script src="odyssey.js"></script>
+~~~
 
 
 ### Quick start
@@ -290,19 +295,20 @@ returns the current state number, 0 based index
 
 function that converts a function or object into an action.
 
-```javascript
+~~~javascript
 var hideDivAction = O.Action(function() {
     $('#element').hide()
 });
 
 // this hides #element when right key is pressed
 story.addAction(O.Keys().right(), hideDivAction)
-```
+~~~
+
 
 More advanced actions can be created. For example, let's define one that shows an element when the story enters in
 the state and hides it when leaves it:
 
-```javascript
+~~~javascript
 var showHideAction = O.Action({
     enter: function() {
         $('#element').show()
@@ -312,13 +318,14 @@ var showHideAction = O.Action({
         $('#element').hide()
     }
 });
+~~~
 
 story.addState(O.Keys().right(), showHideAction)
-```
+
 
 but the right way to define these actions would be:
 
-```javascript
+~~~javascript
 function ShowHideAction(el) {
     return O.Action({
         enter: function() {
@@ -332,7 +339,8 @@ function ShowHideAction(el) {
 }
 
 story.addState(O.Keys().right(), ShowHideAction($('#element')))
-```
+~~~
+
 
 ### O.Trigger(obj)
 
@@ -340,7 +348,7 @@ function that creates trigger that can raise actions
 
 the followint example creates a a trigger that is raised every 3 seconds:
 
-```javascript
+~~~javascript
 function IntervalTrigger() {
     t = O.Trigger();
     setInterval(funtion() {
@@ -352,7 +360,8 @@ function IntervalTrigger() {
 // enter will be printed only once since when the story is in a 
 // state if the trigger is raised again it has no effect
 story.addState(IntervalTrigger(), O.Debug().log('enter')); 
-```
+~~~
+
 
 #### Trigger.trigger([t])
 
@@ -374,14 +383,15 @@ raises `finish` signal when all the tasks has been completed
 
 the following example shows how to include a Sleep between actions
 
-```javascript
+~~~javascript
 story
     .addState(O.Keys().right(), O.Step(
         O.Debug().log('rigth key pressed'),
         O.Sleep(1000),
         O.Debug().log('this is printed after 1 second')
     ))
-```
+~~~
+
 
 ### O.Parallel(action1, action2, ...)
 
@@ -410,6 +420,7 @@ O.Story()
 seq.next() // raises action1
 seq.next() // raises action2
 ~~~
+
 #### Sequence.step(n)
 generates a trigger which is raised when the sequence moves to state ``n``
 
@@ -461,6 +472,7 @@ For example, if #div_element with style "position: absolute; top: 400px" the tri
 when the scroll of the page is 400px
 
 Optionally an ``offset`` can be set:
+
 ~~~javascript
 // in this case the trigger will be raised when the scroll of the page is at 200px
 O.Story()
@@ -480,8 +492,8 @@ returns a trigger which is raised when the scroll is greater than the element po
 ### O.Leaflet.Map
 contains actions to manage Leaflet Map object. This is included as a leaflet map pluggin, so can be
 used from ``actions`` attribute of ``L.Map``
-~~~javascript
 
+~~~javascript
 var map = new L.Map('map', {
     center: [37, -91],
     zoom: 6
@@ -520,6 +532,7 @@ the action and removes when the story leaves it.
 
 ### icon(iconEnabled, iconDisabled)
 creates an action that changes the icon of a marker
+
 ~~~javascript
 var marker = L.marker([0, 0])
 O.Story()
@@ -544,6 +557,103 @@ O.Story()
 #### openOn(map)
 returns an action that opens the popup in the specified ``map``
 see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation
+
+### O.CSS
+
+actions related to css tasks. All the actions inside this module needs the elements to be jQuery.
+
+#### toggleClass
+
+~~~javascript
+O.Story()
+    .addState(trigger, CSS($('#element')).toggleClass('visible'));
+~~~
+
+### O.Debug
+actions for debugging pourposes
+
+#### log(text)
+prints current state plus the ``text``
+
+~~~javascript
+O.Story()
+    .addState(trigger, Debug().log('this is a test'));
+~~~
+
+### O.Location
+actions related to the ``window.location`` object
+
+#### changeHash
+
+changes the url hash
+
+~~~javascript
+O.Story()
+    .addState(trigger, Location.changeHash('/slide/1'));
+~~~
+
+### O.Sleep(ms)
+action that sleeps the execution for some time, it's useful when using ``O.Step``
+
+~~~javascript
+O.Story()
+    .addState(trigger, O.Step(
+        Debug().log('executed now')),
+        O.Sleep(1000),
+        Debug().log('executed 1 second later'))
+    ));
+~~~
+
+### O.Audio
+actions to control HTML5 audio element
+
+#### play
+
+~~~javascript
+O.Story()
+    .addState(trigger, O.Audio('#audio_el').play())
+~~~
+
+#### pause
+
+~~~javascript
+O.Story()
+    .addState(trigger, O.Audio('#audio_el').pause())
+~~~
+
+#### setCurrentTime(t)
+
+sets current play time
+
+~~~javascript
+O.Story()
+    .addState(trigger, O.Audio('#audio_el').setCurrentTime(1400))
+~~~
+
+### O.Slides
+
+Given an DOM element with children return actions to swtich between them.
+
+with the following html:
+
+~~~html
+<div id="slides">
+    <div class="slide">slide 1</div>
+    <div class="slide">slide 2</div>
+</div>
+~~~
+
+a story like this can be created:
+
+~~~javascript
+var slides = O.Slides($('#slides'));
+O.Story()
+    .addState(trigger1, slides.activate(0))
+    .addState(trigger2, slides.activate(1))
+~~~
+
+when ``trigger1`` is raised, the first slide will have the style ``display: block`` and the other ones
+``display: none``. It hides all when no action was raised.
 
 
 ### Basic functions
@@ -570,7 +680,7 @@ _todo_
 
 Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
 
-You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file ```docs/doc.md```.
+You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
 
 ### Developing the Editor
 
