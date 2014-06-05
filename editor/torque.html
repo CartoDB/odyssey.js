@@ -28,7 +28,7 @@
       function _torque() {}
 
       _torque.reach = function (slide) {
-        var i = (slide.get('step') || 0);
+        var i = slide.get('step');
 
         function formaterForRange(start, end) {
           start = start.getTime ? start.getTime(): start;
@@ -161,6 +161,8 @@
           document.getElementById('slides').innerHTML += tmpl;
 
           var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
+
+          if (!slide.get('step')) return;
 
           this.story.addState(
             torque(this.torqueLayer).reach(slide),
