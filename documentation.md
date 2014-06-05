@@ -56,11 +56,13 @@ There are a few options for publishing your story. The first is to publish it di
 **TODO**
 **Include annotated image of the publish options**
 
-### Embed it on your site
+### Publish it on your site
 
-**TODO**
-**Include iframe link on the gist publish dialog**
-**After that, add this section plus screenshots**
+In the **Share** options for your story, you can select the third option, _IFRAME_.
+
+<img src="http://i.imgur.com/lj9DCQ9.gif" width="100%" />
+
+After you have selected iFrame, you can use this code to embed your story on your website or blog. 
 
 ### Save and return to your story
 
