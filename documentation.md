@@ -223,7 +223,7 @@ If you want to use a defined image reference, you can also do that. The markdown
 
 Here, the Alt text is the same as above, but the [id] is the name of a defined image reference which you have named elsewhere. It would look something like:
 
-~~~
+~~~md
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
