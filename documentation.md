@@ -21,9 +21,9 @@ The library is open source and freely available to use in your projects.
 
 **TODO** Create a quickstart video. Very simple, starting at editor and creating a story and publishing as a gist. Narrate and make it short (4 minutes) and possible to watch on its own.
 
-#### Create a new Story
+### Create a new Story
 
-On the [homepage](../), click the button to create a new story or go [here](../editor/editor.html)
+If you want to start using the on-line editor, go to the [homepage](../), click the button to create a new story or just go [here](../editor/editor.html).
 
 #### Name your project
 
@@ -49,20 +49,20 @@ hero who travelled far
 ```
 ~~~
 
-#### Publish your story
+### Publish your story
 
 There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
 
 **TODO**
 **Include annotated image of the publish options**
 
-#### Embed it on your site
+### Embed it on your site
 
 **TODO**
 **Include iframe link on the gist publish dialog**
 **After that, add this section plus screenshots**
 
-#### Save and return to your story
+### Save and return to your story
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
 
@@ -72,29 +72,32 @@ The Odyssey Editor allows you to link map changes and movements to different ele
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
-### Templates
+### Hosted Templates
 
 Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
 
 #### Slide template
 
+The slide template acts like a keynote presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the next/prev buttons or by pressing the cursor keys. This is perfect for stories that have not too much text and where the map is the principal element of them.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
 #### Scrolling template
 
+The scrolling template is based on your page scroll. The story moves on as you scroll around the page. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
 #### Torque template
 
+Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. Perfect for annotating animated stories.
+
 **todo**
-_describe this template and how it controls the flow of your story_
 _provide a link to an example (created using only the editor)_
 
-#### Custom templates
+### Custom templates
 
 Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the following section: **link**
 
@@ -151,7 +154,41 @@ L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
 ```
 ~~~
 
-See the Actions section for a complete list of available actions and their descriptions.
+See the list below for a complete list of available actions and their descriptions.
+
+#### Map Actions
+
+_Move to_ - **todo**
+
+_Zoom to_ - **todo**
+
+#### Control Actions
+
+_Sleep_ - **todo**
+
+#### Data Actions
+
+_Show marker_ - **todo**
+
+_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
+
+#### Video actions
+
+**todo** ask @javisantana when this will be ready.
+
+#### Audio actions
+
+**todo** _html5audio_
+
+**pending** _soundcloud_
+
+#### Torque Actions
+
+_Play_ - **todo**
+
+_Pause_ - **todo**
+
+_Insert time_ - **todo**
 
 **TODO**
 **Add an Actions section at the main level of Documentation**
@@ -202,72 +239,312 @@ Here, the first text in parentheses would be the link, and the second text is a 
 [id]: http://example.com/  "Optional Title Here"
 ~~~
 
-## Actions
-
-**TODO**
-**Add a list of all available actions**
-**Include an indication of which templates they are available in**
-
-#### Map Actions
-
-_Move to_ - **todo**
-
-_Zoom to_ - **todo**
-
-#### Control Actions
-
-_Sleep_ - **todo**
-
-#### Data Actions
-
-_Show marker_ - **todo**
-
-_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
-
-#### Video actions
-
-**todo** ask @javisantana when this will be ready.
-
-#### Audio actions
-
-**todo** _html5audio_
-
-**pending** _soundcloud_
-
-#### Torque Actions
-
-_Play_ - **todo**
-
-_Pause_ - **todo**
-
-_Insert time_ - **todo**
-
 ## Javascript API
 
-#### Story object
+### Install
 
-Will attach each story state to the Odyssey story object.
+
+
+### Quick start
+
+### Story object
+
+Will attach each story state to the Odyssey story object. Controls the state of the story managing the states. Each story contains states and triggers control which state is the active one.
 
 ~~~javascript
 var story = O.Story();
 ~~~
 
-#### Sequence object
+#### addState(trigger, action)
 
-The `sequential` object contains the logic for moving forward and backward through the story states attached to your story` object.
+Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is only called when the story enters in this state.
 
 ~~~javascript
-var seq = O.Sequential();
+Story().addState(trigger, action);
 ~~~
 
-#### Keys object
+#### addLinearState(trigger, action)
+
+Does the same than `addState` but in this case `update` method in the `action` is called every time
+the trigger is updated.
+
+#### go(action_index,[ options])
+
+Move story to the desired state
+
+  - `action_index`: base 0 index of state
+  - `options`: 
+    - reverse: boolean, default false. Set it to true to call ``reverse`` method in the trigger when
+      the state is set
+
+~~~javascript
+// this goes to the second state in the story
+Story().go(1);
+~~~
+
+#### state()
+
+returns the current state number, 0 based index
+
+### O.Action
+
+function that converts a function or object into an action.
+
+```javascript
+var hideDivAction = O.Action(function() {
+    $('#element').hide()
+});
+
+// this hides #element when right key is pressed
+story.addAction(O.Keys().right(), hideDivAction)
+```
+
+More advanced actions can be created. For example, let's define one that shows an element when the story enters in
+the state and hides it when leaves it:
+
+```javascript
+var showHideAction = O.Action({
+    enter: function() {
+        $('#element').show()
+    },
+
+    exit: function() {
+        $('#element').hide()
+    }
+});
+
+story.addState(O.Keys().right(), showHideAction)
+```
+
+but the right way to define these actions would be:
+
+```javascript
+function ShowHideAction(el) {
+    return O.Action({
+        enter: function() {
+            el.show()
+        },
+
+        exit: function() {
+            el.hide()
+        }
+    });
+}
+
+story.addState(O.Keys().right(), ShowHideAction($('#element')))
+```
+
+### O.Trigger(obj)
+
+function that creates trigger that can raise actions
+
+the followint example creates a a trigger that is raised every 3 seconds:
+
+```javascript
+function IntervalTrigger() {
+    t = O.Trigger();
+    setInterval(funtion() {
+        t.trigger();
+    }, 3000)
+    return t;
+}
+
+// enter will be printed only once since when the story is in a 
+// state if the trigger is raised again it has no effect
+story.addState(IntervalTrigger(), O.Debug().log('enter')); 
+```
+
+#### Trigger.trigger([t])
+
+raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
+
+### O.Step(action1, action2, ...)
+
+executes actions serially, waits until the previous task is completed to start with the second and so on
+
+~~~javascript
+var step = O.Step(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+Story().addState(trigger, chain);
+~~~
+
+raises `finish` signal when all the tasks has been completed
+
+the following example shows how to include a Sleep between actions
+
+```javascript
+story
+    .addState(O.Keys().right(), O.Step(
+        O.Debug().log('rigth key pressed'),
+        O.Sleep(1000),
+        O.Debug().log('this is printed after 1 second')
+    ))
+```
+
+### O.Parallel(action1, action2, ...)
+
+executes actions in parallel
+
+~~~javascript
+var parallel = Parallel(action1, action2, action3)
+chain.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+O.Story().addState(trigger, parallel);
+~~~
+
+raises `finish` signal when all the tasks has been completed
+
+### O.Sequence
+
+The `sequential` object contains the logic for moving forward and backward through the story states attached to your story object.
+
+~~~javascript
+var seq = O.Sequence();
+O.Story()
+    .addState(seq.step(0), action1);
+    .addState(seq.step(1), action2);
+
+seq.next() // raises action1
+seq.next() // raises action2
+~~~
+#### Sequence.step(n)
+generates a trigger which is raised when the sequence moves to state ``n``
+
+#### Sequence.next
+goes to the nextstate
+
+#### Sequence.prev
+goes to the prev state
+
+#### Sequence.current([number])
+sets (triggers) or gets the current step
+
+### O.Keys
 
 The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
+
+~~~javascript
+O.Story()
+    .addState(O.Keys().left(), action1);
+    .addState(O.Keys().right(), action1);
+~~~
+
+it can be used to moved a ``O.Sequence``:
 
 ~~~javascript
 O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
 ~~~
+
+#### right()
+returns a trigger that is raised when user press right key
+
+#### left()
+returns a trigger that is raised when user press left key
+
+
+### O.Scroll
+manages page scroll
+
+~~~javascript
+// action will be called when the scroll is within the vertical scape of #myelement
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), action) 
+~~~
+
+#### within(element)
+returns a trigger which is raised when the scroll is within the vertical space of that element. 
+For example, if #div_element with style "position: absolute; top: 400px" the trigger will be raised
+when the scroll of the page is 400px
+
+Optionally an ``offset`` can be set:
+~~~javascript
+// in this case the trigger will be raised when the scroll of the page is at 200px
+O.Story()
+    .addState(O.Scroll().within($('#myelement').offset(200), action) 
+~~~
+
+``element`` can be a DOMElement or a jQuery object
+
+#### less(element)
+returns a trigger which is raised when the scroll is less than the element position in pixels
+``element`` can be a DOMElement or a jQuery object
+
+#### greater(element)
+returns a trigger which is raised when the scroll is greater than the element position in pixels
+``element`` can be a DOMElement or a jQuery object
+
+### O.Leaflet.Map
+contains actions to manage Leaflet Map object. This is included as a leaflet map pluggin, so can be
+used from ``actions`` attribute of ``L.Map``
+~~~javascript
+
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), map.actions.panTo([37.1, -92]);
+~~~
+
+#### panTo(latlng)
+see Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
+#### setView
+see Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
+#### setZoom
+see Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
+
+
+### O.Leaflet.Marker
+creates actions to manage leaflet markers. It can be used as a leaflet pluggin using ``actions`` attribute
+in ``L.Marker`` instance
+
+~~~javascript
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), L.marker([37.1, -92]).actions.addTo(map))
+~~~
+
+#### addTo(map)
+creates an action that adds the marker instance to the specified ``map``
+
+#### addRemove(map)
+creates an action that adds the marker instance to the specified ``map`` when the story enters in
+the action and removes when the story leaves it.
+
+### icon(iconEnabled, iconDisabled)
+creates an action that changes the icon of a marker
+~~~javascript
+var marker = L.marker([0, 0])
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), marker.actions.icon('enabled.png', 'disabled.png')
+~~~
+
+
+### O.Leaflet.Popup
+creates actions to manage [leaflet popups](http://leafletjs.com/reference.html#popup) (infowindows). It can be used as a leaflet pluggin using ``actions`` attribute
+
+~~~javascript
+var map = new L.Map('map', {
+    center: [37, -91],
+    zoom: 6
+});
+var popup = L.popup().setLatLng(latlng).setContent('<p>popup for action1</p>')
+
+O.Story()
+    .addState(O.Scroll().within($('#myelement'), popup.actions.openOn(map));
+~~~
+
+#### openOn(map)
+returns an action that opens the popup in the specified ``map``
+see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation
+
 
 ### Basic functions
 
@@ -275,11 +552,11 @@ _todo_
 
 ### Advanced functions
 
-#### YouTube
+### YouTube
 
 _todo_
 
-#### Torque
+### Torque
 
 _todo_
 
@@ -289,13 +566,13 @@ _todo_
 
 ## Contributing code
 
-#### Improving documentation
+### Improving documentation
 
 Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file ```docs/doc.md```.
 
-#### Developing the Editor
+### Developing the Editor
 
 First, change into the editor and start compass.
 
@@ -306,7 +583,7 @@ compass watch
 
 Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
-#### Submitting improvements
+### Submitting improvements
 
 Send a pull request to the original Odyssey.js repository!
 
@@ -369,64 +646,4 @@ _steps for compile_
 If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above. **TODO, make link to Contributing live**
 
 
-## Old content
 
-### Oddysey.Story
-
-controls the state of the story managing the states. Each story contains states and triggers control
-which state is the active one.
-
-#### Oddysey.Story.addState(trigger, action)
-Adds a new state to the story. `action` will be called when `trigger` is triggered. `action`
-`enter` method is only called when the story enters in this state.
-
-~~~javascript
-Story().addState(trigger, action);
-~~~
-
-#### Oddysey.Story.addLinearState(trigger, action)
-Does the same than `addState` but in this case `update` method in the `action` is called every time
-the trigger is updated
-
-#### Oddysey.Story.go(action_index[, options])
-
-Move story to desired state
-  * `action_index`: base 0 index of state
-  * `options`: todo
-
-
-#### Oddysey.Chain
-
-executes actions serially, waits until the previous task is completed to start with the second and so on
-
-~~~javascript
-var chain = Chain(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
-~~~
-
-raises `finish` signal when all the tasks has been completed
-
-#### Oddysey.Paralel
-
-executes actions in parallel
-
-~~~javascript
-var chain = Parallel(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
-~~~
-
-raises `finish` signal when all the tasks has been completed
-
-### Oddysey.Actions
-
-### Oddysey.Triggers
-
-### Custom actions
-
-### Custom triggers
