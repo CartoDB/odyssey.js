@@ -122,6 +122,17 @@ The config block is a control element at the top of your story's Markdown docume
 - title: "_Title of your story_"
 - author: "_Name of the story author_"
 
+#### Torque options
+
+~~~md
+-vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
+-duration: 30
+~~~
+
+- vizjson: "_the url to your cartodb torque visualization_"
+- duration: "_duration of torque animation (default is 30)_"
+
+
 ### Markdown syntax
 
 The Markdown syntax used in the Odyssey Editor uses all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
