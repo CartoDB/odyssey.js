@@ -110,7 +110,7 @@ Experts can create and use custom Templates with Odyssey. If you are interested 
 
 The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage.
 
-#### Available options
+#### Default options
 
 ~~~md
 
