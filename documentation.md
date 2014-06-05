@@ -129,8 +129,8 @@ The config block is a control element at the top of your story's Markdown docume
 #### Torque options
 
 ~~~md
--vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
--duration: 30
+- vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
+- duration: 30
 ~~~
 
 - vizjson: "_the url to your cartodb torque visualization_"
@@ -168,9 +168,19 @@ See the list below for a complete list of available actions and their descriptio
 
 #### Map Actions
 
-_Move to_ - **todo**
+_Move to_ 
 
-_Zoom to_ - **todo**
+- simply set the map's new center point in latitude and longitude decimal degrees.
+
+```
+- center: [40.7127, -74.0059]
+```
+
+_Zoom to_  
+- set the map's new zoom level using an integer number from 0 to 18.
+```
+- zoom: 3
+```
 
 #### Control Actions
 
