@@ -133,6 +133,7 @@ div#credits{
   right: 0;
   height: 44px;
   background-color: #FFF;
+  z-index: 1000001;
 
   span{
     padding: 13px 0 0 0;
@@ -164,6 +165,7 @@ div#credits{
   width: 1px;
   height: 40px;
   background: #E0E0E0;
+  pointer-events: none;
 
   .tip {
     display: block;
@@ -180,6 +182,7 @@ div#credits{
     background: #ababab;
     border-radius: 2px;
     box-shadow: 0 1px 3px #FFF;
+    pointer-events: auto;
   }
 
   &:before,

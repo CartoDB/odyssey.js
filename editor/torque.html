@@ -10,7 +10,7 @@
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
-  <div id="slides_container">
+  <div id="slides_container" style="display: none;">
     <div id="slides">
     </div>
   </div>
@@ -28,10 +28,10 @@
     function torque(layer) {
       function _torque() {}
 
-      _torque.reach = function (slide, torqueLayer) {
+      _torque.reach = function (slide) {
         var i = (slide.get('step') || 0);
 
-        var l = i*$('.slider').width()/torqueLayer.options.steps,
+        var l = i*$('.slider').width()/layer.options.steps,
             tooltip = ['<div class="slide-tip" style="left:'+l+'px">',
                        '<span class="tip">'+slide.get('tip')+'</span>',
                        '<div class="tooltip">'+slide.html()+'</div>',
@@ -41,7 +41,7 @@
 
         var t = O.Trigger({});
         function check(changes) {
-          if (i === changes.step) {
+          if (i >= changes.step-2 && i < changes.step+2) {
             t.trigger();
           }
         };
@@ -118,7 +118,7 @@
           var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
 
           this.story.addState(
-            torque(this.torqueLayer).reach(slide, this.torqueLayer),
+            torque(this.torqueLayer).reach(slide),
             ac
           )
         }
@@ -127,9 +127,15 @@
       update: function(actions) {
         var self = this;
 
+        if ($("#slides_container").is(":visible")) {
+          $("#slides_container").hide();
+        }
+
         if (this.map && this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
           this.map.removeLayer(this.torqueLayer);
 
+          // hack to stop (not remove) binding
+          this.torqueLayer.stop();
           $('.cartodb-timeslider').remove();
           $('.cartodb-legend-stack').remove();
           this.torqueLayer = null;

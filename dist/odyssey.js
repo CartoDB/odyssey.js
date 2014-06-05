@@ -427,6 +427,11 @@ function Slides(el) {
     var slideElements = Core.getElement(el).children;
     for(var i = 0; i < slideElements.length; ++i) {
       if (i === idx) {
+        var $slidesContainer = document.getElementById("slides_container")
+        if ($slidesContainer.style.display === 'none') {
+          $slidesContainer.style.display = "block";
+        }
+
         slideElements[i].style.display = "block";
       } else {
         slideElements[i].style.display = "none";
