@@ -107,6 +107,23 @@
         this.slides = slides;
       },
 
+      _resetActions: function(actions) {
+        for(var i = 0; i < actions.length; ++i) {
+          var slide = actions[i];
+          var tmpl = "<div class='slide' style='display:none'>"
+          tmpl += slide.html();
+          tmpl += "</div>";
+          document.getElementById('slides').innerHTML += tmpl;
+
+          var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
+
+          this.story.addState(
+            torque(this.torqueLayer).reach(slide, this.torqueLayer),
+            ac
+          )
+        }
+      },
+
       update: function(actions) {
         var self = this;
 
@@ -120,8 +137,7 @@
         }
 
         if (!this.torqueLayer) {
-          debugger;
-          if (!this.created) {
+          if (!this.created) { // sendCode debounce < vis loader :(
             cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
               cartodb.createLayer(self.map, vizjson)
                 .done(function(layer) {
@@ -132,6 +148,8 @@
                   self.torqueLayer = layer;
                   self.torqueLayer.actions = torque(self.torqueLayer);
                   self.map.addLayer(self.torqueLayer);
+
+                  self._resetActions(actions);
                 }).on('error', function(err) {
                   console.log("some error occurred: " + err);
                 });
@@ -157,20 +175,7 @@
 
         $('.slide-tip').remove();
 
-        for(var i = 0; i < actions.length; ++i) {
-          var slide = actions[i];
-          var tmpl = "<div class='slide' style='display:none'>"
-          tmpl += slide.html();
-          tmpl += "</div>";
-          document.getElementById('slides').innerHTML += tmpl;
-
-          var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
-
-          this.story.addState(
-            torque(this.torqueLayer).reach(slide, this.torqueLayer),
-            ac
-          )
-        }
+        this._resetActions(actions);
 
         if (actions.global.duration) {
           this.torqueLayer.stop();
