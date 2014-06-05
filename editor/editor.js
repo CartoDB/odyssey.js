@@ -5,21 +5,27 @@ function _t(s) { return s; }
 
 var dialog = require('./dialog');
 var Splash = require('./splash');
-var saveAs = require('../vendor/FileSaver');
-var saveAs = require('../vendor/DOMParser');
+var DOMParser = require('../vendor/DOMParser');
 var utils = require('./utils');
 
 
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'Display visualization chapters like slides in a presentation',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\nmore text'
   }, {
     title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n\n#slide2\nmore text'
+  }, {
+    title: 'torque',
+    description: 'Create a visualization that changes as your reader moves through your narrative',
+    default: '```\n-title: "Title"\n-author: "Name"\n-vizjson: "http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json"\n-duration: 30\n```\n\n#slide1\n```\n-step: 100\n```\nsome text\n\n\n#slide2\n```\n-step: 200\n```\nmore text'
   }
 ];
+
+
+
 
 
 function editor() {
@@ -57,7 +63,11 @@ function editor() {
   }
 
   context.code = function(_) {
-    if (_) this._code = _;
+
+    if (_) {
+      this._code = _;
+      console.log("code", _);
+    }
     return this._code;
   }
 
@@ -148,12 +158,15 @@ function editor() {
     sendMsg({ type: 'actions' }, function(data) {
       context.actions(data);
     });
-    if (location.hash.length === 0) {
-      // when there is no code, show template selector splash
+
+    // when there is no code, show template selector splash
+    if (!context.code() && location.hash.length === 0) {
       d3.select(document.body).call(Splash(context).on('template', function(t) {
-        set_template(t);
+
         var template_data = context.templates(t);
         if (template_data) {
+          context.code(template_data.default);
+          set_template(t);
           sendCode(template_data.default);
           $editor.call(code_dialog.code(template_data.default));
         }

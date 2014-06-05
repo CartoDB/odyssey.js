@@ -44,11 +44,12 @@ body{
 
 .splash {
   position: absolute;
-  z-index: 7;
+  z-index: 11;
   top: 0; bottom: 0; left: 0; right: 0;
   background: #000;
   background: rgba(0, 0, 0, 0.9);
   text-align: center;
+  min-width: 800px;
   .share_template {
     background: #fff;
     padding: 40px;
@@ -111,6 +112,7 @@ body{
       @include transition(all .15s ease-in-out);
       text-decoration: none;
       outline: none;
+      cursor: pointer;
 
       &:hover,
       &.zeroclipboard-is-hover {
@@ -127,7 +129,7 @@ body{
       border-radius: 4px;
       display: inline-block;
       margin-left: 10px;
-      cursor: pointer;
+      margin-bottom: 10px;
       text-align: center;
 
 
@@ -154,16 +156,7 @@ body{
   width: 452px;
   text-align: left;
   box-shadow: 0 0 6px rgba(0, 0, 0, .2);
-  &:before {
-    content:"";
-    position: absolute;
-    left: 0;
-    width: 55px;
-    top: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .05);
-    border-right: 1px solid rgba(0, 0, 0, .15);
-  }
+  min-height: 330px;
 
   @include border-radius(4px, 4px);
 
@@ -190,12 +183,14 @@ body{
   }
 
 	div.header {
+    position: relative;
     background: rgb(255, 115, 115);
 	  color: white;
 	  line-height: 1em;
 	  margin: 0;
 	  padding: 22px 20px 20px 16px;
     @include border-top-radius(4px);
+    z-index: 10;
 
     a.expandButton{
       background: transparent image-url("expandButtonIcon.png") no-repeat 0 0;
@@ -233,6 +228,9 @@ body{
       cursor: pointer;
       display: inline-block;
       border-radius: 4px;
+      color: #FFF;
+      text-decoration: none;
+
       &:after {
         content:"";
         display: inline-block;
@@ -248,6 +246,51 @@ body{
       }
     }
 	}
+
+  #actions_bar {
+    position: absolute;
+    left: 0;
+    width: 55px;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .05);
+    border-right: 1px solid rgba(0, 0, 0, .15);
+
+    &:before {
+      content:"";
+      position: absolute;
+      top: 66px;
+      right: 0;
+      left: 0;
+      height: 20px;
+      background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0, 0, 0, 0)), color-stop(100%,rgba(0, 0, 0, 0.05))); /* Chrome,Safari4+ */
+      background: linear-gradient(to top,  rgba(#f2f2f2, 0) 0%,rgba(#f2f2f2, 1) 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(endColorstr='#f2f2f2', startColorstr='#00f2f2f2', GradientType=0 ); /* IE6-9 */
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    &:after {
+      content:"";
+      position: absolute;
+      bottom: 53px;
+      right: 0;
+      left: 0;
+      height: 20px;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0, 0, 0, 0)), color-stop(100%,rgbargba(0, 0, 0, 0.05))); /* Chrome,Safari4+ */
+      background: linear-gradient(to bottom,  rgba(#f2f2f2, 0) 0%,rgba(#f2f2f2, 1) 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f2f2f2', endColorstr='#f2f2f2', GradientType=0 ); /* IE6-9 */
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    &.collapseActions {
+      &:before,
+      &:after {
+        display: none;
+      }
+    }
+  }
 
   textarea, .CodeMirror {
     position: absolute;
@@ -269,12 +312,30 @@ body{
     bottom: 0;
     right: 0;
     left: 56px;
-    height: 100px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+    height: 20px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(10%,rgba(255,255,255,0)), color-stop(30%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 10%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
     z-index: 2;
     pointer-events: none;
+  }
+
+  .CodeMirror:before {
+    content:"";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 56px;
+    height: 30px;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(255,255,255,0)), color-stop(10%,rgba(255,255,255,0)), color-stop(30%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 10%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(endColorstr='#ffffff', startColorstr='#00ffffff', GradientType=0 ); /* IE6-9 */
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .CodeMirror-scroll {
+    padding-bottom: 45px;
   }
 
   .actionButton {
@@ -449,7 +510,7 @@ a.expandButton{
 .mode_menu {
   position: absolute;
   top: 4px; right: -10px;
-  width: 170px;
+  width: 115px;
   background: #fff;
 
   li {

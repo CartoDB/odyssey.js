@@ -1,6 +1,7 @@
 
 var dropdown = require('./dropdown');
 var saveAs = require('../vendor/FileSaver');
+var Splash = require('./splash');
 var exp = require('./gist');
 var share_dialog = require('./share_dialog');
 var debounce = require('./utils').debounce;
@@ -64,30 +65,39 @@ function dialog(context) {
 
     var help = divOptions.append('ul').attr('class', 'h-left');
 
-    help.append('li').append('a').attr('class', 'helpButton').attr('xlink:href', function() { return '/'}).on('click', function(){
-    });
+    help.append('li').append('a').attr('class', 'helpButton').attr('href', '/odyssey.js/documentation');
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
 
       if (el.style('bottom') === 'auto') {
+        el.select('.CodeMirror').style('padding', '20px 20px 20px 72px');
+        el.style('bottom', 'auto').style('min-height', '330px');
         el.style('bottom', '80px').style('height', 'auto');
         el.selectAll('.actionButton').style("visibility", "visible");
         d3.select(this).classed('expandButton', false);
-
+        el.select('#actions_bar').classed('collapseActions', false);
       } else {
+        el.style('bottom', 'auto').style('min-height', '0');
         el.style('bottom', 'auto').style('height', '119px');
         d3.select(this).classed('expandButton', true);
         el.selectAll('.actionButton').style("visibility", "hidden");
+        el.select('#actions_bar').classed('collapseActions', true);
+        el.select('.CodeMirror').style('padding', '0');
       }
 
     });
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
         var md = el.select('textarea').node().codemirror.getValue();
-        exp.zip(md, context.template(), function(zipBlob) {
-          saveAs(zipBlob, 'oddysey.zip');
+        exp.zip(md, context.template(), function(zip) {
+          saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
+
+          // var link = document.createElement("a");
+          // link.download = 'odyssey.zip';
+          // link.href = "data:application/zip;base64," + zip.generate({type:"base64"});
+          // link.click();
         });
     });
 
@@ -97,7 +107,7 @@ function dialog(context) {
       exp.gist(md, context.template(), function(gist) {
         console.log(gist);
         //window.open(gist.html_url);
-        share_dialog(gist.gist_url, gist.html_url, gist.url);
+        share_dialog(gist.url, gist.html_url);
       });
 
       var client = new ZeroClipboard(document.getElementById("copy-button"), {
@@ -117,23 +127,25 @@ function dialog(context) {
       });
     });
 
-    divHeader.append('p')
+    divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
+      .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
-        d3.event.stopPropagation();
-        var self = this;
-        open(this, templates, 'drop-right', { x: -74, y: 5}).on('click', function(value) {
-          evt.template(value);
-          close();
-          d3.select(self).text(value);
-        });
+        d3.event.preventDefault();
+        d3.select(document.body).call(Splash(context).on('template', function(t) {
+          evt.template(t);
+        }));
+
       });
 
-      /*
+
     context.on('template_change.editor', function(t) {
       divHeader.select('#show_slide').text(t);
-    });*/
+    });
+
+    var actions_bar = enter.append('div')
+      .attr('id', 'actions_bar');
 
     var textarea = enter.append('textarea')
       .attr('id', 'code')
@@ -152,7 +164,8 @@ function dialog(context) {
         mode: "markdown",
         lineWrapping: true
       });
-      var showActions = debounce(function() { placeActionButtons(el, codemirror); }, 500);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      var showActions = debounce(function() { placeActionButtons(codemirror_wrap, codemirror); }, 500);
       var hideActions = debounce(function() { el.selectAll('.actionButton').remove(); }, 20);
       codemirror.on('scroll',  function() {
         showActions();
@@ -162,7 +175,8 @@ function dialog(context) {
         // change is raised at the beginning with any real change
         if (c.getValue()) {
           sendCode(c.getValue());
-          placeActionButtons(el, codemirror);
+          var codemirror_wrap = el.select('.CodeMirror-wrap');
+          placeActionButtons(codemirror_wrap, codemirror);
         }
       });
     });
@@ -180,7 +194,8 @@ function dialog(context) {
     // update
     codeEditor.each(function(d) {
       this.codemirror.setValue(d);
-      placeActionButtons(el, this.codemirror);
+      var codemirror_wrap = el.select('.CodeMirror-wrap');
+      placeActionButtons(codemirror_wrap, this.codemirror);
     });
 
     context.on('error.editor', function(errors) {
@@ -271,7 +286,7 @@ function dialog(context) {
     codemirror.eachLine(function(a) {
       if (SLIDE_REGEXP.exec(a.text)) {
          positions.push({
-           pos: codemirror.heightAtLine(lineNumber),
+           pos: codemirror.heightAtLine(lineNumber)-66, // header height
            line: lineNumber
          });
       }

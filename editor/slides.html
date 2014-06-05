@@ -4,7 +4,7 @@
   <title>Odyssey.js</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="css/slides.css" />
 </head>
 <body>
@@ -18,14 +18,13 @@
       <li><a class='next'></a></li>
     </ul>
   </div>
-  <div id="progress"></div>
   <div id="credits">
-    <span class="title" id="title">MY PROJECT NAME</span>
-    <span class="author">By <b id="author">name</b> using <a href="#">odyssey.js</a><span>
+    <span class="title" id="title">Title</span>
+    <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
   </div>
 
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
 
   <script>
@@ -71,8 +70,12 @@
       this.story.clear();
 
       // update footer title and author
-      document.getElementById('title').innerHTML = actions.global.title;
-      document.getElementById('author').innerHTML = actions.global.author;
+      var title_ = actions.global.title === undefined ? '' : actions.global.title,
+          author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+      document.getElementById('title').innerHTML = title_;
+      document.getElementById('author').innerHTML = author_;
+      document.title = title_ + " | " + author_ +' Odyssey.js';
 
       var sl = actions;
 
@@ -103,9 +106,7 @@
     },
 
     changeSlide: function(n) {
-      if (this.seq.current() !== n) {
-        this.story.go(n);
-      }
+      this.seq.current(n);
     }
 
   });

@@ -39,14 +39,12 @@ function Splash(context) {
           })
 
     template
-      .append('a').text('SELECT').attr('class', 'button-template')
-
-
-    template.on('click', function(d) {
-      evt.template(d.title);
-      _splash.close()
-    })
-
+      .append('a').text('SELECT').attr('class', 'button-template').on('click', function(d) {
+        d3.event.preventDefault();
+        console.log(evt.template(d.title))
+        evt.template(d.title);
+        _splash.close()
+      })
   }
 
   _splash.close = function() {

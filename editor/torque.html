@@ -1,165 +1,247 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Leaflet Quick Start Guide Example</title>
+  <title>Odyssey.js</title>
   <meta charset="utf-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!--<link rel="stylesheet" href="../../vendor/leaflet.css" />-->
-  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-  <style>
-    html, body {
-      text-align: center;
-      margin: 0; padding: 0;
-      font-family: Georgia;
-      background: #EEE;
-      height: 100%;
-    }
-    h2 {
-      font-weight: normal;
-    }
-    #layout {
-      width: 768px;
-      margin: 0px auto;
-      padding-top: 70px;
-      background: #FFF;
-      height: 2000px;
-    }
-    #map_pos {
-      height: 400px;
-    }
-    .attachTop {
-      position: fixed;
-      width: 768px;
-      top: 0; 
-    }
-    #content {
-      padding: 0 40px;
-      height: 1500px;
-    }
-    #slides{ }
-    .slide {
-      position: absolute;
-      bottom: 10%;
-      left: 10%;
-      font-size: 45px;
-    }
-    
-  </style>
+  <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="//cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="css/slides.css" />
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
-  <div id="slides"></div>
+  <div id="slides_container" style="display: none;">
+    <div id="slides">
+    </div>
+  </div>
+  <div id="credits">
+    <span class="title" id="title">Title</span>
+    <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
+  </div>
 
-   <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <!--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
-  <!--<script src="../../vendor/leaflet.js"></script>-->
-  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-  <script src="../../dist/odyssey.js" charset="UTF-8"></script>
-  <script src="markdown.js" charset="UTF-8"></script>
-  <script src="actions.js" charset="UTF-8"></script>
+  <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="//cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/cartodb.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+
   <script>
+    function torque(layer) {
+      function _torque() {}
 
+      _torque.reach = function (slide) {
+        var i = slide.get('step');
 
-      function torque(layer) {
-        function _torque() {}
+        function formaterForRange(start, end) {
+          start = start.getTime ? start.getTime(): start;
+          end = end.getTime ? end.getTime(): end;
+          var span = (end - start)/1000;
+          var ONE_DAY = 3600*24;
+          var ONE_YEAR = ONE_DAY * 31 * 12;
+          function pad(n) { return n < 10 ? '0' + n : n; };
 
-        _torque.reach = function (i) {
-          var t = O.Trigger({});
-          function check(changes) { 
-            if (i === changes.step) {
-              t.trigger();
+          // lest than a day
+          if (span < ONE_DAY) return function(t) { return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes()); };
+          if (span < ONE_YEAR) return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCDate()) + "/" + pad(t.getUTCFullYear()); };
+          return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCFullYear()); };
+        }
+
+        function getTimeOrStep(s) {
+          var tb = layer.getTimeBounds();
+          if (!tb) return;
+          if (tb.columnType === 'date') {
+            if (tb && tb.start !== undefined) {
+              var f = formaterForRange(tb.start, tb.end);
+              // avoid showing invalid dates
+              if (!_.isNaN(layer.stepToTime(s).getYear())) {
+                return f(layer.stepToTime(s));
+              }
             }
-          };
-          layer.on('change:time', check);
-          t.clear = function() {
-            layer.off('change:time', check);
+          } else {
+            return s;
           }
-          return t;
         }
 
-        _torque.pause = function() {
-          return O.Action(function (){
-            layer.pause();
-          });
+        var l = i*$('.slider').width()/layer.options.steps,
+            tooltip = ['<div class="slide-tip slide-tip-'+i+'" style="left:'+l+'px">',
+                       '<span class="tip tip">'+getTimeOrStep(slide.get('step'))+'</span>',
+                       '<div class="tooltip">'+slide.html()+'</div>',
+                       '</div>'].join("\n");
+
+        $('.slider').append(tooltip);
+        var $tip = $('.slide-tip-'+i+' .tip'),
+            $tooltip = $('.slide-tip-'+i+' .tooltip'),
+            w = $tip.width()/2
+
+        $tip.css({ margin: -w });
+
+        var t = O.Trigger({});
+        function check(changes) {
+          if (changes.step >= i-2 && changes.step < i+2) {
+            t.trigger();
+
+            if (!$tooltip.is(':visible')) {
+              $tooltip.fadeIn(150);
+            }
+          } else if (changes.step >= i+2 && changes.step < i+5) {
+            if ($tooltip.is(':visible')) {
+              setTimeout(function() {
+                $tooltip.fadeOut(150);
+              }, 1000);
+            }
+          }
+        };
+
+        layer.on('change:time', check);
+        t.clear = function() {
+          layer.off('change:time', check);
         }
-
-        _torque.play = function() {
-          return O.Action(function () {
-            layer.play()
-          });
-        }
-
-        return _torque;
+        return t;
       }
 
-  O.Template({
-
-    actions: {
-      'move map to': function() {
-        var center = this.map.getCenter()
-        return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
-      },
-      'show marker': function() {
-        var center = this.map.getCenter()
-        return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
-      },
-      'sleep': function() {
-        return "O.Actions.Sleep(1000)";
-      },
-      'insert time': function() {
-        return "- step: " + this.torqueLayer.getStep()
-      },
-      'pause': function() {
-        return "S.torqueLayer.actions.pause()";
-      },
-      'play': function() {
-        return "S.torqueLayer.actions.play()";
+      _torque.pause = function() {
+        return O.Action(function (){
+          layer.pause();
+        });
       }
-    },
 
-
-    init: function() {
-      var self = this
-      cartodb.createVis('map', 'http://javi.cartodb.com/api/v2/viz/75faec08-882d-11e3-a991-3085a9a9563c/viz.json').done(function(vis, layers) { 
-        self.torqueLayer = layers[2];
-        self.torqueLayer.actions = torque(self.torqueLayer)
-      })
-
-      var slides = O.Actions.Slides('slides');
-      var story = O.Story()
-
-      this.map = map;
-      this.story = story;
-      this.slides = slides;
-
-    },
-
-    update: function(actions) {
-      if (!this.torqueLayer) return;
-      this.story.clear();
-
-      document.getElementById('slides').innerHTML = '';
-      for(var i = 0; i < actions.length; ++i) {
-        var slide = actions[i];
-        var tmpl = "<div class='slide' style='display:none'>"
-        tmpl += slide.html();
-        tmpl += "</div>";
-        document.getElementById('slides').innerHTML += tmpl;
-
-        var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
-        this.story.addState( 
-          torque(this.torqueLayer).reach(slide.get('step') || 0),
-          ac
-        )
+      _torque.play = function() {
+        return O.Action(function () {
+          layer.play()
+        });
       }
+
+      return _torque;
     }
 
-  });
+    O.Template({
+      actions: {
+        'move map to': function() {
+          var center = this.map.getCenter()
+          return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
+        },
+        'show marker': function() {
+          var center = this.map.getCenter()
+          return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
+        },
+        'sleep': function() {
+          return "O.Actions.Sleep(1000)";
+        },
+        'insert time': function() {
+          return "- step: " + this.torqueLayer.getStep()
+        },
+        'pause': function() {
+          return "S.torqueLayer.actions.pause()";
+        },
+        'play': function() {
+          return "S.torqueLayer.actions.play()";
+        }
+      },
 
+      init: function() {
+        var self = this;
 
+        var map = L.map('map').setView([0, 0.0], 4);
+        L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
 
+        var slides = O.Actions.Slides('slides');
+        var story = O.Story()
+
+        this.map = map;
+        this.story = story;
+        this.slides = slides;
+      },
+
+      _resetActions: function(actions) {
+        for(var i = 0; i < actions.length; ++i) {
+          var slide = actions[i];
+          var tmpl = "<div class='slide' style='display:none'>"
+          tmpl += slide.html();
+          tmpl += "</div>";
+          document.getElementById('slides').innerHTML += tmpl;
+
+          var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
+
+          if (!slide.get('step')) return;
+
+          this.story.addState(
+            torque(this.torqueLayer).reach(slide),
+            ac
+          )
+        }
+      },
+
+      update: function(actions) {
+        var self = this;
+
+        if ($("#slides_container").is(":visible")) {
+          $("#slides_container").hide();
+        }
+
+        if (this.map && this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+          this.map.removeLayer(this.torqueLayer);
+
+          // hack to stop (not remove) binding
+          this.torqueLayer.stop();
+          $('.cartodb-timeslider').remove();
+          $('.cartodb-legend-stack').remove();
+          this.torqueLayer = null;
+          this.created = false;
+        }
+
+        if (!this.torqueLayer) {
+          if (!this.created) { // sendCode debounce < vis loader
+            cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+              cartodb.createLayer(self.map, vizjson)
+                .done(function(layer) {
+                  self.map.fitBounds(vizjson.bounds);
+
+                  actions.global.duration && layer.setDuration(actions.global.duration);
+
+                  self.torqueLayer = layer;
+                  self.torqueLayer.stop();
+
+                  self.map.addLayer(self.torqueLayer);
+
+                  setTimeout(function() {
+                    self.torqueLayer.play();
+                    self.torqueLayer.actions = torque(self.torqueLayer);
+                    self._resetActions(actions);
+                  }, 1000); // self.torqueLayer.on('load') not working
+                }).on('error', function(err) {
+                  console.log("some error occurred: " + err);
+                });
+            });
+
+            this.created = true;
+          }
+
+          return;
+        }
+
+        this.story.clear();
+
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        document.getElementById('slides').innerHTML = '';
+
+        $('.slide-tip').remove();
+
+        this._resetActions(actions);
+
+        if (actions.global.duration) {
+          this.torqueLayer.stop();
+          this.torqueLayer.setDuration(actions.global.duration);
+          this.torqueLayer.play()
+        }
+      }
+    });
   </script>
 </body>
 </html>

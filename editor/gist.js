@@ -24,7 +24,7 @@ function processHTML(html, md, transform) {
   var doc = parser.parseFromString(html, 'text/html');
 
   // transform
-  transform && transform(doc)
+  transform && transform(doc);
 
   md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
   // insert oddyset markdown
@@ -59,11 +59,11 @@ function files(md, template, callback) {
 
 function zip(md, template, callback) {
   files(md, template, function(contents) {
-      var zip = new JSZip();
-      for (var f in contents) {
-        zip.file(f, contents[f]);
-      }
-      callback(zip.generate({ type: 'blob' }));
+    var zip = new JSZip();
+    for (var f in contents) {
+      zip.file(f, contents[f]);
+    }
+    callback(zip);
   });
 }
 
@@ -86,12 +86,11 @@ function Gist(md, template, callback) {
       .header("Content-Type", "application/json")
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/'
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/';
         console.log(gist);
         callback({
-          gist_url: gist.url,
-          html_url: BLOCKS + 'raw/' + gist.id,
-          url: BLOCKS + gist.id
+          url: gist.url,
+          html_url: BLOCKS + gist.id,
         });
       });
   });

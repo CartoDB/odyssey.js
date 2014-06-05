@@ -185,6 +185,8 @@ div#credits {
   height: 44px;
   background-color: #FFF;
   border-top: 1px solid #e5e5e5;
+  z-index: 1000001;
+
   a { color: #ff7373; }
   span{
     padding: 13px 0 0 0;
