@@ -190,7 +190,6 @@ body{
 	  margin: 0;
 	  padding: 22px 20px 20px 16px;
     @include border-top-radius(4px);
-    z-index: 10;
 
     a.expandButton{
       background: transparent image-url("expandButtonIcon.png") no-repeat 0 0;
@@ -356,37 +355,32 @@ body{
 
 #actionDropdown {
   position: relative;
-  width: 150px;
+  min-width: 150px;
   z-index: 20;
   text-align: left;
   border-radius: 4px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, .2);
-  padding: 0;
+  border: 1px solid #B7B7B7;
+  padding: 10px 15px;
+  color:#666;
 
   li:last-child {
     border-bottom: 0px;
-    margin: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    padding-bottom:10px;
   }
   li {
     list-style: none;
-    border-bottom: 1px solid #f5f5f5;
-    padding: 10px;
+    border-bottom: 1px solid #EDEDED;
+    padding: 15px 0; 
     font-size: 12px;
     &:hover {
       cursor: pointer;
-      background: #f9f9f9;
+      color:#000;
     }
   }
  li:first-child {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    &:hover:before {
-      border-bottom: 8px solid #f9f9f9;
-    }
+    padding-top: 10px; 
     &:before {
       content: "";
       position: absolute;
@@ -406,14 +400,12 @@ body{
       left: 10px;
       top: -17px;
       border: 8px solid transparent;
-      border-bottom: 8px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 8px solid #B7B7B7;
     }
   }
   li:last-child {
     border-bottom: 0px;
     margin: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
   }
   &.drop-right li:first-child {
     &:before {
