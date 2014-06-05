@@ -31,20 +31,66 @@
       _torque.reach = function (slide) {
         var i = (slide.get('step') || 0);
 
+        function formaterForRange(start, end) {
+          start = start.getTime ? start.getTime(): start;
+          end = end.getTime ? end.getTime(): end;
+          var span = (end - start)/1000;
+          var ONE_DAY = 3600*24;
+          var ONE_YEAR = ONE_DAY * 31 * 12;
+          function pad(n) { return n < 10 ? '0' + n : n; };
+
+          // lest than a day
+          if (span < ONE_DAY) return function(t) { return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes()); };
+          if (span < ONE_YEAR) return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCDate()) + "/" + pad(t.getUTCFullYear()); };
+          return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCFullYear()); };
+        }
+
+        function getTimeOrStep(s) {
+          var tb = layer.getTimeBounds();
+          if (!tb) return;
+          if (tb.columnType === 'date') {
+            if (tb && tb.start !== undefined) {
+              var f = formaterForRange(tb.start, tb.end);
+              // avoid showing invalid dates
+              if (!_.isNaN(layer.stepToTime(s).getYear())) {
+                return f(layer.stepToTime(s));
+              }
+            }
+          } else {
+            return s;
+          }
+        }
+
         var l = i*$('.slider').width()/layer.options.steps,
-            tooltip = ['<div class="slide-tip" style="left:'+l+'px">',
-                       '<span class="tip">'+slide.get('tip')+'</span>',
+            tooltip = ['<div class="slide-tip slide-tip-'+i+'" style="left:'+l+'px">',
+                       '<span class="tip tip">'+getTimeOrStep(slide.get('step'))+'</span>',
                        '<div class="tooltip">'+slide.html()+'</div>',
                        '</div>'].join("\n");
 
         $('.slider').append(tooltip);
+        var $tip = $('.slide-tip-'+i+' .tip'),
+            $tooltip = $('.slide-tip-'+i+' .tooltip'),
+            w = $tip.width()/2
+
+        $tip.css({ margin: -w });
 
         var t = O.Trigger({});
         function check(changes) {
-          if (i >= changes.step-2 && i < changes.step+2) {
+          if (changes.step >= i-2 && changes.step < i+2) {
             t.trigger();
+
+            if (!$tooltip.is(':visible')) {
+              $tooltip.fadeIn(150);
+            }
+          } else if (changes.step >= i+2 && changes.step < i+5) {
+            if ($tooltip.is(':visible')) {
+              setTimeout(function() {
+                $tooltip.fadeOut(150);
+              }, 1000);
+            }
           }
         };
+
         layer.on('change:time', check);
         t.clear = function() {
           layer.off('change:time', check);
@@ -143,7 +189,7 @@
         }
 
         if (!this.torqueLayer) {
-          if (!this.created) { // sendCode debounce < vis loader :(
+          if (!this.created) { // sendCode debounce < vis loader
             cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
               cartodb.createLayer(self.map, vizjson)
                 .done(function(layer) {
@@ -152,10 +198,15 @@
                   actions.global.duration && layer.setDuration(actions.global.duration);
 
                   self.torqueLayer = layer;
-                  self.torqueLayer.actions = torque(self.torqueLayer);
+                  self.torqueLayer.stop();
+
                   self.map.addLayer(self.torqueLayer);
 
-                  self._resetActions(actions);
+                  setTimeout(function() {
+                    self.torqueLayer.play();
+                    self.torqueLayer.actions = torque(self.torqueLayer);
+                    self._resetActions(actions);
+                  }, 1000); // self.torqueLayer.on('load') not working
                 }).on('error', function(err) {
                   console.log("some error occurred: " + err);
                 });

@@ -168,15 +168,14 @@ div#credits{
   pointer-events: none;
 
   .tip {
-    display: block;
+    display: inline-block;
     position: relative;
     overflow: hidden;
     z-index: 10;
-    top: -9px;
+    top: -36px;
     height: 18px;
-    margin-left: -21px;
+    padding: 0 4px;
     font: bold 11px/18px "Helvetica Neue", Helvetica;
-    width: 42px;
     color: #fff;
     text-align: center;
     background: #ababab;
@@ -207,20 +206,20 @@ div#credits{
 
   &:hover {
     .tooltip {
-      display: inline-block;
+      display: inline-block !important;
     }
   }
 
   .tooltip {
-    position: relative;
+    position: absolute;
     display: none;
     background: rgba(#000, 0.85);
-    top: -88px;
-    left: -17px;
-    color: #FFF;
+    bottom: 60px;
     padding: 10px;
+    margin-left: -17px;
     box-shadow: 0 1px 3px #FFF;
     border-radius: 2px;
+    color: #FFF;
 
     h1, p {
       height: auto;
@@ -230,10 +229,15 @@ div#credits{
       color: #EEE;
       font-weight: normal;
       line-height: 1.1;
+      width: auto;
     }
 
     h1 {
       font-weight: bold;
+    }
+
+    p {
+      white-space: nowrap;
     }
 
     &:after {
