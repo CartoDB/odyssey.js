@@ -28,7 +28,17 @@
     function torque(layer) {
       function _torque() {}
 
-      _torque.reach = function (i) {
+      _torque.reach = function (slide, torqueLayer) {
+        var i = (slide.get('step') || 0);
+
+        var l = i*$('.slider').width()/torqueLayer.options.steps,
+            tooltip = ['<div class="slide-tip" style="left:'+l+'px">',
+                       '<span class="tip">'+slide.get('tip')+'</span>',
+                       '<div class="tooltip">'+slide.html()+'</div>',
+                       '</div>'].join("\n");
+
+        $('.slider').append(tooltip);
+
         var t = O.Trigger({});
         function check(changes) {
           if (i === changes.step) {
@@ -92,7 +102,7 @@
         var slides = O.Actions.Slides('slides');
         var story = O.Story()
 
-        // this.map = map;
+        this.map = map;
         this.story = story;
         this.slides = slides;
       },
@@ -100,31 +110,37 @@
       update: function(actions) {
         var self = this;
 
-        if (this.map && this.torqueLayer) {
+        if (this.map && this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
           this.map.removeLayer(this.torqueLayer);
+
+          $('.cartodb-timeslider').remove();
+          $('.cartodb-legend-stack').remove();
+          this.torqueLayer = null;
+          this.created = false;
         }
 
         if (!this.torqueLayer) {
-          cartodb.createVis('map', actions.global.vizjson)
-            .done(function(vis, layers) {
-              self.map = vis.getNativeMap();
+          debugger;
+          if (!this.created) {
+            cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+              cartodb.createLayer(self.map, vizjson)
+                .done(function(layer) {
+                  self.map.fitBounds(vizjson.bounds);
 
-              self.torqueLayer = layers[1];
-              self.torqueLayer.actions = torque(self.torqueLayer);
+                  actions.global.duration && layer.setDuration(actions.global.duration);
 
-              actions.global.duration && self.torqueLayer.setDuration(actions.global.duration);
-            })
-            .error(function(err) {
-              console.log(err);
+                  self.torqueLayer = layer;
+                  self.torqueLayer.actions = torque(self.torqueLayer);
+                  self.map.addLayer(self.torqueLayer);
+                }).on('error', function(err) {
+                  console.log("some error occurred: " + err);
+                });
             });
 
-          return;
-        }
+            this.created = true;
+          }
 
-        if (actions.global.duration) {
-          this.torqueLayer.stop();
-          this.torqueLayer.setDuration(actions.global.duration);
-          this.torqueLayer.play()
+          return;
         }
 
         this.story.clear();
@@ -138,6 +154,9 @@
         document.title = title_ + " | " + author_ +' Odyssey.js';
 
         document.getElementById('slides').innerHTML = '';
+
+        $('.slide-tip').remove();
+
         for(var i = 0; i < actions.length; ++i) {
           var slide = actions[i];
           var tmpl = "<div class='slide' style='display:none'>"
@@ -148,9 +167,15 @@
           var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
 
           this.story.addState(
-            torque(this.torqueLayer).reach(slide.get('step') || 0),
+            torque(this.torqueLayer).reach(slide, this.torqueLayer),
             ac
           )
+        }
+
+        if (actions.global.duration) {
+          this.torqueLayer.stop();
+          this.torqueLayer.setDuration(actions.global.duration);
+          this.torqueLayer.play()
         }
       }
     });

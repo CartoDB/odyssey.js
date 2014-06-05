@@ -24,6 +24,51 @@ body {
     overflow: auto;
     padding-right: 20px;
   }
+
+  h1, h2, h3, h4, h5, h6{
+    font-family: ProximaNovaBold, Sans-serif;
+    color: #333;
+    font-size: 45px;
+    // text-transform: uppercase;
+
+    &:after{
+      display: block;
+      margin: 20px 0 20px 0;
+      height: 3px;
+      content: " ";
+      text-shadow: none;
+      background-color: #333;
+      width: 140px;
+    }
+  }
+
+  h2, h3, h4, h5, h6{
+    font-size: 19px;
+
+    &:after{
+      height: 1px;
+      margin: 18px 0 18px 0;
+      width: 180px;
+    }
+  }
+
+
+  p, span{
+    font-family: AleoRegular, Serif;
+    color: #333;
+    font-size: 15px;
+    line-height: 21px;
+    margin: 0 0 19px 0;
+  }
+
+  a{
+    color: #FF7373;
+    text-decoration: none;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 
 #dots{
@@ -51,50 +96,7 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6{
-  font-family: ProximaNovaBold, Sans-serif;
-  color: #333;
-  font-size: 45px;
-  // text-transform: uppercase;
 
-  &:after{
-    display: block;
-    margin: 20px 0 20px 0;
-    height: 3px;
-    content: " ";
-    text-shadow: none;
-    background-color: #333;
-    width: 140px;
-  }
-}
-
-h2, h3, h4, h5, h6{
-  font-size: 19px;
-
-  &:after{
-    height: 1px;
-    margin: 18px 0 18px 0;
-    width: 180px;
-  }
-}
-
-
-p, span{
-  font-family: AleoRegular, Serif;
-  color: #333;
-  font-size: 15px;
-  line-height: 21px;
-  margin: 0 0 19px 0;
-}
-
-a{
-  color: #FF7373;
-  text-decoration: none;
-
-  &:hover{
-    text-decoration: underline;
-  }
-}
 
 #slides_container img{
 	//max-width: 400px;
@@ -156,5 +158,88 @@ div#credits{
   }
 }
 
+.slide-tip {
+  position: absolute;
+  top: -18px;
+  width: 1px;
+  height: 40px;
+  background: #E0E0E0;
 
+  .tip {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    top: -9px;
+    height: 18px;
+    margin-left: -21px;
+    font: bold 11px/18px "Helvetica Neue", Helvetica;
+    width: 42px;
+    color: #fff;
+    text-align: center;
+    background: #ababab;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px #FFF;
+  }
 
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-left: -7px;
+    border-bottom: 5px solid #E0E0E0;
+    bottom: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
+
+  &:hover {
+    .tooltip {
+      display: inline-block;
+    }
+  }
+
+  .tooltip {
+    position: relative;
+    display: none;
+    background: rgba(#000, 0.85);
+    top: -88px;
+    left: -17px;
+    color: #FFF;
+    padding: 10px;
+    box-shadow: 0 1px 3px #FFF;
+
+    h1, p {
+      height: auto;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      color: #EEE;
+      font-weight: normal;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-weight: bold;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 5px solid rgba(#000, .85);
+      bottom: -5px;
+      left: 10px;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
+  }
+}
+
+div.cartodb-timeslider .ui-slider .ui-slider-range {
+  background-color: #FF7373;
+}

@@ -12,17 +12,20 @@ var utils = require('./utils');
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'Display visualization chapters like slides in a presentation',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\nmore text'
   }, {
     title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n\n#slide2\nmore text'
   }, {
     title: 'torque',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '```\n-title: "Title"\n-author: "Name"\n-vizjson: "http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json"\n-duration: 30\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n#slide2\n more text'
+    default: '```\n-title: "Title"\n-author: "Name"\n-vizjson: "http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json"\n-duration: 30\n```\n\n#slide1\n```\n- step: 100\n```\nsome text\n\n\n#slide2\n```\n- step: 200\n```\nmore text'
   }
 ];
+
+
+
 
 
 function editor() {
@@ -107,6 +110,7 @@ function editor() {
   }
 
   function sendCode(_) {
+    debugger;
     sendMsg({
       type: 'md',
       code: _
