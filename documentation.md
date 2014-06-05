@@ -106,6 +106,10 @@ Experts can create and use custom Templates with Odyssey. If you are interested 
 
 ## Advanced use of the editor
 
+### Markdown syntax
+
+Markdown syntax is used in the Odyssey Editor and contains all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+
 ### Config block
 
 The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage.
@@ -131,11 +135,6 @@ The config block is a control element at the top of your story's Markdown docume
 
 - vizjson: "_the url to your cartodb torque visualization_"
 - duration: "_duration of torque animation (default is 30)_"
-
-
-### Markdown syntax
-
-The Markdown syntax used in the Odyssey Editor uses all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
 ### Chapters
 
