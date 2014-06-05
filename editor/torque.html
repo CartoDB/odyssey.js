@@ -203,11 +203,12 @@
 
                   self.map.addLayer(self.torqueLayer);
 
-                  setTimeout(function() {
+
+                  self.torqueLayer.on('change:steps', function() {
                     self.torqueLayer.play();
                     self.torqueLayer.actions = torque(self.torqueLayer);
                     self._resetActions(actions);
-                  }, 1000); // self.torqueLayer.on('load') not working
+                  });
                 }).on('error', function(err) {
                   console.log("some error occurred: " + err);
                 });
