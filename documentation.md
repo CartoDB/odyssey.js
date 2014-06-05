@@ -227,10 +227,10 @@ Here, the Alt text is the same as above, but the [id] is the name of a defined i
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
-Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example
+Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example:
 
 ~~~md
-<img width="100%" src="http://imgur.com/69Gxjih.jpg" />
+<img width="200px" src="http://imgur.com/69Gxjih.jpg" />
 ~~~
 
 ### Links
@@ -268,11 +268,11 @@ Grab dist/odyssey.js and add it at the end of your `<body>` element in your html
 
 ### Quick start
 
-**TODO: DO THIS**
+**TODO**
 
 ### Story object
 
-Will attach each story state to the Odyssey story object. Controls the state of the story managing the states. Each story contains states and triggers control which state is the active one.
+The main object in Odyssey.js is the Story object. You can initialize a new story object as follows:
 
 ~~~javascript
 var story = O.Story();
