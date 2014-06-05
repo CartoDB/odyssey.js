@@ -223,13 +223,13 @@ If you want to use a defined image reference, you can also do that. The markdown
 
 Here, the Alt text is the same as above, but the [id] is the name of a defined image reference which you have named elsewhere. It would look something like:
 
-~~~md
+~~~txt
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
 Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example
 
-~~md
+~~txt
 <img width="100%" src="http://imgur.com/69Gxjih.jpg" />
 ~~
 
