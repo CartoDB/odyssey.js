@@ -5,6 +5,7 @@ mkdir -p editor
 wget -O editor/editor.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/editor.html
 wget -O editor/scroll.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll.html
 wget -O editor/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides.html
+wget -O editor/torque.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.html
 
 mkdir -p editor/img
 wget -O editor/img/collapseButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/collapseButtonIcon.png
