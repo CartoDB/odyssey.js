@@ -138,7 +138,7 @@ The config block is a control element at the top of your story's Markdown docume
 
 ### Chapters
 
-Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the #` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
+Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the `#` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
 
 ~~~md
 
