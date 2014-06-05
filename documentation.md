@@ -254,7 +254,7 @@ Here, the first text in parentheses would be the link, and the second text is a 
 
 ### Install
 
-grab dist/odyssey.js and use it with
+Grab dist/odyssey.js and add it at the end of your `<body>` element in your html file.
 
 ~~~html
 <script src="odyssey.js"></script>
@@ -262,6 +262,8 @@ grab dist/odyssey.js and use it with
 
 
 ### Quick start
+
+**TODO: DO THIS**
 
 ### Story object
 
@@ -271,40 +273,42 @@ Will attach each story state to the Odyssey story object. Controls the state of 
 var story = O.Story();
 ~~~
 
-#### addState(trigger, action)
+#### addState(_trigger_, _action_)
 
 Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is only called when the story enters in this state.
 
 ~~~javascript
-Story().addState(trigger, action);
+Story().addState(trigger, action); 
+//TODO: IMPROVE THIS EXAMPLE
 ~~~
 
-#### addLinearState(trigger, action)
+#### addLinearState(_trigger_, _action_)
 
 Does the same than `addState` but in this case `update` method in the `action` is called every time
 the trigger is updated.
+
+#### state()
+
+Returns the current state number, 0 based index.
 
 #### go(action_index,[ options])
 
 Move story to the desired state
 
-  - `action_index`: base 0 index of state
-  - `options`: 
-    - reverse: boolean, default false. Set it to true to call ``reverse`` method in the trigger when
-      the state is set
+  - `action_index`: Base 0 index of state
+
+Available options
+
+  - `reverse`: Boolean, default false. Set it to true to call `reverse` method in the trigger when the state is set.
 
 ~~~javascript
-// this goes to the second state in the story
+// This goes to the second state in the story
 Story().go(1);
 ~~~
 
-#### state()
+### Action object
 
-returns the current state number, 0 based index
-
-### O.Action
-
-function that converts a function or object into an action.
+Converts a function or object into an action.
 
 ~~~javascript
 var hideDivAction = O.Action(function() {
@@ -315,26 +319,8 @@ var hideDivAction = O.Action(function() {
 story.addAction(O.Keys().right(), hideDivAction)
 ~~~
 
-
 More advanced actions can be created. For example, let's define one that shows an element when the story enters in
 the state and hides it when leaves it:
-
-~~~javascript
-var showHideAction = O.Action({
-    enter: function() {
-        $('#element').show()
-    },
-
-    exit: function() {
-        $('#element').hide()
-    }
-});
-~~~
-
-story.addState(O.Keys().right(), showHideAction)
-
-
-but the right way to define these actions would be:
 
 ~~~javascript
 function ShowHideAction(el) {
@@ -342,22 +328,19 @@ function ShowHideAction(el) {
         enter: function() {
             el.show()
         },
-
         exit: function() {
             el.hide()
         }
     });
 }
 
-story.addState(O.Keys().right(), ShowHideAction($('#element')))
+story.addState(O.Keys().right(), ShowHideAction($('#element')));
 ~~~
 
 
-### O.Trigger(obj)
+### Trigger object
 
-function that creates trigger that can raise actions
-
-the followint example creates a a trigger that is raised every 3 seconds:
+Creates a trigger that can raise actions. For example, below is a trigger that is raised every 3 seconds.
 
 ~~~javascript
 function IntervalTrigger() {
@@ -368,93 +351,107 @@ function IntervalTrigger() {
     return t;
 }
 
-// enter will be printed only once since when the story is in a 
-// state if the trigger is raised again it has no effect
+// Note that if the trigger is raised again it has no effect
 story.addState(IntervalTrigger(), O.Debug().log('enter')); 
 ~~~
 
+#### trigger(_number_)
 
-#### Trigger.trigger([t])
-
-raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
-
-### O.Step(action1, action2, ...)
-
-executes actions serially, waits until the previous task is completed to start with the second and so on
+Raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
 
 ~~~javascript
-var step = O.Step(action1, action2, action3)
-chain.on('finish.app', function() {
-  console.log("all tasks performed");
-});
-Story().addState(trigger, chain);
+//TODO: ADD EXAMPLE
 ~~~
 
-raises `finish` signal when all the tasks has been completed
+### Step Object
 
-the following example shows how to include a Sleep between actions
+Accepts an unlimited number of actions and execute them in a sequence. Waits until the previous action is completed to start with the next one. The example below raises `finish` signal when all the tasks has been completed.
 
 ~~~javascript
-story
-    .addState(O.Keys().right(), O.Step(
-        O.Debug().log('rigth key pressed'),
-        O.Sleep(1000),
-        O.Debug().log('this is printed after 1 second')
-    ))
+var step = O.Step(action1, action2, action3);
+step.on('finish.app', function() {
+  console.log("all tasks performed");
+});
+
+Story().addState(trigger, step);
+~~~
+
+The following example shows how to include a [`Sleep`](#) between actions
+
+~~~javascript
+story.addState(O.Keys().right(), O.Step(
+  O.Debug().log('rigth key pressed'),
+  O.Sleep(1000),
+  O.Debug().log('this is printed after 1 second')
+))
 ~~~
 
 
-### O.Parallel(action1, action2, ...)
+### Parallel Object
 
-executes actions in parallel
+Similar to Step but execute the defined actions at the same time. The example below raises `finish` signal when all the tasks has been completed.
 
 ~~~javascript
-var parallel = Parallel(action1, action2, action3)
-chain.on('finish.app', function() {
+var parallel = Parallel(action1, action2, action3);
+parallel.on('finish.app', function() {
   console.log("all tasks performed");
 });
+
 O.Story().addState(trigger, parallel);
 ~~~
 
-raises `finish` signal when all the tasks has been completed
 
-### O.Sequence
+### Sequence Object
 
-The `sequential` object contains the logic for moving forward and backward through the story states attached to your story object.
+Contains the logic for moving forward and backward through the story states attached to your story object.
 
 ~~~javascript
+//TODO: THIS IS NOT CLEAR ENOUGH
 var seq = O.Sequence();
 O.Story()
-    .addState(seq.step(0), action1);
-    .addState(seq.step(1), action2);
+  .addState(seq.step(0), action1);
+  .addState(seq.step(1), action2);
 
 seq.next() // raises action1
 seq.next() // raises action2
 ~~~
 
-#### Sequence.step(n)
-generates a trigger which is raised when the sequence moves to state ``n``
+#### next()
 
-#### Sequence.next
-goes to the nextstate
+Goes to the nextstate
 
-#### Sequence.prev
-goes to the prev state
+#### prev()
 
-#### Sequence.current([number])
-sets (triggers) or gets the current step
+Goes to the prev state
 
-### O.Keys
+#### step(_number_)
+
+Generates a trigger which is raised when the sequence moves to state `n`
+
+~~~javascript
+//TODO: ADD EXAMPLE.
+~~~
+
+#### current(_number_)
+
+Set (triggers) or get the current step
+
+~~~javascript
+//TODO: ADD EXAMPLE.
+~~~
+
+
+### Keys
 
 The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
 
 ~~~javascript
 O.Story()
-    .addState(O.Keys().left(), action1);
-    .addState(O.Keys().right(), action1);
+  .addState(O.Keys().left(), action1);
+  .addState(O.Keys().right(), action1);
 ~~~
 
-it can be used to moved a ``O.Sequence``:
+It also can be used together with the [`Sequence`](#) object.
 
 ~~~javascript
 O.Keys().left().then(seq.prev, seq);
@@ -462,14 +459,16 @@ O.Keys().right().then(seq.next, seq);
 ~~~
 
 #### right()
-returns a trigger that is raised when user press right key
+
+Returns a trigger that is raised when user press right key
 
 #### left()
-returns a trigger that is raised when user press left key
+
+Returns a trigger that is raised when user press left key
 
 
-### O.Scroll
-manages page scroll
+### Scroll
+Manages page scroll
 
 ~~~javascript
 // action will be called when the scroll is within the vertical scape of #myelement
@@ -477,175 +476,26 @@ O.Story()
     .addState(O.Scroll().within($('#myelement'), action) 
 ~~~
 
-#### within(element)
-returns a trigger which is raised when the scroll is within the vertical space of that element. 
-For example, if #div_element with style "position: absolute; top: 400px" the trigger will be raised
-when the scroll of the page is 400px
+#### within(_el_)
+Returns a trigger raised when the scroll is within the vertical space of the specified element. For example, if there is a #div_element with style `position: absolute; top: 400px` the trigger will be raised when the scroll of the page is 400px.
 
-Optionally an ``offset`` can be set:
+`el` can be a DOMElement or a jQuery object and optionally an `offset` can be set.
 
 ~~~javascript
 // in this case the trigger will be raised when the scroll of the page is at 200px
 O.Story()
-    .addState(O.Scroll().within($('#myelement').offset(200), action) 
+  .addState(O.Scroll().within($('#myelement').offset(200), action) 
 ~~~
 
-``element`` can be a DOMElement or a jQuery object
+#### less(_el_)
+Returns a trigger which is raised when the scroll is less than the element position in pixels `element` can be a DOMElement or a jQuery object.
 
-#### less(element)
-returns a trigger which is raised when the scroll is less than the element position in pixels
-``element`` can be a DOMElement or a jQuery object
-
-#### greater(element)
-returns a trigger which is raised when the scroll is greater than the element position in pixels
-``element`` can be a DOMElement or a jQuery object
-
-### O.Leaflet.Map
-contains actions to manage Leaflet Map object. This is included as a leaflet map pluggin, so can be
-used from ``actions`` attribute of ``L.Map``
-
-~~~javascript
-var map = new L.Map('map', {
-    center: [37, -91],
-    zoom: 6
-});
-O.Story()
-    .addState(O.Scroll().within($('#myelement'), map.actions.panTo([37.1, -92]);
-~~~
-
-#### panTo(latlng)
-see Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
-#### setView
-see Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
-#### setZoom
-see Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
+#### greater(_el_)
+Returns a trigger which is raised when the scroll is greater than the element position in pixels `element` can be a DOMElement or a jQuery object.
 
 
-### O.Leaflet.Marker
-creates actions to manage leaflet markers. It can be used as a leaflet pluggin using ``actions`` attribute
-in ``L.Marker`` instance
-
-~~~javascript
-var map = new L.Map('map', {
-    center: [37, -91],
-    zoom: 6
-});
-O.Story()
-    .addState(O.Scroll().within($('#myelement'), L.marker([37.1, -92]).actions.addTo(map))
-~~~
-
-#### addTo(map)
-creates an action that adds the marker instance to the specified ``map``
-
-#### addRemove(map)
-creates an action that adds the marker instance to the specified ``map`` when the story enters in
-the action and removes when the story leaves it.
-
-### icon(iconEnabled, iconDisabled)
-creates an action that changes the icon of a marker
-
-~~~javascript
-var marker = L.marker([0, 0])
-O.Story()
-    .addState(O.Scroll().within($('#myelement'), marker.actions.icon('enabled.png', 'disabled.png')
-~~~
-
-
-### O.Leaflet.Popup
-creates actions to manage [leaflet popups](http://leafletjs.com/reference.html#popup) (infowindows). It can be used as a leaflet pluggin using ``actions`` attribute
-
-~~~javascript
-var map = new L.Map('map', {
-    center: [37, -91],
-    zoom: 6
-});
-var popup = L.popup().setLatLng(latlng).setContent('<p>popup for action1</p>')
-
-O.Story()
-    .addState(O.Scroll().within($('#myelement'), popup.actions.openOn(map));
-~~~
-
-#### openOn(map)
-returns an action that opens the popup in the specified ``map``
-see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation
-
-### O.CSS
-
-actions related to css tasks. All the actions inside this module needs the elements to be jQuery.
-
-#### toggleClass
-
-~~~javascript
-O.Story()
-    .addState(trigger, CSS($('#element')).toggleClass('visible'));
-~~~
-
-### O.Debug
-actions for debugging pourposes
-
-#### log(text)
-prints current state plus the ``text``
-
-~~~javascript
-O.Story()
-    .addState(trigger, Debug().log('this is a test'));
-~~~
-
-### O.Location
-actions related to the ``window.location`` object
-
-#### changeHash
-
-changes the url hash
-
-~~~javascript
-O.Story()
-    .addState(trigger, Location.changeHash('/slide/1'));
-~~~
-
-### O.Sleep(ms)
-action that sleeps the execution for some time, it's useful when using ``O.Step``
-
-~~~javascript
-O.Story()
-    .addState(trigger, O.Step(
-        Debug().log('executed now')),
-        O.Sleep(1000),
-        Debug().log('executed 1 second later'))
-    ));
-~~~
-
-### O.Audio
-actions to control HTML5 audio element
-
-#### play
-
-~~~javascript
-O.Story()
-    .addState(trigger, O.Audio('#audio_el').play())
-~~~
-
-#### pause
-
-~~~javascript
-O.Story()
-    .addState(trigger, O.Audio('#audio_el').pause())
-~~~
-
-#### setCurrentTime(t)
-
-sets current play time
-
-~~~javascript
-O.Story()
-    .addState(trigger, O.Audio('#audio_el').setCurrentTime(1400))
-~~~
-
-### O.Slides
-
-Given an DOM element with children return actions to swtich between them.
-
-with the following html:
+### Slides
+Given an DOM element with children return actions to swtich between them. With the following html:
 
 ~~~html
 <div id="slides">
@@ -654,7 +504,7 @@ with the following html:
 </div>
 ~~~
 
-a story like this can be created:
+A story like this can be created with the following code.
 
 ~~~javascript
 var slides = O.Slides($('#slides'));
@@ -663,9 +513,180 @@ O.Story()
     .addState(trigger2, slides.activate(1))
 ~~~
 
-when ``trigger1`` is raised, the first slide will have the style ``display: block`` and the other ones
-``display: none``. It hides all when no action was raised.
+When `trigger1` is raised, the first slide will have the style `display: block` and the other ones `display: none`. It hides all when no action was raised.
 
+
+### Leaflet Object
+
+#### Map Object
+Contains actions to manage the Leaflet Map object. This is included as a leaflet map plugin, so can be used from `actions`.
+
+~~~javascript
+var map = new L.Map('map', {
+  center: [37, -91],
+  zoom: 6
+});
+
+O.Story()
+  .addState(O.Scroll().within($('#myelement'), map.actions.panTo([37.1, -92]);
+~~~
+
+#### panTo(_latlng_)
+
+See Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
+
+~~~javascript
+// TODO: ADD EXAMPLE
+~~~
+
+#### setView()
+
+See Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
+
+~~~javascript()
+// TODO: ADD EXAMPLE
+~~~
+
+#### setZoom()
+
+See Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
+
+~~~javascript
+// TODO: ADD EXAMPLE
+~~~
+
+### Marker
+Creates actions to manage leaflet markers. It can be used as a leaflet plugin using `actions` in ``L.Marker`` instance
+
+~~~javascript
+var map = new L.Map('map', {
+  center: [37, -91],
+  zoom: 6
+});
+
+O.Story()
+  .addState(
+    O.Scroll().within($('#myelement'), 
+    L.marker([37.1, -92]).actions.addTo(map)
+  );
+~~~
+
+#### addTo(_map_)
+Creates an action that adds the marker instance to the specified `map`.
+
+#### addRemove(_map_)
+Creates an action that adds the marker instance to the specified `map` when the story enters in the action and removes when the story leaves it.
+
+### Icon
+Creates an action that changes the icon of a marker. It receives two arguments _(iconEnabled, iconDisabled)_.
+
+~~~javascript
+var marker = L.marker([0, 0])
+O.Story()
+  .addState(
+    O.Scroll().within($('#myelement'), 
+    marker.actions.icon('enabled.png', 'disabled.png')
+  );
+~~~
+
+
+### Popup
+Creates actions to manage [leaflet popups](http://leafletjs.com/reference.html#popup) or also called infowindows. It can be used as a leaflet plugin using `actions` attribute.
+
+~~~javascript
+var map = new L.Map('map', {
+  center: [37, -91],
+  zoom: 6
+});
+var popup = L.popup().setLatLng(latlng).setContent('<p>popup for action1</p>')
+
+O.Story()
+  .addState(O.Scroll().within($('#myelement'), popup.actions.openOn(map));
+~~~
+
+#### openOn(_map_)
+
+Returns an action that opens the popup in the specified `map` see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation.
+
+### CSS
+Actions related to css tasks. All the actions inside this module needs the elements to be jQuery.
+
+#### toggleClass
+
+**TODO: DOCUMENT
+
+~~~javascript
+O.Story()
+  .addState(trigger, CSS($('#element')).toggleClass('visible'));
+~~~
+
+### Debug
+
+Actions for debugging pourposes. 
+**TODO: EXTEND
+
+#### log(_text_)
+Prints current state plus the `text`.
+
+~~~javascript
+O.Story()
+  .addState(trigger, Debug().log('this is a test'));
+~~~
+
+### Location
+Actions related with the `window.location` object.
+**TODO: EXTEND
+
+#### changeHash(_string_)
+
+Changes the url hash
+
+~~~javascript
+O.Story()
+  .addState(trigger, Location.changeHash('/slide/1'));
+~~~
+
+### Sleep(_ms_)
+
+Action that sleeps the execution for some time, it's useful when using `Step`.
+
+~~~javascript
+O.Story()
+  .addState(trigger, O.Step(
+    Debug().log('executed now')),
+    O.Sleep(1000),
+    Debug().log('executed 1 second later'))
+  ));
+~~~
+
+### Audio
+Actions to control HTML5 audio element
+
+#### play
+**TODO: EXTEND
+
+~~~javascript
+O.Story()
+  .addState(trigger, O.Audio('#audio_el').play());
+~~~
+
+#### pause
+**TODO: EXTEND
+
+~~~javascript
+O.Story()
+  .addState(trigger, O.Audio('#audio_el').pause());
+~~~
+
+#### setCurrentTime(_t_)
+
+Sets current play time
+**TODO: EXTEND
+
+~~~javascript
+O.Story()
+  .addState(trigger, O.Audio('#audio_el').setCurrentTime(1400));
+~~~
 
 ### Basic functions
 
