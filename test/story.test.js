@@ -112,6 +112,28 @@ asyncTest('Step - async', 3, function() {
   }, 1100);
 });
 
+asyncTest('Step - async with sync actions', 2, function() {
+  var finished = false;
+  var asyncAction = O.Action({
+    enter: function() {
+      var self = this;
+      this.lastEnterCall = new Date().getTime();
+      self.finish();
+      return true;
+    }
+  });
+  story.addState(t1, O.Step(asyncAction, a2).on('finish.test', function() {
+    finished = true;
+  }));
+
+  t1.trigger();
+  setTimeout(function() {
+    equal(1, a2.called, "a2 should be called");
+    ok(finished, "chain should call finish");
+    start();
+  }, 1100);
+});
+
 test('Parallel', function() {
   var finished = false;
   story.addState(t1, O.Parallel(a1, a2).on('finish.test', function() {
