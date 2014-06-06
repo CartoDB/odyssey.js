@@ -33,14 +33,13 @@ function CSS(el) {
 
   _css.addClass = function(cl) {
     return Action(function() {
-      debugger;
-      el.classList.add(cl);
+      el.addClass(cl);
     });
   };
 
   _css.removeClass = function(cl) {
     return Action(function() {
-      el.classList.remove(cl);
+      el.removeClass(cl);
     });
   };
 

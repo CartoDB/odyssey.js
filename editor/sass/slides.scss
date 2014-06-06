@@ -30,7 +30,7 @@ body {
     padding-right: 20px;
 
     &.selected {
-      display: block;
+      display: block !important;
     }
   }
 
@@ -224,6 +224,7 @@ div#credits{
     display: none;
     background: rgba(#000, 0.85);
     bottom: 60px;
+    max-width: 240px;
     padding: 10px;
     margin-left: -17px;
     box-shadow: 0 1px 3px #FFF;
