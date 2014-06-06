@@ -60,7 +60,7 @@ There are a few options for publishing your story. The first is to publish it di
 
 In the **Share** options for your story, you can select the third option, _IFRAME_.
 
-<img src="http://i.imgur.com/lj9DCQ9.gif" width="100%" />
+<img src='{{ "/img/share.png" | prepend: site.baseurl }}' width="100%" />
 
 After you have selected iFrame, you can use this code to embed your story on your website or blog.
 
