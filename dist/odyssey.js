@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var e = _dereq_('./lib/odyssey/story');
 e.Actions = _dereq_('./lib/odyssey/actions');
@@ -801,13 +801,15 @@ function Step() {
       return;
     }
     var a = queue.pop();
-    if (!a[method] || !a[method]()) {
-      next(method);
-    } else {
+    if (a.on) {
       a.on('finish.chain', function() {
         a.on('finish.chain', null);
         next(method);
       });
+    }
+    if (!a[method] || !a[method]()) {
+      next(method);
+      if(a.on) a.on('finish.chain', null);
     }
   }
 
@@ -1701,16 +1703,6 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
 }
@@ -2317,8 +2309,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":27,"FWaASH":26,"inherits":25}],29:[function(_dereq_,module,exports){
+}).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":27,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":26,"inherits":25}],29:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
