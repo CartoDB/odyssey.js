@@ -153,6 +153,14 @@ function editor() {
     O.Template.Storage.load(function(md, template) {
       sendCode(md);
       set_template(template);
+
+      if (template === 'torque' && md.indexOf('vizjson:') === -1) {
+        var iviz = md.lastIndexOf('```'),
+            torquemd = "-vizjson: \"http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json\"\n-duration: \"30\"\n";
+
+        md = md.slice(0, iviz) + torquemd + md.slice(iviz);
+      }
+
       $editor.call(code_dialog.code(md));
     });
     sendMsg({ type: 'actions' }, function(data) {
