@@ -273,7 +273,7 @@ the trigger is updated.
 Move story to the desired state
 
   - `action_index`: base 0 index of state
-  - `options`: 
+  - `options`:
     - reverse: boolean, default false. Set it to true to call ``reverse`` method in the trigger when
       the state is set
 
@@ -349,9 +349,9 @@ function IntervalTrigger() {
     return t;
 }
 
-// enter will be printed only once since when the story is in a 
+// enter will be printed only once since when the story is in a
 // state if the trigger is raised again it has no effect
-story.addState(IntervalTrigger(), O.Debug().log('enter')); 
+story.addState(IntervalTrigger(), O.Debug().log('enter'));
 ```
 
 #### Trigger.trigger([t])
@@ -370,7 +370,7 @@ chain.on('finish.app', function() {
 Story().addState(trigger, chain);
 ~~~
 
-raises `finish` signal when all the tasks has been completed
+raises `finish` signal when all the tasks from all the actions have been completed
 
 the following example shows how to include a Sleep between actions
 
@@ -395,7 +395,7 @@ chain.on('finish.app', function() {
 O.Story().addState(trigger, parallel);
 ~~~
 
-raises `finish` signal when all the tasks has been completed
+raises `finish` signal when all the tasks from all the actions have been completed
 
 ### O.Sequence
 
@@ -452,11 +452,11 @@ manages page scroll
 ~~~javascript
 // action will be called when the scroll is within the vertical scape of #myelement
 O.Story()
-    .addState(O.Scroll().within($('#myelement'), action) 
+    .addState(O.Scroll().within($('#myelement'), action)
 ~~~
 
 #### within(element)
-returns a trigger which is raised when the scroll is within the vertical space of that element. 
+returns a trigger which is raised when the scroll is within the vertical space of that element.
 For example, if #div_element with style "position: absolute; top: 400px" the trigger will be raised
 when the scroll of the page is 400px
 
@@ -464,7 +464,7 @@ Optionally an ``offset`` can be set:
 ~~~javascript
 // in this case the trigger will be raised when the scroll of the page is at 200px
 O.Story()
-    .addState(O.Scroll().within($('#myelement').offset(200), action) 
+    .addState(O.Scroll().within($('#myelement').offset(200), action)
 ~~~
 
 ``element`` can be a DOMElement or a jQuery object
