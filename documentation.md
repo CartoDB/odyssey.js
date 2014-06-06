@@ -56,11 +56,13 @@ There are a few options for publishing your story. The first is to publish it di
 **TODO**
 **Include annotated image of the publish options**
 
-### Embed it on your site
+### Publish it on your site
 
-**TODO**
-**Include iframe link on the gist publish dialog**
-**After that, add this section plus screenshots**
+In the **Share** options for your story, you can select the third option, _IFRAME_.
+
+<img src="http://i.imgur.com/lj9DCQ9.gif" width="100%" />
+
+After you have selected iFrame, you can use this code to embed your story on your website or blog. 
 
 ### Save and return to your story
 
@@ -74,25 +76,25 @@ The Odyssey Editor allows you to link map changes and movements to different ele
 
 ### Hosted Templates
 
-Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
+Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method by which your story will progress. We have developed three templates to get you started.
 
 #### Slide template
 
-The slide template acts like a keynote presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the next/prev buttons or by pressing the cursor keys. This is perfect for stories that have not too much text and where the map is the principal element of them.
+The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
 **todo**
 _provide a link to an example (created using only the editor)_
 
-#### Scrolling template
+#### Scroll template
 
-The scrolling template is based on your page scroll. The story moves on as you scroll around the page. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
+The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
 **todo**
 _provide a link to an example (created using only the editor)_
 
 #### Torque template
 
-Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. Perfect for annotating animated stories.
+Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
 **todo**
 _provide a link to an example (created using only the editor)_
@@ -129,8 +131,8 @@ The config block is a control element at the top of your story's Markdown docume
 #### Torque options
 
 ~~~md
--vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
--duration: 30
+- vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
+- duration: 30
 ~~~
 
 - vizjson: "_the url to your cartodb torque visualization_"
@@ -168,9 +170,19 @@ See the list below for a complete list of available actions and their descriptio
 
 #### Map Actions
 
-_Move to_ - **todo**
+_Move to_ 
 
-_Zoom to_ - **todo**
+- simply set the map's new center point in latitude and longitude decimal degrees.
+
+```
+- center: [40.7127, -74.0059]
+```
+
+_Zoom to_  
+- set the map's new zoom level using an integer number from 0 to 18.
+```
+- zoom: 3
+```
 
 #### Control Actions
 
@@ -221,11 +233,15 @@ If you want to use a defined image reference, you can also do that. The markdown
 
 Here, the Alt text is the same as above, but the [id] is the name of a defined image reference which you have named elsewhere. It would look something like:
 
-~~~
+~~~md
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
-Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size.
+Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example:
+
+~~~md
+<img width="200px" src="http://imgur.com/69Gxjih.jpg" />
+~~~
 
 ### Links
 
@@ -262,11 +278,11 @@ Grab dist/odyssey.js and add it at the end of your `<body>` element in your html
 
 ### Quick start
 
-**TODO: DO THIS**
+**TODO**
 
 ### Story object
 
-Will attach each story state to the Odyssey story object. Controls the state of the story managing the states. Each story contains states and triggers control which state is the active one.
+The main object in Odyssey.js is the Story object. You can initialize a new story object as follows:
 
 ~~~javascript
 var story = O.Story();
