@@ -22,12 +22,24 @@ var Action = _dereq_('../story').Action;
 
 
 function CSS(el) {
-  
+
   function _css() {};
 
   _css.toggleClass = function(cl) {
     return Action(function() {
       el.toggleClass(cl);
+    });
+  };
+
+  _css.addClass = function(cl) {
+    return Action(function() {
+      el.addClass(cl);
+    });
+  };
+
+  _css.removeClass = function(cl) {
+    return Action(function() {
+      el.removeClass(cl);
     });
   };
 
@@ -427,9 +439,9 @@ function Slides(el) {
     var slideElements = Core.getElement(el).children;
     for(var i = 0; i < slideElements.length; ++i) {
       if (i === idx) {
-        slideElements[i].style.display = "block";
+        slideElements[i].classList.add("selected", "selected_slide");
       } else {
-        slideElements[i].style.display = "none";
+        slideElements[i].classList.remove("selected", "selected_slide");
       }
     }
   }

@@ -60,9 +60,9 @@ There are a few options for publishing your story. The first is to publish it di
 
 In the **Share** options for your story, you can select the third option, _IFRAME_.
 
-<img src="http://i.imgur.com/lj9DCQ9.gif" width="100%" />
+<img src='{{ "/img/share.png" | prepend: site.baseurl }}' width="100%" />
 
-After you have selected iFrame, you can use this code to embed your story on your website or blog. 
+After you have selected iFrame, you can use this code to embed your story on your website or blog.
 
 ### Save and return to your story
 
@@ -170,7 +170,7 @@ See the list below for a complete list of available actions and their descriptio
 
 #### Map Actions
 
-_Move to_ 
+_Move to_
 
 - simply set the map's new center point in latitude and longitude decimal degrees.
 
@@ -178,7 +178,7 @@ _Move to_
 - center: [40.7127, -74.0059]
 ```
 
-_Zoom to_  
+_Zoom to_
 - set the map's new zoom level using an integer number from 0 to 18.
 ```
 - zoom: 3
@@ -293,7 +293,7 @@ var story = O.Story();
 Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is only called when the story enters in this state.
 
 ~~~javascript
-Story().addState(trigger, action); 
+Story().addState(trigger, action);
 //TODO: IMPROVE THIS EXAMPLE
 ~~~
 
@@ -367,7 +367,7 @@ function IntervalTrigger() {
 }
 
 // Note that if the trigger is raised again it has no effect
-story.addState(IntervalTrigger(), O.Debug().log('enter')); 
+story.addState(IntervalTrigger(), O.Debug().log('enter'));
 ~~~
 
 #### trigger(_number_)
@@ -380,7 +380,7 @@ Raises the trigger. Optionally takes an argument, float [0, 1] if the action is 
 
 ### Step Object
 
-Accepts an unlimited number of actions and execute them in a sequence. Waits until the previous action is completed to start with the next one. The example below raises `finish` signal when all the tasks has been completed.
+Accepts an unlimited number of actions and execute them in a sequence. Waits until the previous action is completed to start with the next one. The example below raises `finish` signal when all the tasks from all the actions have been completed.
 
 ~~~javascript
 var step = O.Step(action1, action2, action3);
@@ -404,7 +404,7 @@ story.addState(O.Keys().right(), O.Step(
 
 ### Parallel Object
 
-Similar to Step but execute the defined actions at the same time. The example below raises `finish` signal when all the tasks has been completed.
+Similar to Step but execute the defined actions at the same time. The example below raises `finish` signal when all the tasks from all the actions have been completed.
 
 ~~~javascript
 var parallel = Parallel(action1, action2, action3);
@@ -488,7 +488,7 @@ Manages page scroll
 ~~~javascript
 // action will be called when the scroll is within the vertical scape of #myelement
 O.Story()
-    .addState(O.Scroll().within($('#myelement'), action) 
+    .addState(O.Scroll().within($('#myelement'), action)
 ~~~
 
 #### within(_el_)
@@ -499,7 +499,7 @@ Returns a trigger raised when the scroll is within the vertical space of the spe
 ~~~javascript
 // in this case the trigger will be raised when the scroll of the page is at 200px
 O.Story()
-  .addState(O.Scroll().within($('#myelement').offset(200), action) 
+  .addState(O.Scroll().within($('#myelement').offset(200), action)
 ~~~
 
 #### less(_el_)
@@ -558,7 +558,7 @@ See Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
 
 See Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
 
-~~~javascript()
+~~~javascript
 // TODO: ADD EXAMPLE
 ~~~
 
@@ -581,7 +581,7 @@ var map = new L.Map('map', {
 
 O.Story()
   .addState(
-    O.Scroll().within($('#myelement'), 
+    O.Scroll().within($('#myelement'),
     L.marker([37.1, -92]).actions.addTo(map)
   );
 ~~~
@@ -599,7 +599,7 @@ Creates an action that changes the icon of a marker. It receives two arguments _
 var marker = L.marker([0, 0])
 O.Story()
   .addState(
-    O.Scroll().within($('#myelement'), 
+    O.Scroll().within($('#myelement'),
     marker.actions.icon('enabled.png', 'disabled.png')
   );
 ~~~
@@ -637,7 +637,7 @@ O.Story()
 
 ### Debug
 
-Actions for debugging pourposes. 
+Actions for debugging pourposes.
 **TODO: EXTEND
 
 #### log(_text_)
@@ -801,6 +801,5 @@ _steps for compile_
 **Adding to Odyssey**
 
 If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above. **TODO, make link to Contributing live**
-
 
 
