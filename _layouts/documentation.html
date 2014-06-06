@@ -29,6 +29,9 @@
 
   <section id="content" class="content">
     <nav class="nav">
+      <div class="nav-header-scroll">
+        <h1>ODYYSEY</h1>
+      </div>
       <div class="nav-inner">
       </div>
     </nav>
@@ -45,5 +48,20 @@
   <script src='{{ "/js/vendor/jquery.jscrollpane.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/vendor/waypoints.min.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/docs.js" | prepend: site.baseurl }}'></script>
+  <script>
+
+
+    var valueHeight = $('.navbar').innerHeight();
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= valueHeight) {
+          $( ".nav" ).addClass( "fix-nav" )
+        } else {
+          $( ".nav" ).removeClass( "fix-nav" )
+        }
+    });
+
+
+  </script>
 </body>
 </html>

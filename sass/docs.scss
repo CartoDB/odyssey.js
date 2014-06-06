@@ -29,6 +29,7 @@ em { font-style: italic; }
   min-width: $small-width;
   padding: 20px;
   background: #35454B;
+  z-index: 2;
 }
 
 .nav-brand {
@@ -108,7 +109,7 @@ em { font-style: italic; }
 .inner {
   background: #fff;
   display: block;
-  padding: 40px;
+  padding: 40px 50px;
   position: relative;
   margin-left: 225px;
   color: #333;
@@ -129,6 +130,7 @@ em { font-style: italic; }
     background-color: #F8F8F8;
     border: 1px solid #DDD;
     @include border-radius(3px);
+    + h2 { margin-top: 60px; }
   }
 
   code {
@@ -139,6 +141,7 @@ em { font-style: italic; }
     border: none;
     padding: 0;
     background: transparent;
+
   }
 
   code {
@@ -311,8 +314,14 @@ pre {
   position: fixed;
   top: 0;
 }
+.fix-nav {
+  .nav-inner {
+    margin-top: -30px; 
+  }
+}
 
 .nav-inner {
+  margin-top: -115px;
   min-width: 225px;
   position: relative;
   height: 100%;
@@ -416,6 +425,48 @@ pre {
   margin-top: 10px;
   background: image-url('mobile-nav.png');
   text-indent: -9000px;
+}
+
+
+
+@keyframes show-brand {
+  0% {
+    transform: translateY(80px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes show-brand {
+  0% {
+    -webkit-transform: translateY(-80px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+  }
+}
+
+.nav-header-scroll {
+  -webkit-transform: translateY(-80px);
+  transform: translateY(80px);
+  padding: 30px 0 0 20px;
+  position: relative;
+  z-index: -1;
+  h1 {
+    font-size: 40px;
+    color: #35454B;
+    text-decoration: none;
+    font-family: staticregular;
+  }
+}
+.fix-nav .nav-header-scroll {
+  animation-name: show-brand;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-name: show-brand;
+  -webkit-animation-duration: .3s;
+  -webkit-animation-fill-mode: forwards;
 }
 
 
