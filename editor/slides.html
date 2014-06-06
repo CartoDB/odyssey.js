@@ -55,6 +55,9 @@
     }
   }
 
+  var resizeAction = O.Action(function() {
+    adjustSlides();
+  });
 
   function click(el) {
     var element = O.Core.getElement(el);
@@ -122,7 +125,8 @@
         var actions = O.Parallel(
           this.slides.activate(i),
           slide(this),
-          this.progress.activate(i)
+          this.progress.activate(i),
+          resizeAction
         );
         actions.on("finish.app", function() {
           adjustSlides();

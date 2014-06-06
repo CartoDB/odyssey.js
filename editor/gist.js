@@ -1,4 +1,5 @@
 function relocateAssets(doc) {
+  debugger;
   var s = location.pathname.split('/');
   var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
 

@@ -51,6 +51,10 @@
       }
     }
 
+    var resizeAction = O.Action(function() {
+      adjustSlides();
+    });
+
     function torque(layer) {
       function _torque() {}
 
@@ -194,12 +198,9 @@
           var ac = O.Parallel(
             O.Actions.CSS($("#slides_container")).addClass('visible'),
             this.slides.activate(i),
-            slide(this)
+            slide(this),
+            resizeAction
           );
-
-          ac.on("finish.app", function() {
-            adjustSlides();
-          });
 
           if (!slide.get('step')) return;
 

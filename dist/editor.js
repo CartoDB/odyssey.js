@@ -574,6 +574,7 @@ module.exports = editor;
 
 },{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
 function relocateAssets(doc) {
+  debugger;
   var s = location.pathname.split('/');
   var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
 
