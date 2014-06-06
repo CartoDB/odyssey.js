@@ -6,7 +6,7 @@ function relocateAssets(doc) {
   for (var i = 0; i < js.length; ++i) {
     var src = js[i].getAttribute('src');
     if (src && src.indexOf('http') !== 0) {
-      js[i].setAttribute("src", relocate_url + src);
+      js[i].setAttribute("src", (relocate_url + src).replace(/editor\/..\//g, ''));
     }
   }
 
@@ -40,8 +40,6 @@ function files(md, template, callback) {
   }
   queue(2)
     .defer(request, template + '.html')
-    .defer(request, 'css/' + template + '.css')
-    .defer(request, '../dist/odyssey.js')
     .awaitAll(ready);
 
   function ready(error, results) {
@@ -50,9 +48,7 @@ function files(md, template, callback) {
     });
 
     callback({
-      'oddysey.html': processHTML(results[0], md, relocateAssets),
-      'js/odyssey.js': results[2],
-      'css/slides.css': results[1]
+      'oddysey.html': processHTML(results[0], md, relocateAssets)
     });
   }
 }
