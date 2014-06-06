@@ -28,6 +28,33 @@
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
 
   <script>
+  var resizePID;
+
+  window.addEventListener("resize", function load(event) {
+    clearTimeout(resizePID);
+    resizePID = setTimeout(function() { resizeWindow(); }, 100);
+  });
+
+  function resizeWindow() {
+    adjustSlides();
+  }
+
+  function adjustSlides() {
+    var container = document.getElementById("slides_container"),
+        slide = document.getElementsByClassName("selected_slide")[0];
+
+    if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
+      container.style.bottom = "80px";
+      var h = container.offsetHeight;
+
+      slide.style.height = h-169+"px";
+    } else {
+      container.style.bottom = "auto";
+      container.style.minHeight = "0";
+      slide.style.height = "auto";
+    }
+  }
+
 
   function click(el) {
     var element = O.Core.getElement(el);
@@ -92,11 +119,15 @@
 
         this.progress.step(i).then(this.seq.step(i), this.seq)
 
-        var actions = O.Parallel.apply(window, [
+        var actions = O.Parallel(
           this.slides.activate(i),
           slide(this),
           this.progress.activate(i)
-        ]);
+        );
+        actions.on("finish.app", function() {
+          adjustSlides();
+        });
+
         this.story.addState(
           this.seq.step(i),
           actions

@@ -160,7 +160,11 @@
           tmpl += "</div>";
           document.getElementById('slides').innerHTML += tmpl;
 
-          var ac = O.Parallel.apply(window, [this.slides.activate(i), slide(this)]);
+          var ac = O.Parallel(
+            O.Actions.CSS($("#slides_container")).addClass('visible'),
+            this.slides.activate(i),
+            slide(this)
+          );
 
           if (!slide.get('step')) return;
 
@@ -174,8 +178,8 @@
       update: function(actions) {
         var self = this;
 
-        if ($("#slides_container").is(":visible")) {
-          $("#slides_container").hide();
+        if ($("#slides_container").hasClass("visible")) {
+          $("#slides_container").removeClass("visible");
         }
 
         if (this.map && this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
