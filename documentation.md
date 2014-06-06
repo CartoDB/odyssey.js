@@ -76,25 +76,25 @@ The Odyssey Editor allows you to link map changes and movements to different ele
 
 ### Hosted Templates
 
-Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method your story will progress. We have developed 3 templates to get you started.
+Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method by which your story will progress. We have developed three templates to get you started.
 
 #### Slide template
 
-The slide template acts like a keynote presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the next/prev buttons or by pressing the cursor keys. This is perfect for stories that have not too much text and where the map is the principal element of them.
+The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
 **todo**
 _provide a link to an example (created using only the editor)_
 
-#### Scrolling template
+#### Scroll template
 
-The scrolling template is based on your page scroll. The story moves on as you scroll around the page. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
+The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
 **todo**
 _provide a link to an example (created using only the editor)_
 
 #### Torque template
 
-Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. Perfect for annotating animated stories.
+Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
 **todo**
 _provide a link to an example (created using only the editor)_
