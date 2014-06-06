@@ -558,7 +558,7 @@ See Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
 
 See Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
 
-~~~javascript()
+~~~javascript
 // TODO: ADD EXAMPLE
 ~~~
 
