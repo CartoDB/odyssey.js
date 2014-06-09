@@ -104,7 +104,7 @@ $small-width: 320px;
   @include border-radius(3px);
   @include transition(all .15s ease-out);
   &.download-link {
-    width: 150px;
+    width: 100px;
   }
   &:hover,
   &.button-primary {
