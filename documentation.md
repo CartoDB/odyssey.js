@@ -481,6 +481,44 @@ Returns a trigger that is raised when user press right key
 
 Returns a trigger that is raised when user press left key
 
+### O.Gestures([el])
+
+Same than ``O.keys`` but suited for touch devices, it allows to track events like swipe.
+
+It optionally gets a DOM element where to attach the events.
+
+The tipical usage is with ``Keys`` and a ``Sequence``
+
+~~~javascript
+
+var seq = O.Sequence()
+
+O.Keys().left().then(seq.prev, seq);
+O.Keys().right().then(seq.next, seq);
+
+if ("ontouchstart" in document.documentElement) {
+  O.Gestures().swipeLeft().then(seq.prev, seq)
+  O.Gestures().swipeRight().then(seq.next, seq)
+}
+
+O.Story()
+  .addState(seq.step(0), action1);
+  .addState(seq.step(1), action2);
+
+~~~
+
+It uses [Hammer.js](http://eightmedia.github.io/hammer.js/) under the hood
+
+#### swipeLef
+returns a trigger which is called when the element recieves a swipe event to the left
+
+#### swipeRight
+
+#### swipeUp
+
+#### swipeDown
+
+
 
 ### Scroll
 Manages page scroll
