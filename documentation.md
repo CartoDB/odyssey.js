@@ -528,7 +528,7 @@ O.Story()
 
 It uses [Hammer.js](http://eightmedia.github.io/hammer.js/) under the hood
 
-#### swipeLef
+#### swipeLeft
 returns a trigger which is called when the element recieves a swipe event to the left
 
 #### swipeRight
