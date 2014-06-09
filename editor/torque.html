@@ -151,17 +151,6 @@
 
     O.Template({
       actions: {
-        'move map to': function() {
-          var center = this.map.getCenter()
-          return 'S.map.actions.setView([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + '],' + this.map.getZoom() + ')'
-        },
-        'show marker': function() {
-          var center = this.map.getCenter()
-          return 'L.marker([' + center.lat.toFixed(4) + ', ' + center.lng.toFixed(4) + ']).actions.addRemove(S.map)';
-        },
-        'sleep': function() {
-          return "O.Actions.Sleep(1000)";
-        },
         'insert time': function() {
           return "- step: " + this.torqueLayer.getStep()
         },
