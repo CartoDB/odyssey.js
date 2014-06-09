@@ -180,9 +180,8 @@ var Docs = Backbone.View.extend({
 
     this.$nav.find('a').on('click', function(e) {
       e.preventDefault();
-      app.navigate("help/troubleshooting", {trigger: true});
 
-      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
+      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 }, function() {  window.location.hash = $(e.target).attr('href') });
     });
   },
 
@@ -194,7 +193,9 @@ var Docs = Backbone.View.extend({
 
       $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
 
-      callback && callback();
+      setTimeout(function() {
+        callback && callback();
+      }, delay);
     }
   }
 });
