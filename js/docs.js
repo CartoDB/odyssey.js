@@ -130,7 +130,7 @@ var Docs = Backbone.View.extend({
   },
 
   _styleCode: function() {
-    $('pre code').each(function() {
+    $('.language-md, .language-sh, .language-javascript').each(function() {
         var $this = $(this),
             $code = $this.html();
 
@@ -138,14 +138,27 @@ var Docs = Backbone.View.extend({
 
         var myCodeMirror = CodeMirror(this, {
             value: $code,
-            mode: 'javascript',
             lineNumbers: false,
             readOnly: true,
             lineWrapping: false,
         });
     });
-  },    
 
+    $('.language-html').each(function() {
+        var $this = $(this),
+            $code = $this.html();
+
+        $this.empty();
+
+        var myCodeMirror = CodeMirror(this, {
+            value: $code.replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
+            mode: 'text/html',
+            lineNumbers: false,
+            readOnly: true,
+            lineWrapping: false,
+        });
+    });
+  },
   _waypoint: function(direction, el) {
     var $active = $(el);
 

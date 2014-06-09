@@ -7,6 +7,6 @@ url: ""
 # Build settings
 markdown: kramdown
 kramdown:
-  use_coderay: true
+  use_coderay: false
 permalink: pretty
 encoding: utf-8
