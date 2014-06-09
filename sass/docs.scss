@@ -195,7 +195,7 @@ pre {
   overflow: auto;
   font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
   margin-bottom: 15px;
-  padding: 20px;
+  padding: 15px 15px 2px 15px;;
   background-color: #F8F8F8;
   border: 1px solid #DDD;
   @include border-radius(3px);
@@ -605,3 +605,5 @@ code {
   }
 
 }
+
+.CodeMirror-scroll { font-size: 15px; }
