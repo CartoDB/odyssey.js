@@ -30,10 +30,8 @@ If you want to start using the on-line editor, go to the [homepage](../), click 
 Change the top level data in the editor. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
 
 ~~~md
-
 - title: "10 years later..."
 - author: "Homer"
-
 ~~~
 
 #### Add story content
@@ -41,12 +39,10 @@ Change the top level data in the editor. Change the _title_ and the _author_. Yo
 Stories are broken down into _chapters_. Each chapter begins with a _title_ and then can contain a mix of headlines, text and other Markdown elements (images, links, etc.). Here is an example of one chapter:
 
 ~~~md
-
 # The beginning
 
 Tell me, O muse, of that ingenious
 hero who travelled far
-
 ~~~
 
 ### Publish your story
@@ -119,10 +115,8 @@ The config block is a control element at the top of your story's Markdown docume
 #### Default options
 
 ~~~md
-
 - title: "This is my story title"
 - author: "Odyssey master"
-
 ~~~
 
 - title: "_Title of your story_"
@@ -143,12 +137,10 @@ The config block is a control element at the top of your story's Markdown docume
 Chapters define each section of your story and allow you to perform new Actions when a user reaches the chapter. Chapters are defined by including a new header element, the `#` in Markdown. In this example code shown, the line **# The escape** would indicate the start of a new chapter.
 
 ~~~md
-
 # The escape
 
 But as the sun was rising from the
 fair sea into the firmament...
-
 ~~~
 
 ### The Actions block
@@ -163,7 +155,6 @@ You can also add actions manually once you get a hang of the syntax. The code sh
 - center: [10.000, -10.000]
 - zoom: 6
 L.marker([0.0000, 0.0000]).actions.addRemove(S.map)
-
 ~~~
 
 See the list below for a complete list of available actions and their descriptions.
@@ -174,15 +165,16 @@ _Move to_
 
 - simply set the map's new center point in latitude and longitude decimal degrees.
 
-```
+~~~md
 - center: [40.7127, -74.0059]
-```
+~~~
 
 _Zoom to_
 - set the map's new zoom level using an integer number from 0 to 18.
-```
+
+~~~md
 - zoom: 3
-```
+~~~
 
 #### Control Actions
 

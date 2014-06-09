@@ -30,12 +30,7 @@ var Docs = Backbone.View.extend({
       }
     });
 
-    var $inner_ = this.$content.find('.inner');
-    $inner_.find('h2, h3, h4').waypoint(function(direction) {
-      that._waypoint(direction, this);
-
-      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-    }, { offset: 40 });
+    this._styleCode();
   },
 
   _onScroll: function() {
@@ -134,6 +129,23 @@ var Docs = Backbone.View.extend({
     callback && callback();
   },
 
+  _styleCode: function() {
+    $('pre code').each(function() {
+        var $this = $(this),
+            $code = $this.html();
+
+        $this.empty();
+
+        var myCodeMirror = CodeMirror(this, {
+            value: $code,
+            mode: 'javascript',
+            lineNumbers: false,
+            readOnly: true,
+            lineWrapping: false,
+        });
+    });
+  },    
+
   _waypoint: function(direction, el) {
     var $active = $(el);
 
@@ -177,6 +189,13 @@ var Docs = Backbone.View.extend({
       .on('resize', function() {
         that._onScroll();
       });
+
+    var $inner_ = this.$content.find('.inner');
+    $inner_.find('h2, h3, h4').waypoint(function(direction) {
+      that._waypoint(direction, this);
+
+      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+    }, { offset: 40 });
 
     this.$nav.find('a').on('click', function(e) {
       e.preventDefault();

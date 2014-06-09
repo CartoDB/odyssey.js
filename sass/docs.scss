@@ -3,7 +3,7 @@
 @import '_helpers';
 
 @import "vendor/_jquery.jscrollpane";
-@import "vendor/_syntax";
+@import "vendor/_codemirror";
 
 body {
   text-rendering: optimizeLegibility;
@@ -122,44 +122,6 @@ em { font-style: italic; }
     margin-left: 225px;
   }
 
-  pre, code {
-    overflow: auto;
-    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
-    margin-bottom: 15px;
-    padding: 20px;
-    background-color: #F8F8F8;
-    border: 1px solid #DDD;
-    @include border-radius(3px);
-    + h2 { margin-top: 60px; }
-  }
-
-  code {
-    padding: 2px;
-  }
-
-  pre > code {
-    border: none;
-    padding: 0;
-    background: transparent;
-
-  }
-
-  code {
-    color: #666;
-    background-color: #F8F8F8;
-    border: 1px solid #DDD;
-    @include border-radius(3px);
-    overflow: auto;
-    font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
-    padding: 4px;
-  }
-
-  pre > code {
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-
     h2 {
       margin: 0 0 22px 0;
       font: 26px/30px 'staticregular';
@@ -202,20 +164,6 @@ em { font-style: italic; }
     li p { float: none; }
     ul { list-style-type: disc; margin: 0 0 20px 0; }
     ol { list-style-type: lower-hexadecimal; margin: 0 0 20px 0; }
-    h2,
-    p,
-    h1,
-    table,
-    ol,
-    ul,
-    h3,
-    h4
-    {
-      float: left;
-      display: inline;
-      // width: 50%;
-      clear:left;
-    }
 }
 
 .inner-code {
@@ -243,13 +191,36 @@ em { font-style: italic; }
 
 
 // code
-
 pre {
-  position: relative;
-  z-index: 1;
-  clear: both;
-  width: 100%;
-  margin-bottom: 32px;
+  overflow: auto;
+  font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  margin-bottom: 15px;
+  padding: 20px;
+  background-color: #F8F8F8;
+  border: 1px solid #DDD;
+  @include border-radius(3px);
+  + h2 { margin-top: 60px; }
+}
+
+code {
+  padding: 2px;
+}
+
+pre > code {
+  border: none;
+  padding: 0;
+  background: transparent;
+
+}
+
+code {
+  color: #666;
+  background-color: #F8F8F8;
+  border: 1px solid #DDD;
+  @include border-radius(3px);
+  overflow: auto;
+  font: 16px/22px Consolas, "Liberation Mono", Courier, monospace;
+  padding: 4px;
 }
 
 .code-info {
