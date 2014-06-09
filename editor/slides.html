@@ -72,11 +72,13 @@
   O.Template({
 
     init: function() {
-      var map = L.map('map').setView([0, 0.0], 4);
-      L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', {
+      var seq = O.Triggers.Sequential();
+
+      var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+      var map = this.map = L.map('map').setView([0, 0.0], 4);
+      var basemap = this.basemap = L.tileLayer(baseurl, {
         attribution: 'data OSM - map CartoDB'
       }).addTo(map);
-      var seq = O.Triggers.Sequential();
 
       // enanle keys to move
       O.Keys().on('map').left().then(seq.prev, seq)
@@ -88,7 +90,6 @@
       var slides = O.Actions.Slides('slides');
       var story = O.Story()
 
-      this.map = map;
       this.story = story;
       this.seq = seq;
       this.slides = slides;
@@ -98,6 +99,12 @@
     update: function(actions) {
       if (!actions.length) return;
       this.story.clear();
+
+      if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+        this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+        this.basemap.setUrl(this.baseurl);
+      }
 
       // update footer title and author
       var title_ = actions.global.title === undefined ? '' : actions.global.title,
