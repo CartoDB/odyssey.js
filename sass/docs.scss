@@ -316,12 +316,12 @@ pre {
 }
 .fix-nav {
   .nav-inner {
-    margin-top: -30px; 
+    margin-top: 0; 
   }
 }
 
 .nav-inner {
-  margin-top: -115px;
+  margin-top: -75px;
   min-width: 225px;
   position: relative;
   height: 100%;
@@ -330,7 +330,7 @@ pre {
     margin-bottom: 35px;
   }
   .fixed {
-    padding: 61px 30px 40px 20px;
+    padding: 20px 30px 40px 20px;
     font: 14px 'Helvetica Neu', Helvetica, Arial;
 
     .item {
@@ -367,15 +367,16 @@ pre {
         font-weight: 200;
       }
 
-      &:hover { color: #000; }
+      &:hover { color: #333; }
     }
     > li ul > .indent {
+      display: none;
       font-size: 13px;
-      padding-left: 17px;
+      padding-left: 22px;
 
       .selected {
-        margin-left: -41px;
-        padding-left: 37px;
+        margin-left: -46px;
+        padding-left: 42px;
         font-weight: bold;
         color: #666;
       }
@@ -449,7 +450,7 @@ pre {
 .nav-header-scroll {
   -webkit-transform: translateY(-80px);
   transform: translateY(80px);
-  padding: 30px 0 0 20px;
+  padding: 15px 0 0 20px;
   position: relative;
   z-index: -1;
   h1 {

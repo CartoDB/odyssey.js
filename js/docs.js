@@ -129,20 +129,27 @@ var Docs = {
       .closest('li')
       .addClass('selected');
 
-      // if (direction === "up") {
-      //   $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
-      // }
-
       if (!$active.length) { $active.end('h2'); }
 
       var id_ = $active.attr('id');
 
-      $('.nav').find('.selected')
-        .removeClass('selected');
+      $('.nav').find('.selected').removeClass('selected');
 
-      $('.nav').find('a[href="#' + id_ + '"]')
-        .addClass('selected')
-        .closest('.item')
+      var $a = $('.nav').find('a[href="#' + id_ + '"]').addClass('selected');
+
+      $a.closest('li')
+        .siblings('.indent')
+        .hide();
+
+      var $indent = $a.closest('.indent').show();
+
+      $indent
+        .nextUntil('li:not(.indent)').show();
+
+      $indent
+        .prevUntil('li:not(.indent)').show();
+
+      $a.closest('.item')
         .addClass('selected')
         .find('h3 a')
         .addClass('selected');
