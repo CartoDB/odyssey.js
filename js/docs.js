@@ -1,4 +1,10 @@
-var Docs = {
+var Docs = Backbone.View.extend({
+  el: document.body,
+
+  events: {
+    'click .menu-link': '_onClick'
+  },
+
   initialize: function() {
     this.$el = $('body');
     this.navHeight = $('.navbar').outerHeight()
@@ -46,6 +52,10 @@ var Docs = {
         this.$content.addClass('sticky');
       }
 
+      if (!this.$nav.hasClass('fix-nav')) {
+        this.$nav.addClass('fix-nav');
+      }
+
       if (!this.scrolled) {
         this.scrolled = true;
 
@@ -56,10 +66,12 @@ var Docs = {
 
       this._onResize();
 
-      this.$nav.addClass('sticky');
-
       if (this.$content.hasClass('sticky')) {
         this.$content.removeClass('sticky');
+      }
+
+      if (this.$nav.hasClass('fix-nav')) {
+        this.$nav.removeClass('fix-nav');
       }
 
       if (this.scrolled) {
@@ -168,6 +180,7 @@ var Docs = {
 
     this.$nav.find('a').on('click', function(e) {
       e.preventDefault();
+      app.navigate("help/troubleshooting", {trigger: true});
 
       that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
     });
@@ -184,8 +197,4 @@ var Docs = {
       callback && callback();
     }
   }
-}
-
-$(function() {
-  Docs.initialize();
 });
