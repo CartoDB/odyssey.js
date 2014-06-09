@@ -290,11 +290,11 @@ var story = O.Story();
 
 #### addState(_trigger_, _action_)
 
-Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is only called when the story enters in this state.
+Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is called **once** when the story enters
+in this state so if the trigger is raised another time when the state is active the action is not called. See ``addLinearState``.
 
 ~~~javascript
-Story().addState(trigger, action);
-//TODO: IMPROVE THIS EXAMPLE
+Story().addState(O.Keys().right(), map.actions.moveTo(-1.2, 45));
 ~~~
 
 #### addLinearState(_trigger_, _action_)
@@ -375,8 +375,32 @@ story.addState(IntervalTrigger(), O.Debug().log('enter'));
 Raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
 
 ~~~javascript
-//TODO: ADD EXAMPLE
+    t = O.Trigger();
+    story.addState(t, action);
+    t.trigger(); // this enters in the state and calls "action"
 ~~~
+
+for linear states:
+
+~~~javascript
+    t = O.Trigger();
+    story.addState(t, O.Action({
+
+        enter: function() {
+            console.log("enter");
+        },
+
+        update: function(t) {
+            console.log(t);
+        }
+
+    });
+    t.trigger(); // "enter"
+    t.trigger(0.2); // "0.2"
+~~~
+
+actions without ``update`` method are not called more than once (on action enter)
+
 
 ### Step Object
 
@@ -421,7 +445,6 @@ O.Story().addState(trigger, parallel);
 Contains the logic for moving forward and backward through the story states attached to your story object.
 
 ~~~javascript
-//TODO: THIS IS NOT CLEAR ENOUGH
 var seq = O.Sequence();
 O.Story()
   .addState(seq.step(0), action1);
@@ -443,16 +466,18 @@ Goes to the prev state
 
 Generates a trigger which is raised when the sequence moves to state `n`
 
-~~~javascript
-//TODO: ADD EXAMPLE.
-~~~
-
 #### current(_number_)
 
 Set (triggers) or get the current step
 
 ~~~javascript
-//TODO: ADD EXAMPLE.
+var seq = O.Sequence();
+O.Story()
+  .addState(seq.step(0), action1);
+  .addState(seq.step(1), action2);
+
+seq.current(0); // raises action1
+console.log(seq.current()); // 0
 ~~~
 
 
@@ -586,27 +611,24 @@ O.Story()
 
 #### panTo(_latlng_)
 
+Use when only center need to be changed. For changing center and zoom at the same time see ``setView``
 See Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
-
-~~~javascript
-// TODO: ADD EXAMPLE
-~~~
 
 #### setView()
 
-See Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method
+See Leaflet [setView](http://leafletjs.com/reference.html#map-setview) method. Use this when zoom
+and center are changed at the same time
 
 ~~~javascript
-// TODO: ADD EXAMPLE
+O.Story()
+  .addState(trigger, map.actions.panView([37.1, -92], 10);
 ~~~
 
 #### setZoom()
 
+Use when only zoom need to be changed. For changing center and zoom at the same time see ``setView``
 See Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
 
-~~~javascript
-// TODO: ADD EXAMPLE
-~~~
 
 ### Marker
 Creates actions to manage leaflet markers. It can be used as a leaflet plugin using `actions` in ``L.Marker`` instance
@@ -666,7 +688,7 @@ Actions related to css tasks. All the actions inside this module needs the eleme
 
 #### toggleClass
 
-**TODO: DOCUMENT
+toggle a class for an element, same than jQuery ``toggleClass``.
 
 ~~~javascript
 O.Story()
@@ -676,7 +698,6 @@ O.Story()
 ### Debug
 
 Actions for debugging pourposes.
-**TODO: EXTEND
 
 #### log(_text_)
 Prints current state plus the `text`.
@@ -687,8 +708,7 @@ O.Story()
 ~~~
 
 ### Location
-Actions related with the `window.location` object.
-**TODO: EXTEND
+Actions related with the `window.location` object, like change the url hash.
 
 #### changeHash(_string_)
 
@@ -716,7 +736,6 @@ O.Story()
 Actions to control HTML5 audio element
 
 #### play
-**TODO: EXTEND
 
 ~~~javascript
 O.Story()
@@ -724,7 +743,6 @@ O.Story()
 ~~~
 
 #### pause
-**TODO: EXTEND
 
 ~~~javascript
 O.Story()
@@ -734,7 +752,6 @@ O.Story()
 #### setCurrentTime(_t_)
 
 Sets current play time
-**TODO: EXTEND
 
 ~~~javascript
 O.Story()
