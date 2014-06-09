@@ -165,17 +165,15 @@
       init: function() {
         var self = this;
 
-        var map = L.map('map').setView([0, 0.0], 4);
-        L.tileLayer('http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png', {
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var basemap = this.basemap = L.tileLayer(baseurl, {
           attribution: 'data OSM - map CartoDB'
         }).addTo(map);
 
-        var slides = O.Actions.Slides('slides');
-        var story = O.Story()
-
-        this.map = map;
-        this.story = story;
-        this.slides = slides;
+        var slides = this.slides = O.Actions.Slides('slides');
+        var story = this.story = O.Story()
       },
 
       _resetActions: function(actions) {
@@ -209,7 +207,13 @@
           $("#slides_container").removeClass("visible");
         }
 
-        if (this.map && this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+        if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+          this.baseurl = actions.global.baseurl;
+
+          this.basemap.setUrl(this.baseurl);
+        }
+
+        if (this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
           this.map.removeLayer(this.torqueLayer);
 
           // hack to stop (not remove) binding
