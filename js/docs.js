@@ -1,4 +1,10 @@
-var Docs = {
+var Docs = Backbone.View.extend({
+  el: document.body,
+
+  events: {
+    'click .menu-link': '_onClick'
+  },
+
   initialize: function() {
     this.$el = $('body');
     this.navHeight = $('.navbar').outerHeight()
@@ -24,12 +30,7 @@ var Docs = {
       }
     });
 
-    var $inner_ = this.$content.find('.inner');
-    $inner_.find('h2, h3, h4').waypoint(function(direction) {
-      that._waypoint(direction, this);
-
-      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
-    }, { offset: 40 });
+    this._styleCode();
   },
 
   _onScroll: function() {
@@ -46,6 +47,10 @@ var Docs = {
         this.$content.addClass('sticky');
       }
 
+      if (!this.$nav.hasClass('fix-nav')) {
+        this.$nav.addClass('fix-nav');
+      }
+
       if (!this.scrolled) {
         this.scrolled = true;
 
@@ -56,10 +61,12 @@ var Docs = {
 
       this._onResize();
 
-      this.$nav.addClass('sticky');
-
       if (this.$content.hasClass('sticky')) {
         this.$content.removeClass('sticky');
+      }
+
+      if (this.$nav.hasClass('fix-nav')) {
+        this.$nav.removeClass('fix-nav');
       }
 
       if (this.scrolled) {
@@ -122,6 +129,23 @@ var Docs = {
     callback && callback();
   },
 
+  _styleCode: function() {
+    $('pre code').each(function() {
+        var $this = $(this),
+            $code = $this.html();
+
+        $this.empty();
+
+        var myCodeMirror = CodeMirror(this, {
+            value: $code,
+            mode: 'javascript',
+            lineNumbers: false,
+            readOnly: true,
+            lineWrapping: false,
+        });
+    });
+  },    
+
   _waypoint: function(direction, el) {
     var $active = $(el);
 
@@ -129,20 +153,27 @@ var Docs = {
       .closest('li')
       .addClass('selected');
 
-      // if (direction === "up") {
-      //   $active = ($active.index('h2') === 0) ? $active : $active.prevAll('h2');
-      // }
-
       if (!$active.length) { $active.end('h2'); }
 
       var id_ = $active.attr('id');
 
-      $('.nav').find('.selected')
-        .removeClass('selected');
+      $('.nav').find('.selected').removeClass('selected');
 
-      $('.nav').find('a[href="#' + id_ + '"]')
-        .addClass('selected')
-        .closest('.item')
+      var $a = $('.nav').find('a[href="#' + id_ + '"]').addClass('selected');
+
+      $a.closest('li')
+        .siblings('.indent')
+        .hide();
+
+      var $indent = $a.closest('.indent').show();
+
+      $indent
+        .nextUntil('li:not(.indent)').show();
+
+      $indent
+        .prevUntil('li:not(.indent)').show();
+
+      $a.closest('.item')
         .addClass('selected')
         .find('h3 a')
         .addClass('selected');
@@ -159,10 +190,17 @@ var Docs = {
         that._onScroll();
       });
 
+    var $inner_ = this.$content.find('.inner');
+    $inner_.find('h2, h3, h4').waypoint(function(direction) {
+      that._waypoint(direction, this);
+
+      that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
+    }, { offset: 40 });
+
     this.$nav.find('a').on('click', function(e) {
       e.preventDefault();
 
-      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 });
+      that._goTo($('#'+this.href.split('#')[1]), { margin: 30 }, function() {  window.location.hash = $(e.target).attr('href') });
     });
   },
 
@@ -174,11 +212,9 @@ var Docs = {
 
       $('html, body').delay(delay).animate({scrollTop:$el.offset().top - margin}, speed);
 
-      callback && callback();
+      setTimeout(function() {
+        callback && callback();
+      }, delay);
     }
   }
-}
-
-$(function() {
-  Docs.initialize();
 });

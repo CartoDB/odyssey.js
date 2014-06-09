@@ -9,7 +9,15 @@
   {{ content }}
 
   <script src='{{ "/js/vendor/jquery-1.11.1.min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/underscore-min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/backbone-min.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/main.js" | prepend: site.baseurl }}'></script>
+
+  <script>
+    $(function() {
+      window.home = new Home();
+    });
+  </script>
 
   <!-- TODO: analytics -->
   <script>

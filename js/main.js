@@ -1,5 +1,14 @@
-var Home = {
+var Home = Backbone.View.extend({
+  el: document.body,
+
+  events: {
+    'click .menu-link': '_onClick'
+  },
+
   initialize: function() {
+    this.$offcanvas = $('.offcanvas');
+    this.$navbar = $('.navbar');
+
     this._initBindings();
   },
 
@@ -13,30 +22,24 @@ var Home = {
       .on('resize', function() {
         that._onScroll();
       });
-
-    $('.menu-link').on('click', function(e) {
-      e.preventDefault();
-
-      that._onClick();
-    });
   },
 
   _onScroll: function() {
     var pos = $(window).scrollTop();
 
     if (pos < $('.header').outerHeight()) {
-      if ($('.navbar').hasClass('scrolled')) {
-        $('.navbar').removeClass('scrolled');
+      if (this.$navbar.hasClass('scrolled')) {
+        this.$navbar.removeClass('scrolled');
 
-        $('.navbar').animate({
+        this.$navbar.animate({
           top: '-90px'
         }, 50);
       }
     } else {
-      if (!$('.navbar').hasClass('scrolled')) {
-        $('.navbar').addClass('scrolled');
+      if (!this.$navbar.hasClass('scrolled')) {
+        this.$navbar.addClass('scrolled');
 
-        $('.navbar').animate({
+        this.$navbar.animate({
           top: 0,
         }, 50);
       }
@@ -44,14 +47,10 @@ var Home = {
   },
 
   _onClick: function() {
-    if ($('.offcanvas').hasClass('active')) {
-      $('.offcanvas').removeClass('active');
+    if (this.$offcanvas.hasClass('active')) {
+      this.$offcanvas.removeClass('active');
     } else {
-      $('.offcanvas').addClass('active');
+      this.$offcanvas.addClass('active');
     }
   }
-}
-
-$(function() {
-  Home.initialize();
 });

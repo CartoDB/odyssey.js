@@ -46,21 +46,17 @@
   <script src='{{ "/js/vendor/jquery.mousewheel.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/vendor/jquery.jscrollpane.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/vendor/waypoints.min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/underscore-min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/backbone-min.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/codemirror.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/codemirror/javascript.js" | prepend: site.baseurl }}'></script>
+  <script src='{{ "/js/vendor/codemirror/markdown.js" | prepend: site.baseurl }}'></script>
   <script src='{{ "/js/docs.js" | prepend: site.baseurl }}'></script>
+
   <script>
-
-
-    var valueHeight = $('.navbar').innerHeight();
-
-    $(window).scroll(function() {
-        if ($(window).scrollTop() >= valueHeight) {
-          $( ".nav" ).addClass( "fix-nav" )
-        } else {
-          $( ".nav" ).removeClass( "fix-nav" )
-        }
+    $(function() {
+      window.docs = new Docs();
     });
-
-
   </script>
 </body>
 </html>
