@@ -532,6 +532,23 @@ function editor() {
     O.Template.Storage.load(function(md, template) {
       sendCode(md);
       set_template(template);
+
+      if (template === 'torque') {
+        if (md.indexOf('vizjson:') === -1) {
+          var iviz = md.lastIndexOf('```'),
+              viz = "-vizjson: \"http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json\"\n";
+
+          md = md.slice(0, iviz) + viz + md.slice(iviz);
+        }
+
+        if (md.indexOf('duration:') === -1) {
+          var idur = md.lastIndexOf('```'),
+              dur = "-duration: \"30\"\n";
+
+          md = md.slice(0, idur) + dur + md.slice(idur);
+        }
+      }
+
       $editor.call(code_dialog.code(md));
     });
     sendMsg({ type: 'actions' }, function(data) {
@@ -575,13 +592,13 @@ module.exports = editor;
 },{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
 function relocateAssets(doc) {
   var s = location.pathname.split('/');
-  var relocate_url = "http://" + location.host + s.slice(0, s.length - 1).join('/') + "/";
+  var relocate_url = "http://cartodb.github.io/odyssey.js" + s.slice(0, s.length - 1).join('/') + "/";
 
   var js = doc.getElementsByTagName('script');
   for (var i = 0; i < js.length; ++i) {
     var src = js[i].getAttribute('src');
     if (src && src.indexOf('http') !== 0) {
-      js[i].setAttribute("src", relocate_url + src);
+      js[i].setAttribute("src", (relocate_url + src).replace(/editor\/..\//g, ''));
     }
   }
 
@@ -615,8 +632,6 @@ function files(md, template, callback) {
   }
   queue(2)
     .defer(request, template + '.html')
-    .defer(request, 'css/' + template + '.css')
-    .defer(request, '../dist/odyssey.js')
     .awaitAll(ready);
 
   function ready(error, results) {
@@ -625,9 +640,7 @@ function files(md, template, callback) {
     });
 
     callback({
-      'oddysey.html': processHTML(results[0], md, relocateAssets),
-      'js/odyssey.js': results[2],
-      'css/slides.css': results[1]
+      'oddysey.html': processHTML(results[0], md, relocateAssets)
     });
   }
 }

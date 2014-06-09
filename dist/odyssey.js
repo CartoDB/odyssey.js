@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.O=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var e = _dereq_('./lib/odyssey/story');
 e.Actions = _dereq_('./lib/odyssey/actions');
@@ -16,7 +16,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":5,"./lib/odyssey/core":12,"./lib/odyssey/story":13,"./lib/odyssey/template":14,"./lib/odyssey/triggers":15,"./lib/odyssey/ui":21,"./lib/odyssey/util":23}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":5,"./lib/odyssey/core":13,"./lib/odyssey/story":14,"./lib/odyssey/template":15,"./lib/odyssey/triggers":16,"./lib/odyssey/ui":22,"./lib/odyssey/util":24}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -49,7 +49,7 @@ function CSS(el) {
 
 module.exports = CSS;
 
-},{"../story":13}],3:[function(_dereq_,module,exports){
+},{"../story":14}],3:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 //
@@ -84,7 +84,7 @@ function Debug() {
 
 module.exports = Debug;
 
-},{"../story":13}],4:[function(_dereq_,module,exports){
+},{"../story":14}],4:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -111,7 +111,7 @@ var Audio = function(el){
 module.exports = Audio;
 
 
-},{"../story":13}],5:[function(_dereq_,module,exports){
+},{"../story":14}],5:[function(_dereq_,module,exports){
 
 module.exports = {
   Sleep: _dereq_('./sleep'),
@@ -124,10 +124,11 @@ module.exports = {
     Popup: _dereq_('./leaflet/popup')
   },
   CSS: _dereq_('./css'),
-  Slides: _dereq_('./slides')
+  Slides: _dereq_('./slides'),
+  MiniProgressBar: _dereq_('./mini_progressbar')
 };
 
-},{"./css":2,"./debug":3,"./html5audio":4,"./leaflet/map":6,"./leaflet/marker":7,"./leaflet/popup":8,"./location":9,"./sleep":10,"./slides":11}],6:[function(_dereq_,module,exports){
+},{"./css":2,"./debug":3,"./html5audio":4,"./leaflet/map":6,"./leaflet/marker":7,"./leaflet/popup":8,"./location":9,"./mini_progressbar":10,"./sleep":11,"./slides":12}],6:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -223,7 +224,7 @@ if (typeof window.L !== 'undefined') {
 module.exports = MapActions;
 
 
-},{"../../story":13}],7:[function(_dereq_,module,exports){
+},{"../../story":14}],7:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../../story').Action;
 
@@ -304,7 +305,7 @@ module.exports = MarkerActions;
 //marker.actions.addTo(map);
 //addState(, map.actions.moveTo(..).addMarker(m)
 
-},{"../../story":13}],8:[function(_dereq_,module,exports){
+},{"../../story":14}],8:[function(_dereq_,module,exports){
 
 /**
 directional popup allows to create popups in the left and the right of a point,
@@ -386,7 +387,7 @@ function PopupActions(popup) {
 }
 
 
-},{"../../story":13}],9:[function(_dereq_,module,exports){
+},{"../../story":14}],9:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -406,7 +407,57 @@ var Location = {
 
 module.exports = Location;
 
-},{"../story":13}],10:[function(_dereq_,module,exports){
+},{"../story":14}],10:[function(_dereq_,module,exports){
+
+var Action = _dereq_('../story').Action;
+
+/**
+ * mini progress var adds a small line to the top of the browser
+ * and moves according to story progress
+ * usage:
+ * var pg = MiniProgressBar()
+ * story.addAction(trigger, pg.percent(10)) //goes to 10%
+ */
+
+var MiniProgressBar = function(el) {
+
+  var defaultStyle =  {
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    height: '3px',
+    display: 'inline-block',
+    background: '#ff7373',
+    'z-index': 2
+  };
+
+  var pg = {};
+
+  // create an element and apply default style
+  var div = document.createElement('div');
+  div.setAttribute('class', 'oddysey-miniprogressbar');
+  for (var s in defaultStyle) {
+    div.style[s] = defaultStyle[s];
+  }
+
+  // append to element or to tge body
+  (el || document.body).appendChild(div);
+  
+  /**
+   * returns an action that moves the percentaje bar to the specified one
+   */
+  pg.percent = function(p) {
+    return Action(function() {
+      div.style.width = p + "%";
+    });
+  };
+
+  return pg;
+}
+
+module.exports = MiniProgressBar;
+
+},{"../story":14}],11:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -425,7 +476,7 @@ function Sleep(ms) {
 module.exports = Sleep;
 
 
-},{"../story":13}],11:[function(_dereq_,module,exports){
+},{"../story":14}],12:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 var Core = _dereq_('../core');
@@ -459,7 +510,7 @@ function Slides(el) {
 }
 
 module.exports = Slides;
-},{"../core":12,"../story":13}],12:[function(_dereq_,module,exports){
+},{"../core":13,"../story":14}],13:[function(_dereq_,module,exports){
 
 function getElement(el) {
   if(typeof jQuery !== 'undefined') {
@@ -483,7 +534,7 @@ module.exports = {
   getElement: getElement
 };
 
-},{}],13:[function(_dereq_,module,exports){
+},{}],14:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/d3.custom');
 
@@ -750,13 +801,15 @@ function Step() {
       return;
     }
     var a = queue.pop();
-    if (!a[method] || !a[method]()) {
-      next(method);
-    } else {
+    if (a.on) {
       a.on('finish.chain', function() {
         a.on('finish.chain', null);
         next(method);
       });
+    }
+    if (!a[method] || !a[method]()) {
+      next(method);
+      if(a.on) a.on('finish.chain', null);
     }
   }
 
@@ -816,7 +869,7 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":28}],14:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":29}],15:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 var mapActions = {
@@ -1084,7 +1137,7 @@ Template.parseProperties = parseProperties;
 
 module.exports = Template;
 
-},{"../../vendor/markdown":29}],15:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":30}],16:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -1093,7 +1146,7 @@ module.exports = {
   Video: _dereq_('./video')
 };
 
-},{"./keys":16,"./scroll":17,"./sequential":18,"./video":19}],16:[function(_dereq_,module,exports){
+},{"./keys":17,"./scroll":18,"./sequential":19,"./video":20}],17:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -1151,7 +1204,7 @@ function Keys() {
 
 module.exports = Keys;
 
-},{"../core":12,"../story":13}],17:[function(_dereq_,module,exports){
+},{"../core":13,"../story":14}],18:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -1302,7 +1355,7 @@ function Scroll() {
 Scroll._scrolls = [];
 module.exports = Scroll;
 
-},{"../core":12,"../story":13}],18:[function(_dereq_,module,exports){
+},{"../core":13,"../story":14}],19:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 
@@ -1377,7 +1430,7 @@ function Sequential() {
 
 module.exports = Sequential;
 
-},{"../story":13}],19:[function(_dereq_,module,exports){
+},{"../story":14}],20:[function(_dereq_,module,exports){
 
 function Video(player) {
   if (typeof YT === 'undefined' || !(player instanceof YT.Player)) {
@@ -1420,7 +1473,7 @@ function Video(player) {
 
 module.exports = Video
 
-},{}],20:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
 /**
 # dot progress
 ui widget that controls dot progress 
@@ -1519,13 +1572,13 @@ function DotProgress(el) {
 
 module.exports = DotProgress;
 
-},{"../core":12}],21:[function(_dereq_,module,exports){
+},{"../core":13}],22:[function(_dereq_,module,exports){
 
 module.exports = {
   DotProgress: _dereq_('./dotprogress')
 }
 
-},{"./dotprogress":20}],22:[function(_dereq_,module,exports){
+},{"./dotprogress":21}],23:[function(_dereq_,module,exports){
 /**
  * new L.CrossHair('http://image.com/image', { x: 10, y :10 }).addTo(map)
  */
@@ -1574,13 +1627,13 @@ L.CrossHair = L.Control.extend({
 
 }
 
-},{}],23:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 
 module.exports = {
   CrossHair: _dereq_('./crosshair')
 }
 
-},{"./crosshair":22}],24:[function(_dereq_,module,exports){
+},{"./crosshair":23}],25:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1605,7 +1658,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],25:[function(_dereq_,module,exports){
+},{}],26:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1650,16 +1703,6 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
 }
@@ -1670,14 +1713,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],26:[function(_dereq_,module,exports){
+},{}],27:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],27:[function(_dereq_,module,exports){
+},{}],28:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2266,8 +2309,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":26,"FWaASH":25,"inherits":24}],28:[function(_dereq_,module,exports){
+}).call(this,_dereq_("/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":27,"/Users/javi/dev/repo/odyssey/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":26,"inherits":25}],29:[function(_dereq_,module,exports){
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -2419,7 +2462,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],29:[function(_dereq_,module,exports){
+},{}],30:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -4161,6 +4204,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":27}]},{},[1])
+},{"util":28}]},{},[1])
 (1)
 });
