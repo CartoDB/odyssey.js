@@ -118,6 +118,7 @@ The config block is a control element at the top of your story's Markdown docume
 - title: "This is my story title"
 - author: "Odyssey master"
 ~~~
+In the Scroll and Slide templates, you will see these two options as defaults:
 
 - title: "_Title of your story_"
 - author: "_Name of the story author_"
@@ -128,6 +129,7 @@ The config block is a control element at the top of your story's Markdown docume
 - vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 - duration: 30
 ~~~
+If you are creating a visualization that uses Torque, you will see the following options in addition to the default:
 
 - vizjson: "_the url to your cartodb torque visualization_"
 - duration: "_duration of torque animation (default is 30)_"
@@ -162,15 +164,14 @@ See the list below for a complete list of available actions and their descriptio
 #### Map Actions
 
 _Move to_
-
-- simply set the map's new center point in latitude and longitude decimal degrees.
+- Sets the map's center point in latitude and longitude decimal degrees
 
 ~~~md
 - center: [40.7127, -74.0059]
 ~~~
 
 _Zoom to_
-- set the map's new zoom level using an integer number from 0 to 18.
+- Sets the map's zoom level using an integer number from 0 to 18
 
 ~~~md
 - zoom: 3
@@ -178,11 +179,13 @@ _Zoom to_
 
 #### Control Actions
 
-_Sleep_ - **todo**
+_Sleep_
+- Pauses the map at a location you determine with the Map Actions above, for a pre-set period of time (in milliseconds)
 
 #### Data Actions
 
-_Show marker_ - **todo**
+_Show marker_
+- Places a marker at a latitude/longitude point which you specify
 
 _Show infowindow_ - **todo** (ask @javisantana when this will be ready)
 
