@@ -103,7 +103,7 @@ var Docs = {
         if ($(this).is('h2')) return false;
 
         $subEl = $(this);
-        subTitle = $subEl.text();
+        subTitle = $subEl.html();
         subLink = "#" + $subEl.attr("id");
 
         var klass = $(this).is('h4') ? 'indent' : '';
