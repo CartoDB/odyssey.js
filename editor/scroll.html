@@ -40,17 +40,16 @@
   O.Template({
 
     init: function() {
-      var map = L.map('map').setView([0, 0.0], 4);
-
-      // base layer
-      L.tileLayer('http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png', { attribution: 'data OSM - map CartoDB' }).addTo(map);
+      var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+      var map = this.map = L.map('map').setView([0, 0.0], 4);
+      var basemap = this.basemap = L.tileLayer(baseurl, {
+        attribution: 'data OSM - map CartoDB'
+      }).addTo(map);
 
       var story = O.Story()
 
-      this.map = map;
       this.story = story;
       this.miniprogressbar = O.MiniProgressBar();
-
 
       // trigger when  map_pos go out of the screen
       this.edge = O.Edge(
@@ -61,6 +60,12 @@
 
     update: function(actions) {
       this.story.clear();
+
+      if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+        this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+        this.basemap.setUrl(this.baseurl);
+      }
 
       // update footer title and author
       var title_ = actions.global.title === undefined ? '' : actions.global.title,
