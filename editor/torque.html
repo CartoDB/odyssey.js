@@ -10,7 +10,10 @@
 </head>
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
-  <div id="slides_container" style="display: none;">
+  <div id="slides_container" style="">
+    <div id="front_slide">
+    </div>
+
     <div id="slides">
     </div>
   </div>
@@ -177,16 +180,40 @@
       },
 
       _resetActions: function(actions) {
-        for(var i = 0; i < actions.length; ++i) {
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        if (actions.global.title || actions.global.headline) {
+          var first_slide = '',
+              first_title_ = actions.global.title ? '<h1>'+actions.global.title+'</h1>' : '',
+              first_headline_ = actions.global.headline ? '<p>'+actions.global.headline+'</p>' : '';
+
+          first_slide = first_title_ + first_headline_;
+
+          document.getElementById('slides_container').style.display = "block";
+          document.getElementById('front_slide').innerHTML = actions[0].html();
+        }
+
+        document.getElementById('slides').innerHTML = '';
+
+        // first slide is the header, skip it
+        for(var i = 1; i < actions.length; ++i) {
           var slide = actions[i];
           var tmpl = "<div class='slide' style='display:none'>"
           tmpl += slide.html();
           tmpl += "</div>";
+
           document.getElementById('slides').innerHTML += tmpl;
 
           var ac = O.Parallel(
+            O.Actions.CSS($("#front_slide")).addClass('hidden'),
             O.Actions.CSS($("#slides_container")).addClass('visible'),
-            this.slides.activate(i),
+            this.slides.activate(i-1),
             slide(this),
             resizeAction
           );
@@ -205,6 +232,10 @@
 
         if ($("#slides_container").hasClass("visible")) {
           $("#slides_container").removeClass("visible");
+        }
+
+        if ($("#front_slide").hasClass("hidden")) {
+          $("#front_slide").removeClass("hidden");
         }
 
         if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
@@ -238,7 +269,6 @@
 
                   self.map.addLayer(self.torqueLayer);
 
-
                   self.torqueLayer.on('change:steps', function() {
                     self.torqueLayer.play();
                     self.torqueLayer.actions = torque(self.torqueLayer);
@@ -256,16 +286,6 @@
         }
 
         this.story.clear();
-
-        // update footer title and author
-        var title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
-
-        document.getElementById('title').innerHTML = title_;
-        document.getElementById('author').innerHTML = author_;
-        document.title = title_ + " | " + author_ +' Odyssey.js';
-
-        document.getElementById('slides').innerHTML = '';
 
         $('.slide-tip').remove();
 

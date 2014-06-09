@@ -12,6 +12,7 @@ body {
 #map { position: absolute;  top: 0; left: 0; width:100%; height: 100%; }
 
 #slides_container {
+  display: none;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -78,6 +79,10 @@ body {
       text-decoration: underline;
     }
   }
+}
+
+#front_slide.hidden {
+  display: none;
 }
 
 #dots{
