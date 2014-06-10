@@ -293,6 +293,7 @@ code {
 .fix-nav {
   .nav-inner {
     margin-top: 0; 
+    .fixed { padding-top: 20px; }
   }
 }
 
@@ -306,7 +307,7 @@ code {
     margin-bottom: 35px;
   }
   .fixed {
-    padding: 20px 30px 40px 20px;
+    padding: 40px 30px 40px 20px;
     font: 14px 'Helvetica Neu', Helvetica, Arial;
 
     .item {
