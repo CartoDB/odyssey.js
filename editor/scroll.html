@@ -41,7 +41,13 @@
 
     init: function() {
       var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-      var map = this.map = L.map('map').setView([0, 0.0], 4);
+      var map = this.map = L.map('map',{
+        center: [0, 0],
+        zoom: 4
+      });
+
+      this.map.scrollWheelZoom.disable();
+
       var basemap = this.basemap = L.tileLayer(baseurl, {
         attribution: 'data OSM - map CartoDB'
       }).addTo(map);
