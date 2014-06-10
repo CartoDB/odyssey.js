@@ -26,14 +26,24 @@ function open(el, items, _class, offset) {
   offset = offset || { x: 0, y: 0 }
 
   // update
-  var bbox = el.getBoundingClientRect();
+  var bbox = el.getBoundingClientRect(),
+      h = bbox.top + 25 + offset.y;
   d.style({
-    top: (bbox.top + 25 + offset.y) + "px",
+    top: h + "px",
     left: (bbox.left + offset.x) + "px",
   });
 
   var drop = dropdown().items(items);
   d.call(drop);
+
+  if ((d3.select('#actionDropdown').node().offsetHeight+h - d3.select('#editor_modal').node().offsetHeight) > 120) {
+    var top_ = (h - d3.select('#actionDropdown').node().offsetHeight - 40)+"px";
+
+    d3.selectAll('#actionDropdown')
+      .classed('drop-top', true)
+      .style('top', top_)
+  }
+
   return drop;
 
 }
