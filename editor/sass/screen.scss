@@ -68,9 +68,12 @@ body{
   }
 
   .splash_inner, .inner-template {
-    position: relative;
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .splash_inner {
+    position: relative;
   }
   .inner-template { margin: 0 30px}
 
@@ -106,13 +109,14 @@ body{
       margin-top: 2px;
       border: 2px solid #EC6258;
       padding: 8px 16px;
-      font: normal 17px/23px 'staticregular';
       color: #EC6258;
       border-radius: 4px;
       @include transition(all .15s ease-in-out);
       text-decoration: none;
       outline: none;
       cursor: pointer;
+      font: normal 19px 'staticregular';
+      text-transform: uppercase;
 
       &:hover,
       &.zeroclipboard-is-hover {
@@ -122,8 +126,10 @@ body{
     }
 
     > li {
+      position: relative;
       width: 390px;
-      height: 227px;
+      height: 140px;
+      padding-top: 85px;
       color: #444;
       background: #fff;
       border-radius: 4px;
@@ -134,8 +140,16 @@ body{
 
 
       p { color: #444; font: normal 19px 'staticregular'; margin: 0 0 20px 0; }
-      h2 { color: #444; font: normal 19px 'staticregular'; margin-bottom: 8px; text-transform: uppercase;  }
 
+      img {
+        display: block;
+        position: absolute;
+        top: -35px;
+        left: 50%;
+        margin-left: -75px;
+        width: 150px;
+        height: 115px;
+      }
 
       &:first-child { margin: 0; }
     }

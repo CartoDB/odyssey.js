@@ -25,13 +25,16 @@ function Splash(context) {
         .append('li')
         .attr('class', 'template h-valign')
         .append ('div')
-        .attr('class', 'inner-template')
+        .attr('class', function(d) {
+            return 'inner-template '+d.description
+          })
 
     template
-        .append('h2')
-          .text(function(d) {
-            return d.title
+        .append('img')
+        .attr('src', function(d) {
+            return 'img/'+d.title+'.png'
           })
+
     template
         .append('p')
           .text(function(d) {
@@ -39,9 +42,11 @@ function Splash(context) {
           })
 
     template
-      .append('a').text('SELECT').attr('class', 'button-template').on('click', function(d) {
+      .append('a').text(function(d) {
+          return d.title
+        })
+      .attr('class', 'button-template').on('click', function(d) {
         d3.event.preventDefault();
-        console.log(evt.template(d.title))
         evt.template(d.title);
         _splash.close()
       })
