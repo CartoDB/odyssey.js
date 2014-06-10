@@ -20,7 +20,7 @@ body {
   width: 320px;
   padding: 40px;
   padding-right: 20px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.7);
 
   &.visible {
     display: block !important;
@@ -28,7 +28,7 @@ body {
 
   .slide {
     display: none;
-    overflow: auto;
+    overflow-y: auto;
     padding-right: 20px;
 
     &.selected {
@@ -122,8 +122,8 @@ body {
 
 #slides_container img{
 	//max-width: 400px;
-	margin: 20px -40px 20px -40px;
-	width: 125%;
+	margin: 20px 0;
+	max-width: 100%;
 }
 
 ul#navButtons{
