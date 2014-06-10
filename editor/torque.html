@@ -119,6 +119,7 @@
         $tip.css({ margin: -w });
 
         var t = O.Trigger({});
+
         function check(changes) {
           if (changes.step >= i-2 && changes.step < i+2) {
             t.trigger();
@@ -127,11 +128,9 @@
               $tooltip.fadeIn(150);
             }
           } else if (changes.step >= i+2 && changes.step < i+5) {
-            if ($tooltip.is(':visible')) {
-              setTimeout(function() {
-                $tooltip.fadeOut(150);
-              }, 1000);
-            }
+            setTimeout(function() {
+              $('.tooltip').fadeOut(150);
+            }, 2000);
           }
         };
 
