@@ -990,8 +990,14 @@ function Slide(tree, actions, prop) {
 
   function compile(context) {
     propertiesToActions();
+    //sort actions by order
+    actions.sort(function(a, b) {
+      return a.order - b.order;
+    });
+
     action = O.Step.apply(window,
-      actions.map(function(o) {
+      actions.map(function(a) {
+        var o = a.cmd;
         try {
           var f = Function("S", "return " + o + ";");
         } catch (e) {
@@ -1008,23 +1014,27 @@ function Slide(tree, actions, prop) {
    */
   function propertiesToActions() {
     for (var k in properties) {
+      var prop = properties[k];
       switch (k) {
         case 'center':
-          var pos = properties[k];
+          var pos = prop.value;
           if (properties.zoom === undefined) {
-            actions.push(
-              'S.map.actions.panTo([' + pos[0] + ',' + pos[1] + '])'
-            );
+            actions.push({
+              order: prop.order,
+              cmd: 'S.map.actions.panTo([' + pos[0] + ',' + pos[1] + '])'
+            });
           } else {
-            actions.push(
-              'S.map.actions.setView([' + pos[0] + ',' + pos[1] + '], ' + properties.zoom + ')'
-            );
+            actions.push({
+              order: prop.order,
+              cmd: 'S.map.actions.setView([' + pos[0] + ',' + pos[1] + '], ' + properties.zoom.value + ')'
+            });
           }
         case 'zoom':
           if (!properties.center) {
-            actions.push(
-              'S.map.actions.setZoom(' + properties.zoom + ')'
-            );
+            actions.push({
+              order: prop.order,
+              cmd: 'S.map.actions.setZoom(' + properties.zoom.value+ ')'
+            });
           }
       }
     }
@@ -1100,14 +1110,28 @@ function md2json(tree) {
       for(var j = 1; j < el.length; ++j) {
         var subel = el[j];
         if (subel[0] === "inlinecode") {
-          slide && slide.actions.push.apply(slide.actions, subel[1].split('\n').filter(function(a) {
-            return trim(a) !== "" && !prop_re.exec(a);
-          }))
-          // props
-          var p = parseProperties(subel[1]);
-          var prop = slide ? slide.properties: globalProperties
-          for(var k in p) {
-            prop[k] = p[k];
+          var lines = subel[1].split('\n');
+
+          for (var ln = 0; ln < lines.length; ++ln) {
+            var line = lines[ln];
+            if (trim(line) !== '') {
+              // if matches property, parse it
+              if (prop_re.exec(line)) {
+                var p = parseProperties(subel[1]);
+                var prop = slide ? slide.properties: globalProperties
+                for(var k in p) {
+                  prop[k] = {
+                    order: ln,
+                    value: p[k]
+                  }
+                }
+              } else {
+                slide && slide.actions.push({
+                  cmd: line,
+                  order: ln
+                });
+              }
+            }
           }
 
           // remove from list
@@ -1120,7 +1144,11 @@ function md2json(tree) {
   }
   if (slide) slides.push(Slide(slide.md_tree, slide.actions, slide.properties));
 
-  slides.global = globalProperties;
+  // remove the order for globalProperties
+  slides.global = {};
+  for(var k in globalProperties) {
+    slides.global[k] = globalProperties[k].value;
+  }
 
   return slides;
 }
