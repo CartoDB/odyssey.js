@@ -57,7 +57,23 @@
   <script src="../vendor/jquery.imageload.js" charset="UTF-8"></script>
   <script src="../vendor/jquery.spriteanim.js" charset="UTF-8"></script>
   <script>
-    var app = editor();
+    var app = editor(function() {
+      function initAnim($el) {
+        $el.spriteanim();
+        
+        $el.on("mouseenter", function() {
+          $(this).spriteanim('play');
+        });
+
+        $el.on("mouseleave", function() {
+          $(this).spriteanim('stop');
+        });
+      }
+
+      initAnim($('#slides'));
+      initAnim($('#scroll'));
+      initAnim($('#torque'));
+    });
   </script>
 </body>
 </html>

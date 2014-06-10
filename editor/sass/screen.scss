@@ -129,8 +129,7 @@ body{
       position: relative;
       width: 390px;
       height: 140px;
-//      padding-top: 85px;
-      padding: 40px 0;
+      padding: 85px 0 10px;
       color: #444;
       background: #fff;
       border-radius: 4px;
@@ -142,7 +141,7 @@ body{
 
       p { color: #444; font: normal 19px 'staticregular'; margin: 0 0 20px 0; }
 
-      img {
+      .anim {
         display: block;
         position: absolute;
         top: -35px;

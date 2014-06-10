@@ -28,7 +28,7 @@ var TEMPLATE_LIST =  [{
 
 
 
-function editor() {
+function editor(callback) {
 
   var body = d3.select(document.body);
   var context = {};
@@ -179,7 +179,6 @@ function editor() {
     // when there is no code, show template selector splash
     if (!context.code() && location.hash.length === 0) {
       d3.select(document.body).call(Splash(context).on('template', function(t) {
-
         var template_data = context.templates(t);
         if (template_data) {
           context.code(template_data.default);
@@ -188,6 +187,8 @@ function editor() {
           $editor.call(code_dialog.code(template_data.default));
         }
       }));
+
+      callback && callback();
     }
   });
 

@@ -29,11 +29,24 @@ function Splash(context) {
             return 'inner-template '+d.description
           })
 
-    // template
-    //     .append('img')
-    //     .attr('src', function(d) {
-    //         return 'img/'+d.title+'.png'
-    //       })
+    template
+        .append('div')
+        .attr('class', 'anim')
+        .append('div')
+        .attr('id', function(d) {
+          return d.title
+        })
+        .attr('data-baseurl', function(d) {
+          return d.title
+        })
+        .attr('data-grid', '5x5')
+        .attr('data-blocksize', '150x115')
+        .attr('data-frames', '50')
+        .attr('data-fps', '30')
+        .attr('data-autoplay', 'stop')
+        .attr('data-autoload', 'true')
+        .attr('data-retina', 'false')
+        .attr('data-idx', 0)
 
     template
         .append('p')
