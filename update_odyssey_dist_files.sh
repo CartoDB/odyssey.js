@@ -8,6 +8,8 @@ wget -O editor/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/
 wget -O editor/torque.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.html
 wget -O editor/favicon.ico https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.ico
 wget -O editor/favicon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.png
+cp editor/favicon.ico favicon.ico
+cp editor/favicon.png favicon.png
 
 mkdir -p editor/img
 wget -O editor/img/collapseButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/collapseButtonIcon.png
