@@ -1,7 +1,7 @@
 # Site settings
 title: Odyssey.js
 description: "Built for designers, journalist and non-technical people can tell their stories"
-baseurl: ""
+baseurl: "/odyssey.js"
 url: ""
 
 # Build settings
