@@ -32,12 +32,12 @@
 
   window.addEventListener("resize", function load(event) {
     clearTimeout(resizePID);
-    resizePID = setTimeout(function() { resizeWindow(); }, 100);
+    resizePID = setTimeout(function() { adjustSlides(); }, 100);
   });
 
-  function resizeWindow() {
+  window.addEventListener('load', function load() {
     adjustSlides();
-  }
+  }, false);
 
   function adjustSlides() {
     var container = document.getElementById("slides_container"),
