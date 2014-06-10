@@ -99,17 +99,14 @@ html { min-height: 100%; }
 
 #map { width: 100%; height: 100%; }
 
-#map_pos {
-  height: 20%;
+#map_container{
+  height: 250px;
 
-  #map_container{
-      height: 250px;
-  	&.attachTop {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      box-shadow: 0 2px 2px rgba(0, 0, 0 ,.2);
-    }
+  &.attachTop {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0 ,.2);
   }
 }
 
