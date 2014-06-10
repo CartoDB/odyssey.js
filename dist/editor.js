@@ -789,11 +789,11 @@ function Splash(context) {
             return 'inner-template '+d.description
           })
 
-    template
-        .append('img')
-        .attr('src', function(d) {
-            return 'img/'+d.title+'.png'
-          })
+    // template
+    //     .append('img')
+    //     .attr('src', function(d) {
+    //         return 'img/'+d.title+'.png'
+    //       })
 
     template
         .append('p')
