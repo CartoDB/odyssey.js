@@ -45,13 +45,17 @@
 
     if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
       container.style.bottom = "80px";
+
       var h = container.offsetHeight;
 
       slide.style.height = h-169+"px";
+      slide.classList.add("scrolled");
     } else {
       container.style.bottom = "auto";
       container.style.minHeight = "0";
+
       slide.style.height = "auto";
+      slide.classList.remove("scrolled");
     }
   }
 

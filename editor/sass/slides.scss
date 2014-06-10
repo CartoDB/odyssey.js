@@ -34,6 +34,13 @@ body {
     &.selected {
       display: block !important;
     }
+
+    &.scrolled {
+      img {
+        margin: 20px 0;
+        width: 100%;
+        }
+    }
   }
 
   h1, h2, h3, h4, h5, h6{
