@@ -35,10 +35,6 @@
     resizePID = setTimeout(function() { adjustSlides(); }, 100);
   });
 
-  window.addEventListener('load', function load() {
-    adjustSlides();
-  }, false);
-
   function adjustSlides() {
     var container = document.getElementById("slides_container"),
         slide = document.getElementsByClassName("selected_slide")[0];
@@ -60,7 +56,23 @@
   }
 
   var resizeAction = O.Action(function() {
-    adjustSlides();
+    function imageLoaded() {
+      counter--;
+
+      if (counter === 0) {
+        adjustSlides();
+      }
+    }
+    var images = $('img');
+    var counter = images.length;
+
+    images.each(function() {
+      if (this.complete) {
+        imageLoaded.call( this );
+      } else {
+        $(this).one('load', imageLoaded);
+      }
+    });
   });
 
   function click(el) {
