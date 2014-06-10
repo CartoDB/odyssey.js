@@ -64,7 +64,7 @@
       function _torque() {}
 
       _torque.reach = function (slide) {
-        var i = slide.get('step');
+        var i = slide.get('step').value;
 
         function formaterForRange(start, end) {
           start = start.getTime ? start.getTime(): start;
@@ -106,7 +106,7 @@
         var l = i*$('.slider').width()/layer.options.steps,
             tooltip = ['<div class="slide-tip slide-tip-'+i+'" style="left:'+l+'px">',
                        '<div class="tooltip">',
-                       '<h1>'+getTimeOrStep(slide.get('step'))+'</h1>',
+                       '<h1>'+getTimeOrStep(i)+'</h1>',
                        $(doc).find('h1').text(),
                        '</div>',
                        '</div>'].join("\n");
