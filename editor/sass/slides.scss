@@ -1,5 +1,6 @@
 @import "compass/reset";
 @import "compass/css3/font-face";
+@import "compass/css3/transition";
 
 @include font-face("AleoRegular", font-files("aleo-regular-webfont.woff", "aleo-regular-webfont.ttf", "aleo-regular-webfont.svg"), "aleo-regular-webfont.eot");
 @include font-face("AleoBold", font-files("aleo-bold-webfont.woff", "aleo-bold-webfont.ttf", "aleo-bold-webfont.svg"), "aleo-bold-webfont.eot");
@@ -178,52 +179,31 @@ div#credits{
 .slide-tip {
   position: absolute;
   top: -18px;
-  width: 1px;
-  height: 40px;
-  background: #E0E0E0;
-  pointer-events: none;
-
-  .tip {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    z-index: 10;
-    top: -36px;
-    height: 18px;
-    padding: 0 4px;
-    font: bold 11px/18px "Helvetica Neue", Helvetica;
-    color: #fff;
-    text-align: center;
-    background: #ababab;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px #FFF;
-    pointer-events: auto;
-  }
-
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    margin-left: -7px;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-  }
-
-  &:before {
-    top: 0;
-    border-top: 5px solid #E0E0E0;
-  }
-
-  &:after {
-    bottom: 0;
-    border-bottom: 5px solid #E0E0E0;
-  }
+  width: 3px;
+  height: 37px;
+  border: 3px solid transparent;
+  border-top: 0;
+  border-bottom-color: #ddd;
+  text-align: center;
 
   &:hover {
     .tooltip {
       display: inline-block !important;
     }
+
+    &:after {
+      background: #ccc;
+      width: 3px;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: inline-block;
+    background: #ddd;
+    width: 1px;
+    height: 40px;
+    @include transition(all .15s ease-in-out);
   }
 
   .tooltip {
@@ -237,6 +217,8 @@ div#credits{
     box-shadow: 0 1px 3px #FFF;
     border-radius: 2px;
     color: #FFF;
+    line-height: 1;
+    text-align: left;
 
     h1, p {
       height: auto;
@@ -251,6 +233,7 @@ div#credits{
 
     h1 {
       font-weight: bold;
+      margin-bottom: 5px;
     }
 
     p {
