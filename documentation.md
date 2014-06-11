@@ -19,7 +19,9 @@ The library is open source and freely available to use in your projects.
 
 ## Quick start
 
-**TODO** Create a quickstart video. Very simple, starting at editor and creating a story and publishing as a gist. Narrate and make it short (4 minutes) and possible to watch on its own.
+<iframe src="//player.vimeo.com/video/97968118" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+
+**TODO** Add text
 
 ### Create a new Story
 
