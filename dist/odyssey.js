@@ -1646,6 +1646,8 @@ function DotProgress(el) {
   };
 
   element.onclick = function(e) {
+   e = e || window.event;
+
     var idx = e.target.getAttribute('slide-index');
     var t = triggers[idx];
     if (t) {
