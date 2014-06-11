@@ -899,12 +899,10 @@ var Template = function(template) {
     }
 
     function sendMsg(_) {
-      if (event.currentTarget.location) {
-        event.source.postMessage(JSON.stringify({
-          id: msg.id,
-          data: _
-        }), event.currentTarget.location);
-      }
+      event.source.postMessage(JSON.stringify({
+        id: msg.id,
+        data: _
+      }), event.currentTarget.location);
     }
 
     if (msg.type === 'md') {
@@ -1006,6 +1004,16 @@ function Slide(tree, actions, prop) {
     actions.sort(function(a, b) {
       return a.order - b.order;
     });
+
+    if (!('map' in Array.prototype)) {
+      Array.prototype.map= function(mapper, that /*opt*/) {
+        var other= new Array(this.length);
+        for (var i= 0, n= this.length; i<n; i++)
+          if (i in this)
+              other[i]= mapper.call(that, this[i], i, this);
+        return other;
+      };
+    }
 
     action = O.Step.apply(window,
       actions.map(function(a) {
