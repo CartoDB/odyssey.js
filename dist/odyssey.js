@@ -1435,11 +1435,22 @@ function Scroll() {
   function initScroll() {
     if (!initialized) {
       initialized = true;
-      scroller.addEventListener('scroll', function() {
+
+      function scrollEach() {
         scrolls.forEach(function(s) {
           s.scroll(window.scrollY);
         });
-      });
+      }
+
+      if (!window.addEventListener) {
+        scroller.attachEvent("scroll", function load(event) {
+          scrollEach();
+        });
+      } else {
+        window.addEventListener("scroll", function load(event) {
+          scrollEach();
+        });
+      }
     }
   }
 
