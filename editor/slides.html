@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
-  <title>Odyssey.js</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js Slides</title>
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="css/slides.css" />
+  <script src="../vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="map" style="width: 100%; height: 100%;"></div>
+
   <div id="slides_container" style="display:block;">
     <div id="dots"></div>
-    <div id="slides">
-    </div>
+
+    <div id="slides"></div>
+
     <ul id='navButtons'>
       <li><a class='prev'></a></li>
       <li><a class='next'></a></li>
     </ul>
   </div>
+
   <div id="credits">
     <span class="title" id="title">Title</span>
-    <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
+    <span class="author"><strong id="author">By Name using</strong> <a href="#">Odyssey.js</a><span>
   </div>
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -28,147 +38,161 @@
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
 
   <script>
-  var resizePID;
+    var resizePID;
 
-  window.addEventListener("resize", function load(event) {
-    clearTimeout(resizePID);
-    resizePID = setTimeout(function() { adjustSlides(); }, 100);
-  });
-
-  function adjustSlides() {
-    var container = document.getElementById("slides_container"),
-        slide = document.getElementsByClassName("selected_slide")[0];
-
-    if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
-      container.style.bottom = "80px";
-
-      var h = container.offsetHeight;
-
-      slide.style.height = h-169+"px";
-      slide.classList.add("scrolled");
-    } else {
-      container.style.bottom = "auto";
-      container.style.minHeight = "0";
-
-      slide.style.height = "auto";
-      slide.classList.remove("scrolled");
+    function clearResize() {
+      clearTimeout(resizePID);
+      resizePID = setTimeout(function() { adjustSlides(); }, 100);
     }
-  }
 
-  var resizeAction = O.Action(function() {
-    function imageLoaded() {
-      counter--;
+    if (!window.addEventListener) {
+      window.attachEvent("resize", function load(event) {
+        clearResize();
+      });
+    } else {
+      window.addEventListener("resize", function load(event) {
+        clearResize();
+      });
+    }
 
-      if (counter === 0) {
-        adjustSlides();
+    function adjustSlides() {
+      var container = document.getElementById("slides_container"),
+          slide = document.getElementsByClassName("selected_slide")[0];
+
+      if (slide) {
+        if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
+          container.style.bottom = "80px";
+
+          var h = container.offsetHeight;
+
+          slide.style.height = h-169+"px";
+          slide.classList.add("scrolled");
+        } else {
+          container.style.bottom = "auto";
+          container.style.minHeight = "0";
+
+          slide.style.height = "auto";
+          slide.classList.remove("scrolled");
+        }
       }
     }
-    var images = $('img');
-    var counter = images.length;
 
-    images.each(function() {
-      if (this.complete) {
-        imageLoaded.call( this );
-      } else {
-        $(this).one('load', imageLoaded);
+    var resizeAction = O.Action(function() {
+      function imageLoaded() {
+        counter--;
+
+        if (counter === 0) {
+          adjustSlides();
+        }
+      }
+      var images = $('img');
+      var counter = images.length;
+
+      images.each(function() {
+        if (this.complete) {
+          imageLoaded.call( this );
+        } else {
+          $(this).one('load', imageLoaded);
+        }
+      });
+    });
+
+    function click(el) {
+      var element = O.Core.getElement(el);
+      var t = O.Trigger();
+
+      // TODO: clean properly
+      element.onclick = function() {
+        t.trigger();
+      }
+      return t;
+    }
+
+    O.Template({
+      init: function() {
+        var seq = O.Triggers.Sequential();
+
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var basemap = this.basemap = L.tileLayer(baseurl, {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
+
+        // enanle keys to move
+        O.Keys().on('map').left().then(seq.prev, seq)
+        O.Keys().on('map').right().then(seq.next, seq)
+
+        click(document.getElementsByClassName('next')).then(seq.next, seq)
+        click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+        var slides = O.Actions.Slides('slides');
+        var story = O.Story()
+
+        this.story = story;
+        this.seq = seq;
+        this.slides = slides;
+        this.progress = O.UI.DotProgress('dots').count(0);
+      },
+
+      update: function(actions) {
+        if (!actions.length) return;
+
+        this.story.clear();
+
+        if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+          this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+          this.basemap.setUrl(this.baseurl);
+        }
+
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        var sl = actions;
+
+        document.getElementById('slides').innerHTML = ''
+        this.progress.count(sl.length);
+
+        // create new story
+        for(var i = 0; i < sl.length; ++i) {
+          var slide = sl[i];
+          var tmpl = "<div class='slide' style='diplay:none'>";
+
+          tmpl += slide.html();
+          tmpl += "</div>";
+          document.getElementById('slides').innerHTML += tmpl;
+
+          this.progress.step(i).then(this.seq.step(i), this.seq)
+
+          var actions = O.Parallel(
+            this.slides.activate(i),
+            slide(this),
+            this.progress.activate(i),
+            resizeAction
+          );
+
+          actions.on("finish.app", function() {
+            adjustSlides();
+          });
+
+          this.story.addState(
+            this.seq.step(i),
+            actions
+          )
+        }
+
+        this.story.go(this.seq.current());
+      },
+
+      changeSlide: function(n) {
+        this.seq.current(n);
       }
     });
-  });
-
-  function click(el) {
-    var element = O.Core.getElement(el);
-    var t = O.Trigger();
-    // TODO: clean properly
-    element.onclick = function() {
-      t.trigger();
-    }
-    return t;
-  }
-
-  O.Template({
-
-    init: function() {
-      var seq = O.Triggers.Sequential();
-
-      var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-      var map = this.map = L.map('map').setView([0, 0.0], 4);
-      var basemap = this.basemap = L.tileLayer(baseurl, {
-        attribution: 'data OSM - map CartoDB'
-      }).addTo(map);
-
-      // enanle keys to move
-      O.Keys().on('map').left().then(seq.prev, seq)
-      O.Keys().on('map').right().then(seq.next, seq)
-
-      click(document.getElementsByClassName('next')).then(seq.next, seq)
-      click(document.getElementsByClassName('prev')).then(seq.prev, seq)
-
-      var slides = O.Actions.Slides('slides');
-      var story = O.Story()
-
-      this.story = story;
-      this.seq = seq;
-      this.slides = slides;
-      this.progress = O.UI.DotProgress('dots').count(0);
-    },
-
-    update: function(actions) {
-      if (!actions.length) return;
-      this.story.clear();
-
-      if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
-        this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-
-        this.basemap.setUrl(this.baseurl);
-      }
-
-      // update footer title and author
-      var title_ = actions.global.title === undefined ? '' : actions.global.title,
-          author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
-
-      document.getElementById('title').innerHTML = title_;
-      document.getElementById('author').innerHTML = author_;
-      document.title = title_ + " | " + author_ +' Odyssey.js';
-
-      var sl = actions;
-
-      document.getElementById('slides').innerHTML = ''
-      this.progress.count(sl.length);
-
-      // create new story
-      for(var i = 0; i < sl.length; ++i) {
-        var slide = sl[i];
-        var tmpl = "<div class='slide' style='diplay:none'>"
-        tmpl += slide.html();
-        tmpl += "</div>";
-        document.getElementById('slides').innerHTML += tmpl;
-
-        this.progress.step(i).then(this.seq.step(i), this.seq)
-
-        var actions = O.Parallel(
-          this.slides.activate(i),
-          slide(this),
-          this.progress.activate(i),
-          resizeAction
-        );
-        actions.on("finish.app", function() {
-          adjustSlides();
-        });
-
-        this.story.addState(
-          this.seq.step(i),
-          actions
-        )
-      }
-      this.story.go(this.seq.current());
-    },
-
-    changeSlide: function(n) {
-      this.seq.current(n);
-    }
-
-  });
-
   </script>
 </body>
 </html>
