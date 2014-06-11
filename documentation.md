@@ -89,7 +89,7 @@ Swap the example with a How-to type example like Torque
 
 The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
-[See a live example](http://bl.ocks.org/anonymous/raw/afbe3502bc3391a29502/)
+[See a live example](http://bl.ocks.org/anonymous/raw/31b8ce536c3b2078ff14/)
 
 **todo**
 Swap the example with a How-to type example like Torque
