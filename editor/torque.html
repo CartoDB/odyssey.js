@@ -29,10 +29,20 @@
   <script>
     var resizePID;
 
-    window.addEventListener("resize", function load(event) {
+    function clearResize() {
       clearTimeout(resizePID);
-      resizePID = setTimeout(function() { resizeWindow(); }, 100);
-    });
+      resizePID = setTimeout(function() { adjustSlides(); }, 100);
+    }
+
+    if (!window.addEventListener) {
+      window.attachEvent("resize", function load(event) {
+        clearResize();
+      });
+    } else {
+      window.addEventListener("resize", function load(event) {
+        clearResize();
+      });
+    }
 
     function resizeWindow() {
       adjustSlides();
