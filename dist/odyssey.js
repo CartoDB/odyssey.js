@@ -1436,19 +1436,19 @@ function Scroll() {
     if (!initialized) {
       initialized = true;
 
-      function scrollEach() {
-         $.each(scrolls, function(s) {
+      function scrollEach(s) {
+        scrolls.forEach(function(s) {
           s.scroll(window.scrollY);
         });
       }
 
       if (!window.addEventListener) {
         scroller.attachEvent("onscroll", function load(event) {
-          scrollEach();
+          scrolls.forEach(scrollEach);
         });
       } else {
         window.addEventListener("scroll", function load(event) {
-          scrollEach();
+          scrolls.forEach(scrollEach);
         });
       }
     }
