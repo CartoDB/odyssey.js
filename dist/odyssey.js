@@ -1437,7 +1437,7 @@ function Scroll() {
       initialized = true;
 
       function scrollEach() {
-        scrolls.forEach(function(s) {
+         $.each(scrolls, function(s) {
           s.scroll(window.scrollY);
         });
       }
