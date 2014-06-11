@@ -472,14 +472,25 @@ function editor() {
   d3.select(document.body);
 
   var callbacks = {};
-  window.addEventListener("message", function(event) {
+
+  function readMessage() {
     var msg = JSON.parse(event.data);
+
     if (msg.id) {
       callbacks[msg.id](msg.data);
       delete callbacks[msg.id];
     }
-  });
+  }
 
+  if (!window.addEventListener) {
+    window.attachEvent("message", function load(event) {
+      readMessage();
+    });
+  } else {
+    window.addEventListener("message", function load(event) {
+      readMessage();
+    });
+  }
 
   function sendMsg(_, done) {
     var id = new Date().getTime();

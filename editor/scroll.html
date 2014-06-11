@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
-  <title>Leaflet Quick Start Guide Example</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js Scroll</title>
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="css/scroll.css" />
-
+  <script src="../vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
   <div id="layout">
-
     <!--<div class="progress-bar"></div>-->
 
     <div class="inner-header">
-      <div id="header">
-      </div>
+      <div id="header"></div>
     </div>
+
     <div id="map_pos">
       <div id="map_container">
         <div id="map"></div>
       </div>
     </div>
-    <div id="content">
-    </div>
+
+    <div id="content"></div>
+
     <div id="credits">
       <span class="title" id="title">Title</span>
       <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
@@ -31,97 +37,92 @@
   </div> <!-- layout -->
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <!--<script src="../../vendor/leaflet.js"></script>-->
   <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
+
   <script>
+    O.Template({
+      init: function() {
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+        var map = this.map = L.map('map',{
+          center: [0, 0],
+          zoom: 4
+        });
 
+        this.map.scrollWheelZoom.disable();
 
-  O.Template({
+        var basemap = this.basemap = L.tileLayer(baseurl, {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
 
-    init: function() {
-      var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-      var map = this.map = L.map('map',{
-        center: [0, 0],
-        zoom: 4
-      });
+        var story = O.Story()
 
-      this.map.scrollWheelZoom.disable();
+        this.story = story;
+        this.miniprogressbar = O.MiniProgressBar();
 
-      var basemap = this.basemap = L.tileLayer(baseurl, {
-        attribution: 'data OSM - map CartoDB'
-      }).addTo(map);
-
-      var story = O.Story()
-
-      this.story = story;
-      this.miniprogressbar = O.MiniProgressBar();
-
-      // trigger when  map_pos go out of the screen
-      this.edge = O.Edge(
-        O.Triggers.Scroll().less('map_pos').offset(0),
-        O.Triggers.Scroll().greater('map_pos').offset(0)
-      )
-    },
-
-    update: function(actions) {
-      this.story.clear();
-
-      if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
-        this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-
-        this.basemap.setUrl(this.baseurl);
-      }
-
-      // update footer title and author
-      var title_ = actions.global.title === undefined ? '' : actions.global.title,
-          author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
-
-      document.getElementById('title').innerHTML = title_;
-      document.getElementById('author').innerHTML = author_;
-      document.title = title_ + " | " + author_ +' Odyssey.js';
-
-      var TRIGGER_LINE = this.map.getSize().y + 50;
-      this.story.addEvent(
-        this.edge,
-        O.Parallel(
-          O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
-          O.Actions.CSS($('#content')).toggleClass('attachMap'),
-          O.Actions.Debug().log('attach')
+        // trigger when  map_pos go out of the screen
+        this.edge = O.Edge(
+          O.Triggers.Scroll().less('map_pos').offset(0),
+          O.Triggers.Scroll().greater('map_pos').offset(0)
         )
-      )
+      },
 
-      // create content
-      var content = ''
-      $('#header').html(actions[0].html());
-      for(var i = 1; i < actions.length; ++i) {
-        var slide = actions[i];
-        content += "<div id='s_" + i +"'>" + slide.html() + "</div>";
-      }
-      $('#content').html(content);
+      update: function(actions) {
+        this.story.clear();
 
-      // first slide is the header, skip it
-      for(var i = 1; i < actions.length; ++i) {
-        var slide = actions[i];
-        this.story.addState(
-          O.Triggers.Scroll().within('s_' + i).offset(TRIGGER_LINE),
+        if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+          this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+          this.basemap.setUrl(this.baseurl);
+        }
+
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        var TRIGGER_LINE = this.map.getSize().y + 50;
+        this.story.addEvent(
+          this.edge,
           O.Parallel(
-            slide(this),
-            this.miniprogressbar.percent(100*i/(actions.length - 1))
+            O.Actions.CSS($('#map_container')).toggleClass('attachTop'),
+            O.Actions.CSS($('#content')).toggleClass('attachMap'),
+            O.Actions.Debug().log('attach')
           )
         )
+
+        // create content
+        var content = '';
+
+        $('#header').html(actions[0].html());
+
+        for(var i = 1; i < actions.length; ++i) {
+          var slide = actions[i];
+          content += "<div id='s_" + i +"'>" + slide.html() + "</div>";
+        }
+
+        $('#content').html(content);
+
+        // first slide is the header, skip it
+        for(var i = 1; i < actions.length; ++i) {
+          var slide = actions[i];
+          this.story.addState(
+            O.Triggers.Scroll().within('s_' + i).offset(TRIGGER_LINE),
+            O.Parallel(
+              slide(this),
+              this.miniprogressbar.percent(100*i/(actions.length - 1))
+            )
+          )
+        }
+
+        if(window.scrollY === 0) {
+          this.story.go(0);
+        }
       }
-
-      if(window.scrollY === 0) {
-        this.story.go(0);
-      }
-    }
-
-  });
-
-
-
+    });
   </script>
 </body>
 </html>
-
