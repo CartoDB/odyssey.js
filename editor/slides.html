@@ -101,10 +101,15 @@
       var element = O.Core.getElement(el);
       var t = O.Trigger();
 
-      // TODO: clean properly
-      element.onclick = function() {
+      function trigger() {
         t.trigger();
       }
+
+      // TODO: clean properly
+      element.onclick = function() {
+        trigger();
+      }
+ 
       return t;
     }
 
