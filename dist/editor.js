@@ -401,11 +401,11 @@ var utils = _dereq_('./utils');
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'Display visualization chapters like slides in a presentation',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#slide1\nsome text\n\n#slide2\nmore text'
+    default: '```\n-title: "Title"\n-author: "Name"\n-baseurl: "http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png"\n```\n\n#slide1\nsome text\n\n#slide2\nmore text'
   }, {
     title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: '```\n-title: "Title"\n-author: "Name"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n\n#slide2\nmore text'
+    default: '```\n-title: "Title"\n-author: "Name"\n-baseurl: "http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png"\n```\n\n#title\n##headline\n\n#slide1\nsome text\n\n\n#slide2\nmore text'
   }, {
     title: 'torque',
     description: 'Link story elements to moments in time using this animated map template',
@@ -472,14 +472,25 @@ function editor(callback) {
   d3.select(document.body);
 
   var callbacks = {};
-  window.addEventListener("message", function(event) {
+
+  function readMessage() {
     var msg = JSON.parse(event.data);
+
     if (msg.id) {
       callbacks[msg.id](msg.data);
       delete callbacks[msg.id];
     }
-  });
+  }
 
+  if (!window.addEventListener) {
+    window.attachEvent("message", function load(event) {
+      readMessage();
+    });
+  } else {
+    window.addEventListener("message", function load(event) {
+      readMessage();
+    });
+  }
 
   function sendMsg(_, done) {
     var id = new Date().getTime();

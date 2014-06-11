@@ -29,10 +29,20 @@
   <script>
     var resizePID;
 
-    window.addEventListener("resize", function load(event) {
+    function clearResize() {
       clearTimeout(resizePID);
-      resizePID = setTimeout(function() { resizeWindow(); }, 100);
-    });
+      resizePID = setTimeout(function() { adjustSlides(); }, 100);
+    }
+
+    if (!window.addEventListener) {
+      window.attachEvent("resize", function load(event) {
+        clearResize();
+      });
+    } else {
+      window.addEventListener("resize", function load(event) {
+        clearResize();
+      });
+    }
 
     function resizeWindow() {
       adjustSlides();
@@ -40,7 +50,7 @@
 
     function adjustSlides() {
       var container = document.getElementById("slides_container"),
-          slide = document.getElementsByClassName("selected_slide")[0];
+          slide = document.querySelectorAll('.selected_slide')[0];
 
       if (container && slide) {
         if (slide.offsetHeight+80+40+160 >= window.innerHeight) {

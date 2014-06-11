@@ -16,7 +16,7 @@ for (var k in e.Triggers) {
 }
 module.exports = e;
 
-},{"./lib/odyssey/actions":5,"./lib/odyssey/core":13,"./lib/odyssey/story":14,"./lib/odyssey/template":15,"./lib/odyssey/triggers":17,"./lib/odyssey/ui":23,"./lib/odyssey/util":25}],2:[function(_dereq_,module,exports){
+},{"./lib/odyssey/actions":5,"./lib/odyssey/core":13,"./lib/odyssey/story":14,"./lib/odyssey/template":15,"./lib/odyssey/triggers":17,"./lib/odyssey/ui":23,"./lib/odyssey/util":26}],2:[function(_dereq_,module,exports){
 
 var Action = _dereq_('../story').Action;
 
@@ -480,6 +480,7 @@ module.exports = Sleep;
 
 var Action = _dereq_('../story').Action;
 var Core = _dereq_('../core');
+var classList = _dereq_('../util/classList');
 
 function Slides(el) {
 
@@ -510,7 +511,7 @@ function Slides(el) {
 }
 
 module.exports = Slides;
-},{"../core":13,"../story":14}],13:[function(_dereq_,module,exports){
+},{"../core":13,"../story":14,"../util/classList":24}],13:[function(_dereq_,module,exports){
 
 function getElement(el) {
   if(typeof jQuery !== 'undefined') {
@@ -869,7 +870,7 @@ module.exports = {
 };
 
 
-},{"../../vendor/d3.custom":31}],15:[function(_dereq_,module,exports){
+},{"../../vendor/d3.custom":32}],15:[function(_dereq_,module,exports){
 
 _dereq_('../../vendor/markdown');
 var mapActions = {
@@ -889,7 +890,7 @@ var mapActions = {
 var Template = function(template) {
   var initialized = false;
 
-  window.addEventListener("message", function(event) {
+  function readMessage() {
     var msg = JSON.parse(event.data);
     template.editor = true;
 
@@ -899,10 +900,12 @@ var Template = function(template) {
     }
 
     function sendMsg(_) {
-      event.source.postMessage(JSON.stringify({
-        id: msg.id,
-        data: _
-      }), event.currentTarget.location);
+      if (event.currentTarget) {
+        event.source.postMessage(JSON.stringify({
+          id: msg.id,
+          data: _
+        }), event.currentTarget.location);
+      }
     }
 
     if (msg.type === 'md') {
@@ -937,7 +940,17 @@ var Template = function(template) {
     } else if (msg.type === 'change_slide') {
       template.changeSlide && template.changeSlide(msg.slide);
     }
-  }, false);
+  }
+
+  if (!window.addEventListener) {
+    window.attachEvent("message", function load(event) {
+      readMessage();
+    });
+  } else {
+    window.addEventListener("message", function load(event) {
+      readMessage();
+    });
+  }
 
   template.init(function() { });
 
@@ -994,6 +1007,16 @@ function Slide(tree, actions, prop) {
     actions.sort(function(a, b) {
       return a.order - b.order;
     });
+
+    if (!('map' in Array.prototype)) {
+      Array.prototype.map= function(mapper, that /*opt*/) {
+        var other= new Array(this.length);
+        for (var i= 0, n= this.length; i<n; i++)
+          if (i in this)
+              other[i]= mapper.call(that, this[i], i, this);
+        return other;
+      };
+    }
 
     action = O.Step.apply(window,
       actions.map(function(a) {
@@ -1165,7 +1188,7 @@ Template.parseProperties = parseProperties;
 
 module.exports = Template;
 
-},{"../../vendor/markdown":32}],16:[function(_dereq_,module,exports){
+},{"../../vendor/markdown":33}],16:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -1196,7 +1219,7 @@ function Gestures(el) {
 
 module.exports = Gestures;
 
-},{"../core":13,"../story":14,"hammerjs":30}],17:[function(_dereq_,module,exports){
+},{"../core":13,"../story":14,"hammerjs":31}],17:[function(_dereq_,module,exports){
 
 module.exports = {
   Scroll: _dereq_('./scroll'),
@@ -1227,14 +1250,25 @@ function Keys() {
   var keys = {};
 
   function listenForKey(el, k, callback) {
-    el.addEventListener('keydown', function(e) {
+    function keyDown(e) {
+      e = e || window.event;
+
        var code = e.keyCode;
        if (code === k) {
          callback();
-         e.preventDefault();
-         e.stopPropagation()
+         event.preventDefault ? event.preventDefault() : event.returnValue = false;
        }
-    });
+    }
+
+    if (!window.addEventListener) {
+      el.attachEvent("onkeydown", function load(event) {
+        keyDown(event);
+      });
+    } else {
+      el.addEventListener("keydown", function load(event) {
+        keyDown(event);
+      });
+    }
   }
 
   keys.left = function() {
@@ -1401,11 +1435,79 @@ function Scroll() {
   function initScroll() {
     if (!initialized) {
       initialized = true;
-      scroller.addEventListener('scroll', function() {
+
+      if (!Array.prototype.forEach) {
+
+        Array.prototype.forEach = function (callback, thisArg) {
+
+          var T, k;
+
+          if (this == null) {
+            throw new TypeError(" this is null or not defined");
+          }
+
+          // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+          var O = Object(this);
+
+          // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+          // 3. Let len be ToUint32(lenValue).
+          var len = O.length >>> 0;
+
+          // 4. If IsCallable(callback) is false, throw a TypeError exception.
+          // See: http://es5.github.com/#x9.11
+          if (typeof callback !== "function") {
+            throw new TypeError(callback + " is not a function");
+          }
+
+          // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+          if (thisArg) {
+            T = thisArg;
+          }
+
+          // 6. Let k be 0
+          k = 0;
+
+          // 7. Repeat, while k < len
+          while (k < len) {
+
+            var kValue;
+
+            // a. Let Pk be ToString(k).
+            //   This is implicit for LHS operands of the in operator
+            // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+            //   This step can be combined with c
+            // c. If kPresent is true, then
+            if (k in O) {
+
+              // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+              kValue = O[k];
+
+              // ii. Call the Call internal method of callback with T as the this value and
+              // argument list containing kValue, k, and O.
+              callback.call(T, kValue, k, O);
+            }
+            // d. Increase k by 1.
+            k++;
+          }
+          // 8. return undefined
+        };
+      }
+
+      function scrollEach() {
         scrolls.forEach(function(s) {
           s.scroll(window.scrollY);
         });
-      });
+      }
+
+      if (!window.addEventListener) {
+        scroller.attachEvent("onscroll", function load(event) {
+          scrollEach();
+        });
+      } else {
+        window.addEventListener("scroll", function load(event) {
+          scrollEach();
+        });
+      }
     }
   }
 
@@ -1613,7 +1715,9 @@ function DotProgress(el) {
   };
 
   element.onclick = function(e) {
-    var idx = e.target.getAttribute('slide-index');
+   e = e || window.event;
+
+    var idx = (e.target || e.srcElement).getAttribute('slide-index');
     var t = triggers[idx];
     if (t) {
       t.trigger();
@@ -1639,6 +1743,184 @@ module.exports = {
 }
 
 },{"./dotprogress":22}],24:[function(_dereq_,module,exports){
+/*
+ * classList.js: Cross-browser full element.classList implementation.
+ * 2014-01-31
+ *
+ * By Eli Grey, http://eligrey.com
+ * Public Domain.
+ * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+ */
+
+/*global self, document, DOMException */
+
+/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
+
+if ("document" in self && !("classList" in document.createElement("_"))) {
+
+(function (view) {
+
+"use strict";
+
+if (!('Element' in view)) return;
+
+var
+      classListProp = "classList"
+    , protoProp = "prototype"
+    , elemCtrProto = view.Element[protoProp]
+    , objCtr = Object
+    , strTrim = String[protoProp].trim || function () {
+        return this.replace(/^\s+|\s+$/g, "");
+    }
+    , arrIndexOf = Array[protoProp].indexOf || function (item) {
+        var
+              i = 0
+            , len = this.length
+        ;
+        for (; i < len; i++) {
+            if (i in this && this[i] === item) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    // Vendors: please allow content code to instantiate DOMExceptions
+    , DOMEx = function (type, message) {
+        this.name = type;
+        this.code = DOMException[type];
+        this.message = message;
+    }
+    , checkTokenAndGetIndex = function (classList, token) {
+        if (token === "") {
+            throw new DOMEx(
+                  "SYNTAX_ERR"
+                , "An invalid or illegal string was specified"
+            );
+        }
+        if (/\s/.test(token)) {
+            throw new DOMEx(
+                  "INVALID_CHARACTER_ERR"
+                , "String contains an invalid character"
+            );
+        }
+        return arrIndexOf.call(classList, token);
+    }
+    , ClassList = function (elem) {
+        var
+              trimmedClasses = strTrim.call(elem.getAttribute("class") || "")
+            , classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
+            , i = 0
+            , len = classes.length
+        ;
+        for (; i < len; i++) {
+            this.push(classes[i]);
+        }
+        this._updateClassName = function () {
+            elem.setAttribute("class", this.toString());
+        };
+    }
+    , classListProto = ClassList[protoProp] = []
+    , classListGetter = function () {
+        return new ClassList(this);
+    }
+;
+// Most DOMException implementations don't allow calling DOMException's toString()
+// on non-DOMExceptions. Error's toString() is sufficient here.
+DOMEx[protoProp] = Error[protoProp];
+classListProto.item = function (i) {
+    return this[i] || null;
+};
+classListProto.contains = function (token) {
+    token += "";
+    return checkTokenAndGetIndex(this, token) !== -1;
+};
+classListProto.add = function () {
+    var
+          tokens = arguments
+        , i = 0
+        , l = tokens.length
+        , token
+        , updated = false
+    ;
+    do {
+        token = tokens[i] + "";
+        if (checkTokenAndGetIndex(this, token) === -1) {
+            this.push(token);
+            updated = true;
+        }
+    }
+    while (++i < l);
+
+    if (updated) {
+        this._updateClassName();
+    }
+};
+classListProto.remove = function () {
+    var
+          tokens = arguments
+        , i = 0
+        , l = tokens.length
+        , token
+        , updated = false
+    ;
+    do {
+        token = tokens[i] + "";
+        var index = checkTokenAndGetIndex(this, token);
+        if (index !== -1) {
+            this.splice(index, 1);
+            updated = true;
+        }
+    }
+    while (++i < l);
+
+    if (updated) {
+        this._updateClassName();
+    }
+};
+classListProto.toggle = function (token, force) {
+    token += "";
+
+    var
+          result = this.contains(token)
+        , method = result ?
+            force !== true && "remove"
+        :
+            force !== false && "add"
+    ;
+
+    if (method) {
+        this[method](token);
+    }
+
+    return !result;
+};
+classListProto.toString = function () {
+    return this.join(" ");
+};
+
+if (objCtr.defineProperty) {
+    var classListPropDesc = {
+          get: classListGetter
+        , enumerable: true
+        , configurable: true
+    };
+    try {
+        objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+    } catch (ex) { // IE 8 doesn't support enumerable:true
+        if (ex.number === -0x7FF5EC54) {
+            classListPropDesc.enumerable = false;
+            objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+        }
+    }
+} else if (objCtr[protoProp].__defineGetter__) {
+    elemCtrProto.__defineGetter__(classListProp, classListGetter);
+}
+
+}(self));
+
+}
+
+},{}],25:[function(_dereq_,module,exports){
 /**
  * new L.CrossHair('http://image.com/image', { x: 10, y :10 }).addTo(map)
  */
@@ -1687,13 +1969,13 @@ L.CrossHair = L.Control.extend({
 
 }
 
-},{}],25:[function(_dereq_,module,exports){
+},{}],26:[function(_dereq_,module,exports){
 
 module.exports = {
   CrossHair: _dereq_('./crosshair')
 }
 
-},{"./crosshair":24}],26:[function(_dereq_,module,exports){
+},{"./crosshair":25}],27:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1718,7 +2000,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],27:[function(_dereq_,module,exports){
+},{}],28:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1783,14 +2065,14 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],28:[function(_dereq_,module,exports){
+},{}],29:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],29:[function(_dereq_,module,exports){
+},{}],30:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2380,7 +2662,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":28,"FWaASH":27,"inherits":26}],30:[function(_dereq_,module,exports){
+},{"./support/isBuffer":29,"FWaASH":28,"inherits":27}],31:[function(_dereq_,module,exports){
 /*! Hammer.JS - v1.1.3 - 2014-05-20
  * http://eightmedia.github.io/hammer.js
  *
@@ -4543,7 +4825,19 @@ if(typeof define == 'function' && define.amd) {
 }
 
 })(window);
-},{}],31:[function(_dereq_,module,exports){
+},{}],32:[function(_dereq_,module,exports){
+if (!('indexOf' in Array.prototype)) {
+    Array.prototype.indexOf= function(find, i /*opt*/) {
+        if (i===undefined) i= 0;
+        if (i<0) i+= this.length;
+        if (i<0) i= 0;
+        for (var n= this.length; i<n; i++)
+            if (i in this && this[i]===find)
+                return i;
+        return -1;
+    };
+}
+
 d3 = (function(){
   var d3 = {version: "3.3.10"}; // semver
 function d3_class(ctor, properties) {
@@ -4695,7 +4989,7 @@ function d3_rebind(target, source, method) {
   return d3;
 })();
 
-},{}],32:[function(_dereq_,module,exports){
+},{}],33:[function(_dereq_,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -6437,6 +6731,6 @@ function d3_rebind(target, source, method) {
   return window.markdown;
 }());
 
-},{"util":29}]},{},[1])
+},{"util":30}]},{},[1])
 (1)
 });

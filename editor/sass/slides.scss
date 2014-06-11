@@ -20,7 +20,9 @@ body {
   width: 320px;
   padding: 40px;
   padding-right: 20px;
+  background-color: #fff;
   background-color: rgba(255,255,255,0.7);
+  z-index: 10;
 
   &.visible {
     display: block !important;
@@ -221,7 +223,7 @@ div#credits{
     max-width: 240px;
     padding: 10px;
     margin-left: -17px;
-    box-shadow: 0 1px 3px #FFF;
+    box-shadow: 0 0 1px rgba(#fff, .2);
     border-radius: 2px;
     color: #FFF;
     line-height: 1;
