@@ -106,7 +106,7 @@
         t.trigger();
       }
 
-      element && element.onclick = click;
+      if (element) element.onclick = click;
 
       return t;
     }
