@@ -19,7 +19,7 @@ The library is open source and freely available to use in your projects.
 
 ## Quick start
 
-<iframe src="//player.vimeo.com/video/97968118" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+<iframe src="//player.vimeo.com/video/97968118" width="700px" height="374px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
 
 **TODO** Add text
 
