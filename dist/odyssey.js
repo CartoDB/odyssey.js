@@ -900,10 +900,12 @@ var Template = function(template) {
     }
 
     function sendMsg(_) {
-      event.source.postMessage(JSON.stringify({
-        id: msg.id,
-        data: _
-      }), event.currentTarget.location);
+      if (event.currentTarget) {
+        event.source.postMessage(JSON.stringify({
+          id: msg.id,
+          data: _
+        }), event.currentTarget.location);
+      }
     }
 
     if (msg.type === 'md') {
