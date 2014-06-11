@@ -78,22 +78,25 @@ Templates control the overal structure and layout of your story. They define the
 
 The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
+[See a live example](http://bl.ocks.org/anonymous/raw/c51948a0d1ac9e417887/#1)
+
 **todo**
-_provide a link to an example (created using only the editor)_
+Swap the example with a How-to type example like Torque
 
 #### Scroll template
 
 The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
+[See a live example](http://bl.ocks.org/anonymous/raw/afbe3502bc3391a29502/)
+
 **todo**
-_provide a link to an example (created using only the editor)_
+Swap the example with a How-to type example like Torque
 
 #### Torque template
 
 Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
-**todo**
-_provide a link to an example (created using only the editor)_
+[See a live example](http://bit.ly/1n6kTDn)
 
 ### Custom templates
 
