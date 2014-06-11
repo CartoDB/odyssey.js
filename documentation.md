@@ -226,12 +226,6 @@ _Play_
 S.torqueLayer.actions.play()
 ~~~
 
-
-
-
-**TODO**
-**Add an Actions section at the main level of Documentation**
-
 ### Images
 
 Adding images in Markdown is simple, and you have a few options. The first is the following:
