@@ -187,7 +187,9 @@ _Sleep_
 _Show marker_
 - Places a marker at a latitude/longitude point which you specify
 
-_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
+_Show infowindow_ 
+
+- **todo** (ask @javisantana when this will be ready)
 
 #### Video actions
 
@@ -201,11 +203,31 @@ _Show infowindow_ - **todo** (ask @javisantana when this will be ready)
 
 #### Torque Actions
 
-_Play_ - **todo**
+_Insert time_ 
+- _Insert time_ is an option that links your current story stage with the current frame of your Torque animation. If triggered, it will insert the _step_ option into your options and signify when in the Torque animation to display the current stage of your story. 
 
-_Pause_ - **todo**
+~~~md
+```
+- step: 86
+```
+~~~
 
-_Insert time_ - **todo**
+_Pause_ 
+- Tells the Torque animated map to pause playing at the current step. Often used with the _Sleep_ action to stay at a given step in the Torque animation before triggering a _Play_ action again. 
+
+~~~md
+S.torqueLayer.actions.pause()
+~~~
+
+_Play_ 
+- Tells the Torque animated map to continue playing. The default state is _play_, so only use this after a _pause_ action.
+
+~~~md
+S.torqueLayer.actions.play()
+~~~
+
+
+
 
 **TODO**
 **Add an Actions section at the main level of Documentation**
