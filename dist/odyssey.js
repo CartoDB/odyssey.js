@@ -1443,7 +1443,7 @@ function Scroll() {
       }
 
       if (!window.addEventListener) {
-        scroller.attachEvent("scroll", function load(event) {
+        scroller.attachEvent("onscroll", function load(event) {
           scrollEach();
         });
       } else {
