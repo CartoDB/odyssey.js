@@ -57,7 +57,7 @@
 
     function adjustSlides() {
       var container = document.getElementById("slides_container"),
-          slide = document.getElementsByClassName("selected_slide")[0];
+          slide = document.querySelectorAll('.selected_slide')[0];
 
       if (slide) {
         if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
@@ -122,8 +122,8 @@
         O.Keys().on('map').left().then(seq.prev, seq)
         O.Keys().on('map').right().then(seq.next, seq)
 
-        click(document.getElementsByClassName('next')).then(seq.next, seq)
-        click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+        click(document.querySelectorAll('.next')).then(seq.next, seq)
+        click(document.querySelectorAll('.prev')).then(seq.prev, seq)
 
         var slides = O.Actions.Slides('slides');
         var story = O.Story()
