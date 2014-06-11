@@ -8,6 +8,14 @@ wget -O editor/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/
 wget -O editor/torque.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.html
 wget -O editor/favicon.ico https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.ico
 wget -O editor/favicon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.png
+wget -O editor/scroll0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll0.png
+wget -O editor/scroll1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll1.png
+wget -O editor/slides0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides0.png
+wget -O editor/slides1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides1.png
+wget -O editor/slides2.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides2.png
+wget -O editor/slides3.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides3.png
+wget -O editor/torque0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque0.png
+wget -O editor/torque1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque1.png
 cp editor/favicon.ico favicon.ico
 cp editor/favicon.png favicon.png
 
@@ -55,6 +63,9 @@ wget -O vendor/jszip.js https://raw.githubusercontent.com/CartoDB/odyssey.js/mas
 wget -O vendor/jszip-utils.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jszip-utils.js
 wget -O vendor/ZeroClipboard.min.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/ZeroClipboard.min.js
 wget -O vendor/ZeroClipboard.swf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/ZeroClipboard.swf
+wget -O vendor/jquery-1.10.2.min.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jquery-1.10.2.min.js
+wget -O vendor/jquery.imageload.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jquery.imageload.js
+wget -O vendor/jquery.spriteanim.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/jquery.spriteanim.js
 
 mkdir -p vendor/codemirror
 wget -O vendor/codemirror/codemirror.css https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/codemirror/codemirror.css

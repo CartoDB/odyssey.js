@@ -417,7 +417,7 @@ var TEMPLATE_LIST =  [{
 
 
 
-function editor() {
+function editor(callback) {
 
   var body = d3.select(document.body);
   var context = {};
@@ -579,7 +579,6 @@ function editor() {
     // when there is no code, show template selector splash
     if (!context.code() && location.hash.length === 0) {
       d3.select(document.body).call(Splash(context).on('template', function(t) {
-
         var template_data = context.templates(t);
         if (template_data) {
           context.code(template_data.default);
@@ -588,6 +587,8 @@ function editor() {
           $editor.call(code_dialog.code(template_data.default));
         }
       }));
+
+      callback && callback();
     }
   });
 
@@ -800,11 +801,27 @@ function Splash(context) {
             return 'inner-template '+d.description
           })
 
-    // template
-    //     .append('img')
-    //     .attr('src', function(d) {
-    //         return 'img/'+d.title+'.png'
-    //       })
+    template
+        .append('div')
+        .attr('class', 'anim')
+        .append('div')
+        .attr('id', function(d) {
+          return d.title
+        })
+        .attr('data-baseurl', function(d) {
+          return d.title
+        })
+        .attr('data-grid', '6x8')
+        .attr('data-blocksize', '180x134')
+        .attr('data-frames', function(d) {
+          if (d.title == "slides") return 150
+            else return 50
+        })
+        .attr('data-fps', '30')
+        .attr('data-autoplay', 'stop')
+        .attr('data-autoload', 'true')
+        .attr('data-retina', 'false')
+        .attr('data-idx', 0)
 
     template
         .append('p')

@@ -52,8 +52,27 @@
   <![endif]-->
   <script src="../vendor/ZeroClipboard.min.js"></script>
   <script src="../dist/editor.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery-1.10.2.min.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.imageload.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.spriteanim.js" charset="UTF-8"></script>
   <script>
-    var app = editor();
+    var app = editor(function() {
+      function initAnim($el) {
+        var $anim = $el.find(".anim > div");
+        
+        $anim.spriteanim();
+
+        $el.on("mouseenter", function() {
+          $(this).find(".anim > div").spriteanim('play');
+        });
+
+        $el.on("mouseleave", function() {
+          $(this).find(".anim > div").spriteanim('stop');
+        });
+      }
+
+      initAnim($('li.template'));
+    });
   </script>
 </body>
 </html>
