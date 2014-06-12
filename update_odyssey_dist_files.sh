@@ -16,6 +16,9 @@ wget -O editor/slides2.png https://raw.githubusercontent.com/CartoDB/odyssey.js/
 wget -O editor/slides3.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides3.png
 wget -O editor/torque0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque0.png
 wget -O editor/torque1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque1.png
+wget -O editor/scroll.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll.png
+wget -O editor/slides.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides.png
+wget -O editor/torque.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.png
 cp editor/favicon.ico favicon.ico
 cp editor/favicon.png favicon.png
 
