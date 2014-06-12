@@ -228,7 +228,7 @@ div#credits{
     display: none;
     background: rgba(#000, 0.85);
     bottom: 50px;
-    max-width: 240px;
+    max-width: 200px;
     padding: 10px;
     margin-left: -17px;
     box-shadow: 0 0 1px rgba(#fff, .2);
@@ -237,6 +237,8 @@ div#credits{
     line-height: 1;
     text-align: left;
     font-size: 12px;
+    white-space: nowrap;
+
 
     h1, p {
       height: auto;
