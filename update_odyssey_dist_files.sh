@@ -2,6 +2,7 @@
 rm -rf editor/*
 
 mkdir -p editor
+wget -O editor/notsupportedbrowser.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/notsupportedbrowser.html
 wget -O editor/editor.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/editor.html
 wget -O editor/scroll.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll.html
 wget -O editor/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides.html
