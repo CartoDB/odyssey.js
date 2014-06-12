@@ -211,7 +211,7 @@ var Docs = Backbone.View.extend({
     }, { offset: 40 });
 
     this.$nav.find('a').on('click', function(e) {
-      e.preventDefault();
+      if (!$(this).hasClass('nav-link')) e.preventDefault();
 
       that._goTo($('#'+this.href.split('#')[1]), { margin: 30 }, function() {  window.location.hash = $(e.target).attr('href') });
     });

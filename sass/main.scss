@@ -643,6 +643,21 @@ body {
   color: rgba(#fff, .5);
 }
 
+.footer-logo {
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  margin-left: 5px;
+  width: 79px;
+  height: 28px;
+  background: url('../img/footer-logo.png') center;
+  vertical-align: middle;
+
+  span {
+    display: none;
+  }
+}
+
 .footer-title {
   @extend .section-title;
   color: #fff;

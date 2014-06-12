@@ -432,8 +432,12 @@ code {
   h1 {
     font-size: 40px;
     color: #35454B;
-    text-decoration: none;
     font-family: staticregular;
+
+    a {
+      color: #35454B;
+      text-decoration: none;
+    }
   }
 }
 .fix-nav .nav-header-scroll {
