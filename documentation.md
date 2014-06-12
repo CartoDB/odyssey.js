@@ -80,7 +80,7 @@ Templates control the overal structure and layout of your story. They define the
 
 The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
-[See a live example](http://bl.ocks.org/anonymous/raw/c51948a0d1ac9e417887/#1)
+[See a live example](http://bl.ocks.org/anonymous/raw/8a687b685fe6fb324ff4/)
 
 **todo**
 Swap the example with a How-to type example like Torque
