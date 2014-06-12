@@ -99,9 +99,19 @@ Use this template if your data is animated. This template adds triggers to your 
 - [See a live example](/editor/editor.html#md/torque/YGBgCi10aXRsZTogIlRpdGxlIgotYXV0aG9yOiAiT2R5c3NleS5qcyBEZXZlbG9wZXJzIgotdml6anNvbjogImh0dHA6Ly92aXoyLmNhcnRvZGIuY29tL2FwaS92Mi92aXovNTIxZjM3NjgtZWIzYy0xMWUzLWI0NTYtMGUxMGJjZDkxYzJiL3Zpei5qc29uIgotZHVyYXRpb246IDE4Ci1iYXNldXJsOiAiaHR0cDovL3tzfS5hcGkuY2FydG9jZG4uY29tL2Jhc2UtbGlnaHQve3p9L3t4fS97eX0ucG5nIgpgYGAKCiMgVG9ycXVlIFRlbXBsYXRlCmBgYAotIGNlbnRlcjogWy00LjAzOTYsIDUuNTM3MV0KLSB6b29tOiAyCmBgYAoKIyMgQW5pbWF0ZWQgbWFwcyBpbiBPZHlzc2V5LmpzCgpEZWxldGUgdGhlIFtNYXJrZG93bl0oaHR0cDovL2RhcmluZ2ZpcmViYWxsLm5ldC9wcm9qZWN0cy9tYXJrZG93bi8pIHRvIGdldCBzdGFydGVkIHdpdGggeW91ciBvd24gb3Igd2F0Y2ggdGhpcyBzdG9yeSB0byBsZWFybiBzb21lIG9mIHRoZSB0ZWNobmlxdWVzLgoKIyB2aXpqc29uCmBgYAotIHN0ZXA6IDg2CmBgYAoKVW5saWtlIG90aGVyIE9keXNzZXkuanMgdGVtcGxhdGVzLCB0aGUK)
 
 
+#### Examples
+
+Here's a list of projects making use of hosted templates:
+
+- [A shirt's journey](http://bl.ocks.org/anonymous/raw/8a687b685fe6fb324ff4/)
+- [The Voyage of the HMS Beagle](http://bl.ocks.org/anonymous/raw/31b8ce536c3b2078ff14/)
+
+
 ### Custom templates
 
 Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see [the following section](#javascript-api).
+
+#### Examples
 
 Here's a list of projects making use of custom templates:
 
