@@ -48,7 +48,8 @@ function files(md, template, callback) {
     });
 
     callback({
-      'odyssey.html': processHTML(results[0], md, relocateAssets)
+      'odyssey.html': processHTML(results[0], md, relocateAssets),
+      'odyssey.md': md
     });
   }
 }
@@ -58,6 +59,7 @@ function zip(md, template, callback) {
     var zip = new JSZip();
     for (var f in contents) {
       zip.file(f, '<!doctype><html>'+contents[f]+'</html>');
+      zip.file(f, contents[f]);
     }
     callback(zip);
   });
