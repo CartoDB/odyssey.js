@@ -19,7 +19,9 @@ The library is open source and freely available to use in your projects.
 
 ## Quick start
 
-**TODO** Create a quickstart video. Very simple, starting at editor and creating a story and publishing as a gist. Narrate and make it short (4 minutes) and possible to watch on its own.
+<!-- <iframe src="//player.vimeo.com/video/97968118" width="700px" height="374px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> -->
+
+**TODO** Add text
 
 ### Create a new Story
 
@@ -78,22 +80,25 @@ Templates control the overal structure and layout of your story. They define the
 
 The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
+[See a live example](http://bl.ocks.org/anonymous/raw/8a687b685fe6fb324ff4/)
+
 **todo**
-_provide a link to an example (created using only the editor)_
+Swap the example with a How-to type example like Torque
 
 #### Scroll template
 
 The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
+[See a live example](http://bl.ocks.org/anonymous/raw/31b8ce536c3b2078ff14/)
+
 **todo**
-_provide a link to an example (created using only the editor)_
+Swap the example with a How-to type example like Torque
 
 #### Torque template
 
 Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
-**todo**
-_provide a link to an example (created using only the editor)_
+[See a live example](http://bit.ly/1n6kTDn)
 
 ### Custom templates
 
@@ -187,7 +192,9 @@ _Sleep_
 _Show marker_
 - Places a marker at a latitude/longitude point which you specify
 
-_Show infowindow_ - **todo** (ask @javisantana when this will be ready)
+_Show infowindow_ 
+
+- **todo** (ask @javisantana when this will be ready)
 
 #### Video actions
 
@@ -201,14 +208,28 @@ _Show infowindow_ - **todo** (ask @javisantana when this will be ready)
 
 #### Torque Actions
 
-_Play_ - **todo**
+_Insert time_ 
+- _Insert time_ is an option that links your current story stage with the current frame of your Torque animation. If triggered, it will insert the _step_ option into your options and signify when in the Torque animation to display the current stage of your story. 
 
-_Pause_ - **todo**
+~~~md
+```
+- step: 86
+```
+~~~
 
-_Insert time_ - **todo**
+_Pause_ 
+- Tells the Torque animated map to pause playing at the current step. Often used with the _Sleep_ action to stay at a given step in the Torque animation before triggering a _Play_ action again. 
 
-**TODO**
-**Add an Actions section at the main level of Documentation**
+~~~md
+S.torqueLayer.actions.pause()
+~~~
+
+_Play_ 
+- Tells the Torque animated map to continue playing. The default state is _play_, so only use this after a _pause_ action.
+
+~~~md
+S.torqueLayer.actions.play()
+~~~
 
 ### Images
 
