@@ -97,8 +97,16 @@ body{
   }
   p {
     font: normal 19px 'staticregular';
+    color: #AEAEAE;
     color: rgba(255, 255, 255, .7);
-    margin-bottom: 80px;
+    margin-bottom: 10px;
+
+    + p { margin-bottom: 80px; }
+ 
+    a {
+      color: #AEAEAE;
+      color: rgba(255, 255, 255, .7);
+    }
   }
 
 

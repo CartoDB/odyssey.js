@@ -813,7 +813,7 @@ function Splash(context) {
         .attr('class', 'template h-valign')
         .append ('div')
         .attr('class', function(d) {
-            return 'inner-template '+d.description
+            return 'inner-template '
           })
 
     template
