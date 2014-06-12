@@ -103,6 +103,9 @@ Use this template if your data is animated. This template adds triggers to your 
 
 Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see [the following section](#javascript-api).
 
+Here's a list of projects making use of custom templates:
+
+- [Honoring #MayaAngelou with a map of her life and accomplishments around the world](http://cartodb.com/v/maya-angelou#0)
 
 ## Advanced use of the editor
 
