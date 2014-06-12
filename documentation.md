@@ -20,9 +20,7 @@ The library is open source and freely available to use in your projects.
 
 ## Quick start
 
-<!-- <iframe src="//player.vimeo.com/video/97968118" width="700px" height="374px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> -->
-
-**TODO** Add text
+<iframe src="http://player.vimeo.com/video/97968118" width="100%" height="374px" style="display:block; margin: 0 auto;" allowfullscreen="allowfullscreen">&nbsp;</iframe>
 
 
 ### Create a new Story
