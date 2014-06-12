@@ -512,8 +512,10 @@ a.expandButton{
   top: 0; left: 0;
   width: 100%;
   border: 1px solid #ddd;
+  margin: 0;
   padding: 5px;
   outline: none;
+  height: 31px;
   font: 14px/31px Helvetica, Arial;
   @include border-radius(4px);
   color: #333;
@@ -535,7 +537,7 @@ a.expandButton{
 
 .mode_menu {
   position: absolute;
-  top: 4px; right: -10px;
+  top: 2px; right: -10px;
   width: 115px;
   background: #fff;
 
