@@ -97,7 +97,14 @@
         // create content
         var content = '';
 
-        $('#header').html(actions[0].html());
+        var slide_ = actions[0];
+        $('#header').html(slide_.html());
+
+        this.story
+          .addState(
+            O.Scroll().within($('#header')),
+            slide_(this)
+          );
 
         for(var i = 1; i < actions.length; ++i) {
           var slide = actions[i];
