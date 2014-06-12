@@ -113,6 +113,7 @@ em { font-style: italic; }
   position: relative;
   margin-left: 225px;
   color: #333;
+  max-width: 861px;
 
   .content {
     @extend %clearfix;
@@ -533,7 +534,6 @@ code {
 @media (min-width: $max-width) {
   .inner {
     border-right: 1px solid #EEE;
-    max-width: 861px;
   }
 }
 

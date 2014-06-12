@@ -258,7 +258,7 @@ Here, the Alt text is the same as above, but the [id] is the name of a defined i
 [id]: url/to/image  "Optional title attribute"
 ~~~
 
-Finally, you can also use simple HTML <img> tags if you wish to edit attributes of the image, like size. For example:
+Finally, you can also use simple HTML `<img />` tags if you wish to edit attributes of the image, like size. For example:
 
 ~~~html
 <img width="200px" src="http://imgur.com/69Gxjih.jpg" />
