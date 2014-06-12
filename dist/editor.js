@@ -744,6 +744,9 @@ function share_dialog(url, html_url) {
   // update url
   input.attr('value', share_iframe);
 
+  s.selectAll('#mode_menu li').classed("selected", false);
+  s.select('#mode_menu li.first').classed("selected", true);
+
   // select input on click
   input.on("click", function() {
     this.select();
