@@ -103,7 +103,7 @@ function dialog(context) {
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
         var md = el.select('textarea').node().codemirror.getValue();
         exp.zip(md, context.template(), function(zip) {
-          saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
+          saveAs(zip.generate({ type: 'blob' }), 'odyssey.zip');
 
           // var link = document.createElement("a");
           // link.download = 'odyssey.zip';
@@ -614,7 +614,7 @@ module.exports = editor;
 },{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
 function relocateAssets(doc) {
   var s = location.pathname.split('/');
-  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
+  var relocate_url = "http://cartodb.github.io/odyssey.js" + s.slice(0, s.length - 1).join('/') + "/";
 
   var js = doc.getElementsByTagName('script');
   for (var i = 0; i < js.length; ++i) {
@@ -641,7 +641,7 @@ function processHTML(html, md, transform) {
   transform && transform(doc);
 
   md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
-  // insert oddyset markdown
+  // insert odyssey markdown
   var script = doc.createElement('script');
   script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
   doc.body.appendChild(script);
@@ -662,7 +662,7 @@ function files(md, template, callback) {
     });
 
     callback({
-      'oddysey.html': processHTML(results[0], md, relocateAssets)
+      'odyssey.html': processHTML(results[0], md, relocateAssets)
     });
   }
 }

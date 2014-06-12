@@ -305,9 +305,8 @@
         this._resetActions(actions);
 
         if (actions.global.duration) {
-          this.torqueLayer.stop();
+          this.torqueLayer.pause();
           this.torqueLayer.setDuration(actions.global.duration);
-          this.torqueLayer.play()
         }
       }
     });
