@@ -802,7 +802,10 @@ function Splash(context) {
     var inner_content = div.append('div').attr('class', 'splash_inner')
 
     inner_content.append('h1').text('Select your template')
-    inner_content.append('p').text('Templates give you different ways to unfold you story')
+    inner_content
+      .append('p')
+      .attr('class', 'last')
+      .text('Templates give you different ways to unfold you story')
     var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
 
 

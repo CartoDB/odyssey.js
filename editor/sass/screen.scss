@@ -101,7 +101,9 @@ body{
     color: rgba(255, 255, 255, .7);
     margin-bottom: 10px;
 
-    + p { margin-bottom: 80px; }
+    &.last {
+      margin-bottom: 80px;
+    }
  
     a {
       color: #AEAEAE;
