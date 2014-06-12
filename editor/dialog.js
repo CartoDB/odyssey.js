@@ -100,15 +100,30 @@ function dialog(context) {
     });
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
+      function isSafari() {
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+          return true;
+        }
+
+        return false;
+      }
+
+      function notOld() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      if (!isSafari() && notOld()) {
         var md = el.select('textarea').node().codemirror.getValue();
         exp.zip(md, context.template(), function(zip) {
-          saveAs(zip.generate({ type: 'blob' }), 'odyssey.zip');
-
-          // var link = document.createElement("a");
-          // link.download = 'odyssey.zip';
-          // link.href = "data:application/zip;base64," + zip.generate({type:"base64"});
-          // link.click();
+          saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
         });
+      } else {
+        alert('Download is not fully supported in this browser.');
+      }
     });
 
     optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
