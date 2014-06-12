@@ -17,15 +17,17 @@ The library is open source and freely available to use in your projects.
 
 **We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)**
 
+
 ## Quick start
 
 <!-- <iframe src="//player.vimeo.com/video/97968118" width="700px" height="374px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> -->
 
 **TODO** Add text
 
+
 ### Create a new Story
 
-If you want to start using the on-line editor, go to the [homepage](../), click the button to create a new story or just go [here](../editor/editor.html).
+If you want to start using the on-line editor, go to the [homepage]({{ "/" | prepend: site.baseurl }}), click the button to create a new story or just go [here]({{ "/editor/editor.html" | prepend: site.baseurl }}).
 
 #### Name your project
 
@@ -47,12 +49,14 @@ Tell me, O muse, of that ingenious
 hero who travelled far
 ~~~
 
+
 ### Publish your story
 
 There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
 
 **TODO**
 **Include annotated image of the publish options**
+
 
 ### Publish it on your site
 
@@ -62,15 +66,18 @@ In the **Share** options for your story, you can select the third option, _IFRAM
 
 After you have selected iFrame, you can use this code to embed your story on your website or blog.
 
+
 ### Save and return to your story
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
+
 
 ## The Odyssey Editor
 
 The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
+
 
 ### Hosted Templates
 
@@ -80,38 +87,32 @@ Templates control the overal structure and layout of your story. They define the
 
 The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
-[See a live example](http://bl.ocks.org/anonymous/raw/8a687b685fe6fb324ff4/)
-
-**todo**
-Swap the example with a How-to type example like Torque
+- [See a live example](/editor/editor.html#md/slides/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
 
 #### Scroll template
 
 The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
-[See a live example](http://bl.ocks.org/anonymous/raw/31b8ce536c3b2078ff14/)
-
-**todo**
-Swap the example with a How-to type example like Torque
+- [See a live example](/editor/editor.html#md/scroll/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
 
 #### Torque template
 
 Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
-[See a live example](http://bit.ly/1n6kTDn)
+- [See a live example](/editor/editor.html#md/torque/YGBgCi10aXRsZTogIlRpdGxlIgotYXV0aG9yOiAiT2R5c3NleS5qcyBEZXZlbG9wZXJzIgotdml6anNvbjogImh0dHA6Ly92aXoyLmNhcnRvZGIuY29tL2FwaS92Mi92aXovNTIxZjM3NjgtZWIzYy0xMWUzLWI0NTYtMGUxMGJjZDkxYzJiL3Zpei5qc29uIgotZHVyYXRpb246IDE4Ci1iYXNldXJsOiAiaHR0cDovL3tzfS5hcGkuY2FydG9jZG4uY29tL2Jhc2UtbGlnaHQve3p9L3t4fS97eX0ucG5nIgpgYGAKCiMgVG9ycXVlIFRlbXBsYXRlCmBgYAotIGNlbnRlcjogWy00LjAzOTYsIDUuNTM3MV0KLSB6b29tOiAyCmBgYAoKIyMgQW5pbWF0ZWQgbWFwcyBpbiBPZHlzc2V5LmpzCgpEZWxldGUgdGhlIFtNYXJrZG93bl0oaHR0cDovL2RhcmluZ2ZpcmViYWxsLm5ldC9wcm9qZWN0cy9tYXJrZG93bi8pIHRvIGdldCBzdGFydGVkIHdpdGggeW91ciBvd24gb3Igd2F0Y2ggdGhpcyBzdG9yeSB0byBsZWFybiBzb21lIG9mIHRoZSB0ZWNobmlxdWVzLgoKIyB2aXpqc29uCmBgYAotIHN0ZXA6IDg2CmBgYAoKVW5saWtlIG90aGVyIE9keXNzZXkuanMgdGVtcGxhdGVzLCB0aGUK)
+
 
 ### Custom templates
 
-Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see the following section: **link**
+Experts can create and use custom Templates with Odyssey. If you are interested in using a custom template see [the following section](#javascript-api).
 
-**TODO**
-**Add link to correct section below when prepared**
 
 ## Advanced use of the editor
 
 ### Markdown syntax
 
 Markdown syntax is used in the Odyssey Editor and contains all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+
 
 ### Config block
 
@@ -123,6 +124,7 @@ The config block is a control element at the top of your story's Markdown docume
 - title: "This is my story title"
 - author: "Odyssey master"
 ~~~
+
 In the Scroll and Slide templates, you will see these two options as defaults:
 
 - title: "_Title of your story_"
@@ -134,10 +136,12 @@ In the Scroll and Slide templates, you will see these two options as defaults:
 - vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 - duration: 30
 ~~~
+
 If you are creating a visualization that uses Torque, you will see the following options in addition to the default:
 
 - vizjson: "_the url to your cartodb torque visualization_"
 - duration: "_duration of torque animation (default is 30)_"
+
 
 ### Chapters
 
@@ -149,6 +153,7 @@ Chapters define each section of your story and allow you to perform new Actions 
 But as the sun was rising from the
 fair sea into the firmament...
 ~~~
+
 
 ### The Actions block
 
@@ -192,19 +197,9 @@ _Sleep_
 _Show marker_
 - Places a marker at a latitude/longitude point which you specify
 
+- **Pending**
 _Show infowindow_ 
 
-- **todo** (ask @javisantana when this will be ready)
-
-#### Video actions
-
-**todo** ask @javisantana when this will be ready.
-
-#### Audio actions
-
-**todo** _html5audio_
-
-**pending** _soundcloud_
 
 #### Torque Actions
 
@@ -217,6 +212,7 @@ _Insert time_
 ```
 ~~~
 
+
 _Pause_ 
 - Tells the Torque animated map to pause playing at the current step. Often used with the _Sleep_ action to stay at a given step in the Torque animation before triggering a _Play_ action again. 
 
@@ -224,12 +220,24 @@ _Pause_
 S.torqueLayer.actions.pause()
 ~~~
 
-_Play_ 
+
+_Play_
 - Tells the Torque animated map to continue playing. The default state is _play_, so only use this after a _pause_ action.
 
 ~~~md
 S.torqueLayer.actions.play()
 ~~~
+
+
+#### Pending Actions
+
+_Video actions_ 
+
+_Audio actions_
+
+- html5audio
+- soundcloud
+
 
 ### Images
 
@@ -259,6 +267,7 @@ Finally, you can also use simple HTML <img> tags if you wish to edit attributes 
 <img width="200px" src="http://imgur.com/69Gxjih.jpg" />
 ~~~
 
+
 ### Links
 
 In Markdown, there are two ways to add links. Both are similar to how you add images, which we described above. The simplest way is to add links inline. Your markdown would look like:
@@ -281,6 +290,7 @@ Here, the first text in parentheses would be the link, and the second text is a 
 [id]: http://example.com/  "Optional Title Here"
 ~~~
 
+
 ## Javascript API
 
 ### Install
@@ -291,9 +301,100 @@ Grab dist/odyssey.js and add it at the end of your `<body>` element in your html
 <script src="odyssey.js"></script>
 ~~~
 
+
 ### Quick start
 
-**TODO**
+Create the map and add the story.
+
+~~~javascript
+function click(el) {
+  var element = O.Core.getElement(el);
+  var t = O.Trigger();
+  element.onclick = function() {
+    t.trigger();
+  }
+  return t;
+}
+
+O.Template({
+  init: function() {
+    var seq = O.Triggers.Sequential();
+
+    var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+    var map = this.map = L.map('map').setView([0, 0.0], 4);
+    var basemap = this.basemap = L.tileLayer(baseurl, {
+      attribution: 'data OSM - map CartoDB'
+    }).addTo(map);
+
+    // enanle keys to move
+    O.Keys().on('map').left().then(seq.prev, seq)
+    O.Keys().on('map').right().then(seq.next, seq)
+
+    click(document.getElementsByClassName('next')).then(seq.next, seq)
+    click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+    var slides = O.Actions.Slides('slides');
+    var story = O.Story()
+
+    this.story = story;
+    this.seq = seq;
+    this.slides = slides;
+    this.progress = O.UI.DotProgress('dots').count(0);
+  },
+
+  update: function(actions) {
+    if (!actions.length) return;
+    this.story.clear();
+
+    // update footer title and author
+    var title_ = actions.global.title === undefined ? '' : actions.global.title,
+        author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+    document.getElementById('title').innerHTML = title_;
+    document.getElementById('author').innerHTML = author_;
+    document.title = title_ + " | " + author_ +' Odyssey.js';
+
+    var sl = actions;
+
+    document.getElementById('slides').innerHTML = ''
+    this.progress.count(sl.length);
+
+    // create new story
+    for(var i = 0; i < sl.length; ++i) {
+      var slide = sl[i];
+      var tmpl = "<div class='slide' style='diplay:none'>"
+      tmpl += slide.html();
+      tmpl += "</div>";
+      document.getElementById('slides').innerHTML += tmpl;
+
+      this.progress.step(i).then(this.seq.step(i), this.seq)
+
+      var actions = O.Parallel(
+        this.slides.activate(i),
+        slide(this),
+        this.progress.activate(i)
+      );
+
+      this.story.addState(
+        this.seq.step(i),
+        actions
+      )
+    }
+    this.story.go(this.seq.current());
+  },
+
+  changeSlide: function(n) {
+    this.seq.current(n);
+  }
+});
+~~~
+
+The content in the story relies either in a `window.ODYSSEY_MD` global variable or a hash after `#md/torque/` in base64. Presence of the `window.ODYSSEY_MD` global variable has priority over the hash.
+
+~~~javascript
+window.ODYSSEY_MD = ""
+~~~
+
 
 ### Story object
 
@@ -303,6 +404,7 @@ The main object in Odyssey.js is the Story object. You can initialize a new stor
 var story = O.Story();
 ~~~
 
+
 #### addState(_trigger_, _action_)
 
 Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is called **once** when the story enters
@@ -311,6 +413,7 @@ in this state so if the trigger is raised another time when the state is active 
 ~~~javascript
 Story().addState(O.Keys().right(), map.actions.moveTo(-1.2, 45));
 ~~~
+
 
 #### addLinearState(_trigger_, _action_)
 
@@ -325,16 +428,17 @@ Returns the current state number, 0 based index.
 
 Move story to the desired state
 
-  - `action_index`: Base 0 index of state
+- `action_index`: Base 0 index of state
 
 Available options
 
-  - `reverse`: Boolean, default false. Set it to true to call `reverse` method in the trigger when the state is set.
+- `reverse`: Boolean, default false. Set it to true to call `reverse` method in the trigger when the state is set.
 
 ~~~javascript
 // This goes to the second state in the story
 Story().go(1);
 ~~~
+
 
 ### Action object
 
@@ -342,7 +446,7 @@ Converts a function or object into an action.
 
 ~~~javascript
 var hideDivAction = O.Action(function() {
-    $('#element').hide()
+  $('#element').hide()
 });
 
 // this hides #element when right key is pressed
@@ -354,14 +458,14 @@ the state and hides it when leaves it:
 
 ~~~javascript
 function ShowHideAction(el) {
-    return O.Action({
-        enter: function() {
-            el.show()
-        },
-        exit: function() {
-            el.hide()
-        }
-    });
+  return O.Action({
+    enter: function() {
+      el.show()
+    },
+    exit: function() {
+      el.hide()
+    }
+  });
 }
 
 story.addState(O.Keys().right(), ShowHideAction($('#element')));
@@ -374,44 +478,45 @@ Creates a trigger that can raise actions. For example, below is a trigger that i
 
 ~~~javascript
 function IntervalTrigger() {
-    t = O.Trigger();
-    setInterval(funtion() {
-        t.trigger();
-    }, 3000)
-    return t;
+  t = O.Trigger();
+  setInterval(funtion() {
+    t.trigger();
+  }, 3000)
+  return t;
 }
 
 // Note that if the trigger is raised again it has no effect
 story.addState(IntervalTrigger(), O.Debug().log('enter'));
 ~~~
 
+
 #### trigger(_number_)
 
 Raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
 
 ~~~javascript
-    t = O.Trigger();
-    story.addState(t, action);
-    t.trigger(); // this enters in the state and calls "action"
+t = O.Trigger();
+story.addState(t, action);
+t.trigger(); // this enters in the state and calls "action"
 ~~~
 
 for linear states:
 
 ~~~javascript
-    t = O.Trigger();
-    story.addState(t, O.Action({
+t = O.Trigger();
+story.addState(t, O.Action({
 
-        enter: function() {
-            console.log("enter");
-        },
+  enter: function() {
+    console.log("enter");
+  },
 
-        update: function(t) {
-            console.log(t);
-        }
+  update: function(t) {
+    console.log(t);
+  }
 
-    });
-    t.trigger(); // "enter"
-    t.trigger(0.2); // "0.2"
+});
+t.trigger(); // "enter"
+t.trigger(0.2); // "0.2"
 ~~~
 
 actions without ``update`` method are not called more than once (on action enter)
@@ -469,6 +574,7 @@ seq.next() // raises action1
 seq.next() // raises action2
 ~~~
 
+
 #### next()
 
 Goes to the nextstate
@@ -513,6 +619,7 @@ O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
 ~~~
 
+
 #### right()
 
 Returns a trigger that is raised when user press right key
@@ -530,7 +637,6 @@ It optionally gets a DOM element where to attach the events.
 The tipical usage is with ``Keys`` and a ``Sequence``
 
 ~~~javascript
-
 var seq = O.Sequence()
 
 O.Keys().left().then(seq.prev, seq);
@@ -566,7 +672,7 @@ Manages page scroll
 ~~~javascript
 // action will be called when the scroll is within the vertical scape of #myelement
 O.Story()
-    .addState(O.Scroll().within($('#myelement'), action)
+  .addState(O.Scroll().within($('#myelement'), action)
 ~~~
 
 #### within(_el_)
@@ -592,8 +698,8 @@ Given an DOM element with children return actions to swtich between them. With t
 
 ~~~html
 <div id="slides">
-    <div class="slide">slide 1</div>
-    <div class="slide">slide 2</div>
+  <div class="slide">slide 1</div>
+  <div class="slide">slide 2</div>
 </div>
 ~~~
 
@@ -602,8 +708,8 @@ A story like this can be created with the following code.
 ~~~javascript
 var slides = O.Slides($('#slides'));
 O.Story()
-    .addState(trigger1, slides.activate(0))
-    .addState(trigger2, slides.activate(1))
+  .addState(trigger1, slides.activate(0))
+  .addState(trigger2, slides.activate(1))
 ~~~
 
 When `trigger1` is raised, the first slide will have the style `display: block` and the other ones `display: none`. It hides all when no action was raised.
@@ -660,6 +766,7 @@ O.Story()
     L.marker([37.1, -92]).actions.addTo(map)
   );
 ~~~
+
 
 #### addTo(_map_)
 Creates an action that adds the marker instance to the specified `map`.
@@ -747,25 +854,25 @@ O.Story()
   ));
 ~~~
 
+
 ### Audio
 Actions to control HTML5 audio element
 
 #### play
-
 ~~~javascript
 O.Story()
   .addState(trigger, O.Audio('#audio_el').play());
 ~~~
 
-#### pause
 
+#### pause
 ~~~javascript
 O.Story()
   .addState(trigger, O.Audio('#audio_el').pause());
 ~~~
 
-#### setCurrentTime(_t_)
 
+#### setCurrentTime(_t_)
 Sets current play time
 
 ~~~javascript
@@ -773,23 +880,6 @@ O.Story()
   .addState(trigger, O.Audio('#audio_el').setCurrentTime(1400));
 ~~~
 
-### Basic functions
-
-_todo_
-
-### Advanced functions
-
-### YouTube
-
-_todo_
-
-### Torque
-
-_todo_
-
-### Custom functions
-
-_todo_
 
 ## Contributing code
 
@@ -798,6 +888,7 @@ _todo_
 Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
+
 
 ### Developing the Editor
 
@@ -810,6 +901,7 @@ compass watch
 
 Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
+
 ### Submitting improvements
 
 Send a pull request to the original Odyssey.js repository!
@@ -817,7 +909,8 @@ Send a pull request to the original Odyssey.js repository!
 
 ## Developers
 
-_todo intro_
+If you are interested in helping us develop the project, see [CONTRIBUTING](https://github.com/CartoDB/odyssey.js/blob/master/CONTRIBUTING.md) for more information.
+
 
 ### Run locally
 
@@ -844,32 +937,56 @@ python -m SimpleHTTPServer
 
 Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
 
+
 ### Custom templates
 
 Authoring new templates can be useful if you want to deploy new stories with a custom look and feel or if you have a new story type you want to contribute back to the Odyssey project for others to use.
 
-**TODO**
-_describe the rest of how to author a template_
+Just add your template to the template list and choose it from the splash screen.
+
+~~~javascript
+var TEMPLATE_LIST = [{
+    title: '...',
+    description: '...',
+    default: '...'
+  }];
+~~~
+
 
 **Adding to Odyssey**
 
-If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above for how to contribute. **TODO, make link to Contributing live**
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the [Contributing](#contributing-code) section above for how to contribute.
+
 
 ### Custom Actions
 
 **Action format**
 
-_TODO_
-_actions are written in this format... yada yada_
+In order to have custom actions available in the Editor, add them in `O.Template` with the name and the action to be performed.
+
+~~~javascript
+actions: {
+  'insert time': function() {
+    return "- step: " + this.torqueLayer.getStep()
+  },
+  'pause': function() {
+    return "S.torqueLayer.actions.pause()";
+  },
+  'play': function() {
+    return "S.torqueLayer.actions.play()";
+  }
+}
+~~~
 
 **Using locally**
 
-_you can test your new actions locally by rebuilding the libarary_
-_todo_
-_steps for compile_
+You can test your new actions locally by rebuilding the libarary.
+
+~~~sh
+make
+~~~
+
 
 **Adding to Odyssey**
 
-If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the Contributing section above. **TODO, make link to Contributing live**
-
-
+If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the [Contributing](#contributing-code) section above for how to contribute.
