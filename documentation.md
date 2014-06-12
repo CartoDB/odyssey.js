@@ -52,8 +52,7 @@ hero who travelled far
 
 There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
 
-**TODO**
-**Include annotated image of the publish options**
+<img src='{{ "/img/anotated.png" | prepend: site.baseurl }}' width="100%" />
 
 
 ### Publish it on your site
