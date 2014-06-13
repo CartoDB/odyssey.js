@@ -976,7 +976,7 @@ Template.Storage = {
 
   load: function(done) {
     if (document.getElementById('md_template')) {
-      done(document.getElementById('md_template').content.textContent);
+      done(document.getElementById('md_template').text);
       return;
     }
 
