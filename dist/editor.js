@@ -678,8 +678,7 @@ function files(md, template, callback) {
     });
 
     callback({
-      'odyssey.html': processHTML(results[0], md, relocateAssets),
-      'odyssey.md': md
+      'odyssey.html': processHTML(results[0], md, relocateAssets)
     });
   }
 }
@@ -688,7 +687,6 @@ function zip(md, template, callback) {
   files(md, template, function(contents) {
     var zip = new JSZip();
     for (var f in contents) {
-      zip.file(f, contents[f]);
       zip.file(f, contents[f]);
     }
     callback(zip);
