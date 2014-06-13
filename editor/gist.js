@@ -26,8 +26,10 @@ function processHTML(html, md, transform) {
   // transform
   transform && transform(doc);
 
-  var md_template = doc.createElement("template");
+  var md_template = doc.createElement("script");
+
       md_template.setAttribute("id", "md_template");
+      md_template.setAttribute("type", "text/template");
 
   md_template.innerHTML = md;
   doc.body.appendChild(md_template);
