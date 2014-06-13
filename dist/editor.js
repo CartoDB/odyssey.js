@@ -655,12 +655,13 @@ function processHTML(html, md, transform) {
   // transform
   transform && transform(doc);
 
-  md = md.replace(/\n/g, '\\n').replace(/"/g, '\\"');
-  // insert odyssey markdown
-  var script = doc.createElement('script');
-  script.innerHTML = 'window.ODYSSEY_MD = "' + md + '"';
-  doc.body.appendChild(script);
-  return doc.documentElement.innerHTML;
+  var md_template = doc.createElement("template");
+      md_template.setAttribute("id", "md_template");
+
+  md_template.innerHTML = md;
+  doc.body.appendChild(md_template);
+
+  return '<!doctype><html>'+doc.documentElement.innerHTML+'</html>';
 }
 
 function files(md, template, callback) {
@@ -687,7 +688,7 @@ function zip(md, template, callback) {
   files(md, template, function(contents) {
     var zip = new JSZip();
     for (var f in contents) {
-      zip.file(f, '<!doctype><html>'+contents[f]+'</html>');
+      zip.file(f, contents[f]);
       zip.file(f, contents[f]);
     }
     callback(zip);
