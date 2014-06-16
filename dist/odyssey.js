@@ -890,7 +890,7 @@ var mapActions = {
 var Template = function(template) {
   var initialized = false;
 
-  function readMessage() {
+  function readMessage(event) {
     var msg = JSON.parse(event.data);
     template.editor = true;
 
@@ -942,11 +942,11 @@ var Template = function(template) {
 
   if (!window.addEventListener) {
     window.attachEvent("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   } else {
     window.addEventListener("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   }
 
@@ -1254,8 +1254,8 @@ function Keys() {
        var code = e.keyCode;
        if (code === k) {
          callback();
-         event.preventDefault ? event.preventDefault() : event.returnValue = false;
-         event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;
+         e.preventDefault ? e.preventDefault() : e.returnValue = false;
+         e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
        }
     }
 
