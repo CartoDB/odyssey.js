@@ -160,6 +160,21 @@ function dialog(context) {
           evt.template(t);
         }));
 
+        function initAnim($el) {
+          var $anim = $el.find(".anim > div");
+          
+          $anim.spriteanim();
+
+          $el.on("mouseenter", function() {
+            $(this).find(".anim > div").spriteanim('play');
+          });
+
+          $el.on("mouseleave", function() {
+            $(this).find(".anim > div").spriteanim('stop');
+          });
+        }
+
+        initAnim($('li.template'));
       });
 
 
