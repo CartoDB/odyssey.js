@@ -64,7 +64,10 @@ function dialog(context) {
 
     divHeader.append('a')
       .attr('class','expandButton')
-      .on('click', function(){
+      .attr('href','#')
+      .attr('title','Toggle expanded mode')
+      .on('click', function(e){
+        d3.event.preventDefault();
         // console.log(event.target);
         _expand();
       })
@@ -76,84 +79,114 @@ function dialog(context) {
 
     var help = divOptions.append('ul').attr('class', 'h-left');
 
-    help.append('li').append('a').attr('class', 'helpButton').attr('href', '/odyssey.js/documentation');
+    help
+      .append('li')
+      .append('a')
+      .attr('class', 'helpButton')
+      .attr('title','Documentation')
+      .attr('href', '/odyssey.js/documentation');
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
-    optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
-      if (d3.select(this).classed('expandButton')) {
-        el.select('.CodeMirror').style('padding', '20px 20px 20px 72px');
-        el.style('bottom', 'auto').style('min-height', '330px');
-        el.style('bottom', '80px').style('height', 'auto');
-        el.selectAll('.actionButton').style("visibility", "visible");
-        d3.select(this).classed('expandButton', false);
-        el.select('#actions_bar').classed('collapseActions', false);
-      } else {
-        el.style('bottom', 'auto').style('min-height', '0');
-        el.style('bottom', 'auto').style('height', '119px');
-        d3.select(this).classed('expandButton', true);
-        el.selectAll('.actionButton').style("visibility", "hidden");
-        el.select('#actions_bar').classed('collapseActions', true);
-        el.select('.CodeMirror').style('padding', '0');
-      }
-    });
+    optionsMap
+      .append('li')
+      .append('a')
+      .attr('class', 'collapseButton')
+      .attr('href','#')
+      .attr('title','Toggle collapse mode')
+      .on('click', function(e) {
+        d3.event.preventDefault();
 
-    optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
-      function isSafari() {
-        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-          return true;
-        }
-
-        return false;
-      }
-
-      function notOld() {
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-          return true;
+        if (d3.select(this).classed('expandButton')) {
+          el.select('.CodeMirror').style('padding', '20px 20px 20px 72px');
+          el.style('bottom', 'auto').style('min-height', '330px');
+          el.style('bottom', '80px').style('height', 'auto');
+          el.selectAll('.actionButton').style("visibility", "visible");
+          d3.select(this).classed('expandButton', false);
+          el.select('#actions_bar').classed('collapseActions', false);
         } else {
+          el.style('bottom', 'auto').style('min-height', '0');
+          el.style('bottom', 'auto').style('height', '119px');
+          d3.select(this).classed('expandButton', true);
+          el.selectAll('.actionButton').style("visibility", "hidden");
+          el.select('#actions_bar').classed('collapseActions', true);
+          el.select('.CodeMirror').style('padding', '0');
+        }
+      });
+
+    optionsMap
+      .append('li')
+      .append('a')
+      .attr('class', 'downloadButton')
+      .attr('href','#')
+      .attr('title','Download story')
+      .on('click', function(e) {
+        d3.event.preventDefault();
+
+        function isSafari() {
+          if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            return true;
+          }
+
           return false;
         }
-      }
 
-      if (!isSafari() && notOld()) {
+        function notOld() {
+          if (window.File && window.FileReader && window.FileList && window.Blob) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        if (!isSafari() && notOld()) {
+          var md = el.select('textarea').node().codemirror.getValue();
+          exp.zip(md, context.template(), function(zip) {
+            saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
+          });
+        } else {
+          alert('Download is not fully supported in this browser.');
+        }
+      });
+
+    optionsMap
+      .append('li')
+      .append('a')
+      .attr('class', 'shareButton')
+      .attr('href','#')
+      .attr('title','Share story')
+      .on('click', function(e) {
+        d3.event.preventDefault();
+
         var md = el.select('textarea').node().codemirror.getValue();
-        exp.zip(md, context.template(), function(zip) {
-          saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
-        });
-      } else {
-        alert('Download is not fully supported in this browser.');
-      }
-    });
 
-    optionsMap.append('li').append('a').attr('class', 'shareButton').on('click', function() {
-      var md = el.select('textarea').node().codemirror.getValue();
-
-      exp.gist(md, context.template(), function(gist) {
-        // console.log(gist);
-        //window.open(gist.html_url);
-        share_dialog(gist.url, gist.html_url);
-      });
-
-      var client = new ZeroClipboard(document.getElementById("copy-button"), {
-        moviePath: "../vendor/ZeroClipboard.swf"
-      });
-
-      client.on("load", function(client) {
-        client.on('datarequested', function(client) {
-          var input = document.getElementById('shareInput');
-
-          client.setText(input.value);
+        exp.gist(md, context.template(), function(gist) {
+          // console.log(gist);
+          //window.open(gist.html_url);
+          share_dialog(gist.url, gist.html_url);
         });
 
-        client.on("complete", function(client, args) {
-          this.textContent = "Copied!";
+        var client = new ZeroClipboard(document.getElementById("copy-button"), {
+          moviePath: "../vendor/ZeroClipboard.swf"
+        });
+
+        client.on("load", function(client) {
+          client.on('datarequested', function(client) {
+            var input = document.getElementById('shareInput');
+
+            client.setText(input.value);
+          });
+
+          client.on("complete", function(client, args) {
+            this.textContent = "Copied!";
+          });
         });
       });
-    });
 
     divHeader.append('a')
       .attr('id', 'show_slide')
       .text(templates[0])
+      .attr('title','Change template')
       .attr('href', '/odyssey.js/editor/editor.html')
       .on('click', function(d) {
         d3.event.preventDefault();
