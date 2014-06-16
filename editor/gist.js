@@ -1,6 +1,6 @@
 function relocateAssets(doc) {
   var s = location.pathname.split('/');
-  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
+  var relocate_url = "http://cartodb.github.io/odyssey.js" + s.slice(0, s.length - 1).join('/') + "/";
 
   var js = doc.getElementsByTagName('script');
   for (var i = 0; i < js.length; ++i) {
@@ -28,8 +28,8 @@ function processHTML(html, md, transform) {
 
   var md_template = doc.createElement("script");
 
-      md_template.setAttribute("id", "md_template");
-      md_template.setAttribute("type", "text/template");
+  md_template.setAttribute("id", "md_template");
+  md_template.setAttribute("type", "text/template");
 
   md_template.innerHTML = md;
   doc.body.appendChild(md_template);
@@ -86,7 +86,7 @@ function Gist(md, template, callback) {
       .post(JSON.stringify(payload), function(err, xhr) {
         gist = JSON.parse(xhr.responseText);
         var BLOCKS = 'http://bl.ocks.org/anonymous/raw/';
-        console.log(gist);
+        // console.log(gist);
         callback({
           url: gist.url,
           html_url: BLOCKS + gist.id,

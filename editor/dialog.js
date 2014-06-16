@@ -130,7 +130,7 @@ function dialog(context) {
       var md = el.select('textarea').node().codemirror.getValue();
 
       exp.gist(md, context.template(), function(gist) {
-        console.log(gist);
+        // console.log(gist);
         //window.open(gist.html_url);
         share_dialog(gist.url, gist.html_url);
       });

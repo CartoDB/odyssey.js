@@ -890,7 +890,7 @@ var mapActions = {
 var Template = function(template) {
   var initialized = false;
 
-  function readMessage() {
+  function readMessage(event) {
     var msg = JSON.parse(event.data);
     template.editor = true;
 
@@ -942,11 +942,11 @@ var Template = function(template) {
 
   if (!window.addEventListener) {
     window.attachEvent("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   } else {
     window.addEventListener("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   }
 

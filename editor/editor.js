@@ -66,7 +66,7 @@ function editor(callback) {
 
     if (_) {
       this._code = _;
-      console.log("code", _);
+      // console.log("code", _);
     }
     return this._code;
   }
@@ -84,7 +84,7 @@ function editor(callback) {
 
   var callbacks = {};
 
-  function readMessage() {
+  function readMessage(event) {
     var msg = JSON.parse(event.data);
 
     if (msg.id) {
@@ -95,11 +95,11 @@ function editor(callback) {
 
   if (!window.addEventListener) {
     window.attachEvent("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   } else {
     window.addEventListener("message", function load(event) {
-      readMessage();
+      readMessage(event);
     });
   }
 
