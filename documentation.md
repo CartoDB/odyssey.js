@@ -103,8 +103,8 @@ Use this template if your data is animated. This template adds triggers to your 
 
 Here's a list of projects making use of hosted templates:
 
-- [A shirt's journey](http://bl.ocks.org/anonymous/raw/c2927f0f5703508c3096/)
-- [The Voyage of the HMS Beagle](http://bl.ocks.org/anonymous/raw/a8a0e902efe6f1bddd64/)
+- [A shirt's journey](http://bl.ocks.org/anonymous/raw/92f40d9e6bf8de169fe4/)
+- [The Voyage of the HMS Beagle](http://bl.ocks.org/anonymous/raw/7d67c4ef3348192da613/)
 
 
 ### Custom templates
