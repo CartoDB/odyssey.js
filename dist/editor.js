@@ -81,8 +81,7 @@ function dialog(context) {
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
     optionsMap.append('li').append('a').attr('class', 'collapseButton').on('click', function() {
-
-      if (el.style('bottom') === 'auto') {
+      if (d3.select(this).classed('expandButton')) {
         el.select('.CodeMirror').style('padding', '20px 20px 20px 72px');
         el.style('bottom', 'auto').style('min-height', '330px');
         el.style('bottom', '80px').style('height', 'auto');
@@ -97,7 +96,6 @@ function dialog(context) {
         el.select('#actions_bar').classed('collapseActions', true);
         el.select('.CodeMirror').style('padding', '0');
       }
-
     });
 
     optionsMap.append('li').append('a').attr('class', 'downloadButton').on('click', function() {
