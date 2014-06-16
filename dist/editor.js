@@ -627,7 +627,7 @@ module.exports = editor;
 },{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
 function relocateAssets(doc) {
   var s = location.pathname.split('/');
-  var relocate_url = "http://cartodb.github.io/odyssey.js" + s.slice(0, s.length - 1).join('/') + "/";
+  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
 
   var js = doc.getElementsByTagName('script');
   for (var i = 0; i < js.length; ++i) {
