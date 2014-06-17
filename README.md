@@ -23,9 +23,15 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 * Updated editor, 10/06/2014
 
 
-## Examples
+## Live editor, Documentation and Examples
 
-Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/editor/editor.html)
+Jump directly into:
+
+* [the live editor](http://cartodb.github.io/odyssey.js/index.html)
+* [documentation](http://cartodb.github.io/odyssey.js/documentation) 
+* [some examples](http://cartodb.github.io/odyssey.js/documentation/#the-odyssey-editor) 
+
+
 
 ## Contributing
 
