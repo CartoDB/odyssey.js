@@ -49,7 +49,7 @@ function open(el, items, _class, offset) {
 }
 function dialog(context) {
   var code = '';
-  var evt = d3.dispatch('code', 'template');
+  var evt = d3.dispatch('code', 'template', 'basemap');
 
   function _dialog (el) {
 
@@ -75,7 +75,8 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
-    var templates = context.templates().map(function(d) { return d.title; });
+    var templates = context.templates().map(function(d) { return d.title; }),
+        basemaps = context.basemaps();
 
     var help = divOptions.append('ul').attr('class', 'h-left');
 
@@ -85,6 +86,36 @@ function dialog(context) {
       .attr('class', 'helpButton')
       .attr('title','Documentation')
       .attr('href', '/odyssey.js/documentation');
+
+    var selector = help.append('li')
+      .append('a')
+      .attr('class', 'basemapSelector')
+      .attr('title','Change basemap')
+      .attr('href', '#basemap')
+
+    selector.append('img')
+      .attr('id', 'selectorImg')
+      .attr('src', 'https://cartocdn_a.global.ssl.fastly.net/base-light/6/30/24.png')
+      .attr('alt', '');
+
+    selector.append('span')
+      .attr('id', 'selectorName')
+      .text(basemaps[0].title);
+
+    selector
+      .on('click', function() {
+        d3.event.preventDefault();
+
+        var self = this;
+
+        open(this, context.basemaps().map(function(d) { return d.title; })).on('click', function(e) {
+          var md = el.select('textarea').node().codemirror.getValue();
+          evt.basemap(md, e);
+
+          close(self);
+        });
+      });
+
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 
@@ -213,7 +244,7 @@ function dialog(context) {
 
 
     context.on('template_change.editor', function(t) {
-      divHeader.select('#show_slide').text(t);
+      d3.select('#show_slide').text(t);
     });
 
     var actions_bar = enter.append('div')
@@ -470,12 +501,24 @@ var TEMPLATE_LIST =  [{
   }, {
     title: 'torque',
     description: 'Link story elements to moments in time using this animated map template',
-    default: "```\n-title: \"Title\"\n-author: \"Odyssey.js Developers\"\n-vizjson: \"http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json\"\n-duration: 18\n-baseurl: \"http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png\"\n```\n\n# Torque Template\n```\n- center: [-4.0396, 5.5371]\n- zoom: 2\n```\n\n## Animated maps in Odyssey.js\n\nDelete the [Markdown](http://daringfireball.net/projects/markdown/) to get started with your own or watch this story to learn some of the techniques.\n\n# vizjson\n```\n-step: 30\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nUnlike other Odyssey.js templates, the Torque template requres a Viz.JSON URL to add an animated layer to your map. You can find out more about Viz.JSON URLs [here](http://developers.cartodb.com/documentation/using-cartodb.html#sec-8)\n\nTo add your own, just replace the above link so it looks like,\n\n**-vizjson: \"http://your-url/viz.json\"**\n\n\n# Markdown\n```\n-step: 60\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nLike all templates, the Torque template runs on [Markdown](http://daringfireball.net/projects/markdown/). This gives you the ability to create completely custom content for your story\n\n# Change map position \n```\n- step: 111\n- center: [50.2613, -2.1313]\n- zoom: 5\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nYou can tour the map by:\n\n1. Add a new section using the headline notation, **#**\n2. Pause the slider and move it to the desired time in your map visualization.\n3. Beside your new headline, click Add and then **insert time**\n4. Move your map to your desired location, and click \"move map to current position\"\n\n# Pause your map\n```\n- step: 292\n- center: [9.4165, -79.2828]\n- zoom: 7\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(2000)\nS.torqueLayer.actions.play()\n```\n\nIf you want to highlight a particular moment in time, it is helpful to use a Pause, Sleep, Play series of events like this slide. \n"
+    default: "```\n-title: \"Title\"\n-author: \"Odyssey.js Developers\"\n-vizjson: \"http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json\"\n-duration: 18\n```\n\n# Torque Template\n```\n- center: [-4.0396, 5.5371]\n- zoom: 2\n```\n\n## Animated maps in Odyssey.js\n\nDelete the [Markdown](http://daringfireball.net/projects/markdown/) to get started with your own or watch this story to learn some of the techniques.\n\n# vizjson\n```\n-step: 30\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nUnlike other Odyssey.js templates, the Torque template requres a Viz.JSON URL to add an animated layer to your map. You can find out more about Viz.JSON URLs [here](http://developers.cartodb.com/documentation/using-cartodb.html#sec-8)\n\nTo add your own, just replace the above link so it looks like,\n\n**-vizjson: \"http://your-url/viz.json\"**\n\n\n# Markdown\n```\n-step: 60\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nLike all templates, the Torque template runs on [Markdown](http://daringfireball.net/projects/markdown/). This gives you the ability to create completely custom content for your story\n\n# Change map position \n```\n- step: 111\n- center: [50.2613, -2.1313]\n- zoom: 5\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(3000)\nS.torqueLayer.actions.play()\n```\n\nYou can tour the map by:\n\n1. Add a new section using the headline notation, **#**\n2. Pause the slider and move it to the desired time in your map visualization.\n3. Beside your new headline, click Add and then **insert time**\n4. Move your map to your desired location, and click \"move map to current position\"\n\n# Pause your map\n```\n- step: 292\n- center: [9.4165, -79.2828]\n- zoom: 7\nS.torqueLayer.actions.pause()\nO.Actions.Sleep(2000)\nS.torqueLayer.actions.play()\n```\n\nIf you want to highlight a particular moment in time, it is helpful to use a Pause, Sleep, Play series of events like this slide. \n"
   }
 ];
 
-
-
+var BASEMAP_LIST =  [{
+    title: 'CartoDB Light',
+    url: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/{z}\/{x}\/{y}.png",
+    thumbnail: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/6\/30\/24.png"
+  }, {
+    title: 'Nokia Day',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/6\/30\/24.png"
+  }, {
+    title: 'Stamen Watercolor',
+    url: "http://{s}.tile.stamen.com/watercolor/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/watercolor\/6\/30\/24.jpg"
+  }
+];
 
 
 function editor(callback) {
@@ -519,6 +562,17 @@ function editor(callback) {
       // console.log("code", _);
     }
     return this._code;
+  }
+
+  context.basemaps = function(_) {
+    if (_) {
+      var t = BASEMAP_LIST.map(function(d) { return d.title; }).indexOf(_);
+      if (t >= 0) {
+        return BASEMAP_LIST[t];
+      }
+      return null;
+    }
+    return BASEMAP_LIST;
   }
 
   var template = body.select('#template');
@@ -592,7 +646,51 @@ function editor(callback) {
     sendMsg({ type: 'change_slide', slide: _ });
   }
 
+  code_dialog.on('basemap.editor', function(md, bm) {
+    var basemap_data = context.basemaps(bm);
+
+    //TODO: refactor with addAction
+    if (basemap_data) {
+      var url = basemap_data.url;
+
+      if (md.indexOf('baseurl:') === -1) {
+        var ibas = md.indexOf('```')+3,
+            bas = "\n-baseurl: \""+url+"\"";
+
+        md = md.slice(0, ibas) + bas + md.slice(ibas);
+      } else {
+        var md_i = md.indexOf('baseurl:')+8,
+            md_ = md.slice(md_i, md.length);
+
+        md = '```\n-baseurl: \"'+url+'"\n'+md_.slice(md_.indexOf('\n')+1, md_.length);
+      }
+
+      $editor.call(code_dialog.code(md));
+    }
+  });
+
   code_dialog.on('code.editor', function(code) {
+    if (code.indexOf('baseurl:') != -1) {
+      var code_i = code.indexOf('baseurl:')+8,
+          code_ = code.slice(code_i, code.length);
+          url = code_.split("\"")[1];
+
+      var url_ = url.replace(/\{s\}/g, "a")
+        .replace(/\{x\}/g, "30")
+        .replace(/\{y\}/g, "24")
+        .replace(/\{z\}/g, "6");
+
+      document.getElementById('selectorImg').src = url_;
+
+      var urls = context.basemaps().map(function(d) { return d.url; });
+
+      for(var i = 0; i < urls.length; i++) {
+        if (url === urls[i]) {
+          document.getElementById('selectorName').innerHTML = context.basemaps()[i].title;
+        }
+      }
+    }
+
     sendCode(code);
     context.code(code);
     context.save();
@@ -614,22 +712,6 @@ function editor(callback) {
     O.Template.Storage.load(function(md, template) {
       sendCode(md);
       set_template(template);
-
-      if (template === 'torque') {
-        if (md.indexOf('vizjson:') === -1) {
-          var iviz = md.lastIndexOf('```'),
-              viz = "-vizjson: \"http://viz2.cartodb.com/api/v2/viz/521f3768-eb3c-11e3-b456-0e10bcd91c2b/viz.json\"\n";
-
-          md = md.slice(0, iviz) + viz + md.slice(iviz);
-        }
-
-        if (md.indexOf('duration:') === -1) {
-          var idur = md.lastIndexOf('```'),
-              dur = "-duration: \"30\"\n";
-
-          md = md.slice(0, idur) + dur + md.slice(idur);
-        }
-      }
 
       $editor.call(code_dialog.code(md));
     });

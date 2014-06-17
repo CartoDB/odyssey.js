@@ -182,11 +182,12 @@
       init: function() {
         var self = this;
 
-      var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-      var map = this.map = L.map('map').setView([0, 0.0], 4);
-      var basemap = this.basemap = L.tileLayer(baseurl, {
-        attribution: 'data OSM - map CartoDB'
-      }).addTo(map);
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var basemap = this.basemap = L.tileLayer(baseurl, {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
+        this.duration = '18';
 
         var slides = this.slides = O.Actions.Slides('slides');
         var story = this.story = O.Story()
@@ -257,6 +258,10 @@
           this.basemap.setUrl(this.baseurl);
         }
 
+        if (this.duration && (this.duration !== actions.global.duration)) {
+          this.duration = actions.global.duration || 18;
+        }
+
         if (this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
           this.map.removeLayer(this.torqueLayer);
 
@@ -304,7 +309,7 @@
 
         this._resetActions(actions);
 
-        if (actions.global.duration) {
+        if (this.duration && (this.duration !== actions.global.duration)) {
           this.torqueLayer.pause();
           this.torqueLayer.setDuration(actions.global.duration);
         }
