@@ -19,8 +19,9 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 * Designed/added init templates, 11/03/2014
 * Added initial editor, 12/03/2014
 * Added intro docs, 17/03/2014
+* Documentation section, 5/06/2014
+* Updated editor, 10/06/2014
 
-We will be documenting future [milestones here](MILESTONES.md)
 
 ## Examples
 
