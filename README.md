@@ -19,12 +19,19 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 * Designed/added init templates, 11/03/2014
 * Added initial editor, 12/03/2014
 * Added intro docs, 17/03/2014
+* Documentation section, 5/06/2014
+* Updated editor, 10/06/2014
 
-We will be documenting future [milestones here](MILESTONES.md)
 
-## Examples
+## Live editor, Documentation and Examples
 
-Launch example - [code](examples/) | [live](http://cartodb.github.io/odyssey.js/editor/editor.html)
+Jump directly into:
+
+* [the live editor](http://cartodb.github.io/odyssey.js/index.html)
+* [documentation](http://cartodb.github.io/odyssey.js/documentation) 
+* [some examples](http://cartodb.github.io/odyssey.js/documentation/#the-odyssey-editor) 
+
+
 
 ## Contributing
 
