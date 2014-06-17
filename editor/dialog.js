@@ -48,7 +48,7 @@ function open(el, items, _class, offset) {
 }
 function dialog(context) {
   var code = '';
-  var evt = d3.dispatch('code', 'template');
+  var evt = d3.dispatch('code', 'template', 'basemap');
 
   function _dialog (el) {
 
@@ -74,7 +74,8 @@ function dialog(context) {
     divHeader.append('h1')
       .text('Odyssey editor');
 
-    var templates = context.templates().map(function(d) { return d.title; });
+    var templates = context.templates().map(function(d) { return d.title; }),
+        basemaps = context.basemaps();
 
     var help = divOptions.append('ul').attr('class', 'h-left');
 
@@ -84,6 +85,36 @@ function dialog(context) {
       .attr('class', 'helpButton')
       .attr('title','Documentation')
       .attr('href', '/odyssey.js/documentation');
+
+    var selector = help.append('li')
+      .append('a')
+      .attr('class', 'basemapSelector')
+      .attr('title','Change basemap')
+      .attr('href', '#basemap')
+
+    selector.append('img')
+      .attr('id', 'selectorImg')
+      .attr('src', 'https://cartocdn_a.global.ssl.fastly.net/base-light/6/30/24.png')
+      .attr('alt', '');
+
+    selector.append('span')
+      .attr('id', 'selectorName')
+      .text(basemaps[0].title);
+
+    selector
+      .on('click', function() {
+        d3.event.preventDefault();
+
+        var self = this;
+
+        open(this, context.basemaps().map(function(d) { return d.title; })).on('click', function(e) {
+          var md = el.select('textarea').node().codemirror.getValue();
+          evt.basemap(md, e);
+
+          close(self);
+        });
+      });
+
 
     var optionsMap = divOptions.append('ul').attr('class', 'h-right');
 

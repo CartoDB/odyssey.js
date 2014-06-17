@@ -1,6 +1,7 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
+@import "compass/css3/box-sizing";
 
 
 @font-face {
@@ -464,14 +465,22 @@ body{
   left: 0;
   right: 0;
   z-index: 1;
-  .h-left { float: left; }
+  .h-left {
+    float: left;
+
+    li {
+      margin-left: 20px;
+    }
+  }
   .h-right { float: right; }
   li {
     display: inline-block;
     margin-left: 8px;
     &:first-child { margin: 0;}
   }
-  a {
+
+  a,
+  div {
     display: inline-block;
     width: 33px;
     height: 33px;
@@ -481,9 +490,37 @@ body{
     cursor: pointer;
     -webkit-transition: opacity .5s;
     transition: opacity .5s;
+
     &:hover {
       opacity: 1;
     }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+a.basemapSelector {
+  width: auto;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 31px;
+  color: #ababab;
+  text-decoration: none;
+
+  img {
+    height: 31px;
+    width: 31px;
+    border: 2px solid rgba(#000,.15);
+    @include box-sizing(border-box);
+    @include border-radius(2px);
+  }
+
+  span {
+    vertical-align: top;
+    line-height: 33px;
+    margin-left: 8px;
   }
 }
 
