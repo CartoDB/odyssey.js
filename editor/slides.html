@@ -152,7 +152,7 @@
         if (this.cartoDBLayer && ("http://"+self.cartoDBLayer.options.user_name+".cartodb.com/api/v2/viz/"+self.cartoDBLayer.options.layer_definition.stat_tag+"/viz.json" !== actions.global.vizjson)) {
           this.map.removeLayer(this.cartoDBLayer);
 
-          this.torqueLayer = null;
+          this.cartoDBLayer = null;
           this.created = false;
         }
 
