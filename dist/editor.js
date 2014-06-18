@@ -108,9 +108,9 @@ function dialog(context) {
 
         var self = this;
 
-        open(this, context.basemaps().map(function(d) { return d.title; })).on('click', function(e) {
+        open(this, context.basemaps().map(function(d) { return '<img src="'+d.thumbnail+'" alt="" /><span>'+d.title+'</span>'; })).on('click', function(e) {
           var md = el.select('textarea').node().codemirror.getValue();
-          evt.basemap(md, e);
+          evt.basemap(md, e.match(/<span>(.*?)<\/span>/)[1]);
 
           close(self);
         });
@@ -458,7 +458,7 @@ function dropdown() {
       evt.click(d.value || d);
     });
     // update
-    i.text(function(d) { return d.text || d; });
+    i.html(function(d) { return d.text || d; });
     // remove
     i.exit().remove();
 
@@ -512,7 +512,7 @@ var BASEMAP_LIST =  [{
   }, {
     title: 'Nokia Day',
     url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
-    thumbnail: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/6\/30\/24.png"
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.day\/6\/30\/24\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
   }, {
     title: 'Stamen Watercolor',
     url: "http://{s}.tile.stamen.com/watercolor/{z}\/{x}\/{y}.jpg",
