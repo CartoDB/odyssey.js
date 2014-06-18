@@ -10,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.png" />
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <link rel="stylesheet" href="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="css/slides.css" />
   <script src="../vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -33,8 +33,7 @@
     <span class="author"><strong id="author">By Name using</strong> <a href="#">Odyssey.js</a><span>
   </div>
 
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/cartodb.js"></script>
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
 
   <script>
@@ -138,6 +137,8 @@
       },
 
       update: function(actions) {
+        var self = this;
+
         if (!actions.length) return;
 
         this.story.clear();
@@ -148,6 +149,45 @@
           this.basemap.setUrl(this.baseurl);
         }
 
+        if (this.cartoDBLayer && ("http://"+self.cartoDBLayer.options.user_name+".cartodb.com/api/v2/viz/"+self.cartoDBLayer.options.layer_definition.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+          this.map.removeLayer(this.cartoDBLayer);
+
+          this.torqueLayer = null;
+          this.created = false;
+        }
+
+        if (actions.global.vizjson && !this.cartoDBLayer) {
+          if (!this.created) { // sendCode debounce < vis loader
+            cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+              self.map.fitBounds(vizjson.bounds);
+
+              cartodb.createLayer(self.map, vizjson)
+                .done(function(layer) {
+                  self.cartoDBLayer = layer;
+
+                  var sublayer = layer.getSubLayer(0),
+                      layer_name = layer.layers[0].options.layer_name;
+
+                  sublayer.setSQL("SELECT * FROM "+layer_name+" WHERE "+actions.global.cartodb_filter)
+
+                  self.map.addLayer(layer);
+
+                  self._resetActions(actions);
+                }).on('error', function(err) {
+                  console.log("some error occurred: " + err);
+                });
+            });
+
+            this.created = true;
+          }
+
+          return;
+        }
+
+        this._resetActions(actions);
+      },
+
+      _resetActions: function(actions) {
         // update footer title and author
         var title_ = actions.global.title === undefined ? '' : actions.global.title,
             author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
