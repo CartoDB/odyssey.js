@@ -10,7 +10,7 @@ function dropdown() {
       evt.click(d.value || d);
     });
     // update
-    i.text(function(d) { return d.text || d; });
+    i.html(function(d) { return d.text || d; });
     // remove
     i.exit().remove();
 

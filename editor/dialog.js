@@ -107,9 +107,9 @@ function dialog(context) {
 
         var self = this;
 
-        open(this, context.basemaps().map(function(d) { return d.title; })).on('click', function(e) {
+        open(this, context.basemaps().map(function(d) { return '<img src="'+d.thumbnail+'" alt="" /><span>'+d.title+'</span>'; })).on('click', function(e) {
           var md = el.select('textarea').node().codemirror.getValue();
-          evt.basemap(md, e);
+          evt.basemap(md, e.match(/<span>(.*?)<\/span>/)[1]);
 
           close(self);
         });

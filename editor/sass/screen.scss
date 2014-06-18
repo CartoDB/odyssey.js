@@ -387,7 +387,7 @@ body{
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   background: #fff;
   border: 1px solid #B7B7B7;
-  padding: 10px 15px;
+  padding: 0 10px;
   color:#666;
 
   &:before {
@@ -419,7 +419,7 @@ body{
   li {
     list-style: none;
     border-bottom: 1px solid #EDEDED;
-    padding: 15px 0; 
+    padding: 10px 0;
     font-size: 12px;
     &:hover {
       cursor: pointer;
@@ -453,6 +453,17 @@ body{
     }
   }
 
+  img {
+    height: 28px;
+    width: 28px;
+    margin-right: 10px;
+    @include border-radius(2px);
+  }
+
+  span {
+    line-height: 28px;
+    vertical-align: top;
+  }
 }
 
 
