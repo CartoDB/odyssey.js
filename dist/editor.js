@@ -939,7 +939,7 @@ function Splash(context) {
     inner_content
       .append('p')
       .attr('class', 'last')
-      .text('Templates give you different ways to unfold your story')
+      .text('Templates give you different ways to unfold you story')
     var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
 
 
