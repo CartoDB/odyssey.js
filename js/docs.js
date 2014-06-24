@@ -38,7 +38,7 @@ var Docs = Backbone.View.extend({
 
     if (!this.built) return;
 
-    var pos = document.documentElement ? document.documentElement.scrollTop : document.body.scrollTop();
+    var pos = document.body.scrollTop || document.documentElement.scrollTop;
 
     if (pos >= this.navHeight) {
       this._onResize();
