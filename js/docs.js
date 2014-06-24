@@ -20,14 +20,14 @@ var Docs = Backbone.View.extend({
 
     this._buildToc(function() {
       if (location.hash) {
-        that._onResize();
-
         if (!that.$content.hasClass('sticky')) {
           that.$content.addClass('sticky');
         }
 
         that.api = that.$nav.find('.nav-inner').jScrollPane().data().jsp;
       }
+
+      that._onResize();
     });
 
     this._styleCode();
