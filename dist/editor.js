@@ -197,6 +197,8 @@ function dialog(context) {
           share_dialog(gist.url, gist.html_url);
         });
 
+        document.getElementById("copy-button").innerHTML = "Copy";
+
         var client = new ZeroClipboard(document.getElementById("copy-button"), {
           moviePath: "../vendor/ZeroClipboard.swf"
         });
