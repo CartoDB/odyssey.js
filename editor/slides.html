@@ -166,9 +166,10 @@
                   self.cartoDBLayer = layer;
 
                   var sublayer = layer.getSubLayer(0),
-                      layer_name = layer.layers[0].options.layer_name;
+                      layer_name = layer.layers[0].options.layer_name,
+                      filter = actions.global.cartodb_filter ? " WHERE "+actions.global.cartodb_filter : "";
 
-                  sublayer.setSQL("SELECT * FROM "+layer_name+" WHERE "+actions.global.cartodb_filter)
+                  sublayer.setSQL("SELECT * FROM "+layer_name+filter)
 
                   self.map.addLayer(layer);
 
