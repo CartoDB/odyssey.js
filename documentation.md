@@ -133,25 +133,26 @@ The config block is a control element at the top of your story's Markdown docume
 ~~~md
 - title: "This is my story title"
 - author: "Odyssey master"
+- vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 ~~~
 
 In the Scroll and Slide templates, you will see these two options as defaults:
 
 - title: "_Title of your story_"
 - author: "_Name of the story author_"
+- vizjson: "_The URL to any viz.json on cartodb_"
 
 #### Torque options
 
 ~~~md
-- vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 - duration: 30
 ~~~
 
 If you are creating a visualization that uses Torque, you will see the following options in addition to the default:
 
-- vizjson: "_the url to your cartodb torque visualization_"
-- duration: "_duration of torque animation (default is 30)_"
+- duration: "_Duration of torque animation (default is 30)_"
 
+Make sure that your vizjson links to a Torque visualization in order to use this template effectively.
 
 ### Chapters
 
