@@ -25,11 +25,11 @@ The library is open source and freely available to use in your projects.
 
 ### Create a new Story
 
-If you want to start using the on-line editor, go to the [homepage]({{ "/" | prepend: site.baseurl }}), click the button to create a new story or just go [here]({{ "/editor/editor.html" | prepend: site.baseurl }}).
+If you want to start using the sandbox, go to the [homepage]({{ "/" | prepend: site.baseurl }}), click the button to create a new story or just go [here]({{ "/sandbox/sandbox.html" | prepend: site.baseurl }}).
 
 #### Name your project
 
-Change the top level data in the editor. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
+Change the top level data in the sandbox. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
 
 ~~~md
 - title: "10 years later..."
@@ -66,12 +66,12 @@ After you have selected iFrame, you can use this code to embed your story on you
 
 ### Save and return to your story
 
-You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the editor will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
+You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the sandbox will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
 
 
-## The Odyssey Editor
+## The Odyssey Sandbox
 
-The Odyssey Editor allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
+The Odyssey Sandbox allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
 
@@ -84,19 +84,19 @@ Templates control the overal structure and layout of your story. They define the
 
 The slide template acts like a Keynote or PowerPoint presentation. Your story is broken down into different states or slides, so you can go forward or backward just by clicking the arrows on the screen buttons or by pressing the forward/back arrows on your keyboard. This is perfect for stories that don't have too much text and you want to highlight the map as the principal element.
 
-- [See a live example](/odyssey.js/editor/editor.html#md/slides/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
+- [See a live example](/odyssey.js/sandbox/sandbox.html#md/slides/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
 
 #### Scroll template
 
 The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
-- [See a live example](/odyssey.js/editor/editor.html#md/scroll/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
+- [See a live example](/odyssey.js/sandbox/sandbox.html#md/scroll/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
 
 #### Torque template
 
 Use this template if your data is animated. This template adds triggers to your animated map so when reaching a certain point on the timeline your contextual information changes. This is perfect for adding extra information to animated stories.
 
-- [See a live example](/odyssey.js/editor/editor.html#md/torque/YGBgCi10aXRsZTogIlRpdGxlIgotYXV0aG9yOiAiT2R5c3NleS5qcyBEZXZlbG9wZXJzIgotdml6anNvbjogImh0dHA6Ly92aXoyLmNhcnRvZGIuY29tL2FwaS92Mi92aXovNTIxZjM3NjgtZWIzYy0xMWUzLWI0NTYtMGUxMGJjZDkxYzJiL3Zpei5qc29uIgotZHVyYXRpb246IDE4Ci1iYXNldXJsOiAiaHR0cDovL3tzfS5hcGkuY2FydG9jZG4uY29tL2Jhc2UtbGlnaHQve3p9L3t4fS97eX0ucG5nIgpgYGAKCiMgVG9ycXVlIFRlbXBsYXRlCmBgYAotIGNlbnRlcjogWy00LjAzOTYsIDUuNTM3MV0KLSB6b29tOiAyCmBgYAoKIyMgQW5pbWF0ZWQgbWFwcyBpbiBPZHlzc2V5LmpzCgpEZWxldGUgdGhlIFtNYXJrZG93bl0oaHR0cDovL2RhcmluZ2ZpcmViYWxsLm5ldC9wcm9qZWN0cy9tYXJrZG93bi8pIHRvIGdldCBzdGFydGVkIHdpdGggeW91ciBvd24gb3Igd2F0Y2ggdGhpcyBzdG9yeSB0byBsZWFybiBzb21lIG9mIHRoZSB0ZWNobmlxdWVzLgoKIyB2aXpqc29uCmBgYAotIHN0ZXA6IDg2CmBgYAoKVW5saWtlIG90aGVyIE9keXNzZXkuanMgdGVtcGxhdGVzLCB0aGUK)
+- [See a live example](/odyssey.js/sandbox/sandbox.html#md/torque/YGBgCi10aXRsZTogIlRpdGxlIgotYXV0aG9yOiAiT2R5c3NleS5qcyBEZXZlbG9wZXJzIgotdml6anNvbjogImh0dHA6Ly92aXoyLmNhcnRvZGIuY29tL2FwaS92Mi92aXovNTIxZjM3NjgtZWIzYy0xMWUzLWI0NTYtMGUxMGJjZDkxYzJiL3Zpei5qc29uIgotZHVyYXRpb246IDE4Ci1iYXNldXJsOiAiaHR0cDovL3tzfS5hcGkuY2FydG9jZG4uY29tL2Jhc2UtbGlnaHQve3p9L3t4fS97eX0ucG5nIgpgYGAKCiMgVG9ycXVlIFRlbXBsYXRlCmBgYAotIGNlbnRlcjogWy00LjAzOTYsIDUuNTM3MV0KLSB6b29tOiAyCmBgYAoKIyMgQW5pbWF0ZWQgbWFwcyBpbiBPZHlzc2V5LmpzCgpEZWxldGUgdGhlIFtNYXJrZG93bl0oaHR0cDovL2RhcmluZ2ZpcmViYWxsLm5ldC9wcm9qZWN0cy9tYXJrZG93bi8pIHRvIGdldCBzdGFydGVkIHdpdGggeW91ciBvd24gb3Igd2F0Y2ggdGhpcyBzdG9yeSB0byBsZWFybiBzb21lIG9mIHRoZSB0ZWNobmlxdWVzLgoKIyB2aXpqc29uCmBgYAotIHN0ZXA6IDg2CmBgYAoKVW5saWtlIG90aGVyIE9keXNzZXkuanMgdGVtcGxhdGVzLCB0aGUK)
 
 
 #### Examples
@@ -117,11 +117,11 @@ Here's a list of projects making use of custom templates:
 
 - [Honoring #MayaAngelou with a map of her life and accomplishments around the world](http://cartodb.com/v/maya-angelou#0)
 
-## Advanced use of the editor
+## Advanced use of the Sandbox
 
 ### Markdown syntax
 
-Markdown syntax is used in the Odyssey Editor and contains all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
+Markdown syntax is used in the Odyssey Sandbox and contains all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
 
 ### Config block
@@ -168,9 +168,9 @@ fair sea into the firmament...
 
 ### The Actions block
 
-At the heart of Odyssey are **Actions**. For each chapter of your story, you can add one or many actions to unfold when the reader arrives. Each time you add a new chapter, an **add** button appears in the editor to the left of the chapter's starting line. You can click the add button to create new Actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
+At the heart of Odyssey are **Actions**. For each chapter of your story, you can add one or many actions to unfold when the reader arrives. Each time you add a new chapter, an **add** button appears in the sandbox to the left of the chapter's starting line. You can click the add button to create new Actions in the chapter. You can string Actions together, one followed by the next, and use the Sleep action to create delays between actions.
 
-You can also add actions manually once you get a hang of the syntax. The code shown here demonstrates what a chapter title and action block will look like in the editor.
+You can also add actions manually once you get a hang of the syntax. The code shown here demonstrates what a chapter title and action block will look like in the sandbox.
 
 ~~~md
 # Title of the section
@@ -901,16 +901,16 @@ Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
 
 
-### Developing the Editor
+### Developing the Sandbox
 
-First, change into the editor and start compass.
+First, change into the sandbox and start compass.
 
 ~~~sh
-editor/
+sandbox/
 compass watch
 ~~~
 
-Next, start the server as above and go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
+Next, start the server as above and go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
 
 
 ### Submitting improvements
@@ -946,7 +946,7 @@ gem install compass
 python -m SimpleHTTPServer
 ~~~
 
-Now go to [http://locahost:8000/editor/editor.html](http://locahost:8000/editor/editor.html)
+Now go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
 
 
 ### Custom templates
@@ -973,7 +973,7 @@ If you are particularly happy with your template and think it could be useful fo
 
 **Action format**
 
-In order to have custom actions available in the Editor, add them in `O.Template` with the name and the action to be performed.
+In order to have custom actions available in the Sandbox, add them in `O.Template` with the name and the action to be performed.
 
 ~~~javascript
 actions: {
