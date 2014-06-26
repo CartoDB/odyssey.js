@@ -1,64 +1,64 @@
 #!/bin/sh
-rm -rf editor/*
+rm -rf sandbox/*
 
-mkdir -p editor
-wget -O editor/notsupportedbrowser.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/notsupportedbrowser.html
-wget -O editor/editor.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/editor.html
-wget -O editor/scroll.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll.html
-wget -O editor/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides.html
-wget -O editor/torque.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.html
-wget -O editor/favicon.ico https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.ico
-wget -O editor/favicon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/favicon.png
-wget -O editor/scroll0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll0.png
-wget -O editor/scroll1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll1.png
-wget -O editor/slides0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides0.png
-wget -O editor/slides1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides1.png
-wget -O editor/slides2.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides2.png
-wget -O editor/slides3.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides3.png
-wget -O editor/torque0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque0.png
-wget -O editor/torque1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque1.png
-wget -O editor/scroll.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/scroll.png
-wget -O editor/slides.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/slides.png
-wget -O editor/torque.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/torque.png
-cp editor/favicon.ico favicon.ico
-cp editor/favicon.png favicon.png
+mkdir -p sandbox
+wget -O sandbox/notsupportedbrowser.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/notsupportedbrowser.html
+wget -O sandbox/sandbox.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/sandbox.html
+wget -O sandbox/scroll.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/scroll.html
+wget -O sandbox/slides.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides.html
+wget -O sandbox/torque.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/torque.html
+wget -O sandbox/favicon.ico https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/favicon.ico
+wget -O sandbox/favicon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/favicon.png
+wget -O sandbox/scroll0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/scroll0.png
+wget -O sandbox/scroll1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/scroll1.png
+wget -O sandbox/slides0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides0.png
+wget -O sandbox/slides1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides1.png
+wget -O sandbox/slides2.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides2.png
+wget -O sandbox/slides3.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides3.png
+wget -O sandbox/torque0.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/torque0.png
+wget -O sandbox/torque1.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/torque1.png
+wget -O sandbox/scroll.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/scroll.png
+wget -O sandbox/slides.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/slides.png
+wget -O sandbox/torque.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/torque.png
+cp sandbox/favicon.ico favicon.ico
+cp sandbox/favicon.png favicon.png
 
-mkdir -p editor/img
-wget -O editor/img/collapseButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/collapseButtonIcon.png
-wget -O editor/img/expandButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/expandButtonIcon.png
-wget -O editor/img/expandButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/expandButtonIcon.png
-wget -O editor/img/downloadButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/downloadButtonIcon.png
-wget -O editor/img/shareButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/shareButtonIcon.png
-wget -O editor/img/crosshair.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/crosshair.png
-wget -O editor/img/greyBarBkg.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/greyBarBkg.png
-wget -O editor/img/helpButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/helpButtonIcon.png
-wget -O editor/img/navBtns.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/navBtns.png
-wget -O editor/img/expandToogleButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/expandToogleButtonIcon.png
-wget -O editor/img/EditButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/img/EditButtonIcon.png
+mkdir -p sandbox/img
+wget -O sandbox/img/collapseButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/collapseButtonIcon.png
+wget -O sandbox/img/expandButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/expandButtonIcon.png
+wget -O sandbox/img/expandButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/expandButtonIcon.png
+wget -O sandbox/img/downloadButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/downloadButtonIcon.png
+wget -O sandbox/img/shareButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/shareButtonIcon.png
+wget -O sandbox/img/crosshair.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/crosshair.png
+wget -O sandbox/img/greyBarBkg.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/greyBarBkg.png
+wget -O sandbox/img/helpButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/helpButtonIcon.png
+wget -O sandbox/img/navBtns.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/navBtns.png
+wget -O sandbox/img/expandToogleButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/expandToogleButtonIcon.png
+wget -O sandbox/img/EditButtonIcon.png https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/img/EditButtonIcon.png
 
 
-mkdir -p editor/fonts
-wget -O editor/fonts/static-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.ttf
-wget -O editor/fonts/static-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.svg
-wget -O editor/fonts/static-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.woff
-wget -O editor/fonts/static-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/static-webfont.eot
-wget -O editor/fonts/aleo-regular-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.ttf
-wget -O editor/fonts/aleo-regular-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.svg
-wget -O editor/fonts/aleo-regular-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.woff
-wget -O editor/fonts/aleo-regular-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-regular-webfont.eot
-wget -O editor/fonts/aleo-bold-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.ttf
-wget -O editor/fonts/aleo-bold-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.svg
-wget -O editor/fonts/aleo-bold-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.woff
-wget -O editor/fonts/aleo-bold-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/aleo-bold-webfont.eot
-wget -O editor/fonts/ProximaNova-bold.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.ttf
-wget -O editor/fonts/ProximaNova-bold.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.svg
-wget -O editor/fonts/ProximaNova-bold.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.woff
-wget -O editor/fonts/ProximaNova-bold.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/fonts/ProximaNova-Bold.eot
+mkdir -p sandbox/fonts
+wget -O sandbox/fonts/static-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/static-webfont.ttf
+wget -O sandbox/fonts/static-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/static-webfont.svg
+wget -O sandbox/fonts/static-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/static-webfont.woff
+wget -O sandbox/fonts/static-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/static-webfont.eot
+wget -O sandbox/fonts/aleo-regular-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-regular-webfont.ttf
+wget -O sandbox/fonts/aleo-regular-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-regular-webfont.svg
+wget -O sandbox/fonts/aleo-regular-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-regular-webfont.woff
+wget -O sandbox/fonts/aleo-regular-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-regular-webfont.eot
+wget -O sandbox/fonts/aleo-bold-webfont.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-bold-webfont.ttf
+wget -O sandbox/fonts/aleo-bold-webfont.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-bold-webfont.svg
+wget -O sandbox/fonts/aleo-bold-webfont.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-bold-webfont.woff
+wget -O sandbox/fonts/aleo-bold-webfont.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/aleo-bold-webfont.eot
+wget -O sandbox/fonts/ProximaNova-bold.ttf https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/ProximaNova-Bold.ttf
+wget -O sandbox/fonts/ProximaNova-bold.svg https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/ProximaNova-Bold.svg
+wget -O sandbox/fonts/ProximaNova-bold.woff https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/ProximaNova-Bold.woff
+wget -O sandbox/fonts/ProximaNova-bold.eot https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/fonts/ProximaNova-Bold.eot
 
-mkdir -p editor/css
-wget -O editor/css/screen.css https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/css/screen.css
-wget -O editor/css/scroll.css  https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/css/scroll.css
-wget -O editor/css/slides.css  https://raw.githubusercontent.com/CartoDB/odyssey.js/master/editor/css/slides.css
+mkdir -p sandbox/css
+wget -O sandbox/css/screen.css https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/css/screen.css
+wget -O sandbox/css/scroll.css  https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/css/scroll.css
+wget -O sandbox/css/slides.css  https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/css/slides.css
 
 mkdir -p vendor
 wget -O vendor/d3.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/vendor/d3.js
@@ -77,4 +77,4 @@ wget -O vendor/codemirror/codemirror.js https://raw.githubusercontent.com/CartoD
 
 mkdir -p dist
 wget -O dist/odyssey.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/dist/odyssey.js
-wget -O dist/editor.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/dist/editor.js
+wget -O dist/sandbox.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/dist/sandbox.js
