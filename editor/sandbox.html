@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js Sandbox</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="stylesheet" href="../vendor/codemirror/codemirror.css">
+  <link rel="stylesheet" href="css/screen.css" />
+  <script src="../vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+  <iframe id="template" src="./slides.html"></iframe>
+
+  <div id="drop" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+
+  <div id="share_dialog" class="splash h-valign" style="display: none">
+    <div class="splash_inner">
+      <a href="#close" id="closeButton" class="closeButton">×</a>
+
+      <h1>Share your story</h1>
+
+      <div class="share_template template_list">
+        <div class="input_field">
+          <input type="text" id="shareInput" class="shareInput" value="&lt;iframe width='100%' height='520' frameborder='0' src='http://bl.ocks.org/anonymous/raw/62f109e66a00767c3f7e' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen&gt;&lt;/iframe&gt;">
+          <ul class="mode_menu" id="mode_menu">
+            <li class="selected first"><a href="#iframe" data-embed="iframe">iframe</a></li>
+            <li class="last"><a href="#url" data-embed="url">url</a></li>
+          </ul>
+        </div>
+
+        <a href="#" id="copy-button" class="button-template">Copy</a>
+      </div>
+    </div>
+  </div>
+
+  <!--[if lt IE 10]>
+    <script>
+      window.location.href = 'notsupportedbrowser.html';
+    </script>
+  <![endif]-->
+
+  <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+  <script src="../vendor/d3.js" charset="UTF-8"></script>
+  <script src="../vendor/codemirror/codemirror.js"></script>
+  <script src="../vendor/codemirror-markdown.js"></script>
+  <script src="../vendor/jszip.js"></script>
+  <script src="../vendor/ZeroClipboard.min.js"></script>
+  <script src="../dist/sandbox.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery-1.10.2.min.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.imageload.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.spriteanim.js" charset="UTF-8"></script>
+  <script>
+    var app = editor(function() {
+      function initAnim($el) {
+        var $anim = $el.find(".anim > div");
+        
+        $anim.spriteanim();
+
+        $el.on("mouseenter", function() {
+          $(this).find(".anim > div").spriteanim('play');
+        });
+
+        $el.on("mouseleave", function() {
+          $(this).find(".anim > div").spriteanim('stop');
+        });
+      }
+
+      initAnim($('li.template'));
+    });
+  </script>
+</body>
+</html>

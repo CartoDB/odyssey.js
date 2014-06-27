@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js Torque</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="stylesheet" href="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="css/slides.css" />
+  <script src="../vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="slides_container" style="">
+    <div id="front_slide">
+    </div>
+
+    <div id="slides">
+    </div>
+  </div>
+  <div id="credits">
+    <span class="title" id="title">Title</span>
+    <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
+  </div>
+
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/cartodb.js"></script>
+  <script src="../dist/odyssey.js" charset="UTF-8"></script>
+
+  <script>
+    var resizePID;
+
+    function clearResize() {
+      clearTimeout(resizePID);
+      resizePID = setTimeout(function() { adjustSlides(); }, 100);
+    }
+
+    if (!window.addEventListener) {
+      window.attachEvent("resize", function load(event) {
+        clearResize();
+      });
+    } else {
+      window.addEventListener("resize", function load(event) {
+        clearResize();
+      });
+    }
+
+    function resizeWindow() {
+      adjustSlides();
+    }
+
+    function adjustSlides() {
+      var container = document.getElementById("slides_container"),
+          slide = document.querySelectorAll('.selected_slide')[0];
+
+      if (container && slide) {
+        if (slide.offsetHeight+80+40+160 >= window.innerHeight) {
+          container.style.bottom = "160px";
+          var h = container.offsetHeight;
+
+          slide.style.height = h-80+"px";
+        } else {
+          container.style.bottom = "auto";
+          container.style.minHeight = "0";
+          slide.style.height = "auto";
+        }
+      }
+    }
+
+    var resizeAction = O.Action(function() {
+      adjustSlides();
+    });
+
+    function torque(layer) {
+      function _torque() {}
+
+      _torque.reach = function (slide) {
+        var i = slide.get('step').value;
+
+        function formaterForRange(start, end) {
+          start = start.getTime ? start.getTime(): start;
+          end = end.getTime ? end.getTime(): end;
+          var span = (end - start)/1000;
+          var ONE_DAY = 3600*24;
+          var ONE_YEAR = ONE_DAY * 31 * 12;
+          function pad(n) { return n < 10 ? '0' + n : n; };
+
+          // lest than a day
+          if (span < ONE_DAY) return function(t) { return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes()); };
+          if (span < ONE_YEAR) return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCDate()) + "/" + pad(t.getUTCFullYear()); };
+          return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCFullYear()); };
+        }
+
+        function getTimeOrStep(s) {
+          var tb = layer.getTimeBounds();
+          if (!tb) return;
+          if (tb.columnType === 'date') {
+            if (tb && tb.start !== undefined) {
+              var f = formaterForRange(tb.start, tb.end);
+              // avoid showing invalid dates
+              if (!_.isNaN(layer.stepToTime(s).getYear())) {
+                return f(layer.stepToTime(s));
+              }
+            }
+          } else {
+            return s;
+          }
+        }
+
+        function truncate(s, length) {
+          return s.substr(0, length-1) + (s.length > length ? '…' : '');
+        }
+
+        var parser = new DOMParser(),
+            doc = parser.parseFromString(slide.html(), 'text/html');
+
+        var l = i*$('.slider').width()/layer.options.steps,
+            tooltip = ['<div class="slide-tip slide-tip-'+i+'" style="left:'+l+'px">',
+                       '<div class="tooltip">',
+                       '<h1>'+getTimeOrStep(i)+'</h1>',
+                       $(doc).find('h1').text(),
+                       '</div>',
+                       '</div>'].join("\n");
+
+        $('.slider').append(tooltip);
+        var $tip = $('.slide-tip-'+i+' .tip'),
+            $tooltip = $('.slide-tip-'+i+' .tooltip'),
+            w = $tip.width()/2
+
+        $tip.css({ margin: -w });
+
+        var t = O.Trigger({});
+
+        function check(changes) {
+          if (changes.step >= i-2 && changes.step < i+2) {
+            t.trigger();
+
+            if (!$tooltip.is(':visible')) {
+              $tooltip.fadeIn(150);
+            }
+          } else if (changes.step >= i+2 && changes.step < i+5) {
+            setTimeout(function() {
+              $('.tooltip').fadeOut(150);
+            }, 2000);
+          }
+        };
+
+        layer.on('change:time', check);
+        t.clear = function() {
+          layer.off('change:time', check);
+        }
+        return t;
+      }
+
+      _torque.pause = function() {
+        return O.Action(function (){
+          layer.pause();
+        });
+      }
+
+      _torque.play = function() {
+        return O.Action(function () {
+          layer.play()
+        });
+      }
+
+      return _torque;
+    }
+
+    O.Template({
+      actions: {
+        'insert time': function() {
+          return "- step: " + this.torqueLayer.getStep()
+        },
+        'pause': function() {
+          return "S.torqueLayer.actions.pause()";
+        },
+        'play': function() {
+          return "S.torqueLayer.actions.play()";
+        }
+      },
+
+      init: function() {
+        var self = this;
+
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var basemap = this.basemap = L.tileLayer(baseurl, {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
+        this.duration = '18';
+
+        var slides = this.slides = O.Actions.Slides('slides');
+        var story = this.story = O.Story()
+      },
+
+      _resetActions: function(actions) {
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        if (actions.global.title || actions.global.headline) {
+          var first_slide = '',
+              first_title_ = actions.global.title ? '<h1>'+actions.global.title+'</h1>' : '',
+              first_headline_ = actions.global.headline ? '<p>'+actions.global.headline+'</p>' : '';
+
+          first_slide = first_title_ + first_headline_;
+
+          document.getElementById('slides_container').style.display = "block";
+          document.getElementById('front_slide').innerHTML = actions[0].html();
+        }
+
+        document.getElementById('slides').innerHTML = '';
+
+        // first slide is the header, skip it
+        for(var i = 1; i < actions.length; ++i) {
+          var slide = actions[i];
+          var tmpl = "<div class='slide' style='display:none'>"
+          tmpl += slide.html();
+          tmpl += "</div>";
+
+          document.getElementById('slides').innerHTML += tmpl;
+
+          var ac = O.Parallel(
+            O.Actions.CSS($("#front_slide")).addClass('hidden'),
+            O.Actions.CSS($("#slides_container")).addClass('visible'),
+            this.slides.activate(i-1),
+            slide(this),
+            resizeAction
+          );
+
+          if (!slide.get('step')) return;
+
+          this.story.addState(
+            torque(this.torqueLayer).reach(slide),
+            ac
+          )
+        }
+      },
+
+      update: function(actions) {
+        var self = this;
+
+        if ($("#slides_container").hasClass("visible")) {
+          $("#slides_container").removeClass("visible");
+        }
+
+        if ($("#front_slide").hasClass("hidden")) {
+          $("#front_slide").removeClass("hidden");
+        }
+
+        if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+          this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+          this.basemap.setUrl(this.baseurl);
+        }
+
+        if (this.duration && (this.duration !== actions.global.duration)) {
+          this.duration = actions.global.duration || 18;
+        }
+
+        if (this.torqueLayer && ("http://"+self.torqueLayer.options.user+".cartodb.com/api/v2/viz/"+self.torqueLayer.options.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+          this.map.removeLayer(this.torqueLayer);
+
+          // hack to stop (not remove) binding
+          this.torqueLayer.stop();
+          $('.cartodb-timeslider').remove();
+          $('.cartodb-legend-stack').remove();
+          this.torqueLayer = null;
+          this.created = false;
+        }
+
+        if (!this.torqueLayer) {
+          if (!this.created) { // sendCode debounce < vis loader
+            cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+              cartodb.createLayer(self.map, vizjson)
+                .done(function(layer) {
+                  self.map.fitBounds(vizjson.bounds);
+
+                  actions.global.duration && layer.setDuration(actions.global.duration);
+
+                  self.torqueLayer = layer;
+                  self.torqueLayer.stop();
+
+                  self.map.addLayer(self.torqueLayer);
+
+                  self.torqueLayer.on('change:steps', function() {
+                    self.torqueLayer.play();
+                    self.torqueLayer.actions = torque(self.torqueLayer);
+                    self._resetActions(actions);
+                  });
+                }).on('error', function(err) {
+                  console.log("some error occurred: " + err);
+                });
+            });
+
+            this.created = true;
+          }
+
+          return;
+        }
+
+        this.story.clear();
+
+        $('.slide-tip').remove();
+
+        this._resetActions(actions);
+
+        if (this.duration && (this.duration !== actions.global.duration)) {
+          this.torqueLayer.pause();
+          this.torqueLayer.setDuration(actions.global.duration);
+        }
+      }
+    });
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20934186-21', 'cartodb.github.io');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+

@@ -1,7 +1,9 @@
 #!/bin/sh
 rm -rf sandbox/*
+rm -rf editor/*
 
 mkdir -p sandbox
+mkdir -p editor
 wget -O sandbox/notsupportedbrowser.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/notsupportedbrowser.html
 wget -O sandbox/sandbox.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/sandbox.html
 wget -O sandbox/scroll.html https://raw.githubusercontent.com/CartoDB/odyssey.js/master/sandbox/scroll.html
@@ -78,3 +80,5 @@ wget -O vendor/codemirror/codemirror.js https://raw.githubusercontent.com/CartoD
 mkdir -p dist
 wget -O dist/odyssey.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/dist/odyssey.js
 wget -O dist/sandbox.js https://raw.githubusercontent.com/CartoDB/odyssey.js/master/dist/sandbox.js
+
+cp sandbox/* editor/*
