@@ -72,7 +72,7 @@ function dialog(context) {
       })
 
     divHeader.append('h1')
-      .text('Odyssey editor');
+      .text('Odyssey sandbox');
 
     var templates = context.templates().map(function(d) { return d.title; }),
         basemaps = context.basemaps();
@@ -219,7 +219,7 @@ function dialog(context) {
       .attr('id', 'show_slide')
       .text(templates[0])
       .attr('title','Change template')
-      .attr('href', '/odyssey.js/editor/editor.html')
+      .attr('href', '/odyssey.js/sandbox/sandbox.html')
       .on('click', function(d) {
         d3.event.preventDefault();
         d3.select(document.body).call(Splash(context).on('template', function(t) {

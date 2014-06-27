@@ -6,7 +6,7 @@ function relocateAssets(doc) {
   for (var i = 0; i < js.length; ++i) {
     var src = js[i].getAttribute('src');
     if (src && src.indexOf('http') !== 0) {
-      js[i].setAttribute("src", (relocate_url + src).replace(/editor\/..\//g, ''));
+      js[i].setAttribute("src", (relocate_url + src).replace(/sandbox\/..\//g, ''));
     }
   }
 
