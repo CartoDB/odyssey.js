@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.editor=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.sandbox=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 var dropdown = _dereq_('./dropdown');
 var saveAs = _dereq_('../vendor/FileSaver');
@@ -447,7 +447,7 @@ function dialog(context) {
 
 module.exports = dialog;
 
-},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":4,"./share_dialog":5,"./splash":6,"./utils":7}],2:[function(_dereq_,module,exports){
+},{"../vendor/FileSaver":9,"./dropdown":2,"./gist":3,"./share_dialog":5,"./splash":6,"./utils":7}],2:[function(_dereq_,module,exports){
 
 function dropdown() {
   var evt = d3.dispatch('click');
@@ -481,6 +481,110 @@ function dropdown() {
 module.exports = dropdown;
 
 },{}],3:[function(_dereq_,module,exports){
+function relocateAssets(doc) {
+  var s = location.pathname.split('/');
+  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
+
+  var js = doc.getElementsByTagName('script');
+  for (var i = 0; i < js.length; ++i) {
+    var src = js[i].getAttribute('src');
+    if (src && src.indexOf('http') !== 0) {
+      js[i].setAttribute("src", (relocate_url + src).replace(/editor\/..\//g, ''));
+    }
+  }
+
+  var css = doc.getElementsByTagName('link');
+  for (var i = 0; i < css.length; ++i) {
+    var href = css[i].getAttribute('href');
+    if (href && href.indexOf('http') !== 0) {
+      css[i].setAttribute("href", relocate_url + href);
+    }
+  }
+}
+
+function processHTML(html, md, transform) {
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(html, 'text/html');
+
+  // transform
+  transform && transform(doc);
+
+  var md_template = doc.createElement("script");
+
+  md_template.setAttribute("id", "md_template");
+  md_template.setAttribute("type", "text/template");
+
+  md_template.innerHTML = md;
+  doc.body.appendChild(md_template);
+
+  return '<!doctype><html>'+doc.documentElement.innerHTML+'</html>';
+}
+
+function files(md, template, callback) {
+  function request(r, callback) {
+    d3.xhr(r).get(callback);
+  }
+  queue(2)
+    .defer(request, template + '.html')
+    .awaitAll(ready);
+
+  function ready(error, results) {
+    results = results.map(function(r) {
+      return r.responseText;
+    });
+
+    callback({
+      'odyssey.html': processHTML(results[0], md, relocateAssets)
+    });
+  }
+}
+
+function zip(md, template, callback) {
+  files(md, template, function(contents) {
+    var zip = new JSZip();
+    for (var f in contents) {
+      zip.file(f, contents[f]);
+    }
+    callback(zip);
+  });
+}
+
+function Gist(md, template, callback) {
+  var gistData = null;
+
+  d3.xhr(template + ".html").get(function(err, xhr) {
+    var html = xhr.responseText;
+    var payload = {
+        "description": "Odyssey.js template",
+        "public": true,
+        "files": {
+          'index.html': {
+            content: processHTML(html, md, relocateAssets)
+          }
+        }
+    };
+
+    d3.xhr('https://api.github.com/gists')
+      .header("Content-Type", "application/json")
+      .post(JSON.stringify(payload), function(err, xhr) {
+        gist = JSON.parse(xhr.responseText);
+        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/';
+        // console.log(gist);
+        callback({
+          url: gist.url,
+          html_url: BLOCKS + gist.id,
+        });
+      });
+  });
+
+}
+
+module.exports = {
+  gist: Gist,
+  zip: zip
+}
+
+},{}],4:[function(_dereq_,module,exports){
 
 //i18n placeholder
 function _t(s) { return s; }
@@ -756,111 +860,7 @@ function editor(callback) {
 
 module.exports = editor;
 
-},{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],4:[function(_dereq_,module,exports){
-function relocateAssets(doc) {
-  var s = location.pathname.split('/');
-  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
-
-  var js = doc.getElementsByTagName('script');
-  for (var i = 0; i < js.length; ++i) {
-    var src = js[i].getAttribute('src');
-    if (src && src.indexOf('http') !== 0) {
-      js[i].setAttribute("src", (relocate_url + src).replace(/editor\/..\//g, ''));
-    }
-  }
-
-  var css = doc.getElementsByTagName('link');
-  for (var i = 0; i < css.length; ++i) {
-    var href = css[i].getAttribute('href');
-    if (href && href.indexOf('http') !== 0) {
-      css[i].setAttribute("href", relocate_url + href);
-    }
-  }
-}
-
-function processHTML(html, md, transform) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(html, 'text/html');
-
-  // transform
-  transform && transform(doc);
-
-  var md_template = doc.createElement("script");
-
-  md_template.setAttribute("id", "md_template");
-  md_template.setAttribute("type", "text/template");
-
-  md_template.innerHTML = md;
-  doc.body.appendChild(md_template);
-
-  return '<!doctype><html>'+doc.documentElement.innerHTML+'</html>';
-}
-
-function files(md, template, callback) {
-  function request(r, callback) {
-    d3.xhr(r).get(callback);
-  }
-  queue(2)
-    .defer(request, template + '.html')
-    .awaitAll(ready);
-
-  function ready(error, results) {
-    results = results.map(function(r) {
-      return r.responseText;
-    });
-
-    callback({
-      'odyssey.html': processHTML(results[0], md, relocateAssets)
-    });
-  }
-}
-
-function zip(md, template, callback) {
-  files(md, template, function(contents) {
-    var zip = new JSZip();
-    for (var f in contents) {
-      zip.file(f, contents[f]);
-    }
-    callback(zip);
-  });
-}
-
-function Gist(md, template, callback) {
-  var gistData = null;
-
-  d3.xhr(template + ".html").get(function(err, xhr) {
-    var html = xhr.responseText;
-    var payload = {
-        "description": "Odyssey.js template",
-        "public": true,
-        "files": {
-          'index.html': {
-            content: processHTML(html, md, relocateAssets)
-          }
-        }
-    };
-
-    d3.xhr('https://api.github.com/gists')
-      .header("Content-Type", "application/json")
-      .post(JSON.stringify(payload), function(err, xhr) {
-        gist = JSON.parse(xhr.responseText);
-        var BLOCKS = 'http://bl.ocks.org/anonymous/raw/';
-        // console.log(gist);
-        callback({
-          url: gist.url,
-          html_url: BLOCKS + gist.id,
-        });
-      });
-  });
-
-}
-
-module.exports = {
-  gist: Gist,
-  zip: zip
-}
-
-},{}],5:[function(_dereq_,module,exports){
+},{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],5:[function(_dereq_,module,exports){
 
 function share_dialog(url, html_url) {
   var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
@@ -1312,6 +1312,6 @@ if (typeof module !== "undefined" && module !== null) {
     return saveAs;
   });
 }
-},{}]},{},[3])
-(3)
+},{}]},{},[4])
+(4)
 });
