@@ -21,15 +21,16 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 * Added intro docs, 17/03/2014
 * Documentation section, 5/06/2014
 * Updated editor, 10/06/2014
+* Renamed editor => sandbox, 27/06/2014
 
 
-## Live editor, Documentation and Examples
+## Live sandbox, Documentation and Examples
 
 Jump directly into:
 
-* [the live editor](http://cartodb.github.io/odyssey.js/index.html)
+* [the live sandbox](http://cartodb.github.io/odyssey.js/index.html)
 * [documentation](http://cartodb.github.io/odyssey.js/documentation) 
-* [some examples](http://cartodb.github.io/odyssey.js/documentation/#the-odyssey-editor) 
+* [some examples](http://cartodb.github.io/odyssey.js/documentation/#the-odyssey-sandbox) 
 
 
 

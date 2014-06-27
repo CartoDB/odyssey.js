@@ -11,16 +11,16 @@ ODYSSEY_FILES= \
 	lib/odyssey/triggers/*.js \
 	lib/odyssey/util/*.js
 
-ODYSSEY_EDITOR_FILES= editor/*.js
+ODYSSEY_SANDBOX_FILES= sandbox/*.js
 
-all: dist/odyssey.js  dist/editor.js
+all: dist/odyssey.js  dist/sandbox.js
 
 dist/odyssey.js: $(ODYSSEY_FILES) $(VENDOR_FILES)
 	node node_modules/browserify/bin/cmd.js -s O index.js > $@
 	#browserify -s O index.js > $@
 
-dist/editor.js: $(ODYSSEY_EDITOR_FILES) $(VENDOR_FILES)
-	node node_modules/browserify/bin/cmd.js -s editor editor/editor.js > $@
+dist/sandbox.js: $(ODYSSEY_SANDBOX_FILES) $(VENDOR_FILES)
+	node node_modules/browserify/bin/cmd.js -s sandbox sandbox/sandbox.js > $@
 
 vendor/d3.custom.js:
 	node_modules/smash/smash node_modules/d3/src/start.js node_modules/d3/src/event/dispatch.js node_modules/d3/src/core/rebind.js node_modules/d3/src/end.js > $@
