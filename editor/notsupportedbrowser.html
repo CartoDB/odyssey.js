@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js - Not supported browser</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="stylesheet" href="css/screen.css" />
+  <script src="../vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+  <div id="drop" style="background: #000; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+
+  <div id="template_selector" class="splash h-valign">
+    <div class="splash_inner">
+      <h1>Select your template</h1>
+      <p>This website is optimized for <a href="https://www.google.com/intl/en/chrome/browser/">Chrome 19</a>, <a href="http://www.mozilla.org/en-US/firefox/all/">Firefox 12</a>, <a href="http://www.apple.com/safari">Safari 5</a>, <a href="http://www.opera.com/">Opera 11</a>, <a href="http://windows.microsoft.com/en-us/internet-explorer/ie-10-worldwide-languages">Internet Explorer 10</a> or newer.</p>
+      <p class="last">Please upgrade to a supported browser and try loading the website again for the Sandbox mode.</p>
+
+      <ul class="template_list h-valign">
+        <li class="template h-valign">
+          <div class="inner-template">
+            <div class="anim">
+              <img src="slides.png" alt="" />
+            </div>
+            <p>Display visualization chapters like slides in a presentation</p>
+            <a href="http://bl.ocks.org/anonymous/raw/6b31662f8760eb625d93" class="button-template">slides</a>
+          </div>
+        </li>
+        <li class="template h-valign">
+          <div class="inner-template">
+            <div class="anim">
+              <img src="scroll.png" alt="" />
+            </div>
+            <p>Create a visualization that changes as your reader moves through your narrative</p>
+            <a href="http://bl.ocks.org/anonymous/raw/8687c57f084c7140cbc8" class="button-template">scroll</a>
+          </div>
+        </li>
+        <li class="template h-valign">
+          <div class="inner-template">
+            <div class="anim">
+              <img src="torque.png" alt="" />
+            </div>
+            <p>Link story elements to moments in time using this animated map template</p>
+            <a href="http://bl.ocks.org/anonymous/raw/0fd26947a3b7fa885dce" class="button-template">torque</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../vendor/jquery-1.10.2.min.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.imageload.js" charset="UTF-8"></script>
+  <script src="../vendor/jquery.spriteanim.js" charset="UTF-8"></script>
+  <script>
+    function initAnim($el) {
+      var $anim = $el.find(".anim > div");
+      
+      $anim.spriteanim();
+
+      $el.on("mouseenter", function() {
+        $(this).find(".anim > div").spriteanim('play');
+      });
+
+      $el.on("mouseleave", function() {
+        $(this).find(".anim > div").spriteanim('stop');
+      });
+    }
+
+    jQuery(function($) {
+      initAnim($('li.template'));
+    });
+  </script>
+</body>
+</html>
