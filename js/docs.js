@@ -130,7 +130,7 @@ var Docs = Backbone.View.extend({
   },
 
   _styleCode: function() {
-    $('.language-md, .language-sh, .language-javascript').each(function() {
+    $('.language-md, .language-bash, .language-javascript').each(function() {
         var $this = $(this),
             $code = $this.html();
 
@@ -159,6 +159,7 @@ var Docs = Backbone.View.extend({
         });
     });
   },
+
   _waypoint: function(direction, el) {
     var $active = $(el);
 

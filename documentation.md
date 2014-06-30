@@ -17,11 +17,9 @@ The library is open source and freely available to use in your projects.
 
 **We are at an early stage of development where many things are still in flux! Be prepared for what you see today to change tomorrow :)**
 
-
 ## Quick start
 
 <iframe src="http://player.vimeo.com/video/97968118" width="100%" height="374px" style="display:block; margin: 0 auto;" allowfullscreen="allowfullscreen">&nbsp;</iframe>
-
 
 ### Create a new Story
 
@@ -47,13 +45,11 @@ Tell me, O muse, of that ingenious
 hero who travelled far
 ~~~
 
-
 ### Publish your story
 
 There are a few options for publishing your story. The first is to publish it directly to the web using the **Publish** button. By using the Publish button, your story will be hosted on GitHub and you will be provided a public link to share and view your story. The second way to publish a story is to click the **Download** button to save a local copy of the story. You can then host this copy on your own GitHub account or your own servers. The archive will contain the HTML, CSS, and JavaScript you need to publish the story wherever you prefer.
 
 <img src='{{ "/img/anotated.png" | prepend: site.baseurl }}' width="100%" />
-
 
 ### Publish it on your site
 
@@ -63,18 +59,15 @@ In the **Share** options for your story, you can select the third option, _IFRAM
 
 After you have selected iFrame, you can use this code to embed your story on your website or blog.
 
-
 ### Save and return to your story
 
 You can always save and return to your existing story by bookmarking your current URL. The URL is dynamic, so any changes you make in the sandbox will result in a new URL. **Be sure to rebookmark the page if you make changes**. You can also _cut & paste_ the URL to share with collaborators.
-
 
 ## The Odyssey Sandbox
 
 The Odyssey Sandbox allows you to link map changes and movements to different elements in a web document through the use of [Markdown](http://daringfireball.net/projects/markdown/syntax). We have included a small number of webpage templates to help you quickly create your stories.
 
 <img src="http://i.imgur.com/i0c3bLL.gif" width="100%" />
-
 
 ### Hosted Templates
 
@@ -98,14 +91,12 @@ Use this template if your data is animated. This template adds triggers to your 
 
 - [See a live example](/odyssey.js/sandbox/sandbox.html#md/torque/YGBgCi10aXRsZTogIlRpdGxlIgotYXV0aG9yOiAiT2R5c3NleS5qcyBEZXZlbG9wZXJzIgotdml6anNvbjogImh0dHA6Ly92aXoyLmNhcnRvZGIuY29tL2FwaS92Mi92aXovNTIxZjM3NjgtZWIzYy0xMWUzLWI0NTYtMGUxMGJjZDkxYzJiL3Zpei5qc29uIgotZHVyYXRpb246IDE4Ci1iYXNldXJsOiAiaHR0cDovL3tzfS5hcGkuY2FydG9jZG4uY29tL2Jhc2UtbGlnaHQve3p9L3t4fS97eX0ucG5nIgpgYGAKCiMgVG9ycXVlIFRlbXBsYXRlCmBgYAotIGNlbnRlcjogWy00LjAzOTYsIDUuNTM3MV0KLSB6b29tOiAyCmBgYAoKIyMgQW5pbWF0ZWQgbWFwcyBpbiBPZHlzc2V5LmpzCgpEZWxldGUgdGhlIFtNYXJrZG93bl0oaHR0cDovL2RhcmluZ2ZpcmViYWxsLm5ldC9wcm9qZWN0cy9tYXJrZG93bi8pIHRvIGdldCBzdGFydGVkIHdpdGggeW91ciBvd24gb3Igd2F0Y2ggdGhpcyBzdG9yeSB0byBsZWFybiBzb21lIG9mIHRoZSB0ZWNobmlxdWVzLgoKIyB2aXpqc29uCmBgYAotIHN0ZXA6IDg2CmBgYAoKVW5saWtlIG90aGVyIE9keXNzZXkuanMgdGVtcGxhdGVzLCB0aGUK)
 
-
 #### Examples
 
 Here's a list of projects making use of hosted templates:
 
 - [A shirt's journey](http://bl.ocks.org/anonymous/raw/92f40d9e6bf8de169fe4/)
 - [The Voyage of the HMS Beagle](http://bl.ocks.org/anonymous/raw/7d67c4ef3348192da613/)
-
 
 ### Custom templates
 
@@ -123,34 +114,46 @@ Here's a list of projects making use of custom templates:
 
 Markdown syntax is used in the Odyssey Sandbox and contains all the features documented in the [Daring Fireball](http://daringfireball.net/projects/markdown/syntax) documentation.
 
-
 ### Config block
 
 The config block is a control element at the top of your story's Markdown document. You can capture information such as _author_ and _project title_ using the config block. Depending on which template you choose, information from the config block may be displayed as part of the webpage.
 
 #### Default options
 
+In the Scroll and Slide templates, you will see these two options as defaults:
+
+- **title**  
+  Title of your story
+
+- **author**  
+  Name of the story author
+
 ~~~md
 - title: "This is my story title"
 - author: "Odyssey master"
+~~~
+
+#### Optional options
+
+If you are creating a visualization that uses a CartoDB map, you will see the following options in addition to the default:
+
+- **vizjson**  
+  The URL to any viz.json on cartodb
+
+~~~md
 - vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 ~~~
 
-In the Scroll and Slide templates, you will see these two options as defaults:
-
-- title: "_Title of your story_"
-- author: "_Name of the story author_"
-- vizjson: "_The URL to any viz.json on cartodb_"
-
 #### Torque options
+
+If you are creating a visualization that uses the Torque wizard, you will see the following option in addition to the default:
+
+- **duration**  
+  Duration of torque animation (default is 30)
 
 ~~~md
 - duration: 30
 ~~~
-
-If you are creating a visualization that uses Torque, you will see the following options in addition to the default:
-
-- duration: "_Duration of torque animation (default is 30)_"
 
 Make sure that your vizjson links to a Torque visualization in order to use this template effectively.
 
@@ -164,7 +167,6 @@ Chapters define each section of your story and allow you to perform new Actions 
 But as the sun was rising from the
 fair sea into the firmament...
 ~~~
-
 
 ### The Actions block
 
@@ -184,71 +186,64 @@ See the list below for a complete list of available actions and their descriptio
 
 #### Map Actions
 
-_Move to_
-- Sets the map's center point in latitude and longitude decimal degrees
+- **Move to**  
+  Sets the map's center point in latitude and longitude decimal degrees
 
-~~~md
-- center: [40.7127, -74.0059]
-~~~
+  ~~~md
+  - center: [40.7127, -74.0059]
+  ~~~
 
-_Zoom to_
-- Sets the map's zoom level using an integer number from 0 to 18
+- **Zoom to**  
+  Sets the map's zoom level using an integer number from 0 to 18
 
-~~~md
-- zoom: 3
-~~~
+  ~~~md
+  - zoom: 3
+  ~~~
 
 #### Control Actions
 
-_Sleep_
-- Pauses the map at a location you determine with the Map Actions above, for a pre-set period of time (in milliseconds)
+- **Sleep**  
+  Pauses the map at a location you determine with the Map Actions above, for a pre-set period of time (in milliseconds)
 
 #### Data Actions
 
-_Show marker_
-- Places a marker at a latitude/longitude point which you specify
+- **Show marker**  
+  Places a marker at a latitude/longitude point which you specify
 
-- **Pending**
-_Show infowindow_ 
-
+- **Pending**  
+  _Show infowindow_ 
 
 #### Torque Actions
 
-_Insert time_ 
-- _Insert time_ is an option that links your current story stage with the current frame of your Torque animation. If triggered, it will insert the _step_ option into your options and signify when in the Torque animation to display the current stage of your story. 
+- **Sleep**  
+  _Insert time_ is an option that links your current story stage with the current frame of your Torque animation. If triggered, it will insert the _step_ option into your options and signify when in the Torque animation to display the current stage of your story. 
 
-~~~md
-```
-- step: 86
-```
-~~~
+  ~~~md
+  ```
+  - step: 86
+  ```
+  ~~~
 
+- **Pause**  
+  Tells the Torque animated map to pause playing at the current step. Often used with the _Sleep_ action to stay at a given step in the Torque animation before triggering a _Play_ action again. 
 
-_Pause_ 
-- Tells the Torque animated map to pause playing at the current step. Often used with the _Sleep_ action to stay at a given step in the Torque animation before triggering a _Play_ action again. 
+  ~~~md
+  S.torqueLayer.actions.pause()
+  ~~~
 
-~~~md
-S.torqueLayer.actions.pause()
-~~~
+- **Play**  
+  Tells the Torque animated map to continue playing. The default state is _play_, so only use this after a _pause_ action.
 
-
-_Play_
-- Tells the Torque animated map to continue playing. The default state is _play_, so only use this after a _pause_ action.
-
-~~~md
-S.torqueLayer.actions.play()
-~~~
-
+  ~~~md
+  S.torqueLayer.actions.play()
+  ~~~
 
 #### Pending Actions
 
-_Video actions_ 
-
-_Audio actions_
-
-- html5audio
-- soundcloud
-
+- **Video actions**
+- **Audio actions**  
+  html5audio  
+  soundcloud
 
 ### Images
 
@@ -278,7 +273,6 @@ Finally, you can also use simple HTML `<img />` tags if you wish to edit attribu
 <img width="200px" src="http://imgur.com/69Gxjih.jpg" />
 ~~~
 
-
 ### Links
 
 In Markdown, there are two ways to add links. Both are similar to how you add images, which we described above. The simplest way is to add links inline. Your markdown would look like:
@@ -301,7 +295,6 @@ Here, the first text in parentheses would be the link, and the second text is a 
 [id]: http://example.com/  "Optional Title Here"
 ~~~
 
-
 ## Javascript API
 
 ### Install
@@ -311,7 +304,6 @@ Grab dist/odyssey.js and add it at the end of your `<body>` element in your html
 ~~~html
 <script src="odyssey.js"></script>
 ~~~
-
 
 ### Quick start
 
@@ -406,7 +398,6 @@ The content in the story relies either in a `window.ODYSSEY_MD` global variable 
 window.ODYSSEY_MD = ""
 ~~~
 
-
 ### Story object
 
 The main object in Odyssey.js is the Story object. You can initialize a new story object as follows:
@@ -415,16 +406,14 @@ The main object in Odyssey.js is the Story object. You can initialize a new stor
 var story = O.Story();
 ~~~
 
-
 #### addState(_trigger_, _action_)
 
 Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is called **once** when the story enters
-in this state so if the trigger is raised another time when the state is active the action is not called. See ``addLinearState``.
+in this state so if the trigger is raised another time when the state is active the action is not called. See `addLinearState`.
 
 ~~~javascript
 Story().addState(O.Keys().right(), map.actions.moveTo(-1.2, 45));
 ~~~
-
 
 #### addLinearState(_trigger_, _action_)
 
@@ -439,17 +428,18 @@ Returns the current state number, 0 based index.
 
 Move story to the desired state
 
-- `action_index`: Base 0 index of state
+- **action_index**  
+  Base 0 index of state
 
 Available options
 
-- `reverse`: Boolean, default false. Set it to true to call `reverse` method in the trigger when the state is set.
+- **reverse**  
+  Boolean, default false. Set it to true to call `reverse` method in the trigger when the state is set.
 
 ~~~javascript
 // This goes to the second state in the story
 Story().go(1);
 ~~~
-
 
 ### Action object
 
@@ -482,7 +472,6 @@ function ShowHideAction(el) {
 story.addState(O.Keys().right(), ShowHideAction($('#element')));
 ~~~
 
-
 ### Trigger object
 
 Creates a trigger that can raise actions. For example, below is a trigger that is raised every 3 seconds.
@@ -499,7 +488,6 @@ function IntervalTrigger() {
 // Note that if the trigger is raised again it has no effect
 story.addState(IntervalTrigger(), O.Debug().log('enter'));
 ~~~
-
 
 #### trigger(_number_)
 
@@ -532,7 +520,6 @@ t.trigger(0.2); // "0.2"
 
 actions without ``update`` method are not called more than once (on action enter)
 
-
 ### Step Object
 
 Accepts an unlimited number of actions and execute them in a sequence. Waits until the previous action is completed to start with the next one. The example below raises `finish` signal when all the tasks from all the actions have been completed.
@@ -556,7 +543,6 @@ story.addState(O.Keys().right(), O.Step(
 ))
 ~~~
 
-
 ### Parallel Object
 
 Similar to Step but execute the defined actions at the same time. The example below raises `finish` signal when all the tasks from all the actions have been completed.
@@ -569,7 +555,6 @@ parallel.on('finish.app', function() {
 
 O.Story().addState(trigger, parallel);
 ~~~
-
 
 ### Sequence Object
 
@@ -584,7 +569,6 @@ O.Story()
 seq.next() // raises action1
 seq.next() // raises action2
 ~~~
-
 
 #### next()
 
@@ -612,7 +596,6 @@ seq.current(0); // raises action1
 console.log(seq.current()); // 0
 ~~~
 
-
 ### Keys
 
 The `keys` object abstracts the keyboard based interaction with your story, allowing you to quickly attach left and right key strokes to movement through your story.
@@ -629,7 +612,6 @@ It also can be used together with the [`Sequence`](#) object.
 O.Keys().left().then(seq.prev, seq);
 O.Keys().right().then(seq.next, seq);
 ~~~
-
 
 #### right()
 
@@ -661,23 +643,28 @@ if ("ontouchstart" in document.documentElement) {
 O.Story()
   .addState(seq.step(0), action1);
   .addState(seq.step(1), action2);
-
 ~~~
 
 It uses [Hammer.js](http://eightmedia.github.io/hammer.js/) under the hood
 
 #### swipeLeft
-returns a trigger which is called when the element recieves a swipe event to the left
+
+Returns a trigger which is called when the element recieves a swipe event to the left.
 
 #### swipeRight
 
+Returns a trigger which is called when the element recieves a swipe event to the right.
+
 #### swipeUp
+
+Returns a trigger which is called when the element recieves a swipe event up.
 
 #### swipeDown
 
-
+Returns a trigger which is called when the element recieves a swipe event down.
 
 ### Scroll
+
 Manages page scroll
 
 ~~~javascript
@@ -687,6 +674,7 @@ O.Story()
 ~~~
 
 #### within(_el_)
+
 Returns a trigger raised when the scroll is within the vertical space of the specified element. For example, if there is a #div_element with style `position: absolute; top: 400px` the trigger will be raised when the scroll of the page is 400px.
 
 `el` can be a DOMElement or a jQuery object and optionally an `offset` can be set.
@@ -698,13 +686,15 @@ O.Story()
 ~~~
 
 #### less(_el_)
+
 Returns a trigger which is raised when the scroll is less than the element position in pixels `element` can be a DOMElement or a jQuery object.
 
 #### greater(_el_)
+
 Returns a trigger which is raised when the scroll is greater than the element position in pixels `element` can be a DOMElement or a jQuery object.
 
-
 ### Slides
+
 Given an DOM element with children return actions to swtich between them. With the following html:
 
 ~~~html
@@ -725,10 +715,10 @@ O.Story()
 
 When `trigger1` is raised, the first slide will have the style `display: block` and the other ones `display: none`. It hides all when no action was raised.
 
-
 ### Leaflet Object
 
 #### Map Object
+
 Contains actions to manage the Leaflet Map object. This is included as a leaflet map plugin, so can be used from `actions`.
 
 ~~~javascript
@@ -761,8 +751,8 @@ O.Story()
 Use when only zoom need to be changed. For changing center and zoom at the same time see ``setView``
 See Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
 
-
 ### Marker
+
 Creates actions to manage leaflet markers. It can be used as a leaflet plugin using `actions` in ``L.Marker`` instance
 
 ~~~javascript
@@ -778,14 +768,16 @@ O.Story()
   );
 ~~~
 
-
 #### addTo(_map_)
+
 Creates an action that adds the marker instance to the specified `map`.
 
 #### addRemove(_map_)
+
 Creates an action that adds the marker instance to the specified `map` when the story enters in the action and removes when the story leaves it.
 
 ### Icon
+
 Creates an action that changes the icon of a marker. It receives two arguments _(iconEnabled, iconDisabled)_.
 
 ~~~javascript
@@ -797,8 +789,8 @@ O.Story()
   );
 ~~~
 
-
 ### Popup
+
 Creates actions to manage [leaflet popups](http://leafletjs.com/reference.html#popup) or also called infowindows. It can be used as a leaflet plugin using `actions` attribute.
 
 ~~~javascript
@@ -817,6 +809,7 @@ O.Story()
 Returns an action that opens the popup in the specified `map` see [L.Popup.openOn](http://leafletjs.com/reference.html#popup-openon) documentation.
 
 ### CSS
+
 Actions related to css tasks. All the actions inside this module needs the elements to be jQuery.
 
 #### toggleClass
@@ -833,6 +826,7 @@ O.Story()
 Actions for debugging pourposes.
 
 #### log(_text_)
+
 Prints current state plus the `text`.
 
 ~~~javascript
@@ -841,6 +835,7 @@ O.Story()
 ~~~
 
 ### Location
+
 Actions related with the `window.location` object, like change the url hash.
 
 #### changeHash(_string_)
@@ -865,32 +860,32 @@ O.Story()
   ));
 ~~~
 
-
 ### Audio
+
 Actions to control HTML5 audio element
 
 #### play
+
 ~~~javascript
 O.Story()
   .addState(trigger, O.Audio('#audio_el').play());
 ~~~
 
-
 #### pause
+
 ~~~javascript
 O.Story()
   .addState(trigger, O.Audio('#audio_el').pause());
 ~~~
 
-
 #### setCurrentTime(_t_)
+
 Sets current play time
 
 ~~~javascript
 O.Story()
   .addState(trigger, O.Audio('#audio_el').setCurrentTime(1400));
 ~~~
-
 
 ## Contributing code
 
@@ -900,41 +895,37 @@ Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
 
-
 ### Developing the Sandbox
 
 First, change into the sandbox and start compass.
 
-~~~sh
+~~~bash
 sandbox/
 compass watch
 ~~~
 
 Next, start the server as above and go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
 
-
 ### Submitting improvements
 
 Send a pull request to the original Odyssey.js repository!
-
 
 ## Developers
 
 If you are interested in helping us develop the project, see [CONTRIBUTING](https://github.com/CartoDB/odyssey.js/blob/master/CONTRIBUTING.md) for more information.
 
-
 ### Run locally
 
 **Step 1: Checkout the code**
 
-~~~sh
+~~~bash
 git clone git@github.com:CartoDB/odyssey.js.git
 cd odyssey.js
 ~~~
 
 **Step 2: Install dependancies**
 
-~~~sh
+~~~bash
 npm install
 gem system --update
 gem install compass
@@ -942,12 +933,11 @@ gem install compass
 
 **Step 3. Start the server**
 
-~~~sh
+~~~bash
 python -m SimpleHTTPServer
 ~~~
 
 Now go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
-
 
 ### Custom templates
 
@@ -963,11 +953,9 @@ var TEMPLATE_LIST = [{
   }];
 ~~~
 
-
 **Adding to Odyssey**
 
 If you are particularly happy with your template and think it could be useful for others, submit a pull request. See the [Contributing](#contributing-code) section above for how to contribute.
-
 
 ### Custom Actions
 
@@ -993,10 +981,9 @@ actions: {
 
 You can test your new actions locally by rebuilding the libarary.
 
-~~~sh
+~~~bash
 make
 ~~~
-
 
 **Adding to Odyssey**
 
