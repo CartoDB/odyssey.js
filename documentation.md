@@ -140,8 +140,12 @@ If you are creating a visualization that uses a CartoDB map, you will see the fo
 - **vizjson**  
   The URL to any viz.json on cartodb
 
+- **cartodb_filter**  
+  The value for the column you want to filter
+
 ~~~md
 - vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
+- cartodb_filter: "column='VALUE'"
 ~~~
 
 #### Torque options
