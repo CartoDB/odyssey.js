@@ -673,6 +673,20 @@ body {
   }
 }
 
+.attributions {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #35454B;
+  padding: 20px;
+  text-align: center;
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
 @media (max-width: 880px) {
   .col {
     display: block;
