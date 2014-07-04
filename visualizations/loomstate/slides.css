@@ -49,15 +49,16 @@ ul#navButtons {
   
 ul#navButtons li {
   text-align: center;
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
   display: inline-block;
   margin-left: 6px;
   background: #fff;
-  background: rgba(255, 255, 255, .9);
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, .5);
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.65);
+}
+ul#navButtons li:hover {
+  background-color: #f4f4f4;
 }
 ul#navButtons li a{
   display: block;
@@ -65,26 +66,24 @@ ul#navButtons li a{
   width: 12px;
   margin: 0 auto;
   opacity: .8;
-  margin-top: 6px;
   -webkit-transition: opacity .3s;
   transition: opacity .3s;
-  background: url(img/navBtns.png) no-repeat -10px 0;
-
+  background: url(img/navBtns.png) no-repeat 0 7px;
 
 }
 
 ul#navButtons li a:hover {
-  background-position: -10px 0;
+  background-position: 0 7px;
   opacity: 1;
 }
 
 ul#navButtons li a.next {
-    background: url(img/navBtns.png) no-repeat -38px 0;
+    background: url(img/navBtns.png) no-repeat -38px 7px;
 
 
 }
 ul#navButtons li a.next:hover {
-  background-position: -38px 0;
+  background-position: -38px 7px;
 }
 
 
