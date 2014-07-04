@@ -1,0 +1,140 @@
+.background {
+  position: absolute;
+  position:absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; 
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 27%,rgba(0,0,0,0.3) 100%); /* W3C */
+}
+
+#dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  text-align: center;
+}
+#dots li {
+  display: inline-block;
+  margin-left: 8px;
+}
+#dots li a {
+  -webkit-transition: color .5s;
+  transition: color .5s;
+  text-decoration: none;
+  opacity: 1;
+  color: #fff;
+}
+#dots a.active {
+  color: #01B3B2;
+}
+#dots li a:before {
+  font-size: 25px;
+}
+
+#slides_container{
+  border-radius: 2px;
+  background: #fff;
+  padding: 40px 40px 20px 40px;
+}
+  #slides_container .slide {
+    padding: 0 0 20px 0;
+  }
+
+ul#navButtons {
+  margin: 0;
+  position: absolute;
+  height: 100%;
+  pointer-events: inherit;
+  right: 40px;
+  top: 40px;
+}
+  
+ul#navButtons li {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin-left: 6px;
+  background: #fff;
+  background: rgba(255, 255, 255, .9);
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .5);
+}
+ul#navButtons li a{
+  display: block;
+  height: 26px;
+  width: 12px;
+  margin: 0 auto;
+  opacity: .8;
+  margin-top: 6px;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
+  background: url(img/navBtns.png) no-repeat -10px 0;
+
+
+}
+
+ul#navButtons li a:hover {
+  background-position: -10px 0;
+  opacity: 1;
+}
+
+ul#navButtons li a.next {
+    background: url(img/navBtns.png) no-repeat -38px 0;
+
+
+}
+ul#navButtons li a.next:hover {
+  background-position: -38px 0;
+}
+
+
+
+#slides_container h1 {
+  font-family: Georgia;
+  color: #000;
+  margin-bottom: 10px;
+  line-height: 42px;
+  font-size: 35px;
+}
+  #slides_container h1:first-letter {
+    text-transform: uppercase;
+  }
+  #slides_container h1:after {
+    margin-top: 40px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, .5); 
+    width: 100px;
+    display: none;
+  }
+
+
+#slides_container p {
+  font-family: 'Helvetica', Arial;
+  margin: 20px 0 0 0;
+}
+#slides_container .slide strong {
+  font-family: 'Helvetica', Arial;
+  font-weight: bold;
+}
+
+
+
+#slides_container .slide h1 + p > img:first-child {
+  margin-bottom: 20px ;
+  margin-top: 0;
+}
+
+#slides_container .slide img {
+  margin: 20px 0 0 0;
+}
+
+.leaflet-top {
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.leaflet-control-zoom  {
+  position: absolute;
+  right: 40px;
+  top: 94px;
+}
