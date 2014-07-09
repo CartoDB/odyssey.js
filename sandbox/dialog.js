@@ -172,7 +172,7 @@ function dialog(context) {
         if (!isSafari() && notOld()) {
           var md = el.select('textarea').node().codemirror.getValue();
           exp.zip(md, context.template(), function(zip) {
-            saveAs(zip.generate({ type: 'blob' }), 'oddysey.zip');
+            saveAs(zip.generate({ type: 'blob' }), 'odyssey.zip');
           });
         } else {
           alert('Download is not fully supported in this browser.');
