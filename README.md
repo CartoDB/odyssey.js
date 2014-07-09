@@ -22,7 +22,7 @@ The odyssey.js library is being developed to help journalists, bloggers, and oth
 * Documentation section, 5/06/2014
 * Updated editor, 10/06/2014
 * Renamed editor => sandbox, 27/06/2014
-
+* Official release, 9/07/2014
 
 ## Live sandbox, Documentation and Examples
 
