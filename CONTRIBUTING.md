@@ -1,6 +1,6 @@
-Want to help us build an amazing library to help tell map based sotries? Here is how you can get started.
+Want to help us build an amazing library to help tell map based stories? Here is how you can get started.
 
-## Libary feedback
+## Library feedback
 
 The library is intentionally easy to start using. Take one of our examples and start testing it right away. We'd love to hear your feedback regarding features and API methods.
 
