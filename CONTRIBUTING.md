@@ -1,4 +1,4 @@
-Want to help us build an amazing library to help tell map based sotries? Here is how you can get started.
+Want to help us build an amazing library to help tell map based stories? Here is how you can get started.
 
 ## Library feedback
 
