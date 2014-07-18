@@ -17,9 +17,6 @@
 <body>
   <div id="map" style="width: 100%; height: 100%"></div>
   <div id="slides_container" style="">
-    <div id="front_slide">
-    </div>
-
     <div id="slides">
     </div>
   </div>
@@ -208,21 +205,12 @@
         document.getElementById('author').innerHTML = author_;
         document.title = title_ + " | " + author_ +' Odyssey.js';
 
-        if (actions.global.title || actions.global.headline) {
-          var first_slide = '',
-              first_title_ = actions.global.title ? '<h1>'+actions.global.title+'</h1>' : '',
-              first_headline_ = actions.global.headline ? '<p>'+actions.global.headline+'</p>' : '';
-
-          first_slide = first_title_ + first_headline_;
-
-          document.getElementById('slides_container').style.display = "block";
-          document.getElementById('front_slide').innerHTML = actions[0].html();
-        }
+        document.getElementById('slides_container').style.display = "block";
 
         document.getElementById('slides').innerHTML = '';
 
         // first slide is the header, skip it
-        for(var i = 1; i < actions.length; ++i) {
+        for(var i = 0; i < actions.length; ++i) {
           var slide = actions[i];
           var tmpl = "<div class='slide' style='display:none'>"
           tmpl += slide.html();
@@ -231,9 +219,8 @@
           document.getElementById('slides').innerHTML += tmpl;
 
           var ac = O.Parallel(
-            O.Actions.CSS($("#front_slide")).addClass('hidden'),
             O.Actions.CSS($("#slides_container")).addClass('visible'),
-            this.slides.activate(i-1),
+            this.slides.activate(i),
             slide(this),
             resizeAction
           );
@@ -252,10 +239,6 @@
 
         if ($("#slides_container").hasClass("visible")) {
           $("#slides_container").removeClass("visible");
-        }
-
-        if ($("#front_slide").hasClass("hidden")) {
-          $("#front_slide").removeClass("hidden");
         }
 
         if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
@@ -282,25 +265,35 @@
         if (!this.torqueLayer) {
           if (!this.created) { // sendCode debounce < vis loader
             cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
-              cartodb.createLayer(self.map, vizjson)
-                .done(function(layer) {
-                  self.map.fitBounds(vizjson.bounds);
+              // find index for the torque layer
+              function torqueLayerIndex() {
+                for(var i = 0; i < vizjson.layers.length; ++i) {
+                  if (vizjson.layers[i].type === 'torque') return i;
+                }
+                return -1;
+              }
+              var torqueIndex = torqueLayerIndex();
+              if (torqueIndex >= 0) {
+                cartodb.createLayer(self.map, vizjson, { layerIndex: torqueIndex })
+                  .done(function(layer) {
+                    self.map.fitBounds(vizjson.bounds);
 
-                  actions.global.duration && layer.setDuration(actions.global.duration);
+                    actions.global.duration && layer.setDuration(actions.global.duration);
 
-                  self.torqueLayer = layer;
-                  self.torqueLayer.stop();
+                    self.torqueLayer = layer;
+                    self.torqueLayer.stop();
 
-                  self.map.addLayer(self.torqueLayer);
+                    self.map.addLayer(self.torqueLayer);
 
-                  self.torqueLayer.on('change:steps', function() {
-                    self.torqueLayer.play();
-                    self.torqueLayer.actions = torque(self.torqueLayer);
-                    self._resetActions(actions);
+                    self.torqueLayer.on('change:steps', function() {
+                      self.torqueLayer.play();
+                      self.torqueLayer.actions = torque(self.torqueLayer);
+                      self._resetActions(actions);
+                    });
+                  }).on('error', function(err) {
+                    console.log("some error occurred: " + err);
                   });
-                }).on('error', function(err) {
-                  console.log("some error occurred: " + err);
-                });
+                }
             });
 
             this.created = true;
@@ -315,9 +308,10 @@
 
         this._resetActions(actions);
 
-        if (this.duration && (this.duration !== actions.global.duration)) {
-          this.torqueLayer.pause();
+        if (this.created) {
           this.torqueLayer.setDuration(actions.global.duration);
+          this.torqueLayer.stop();
+          $('.button').removeClass('stop');
         }
       }
     });
