@@ -1,6 +1,5 @@
 #!/bin/sh
 rm -rf sandbox/*
-rm -rf editor/*
 
 mkdir -p sandbox
 mkdir -p editor
