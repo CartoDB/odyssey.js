@@ -71,7 +71,7 @@ The Odyssey Sandbox allows you to link map changes and movements to different el
 
 ### Hosted Templates
 
-Templates control the overal structure and layout of your story. They define the position of your map and story elements and define the method by which your story will progress. We have developed three templates to get you started.
+Templates control the overall structure and layout of your story. They define the position of your map and story elements and define the method by which your story will progress. We have developed three templates to get you started.
 
 #### Slide template
 
@@ -81,7 +81,7 @@ The slide template acts like a Keynote or PowerPoint presentation. Your story is
 
 #### Scroll template
 
-The scroll template is moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
+The scroll template moves based on when the viewer scrolls the page. As you scroll up or down, the story moves forward or backward. This template works really well with stories that have a lot of editorial content such as images and texts, and where the map adds more context to the story.
 
 - [See a live example](/odyssey.js/sandbox/sandbox.html#md/scroll/YGBgCi10aXRsZTogIk9keXNzZSBleGFtcGxlIEZUVyIKLWF1dGhvcjogIkNhcnRvREIiCmBgYAoKI1lvdXIgZmlyc3Qgb2R5c3NleS5qcyBzdG9yeQpgYGAKLSBjZW50ZXI6IFszNy43NjIwLCAtMTIyLjQzODVdCi0gem9vbTogOQpMLm1hcmtlcihbMzcuNzYyMCwgLTEyMi40Mzg1XSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKTW92ZSB0aGUgbWFwIGFyb3VuZCBhbmQgc2F2ZSB0aGUgcG9zaXRpb24gYnkgY2xpY2tpbmcgb24gIkFERCA+IE1vdmUgbWFwIHRvIHRoZSBjdXJyZW50IHBvc2l0aW9uIi4gQXMgeW91IGNhbiBzZWUsIG5vdyB3ZSBhcmUgaGlnaGxpZ2h0aW5nIFNhbiBGcmFuY2lzY28uCgpUaGVuIGFkZCBoZXJlIHRoZSBkZXNjcmlwdGlvbiBmb3IgeW91ciBzbGlkZSBzbyBpdCdzIHNob3duIG9uIHRoZSBsZWZ0IHNpZGUgYm94LgoKCiNIb3cgdG8gYWRkIG1vcmUgc3RhdGVzCmBgYAotIGNlbnRlcjogWzQwLjczNDgsIC03My45OTcwXQotIHpvb206IDkKTC5tYXJrZXIoWzQwLjczNDgsIC03My45OTcwXSkuYWN0aW9ucy5hZGRSZW1vdmUoUy5tYXApCmBgYAoKQnkgYWRkaW5nIG5ldyBbTWFya2Rvd25dIChodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0L3Byb2plY3RzL21hcmtkb3duL10pIGgxIGVsZW1lbnRzICgjKSB5b3UgYWRkIG5ldyBzdGF0ZXMgdG8geW91ciBzdG9yeS4KCgojQWRkaW5nIGltYWdlcyB0byB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjczNjUsIC03My45OTgyXQotIHpvb206IDEzCmBgYAoKQnkgZGVmYXVsdCwgaW1hZ2VzIGFyZSBhbHNvIHN1cHBvcnRlZC4gCgohW05ldyBZb3JrXShodHRwOi8vd3d3LmJvc3Rvbi1kaXNjb3ZlcnktZ3VpZGUuY29tL2ltYWdlLWZpbGVzL25ldy15b3JrLTEuanBnKQoKI0V4cG9ydGluZyB5b3VyIHN0b3J5CmBgYAotIGNlbnRlcjogWzQwLjQ0NjksIC0yOC41NjQ1XQotIHpvb206IDMKYGBgCgpZb3UgaGF2ZSBkaWZmZXJlbnQgb3B0aW9ucyBmb3IgZXhwb3J0aW5nIHlvdXIgb2R5c3NleS5qcyB2aXN1YWxpemF0aW9uLiBZb3UgY2FuIGVpdGhlciBlbWJlZCB0aGlzIHVzaW5nIGFuIGlmcmFtZSwgcHVibGlzaGluZyB3aXRoIGEgY2xpY2sgb24gYmwub2NrcyBvciBqdXN0IHNoYXJlIHRoZSBVUkwgb2YgdGhpcyB2aXN1YWxpemF0aW9uLgoKSWYgeW91IHdhbnQgdG8gY3VzdG9taXplIGl0IGZ1cnRoZXIsIHlvdSBjYW4gZG93bmxvYWQgdGhlIGdlbmVyYXRlZCBzb3VyY2UgY29kZSBieSBjbGlja2luZyBvbiB0aGUgYnV0dG9uIGJlbG93LgoKI0FkdmFuY2VkIHVzZXJzCgpDaGVjayBvdXQgb3VyIFtkb2N1bWVudGF0aW9uXShodHRwOi8vZG9jcy51cmwpIHRvIGxlYXJuIGhvdyB0byB1c2Ugb2R5c3NleSB0byBjcmVhdGUgbW9yZSBjdXN0b20gdGhpbmdzLiBJdCdzIGNyYXp5IHRoZSBhbW91bnQgb2YgY29vbCB0aGluZ3MgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIHRoZSBsaWJyYXJ5LgoKQWxzbyBpZiB5b3UgYXJlIGEgZGV2ZWxvcGVyLCB0YWtlIGEgbG9vayBhdCBvdXIgY29udHJpYnV0aW5nIGd1aWRlbGluZSBzbyB5b3UgY2FuIHB1c2ggY29kZSB0byB0aGUgYWN0dWFsIGxpYnJhcnkuCgpDaGVlcnMhCg==)
 
@@ -333,7 +333,7 @@ O.Template({
       attribution: 'data OSM - map CartoDB'
     }).addTo(map);
 
-    // enanle keys to move
+    // enable keys to move
     O.Keys().on('map').left().then(seq.prev, seq)
     O.Keys().on('map').right().then(seq.next, seq)
 
@@ -413,7 +413,7 @@ var story = O.Story();
 #### addState(_trigger_, _action_)
 
 Adds a new state to the story. [`action`](#) will be called when [`trigger`](#) is triggered. Action method is called **once** when the story enters
-in this state so if the trigger is raised another time when the state is active the action is not called. See `addLinearState`.
+into this state so if the trigger is raised another time when the state is active the action is not called. See `addLinearState`.
 
 ~~~javascript
 Story().addState(O.Keys().right(), map.actions.moveTo(-1.2, 45));
@@ -495,7 +495,7 @@ story.addState(IntervalTrigger(), O.Debug().log('enter'));
 
 #### trigger(_number_)
 
-Raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e a scroll
+Raises the trigger. Optionally takes an argument, float [0, 1] if the action is linear, i.e., a scroll
 
 ~~~javascript
 t = O.Trigger();
@@ -631,7 +631,7 @@ Same than ``O.keys`` but suited for touch devices, it allows to track events lik
 
 It optionally gets a DOM element where to attach the events.
 
-The tipical usage is with ``Keys`` and a ``Sequence``
+The typical usage is with ``Keys`` and a ``Sequence``
 
 ~~~javascript
 var seq = O.Sequence()
@@ -653,19 +653,19 @@ It uses [Hammer.js](http://eightmedia.github.io/hammer.js/) under the hood
 
 #### swipeLeft
 
-Returns a trigger which is called when the element recieves a swipe event to the left.
+Returns a trigger which is called when the element receives a swipe event to the left.
 
 #### swipeRight
 
-Returns a trigger which is called when the element recieves a swipe event to the right.
+Returns a trigger which is called when the element receives a swipe event to the right.
 
 #### swipeUp
 
-Returns a trigger which is called when the element recieves a swipe event up.
+Returns a trigger which is called when the element receives a swipe event up.
 
 #### swipeDown
 
-Returns a trigger which is called when the element recieves a swipe event down.
+Returns a trigger which is called when the element receives a swipe event down.
 
 ### Scroll
 
@@ -699,7 +699,7 @@ Returns a trigger which is raised when the scroll is greater than the element po
 
 ### Slides
 
-Given an DOM element with children return actions to swtich between them. With the following html:
+Given an DOM element with children return actions to switch between them. With the following html:
 
 ~~~html
 <div id="slides">
@@ -737,7 +737,7 @@ O.Story()
 
 #### panTo(_latlng_)
 
-Use when only center need to be changed. For changing center and zoom at the same time see ``setView``
+Use when only the center needs to be changed. For changing center and zoom at the same time see ``setView``
 See Leaflet [panTo](http://leafletjs.com/reference.html#map-panto) method
 
 #### setView()
@@ -752,7 +752,7 @@ O.Story()
 
 #### setZoom()
 
-Use when only zoom need to be changed. For changing center and zoom at the same time see ``setView``
+Use when only the zoom needs to be changed. For changing center and zoom at the same time see ``setView``
 See Leaflet [setZoom](http://leafletjs.com/reference.html#map-setzoom) method
 
 ### Marker
@@ -818,7 +818,7 @@ Actions related to css tasks. All the actions inside this module needs the eleme
 
 #### toggleClass
 
-toggle a class for an element, same than jQuery ``toggleClass``.
+toggle a class for an element, same as jQuery ``toggleClass``.
 
 ~~~javascript
 O.Story()
@@ -827,7 +827,7 @@ O.Story()
 
 ### Debug
 
-Actions for debugging pourposes.
+Actions for debugging purposes.
 
 #### log(_text_)
 
@@ -895,7 +895,7 @@ O.Story()
 
 ### Improving documentation
 
-Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
+Now go to [http://localhost:8000/docs/index.html](http://localhost:8000/docs/index.html)
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
 
@@ -908,7 +908,7 @@ sandbox/
 compass watch
 ~~~
 
-Next, start the server as above and go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
+Next, start the server as above and go to [http://localhost:8000/sandbox/sandbox.html](http://localhost:8000/sandbox/sandbox.html)
 
 ### Submitting improvements
 
@@ -927,7 +927,7 @@ git clone git@github.com:CartoDB/odyssey.js.git
 cd odyssey.js
 ~~~
 
-**Step 2: Install dependancies**
+**Step 2: Install dependencies**
 
 ~~~bash
 npm install
@@ -941,7 +941,7 @@ gem install compass
 python -m SimpleHTTPServer
 ~~~
 
-Now go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
+Now go to [http://localhost:8000/sandbox/sandbox.html](http://localhost:8000/sandbox/sandbox.html)
 
 ### Custom templates
 
@@ -983,7 +983,7 @@ actions: {
 
 **Using locally**
 
-You can test your new actions locally by rebuilding the libarary.
+You can test your new actions locally by rebuilding the library.
 
 ~~~bash
 make
