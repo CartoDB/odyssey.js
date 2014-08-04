@@ -895,7 +895,7 @@ O.Story()
 
 ### Improving documentation
 
-Now go to [http://locahost:8000/docs/index.html](http://locahost:8000/docs/index.html)
+Now go to [http://localhost:8000/docs/index.html](http://localhost:8000/docs/index.html)
 
 You can add to or edit this file by editing the [Markdown](http://daringfireball.net/projects/markdown/syntax) in the file docs/doc.md.
 
@@ -908,7 +908,7 @@ sandbox/
 compass watch
 ~~~
 
-Next, start the server as above and go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
+Next, start the server as above and go to [http://localhost:8000/sandbox/sandbox.html](http://localhost:8000/sandbox/sandbox.html)
 
 ### Submitting improvements
 
@@ -941,7 +941,7 @@ gem install compass
 python -m SimpleHTTPServer
 ~~~
 
-Now go to [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
+Now go to [http://localhost:8000/sandbox/sandbox.html](http://localhost:8000/sandbox/sandbox.html)
 
 ### Custom templates
 
