@@ -265,25 +265,35 @@
         if (!this.torqueLayer) {
           if (!this.created) { // sendCode debounce < vis loader
             cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
-              cartodb.createLayer(self.map, vizjson)
-                .done(function(layer) {
-                  self.map.fitBounds(vizjson.bounds);
+              // find index for the torque layer
+              function torqueLayerIndex() {
+                for(var i = 0; i < vizjson.layers.length; ++i) {
+                  if (vizjson.layers[i].type === 'torque') return i;
+                }
+                return -1;
+              }
+              var torqueIndex = torqueLayerIndex();
+              if (torqueIndex >= 0) {
+                cartodb.createLayer(self.map, vizjson, { layerIndex: torqueIndex })
+                  .done(function(layer) {
+                    self.map.fitBounds(vizjson.bounds);
 
-                  actions.global.duration && layer.setDuration(actions.global.duration);
+                    actions.global.duration && layer.setDuration(actions.global.duration);
 
-                  self.torqueLayer = layer;
-                  self.torqueLayer.stop();
+                    self.torqueLayer = layer;
+                    self.torqueLayer.stop();
 
-                  self.map.addLayer(self.torqueLayer);
+                    self.map.addLayer(self.torqueLayer);
 
-                  self.torqueLayer.on('change:steps', function() {
-                    self.torqueLayer.play();
-                    self.torqueLayer.actions = torque(self.torqueLayer);
-                    self._resetActions(actions);
+                    self.torqueLayer.on('change:steps', function() {
+                      self.torqueLayer.play();
+                      self.torqueLayer.actions = torque(self.torqueLayer);
+                      self._resetActions(actions);
+                    });
+                  }).on('error', function(err) {
+                    console.log("some error occurred: " + err);
                   });
-                }).on('error', function(err) {
-                  console.log("some error occurred: " + err);
-                });
+                }
             });
 
             this.created = true;
