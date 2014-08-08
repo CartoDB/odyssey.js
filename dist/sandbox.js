@@ -23,7 +23,7 @@ function open(el, items, _class, offset) {
     d3.selectAll('#actionDropdown').attr('class', '');
   }
 
-  offset = offset || { x: 0, y: 0 }
+  offset = offset || { x: 0, y: 0 };
 
   // update
   var bbox = el.getBoundingClientRect(),
@@ -70,7 +70,7 @@ function dialog(context) {
         d3.event.preventDefault();
         // console.log(event.target);
         _expand();
-      })
+      });
 
     divHeader.append('h1')
       .text('Odyssey sandbox');
@@ -91,7 +91,7 @@ function dialog(context) {
       .append('a')
       .attr('class', 'basemapSelector')
       .attr('title','Change basemap')
-      .attr('href', '#basemap')
+      .attr('href', '#basemap');
 
     selector.append('img')
       .attr('id', 'selectorImg')
@@ -288,7 +288,7 @@ function dialog(context) {
 
     function _expand() {
       var _t = d3.select('#editor_modal');
-      var _hassClass = _t.classed('expanded')
+      var _hassClass = _t.classed('expanded');
       _t.classed('expanded', !_hassClass);
 
       var _b = d3.select('a.expandButton');
@@ -304,11 +304,11 @@ function dialog(context) {
     });
 
     context.on('error.editor', function(errors) {
-      var e = el.selectAll('.error').data(errors)
+      var e = el.selectAll('.error').data(errors);
       e.enter()
         .append('div')
-        .attr('class', 'error')
-      e.text(String)
+        .attr('class', 'error');
+      e.text(String);
 
       e.exit().remove();
     })
@@ -399,7 +399,7 @@ function dialog(context) {
     });
 
     //remove previously added buttons
-    el.selectAll('.actionButton').remove()
+    el.selectAll('.actionButton').remove();
 
     var buttons = el.selectAll('.actionButton')
       .data(positions);
@@ -425,7 +425,7 @@ function dialog(context) {
     el.on('click.actionbutton', function() {
       //close popup
       close();
-    })
+    });
 
     // update
     var LINE_HEIGHT = 38;
@@ -582,7 +582,7 @@ function Gist(md, template, callback) {
 module.exports = {
   gist: Gist,
   zip: zip
-}
+};
 
 },{}],4:[function(_dereq_,module,exports){
 
@@ -659,7 +659,7 @@ function editor(callback) {
       }
     }
     return this._template;
-  }
+  };
 
   context.code = function(_) {
 
@@ -668,7 +668,7 @@ function editor(callback) {
       // console.log("code", _);
     }
     return this._code;
-  }
+  };
 
   context.basemaps = function(_) {
     if (_) {
@@ -679,7 +679,7 @@ function editor(callback) {
       return null;
     }
     return BASEMAP_LIST;
-  }
+  };
 
   var template = body.select('#template');
   var code_dialog = dialog(context);
@@ -863,7 +863,7 @@ module.exports = editor;
 },{"../vendor/DOMParser":8,"./dialog":1,"./splash":6,"./utils":7}],5:[function(_dereq_,module,exports){
 
 function share_dialog(url, html_url) {
-  var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
+  var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>";
 
   // show the dialog
   var s = d3.select('#share_dialog').style('display', 'block');
@@ -918,7 +918,7 @@ function share_dialog(url, html_url) {
     });
 }
 
-module.exports = share_dialog
+module.exports = share_dialog;
 
 },{}],6:[function(_dereq_,module,exports){
 
@@ -935,14 +935,14 @@ function Splash(context) {
       .attr('id', 'template_selector')
       .attr('class', 'splash h-valign');
 
-    var inner_content = div.append('div').attr('class', 'splash_inner')
+    var inner_content = div.append('div').attr('class', 'splash_inner');
 
-    inner_content.append('h1').text('Select your template')
+    inner_content.append('h1').text('Select your template');
     inner_content
       .append('p')
       .attr('class', 'last')
-      .text('Templates give you different ways to unfold your story')
-    var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
+      .text('Templates give you different ways to unfold your story');
+    var templates = inner_content.append('ul').attr('class', 'template_list h-valign');
 
 
     var template = templates
@@ -953,7 +953,7 @@ function Splash(context) {
         .append ('div')
         .attr('class', function(d) {
             return 'inner-template '
-          })
+          });
 
     template
         .append('div')
@@ -975,13 +975,13 @@ function Splash(context) {
         .attr('data-autoplay', 'stop')
         .attr('data-autoload', 'true')
         .attr('data-retina', 'false')
-        .attr('data-idx', 0)
+        .attr('data-idx', 0);
 
     template
         .append('p')
           .text(function(d) {
             return d.description
-          })
+          });
 
     template
       .append('a').text(function(d) {
@@ -999,13 +999,13 @@ function Splash(context) {
       .selectAll('#template_selector')
       .data([]);
     s.exit().remove();
-  }
+  };
 
   return d3.rebind(_splash, evt, 'on');
 
 }
 
-module.exports = Splash
+module.exports = Splash;
 
 },{}],7:[function(_dereq_,module,exports){
 
@@ -1020,7 +1020,7 @@ function debounce(fn, t, ctx) {
 
 module.exports = {
   debounce: debounce
-}
+};
 
 },{}],8:[function(_dereq_,module,exports){
 /*
