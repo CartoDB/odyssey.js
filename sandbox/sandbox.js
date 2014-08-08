@@ -72,7 +72,7 @@ function editor(callback) {
       }
     }
     return this._template;
-  }
+  };
 
   context.code = function(_) {
 
@@ -81,7 +81,7 @@ function editor(callback) {
       // console.log("code", _);
     }
     return this._code;
-  }
+  };
 
   context.basemaps = function(_) {
     if (_) {
@@ -92,7 +92,7 @@ function editor(callback) {
       return null;
     }
     return BASEMAP_LIST;
-  }
+  };
 
   var template = body.select('#template');
   var code_dialog = dialog(context);

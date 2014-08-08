@@ -99,4 +99,4 @@ function Gist(md, template, callback) {
 module.exports = {
   gist: Gist,
   zip: zip
-}
+};
