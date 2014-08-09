@@ -122,7 +122,7 @@
         var seq = O.Triggers.Sequential();
 
         var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var map = this.map = L.map('map').setView([16.2991, -59.7656], 2);
         var basemap = this.basemap = L.tileLayer(baseurl, {
           attribution: 'data OSM - map CartoDB'
         }).addTo(map);
