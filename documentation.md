@@ -141,7 +141,7 @@ If you are creating a visualization that uses a CartoDB map, you will see the fo
   The value for the column you want to filter
   
 - **vizjson**  
-  If you wish to use a CartoDB data visualization in your story, you will use the "vizjson" option to link to the visualization. The vizjson URL that you need to include here can be found by going to your visualization in CartoDB, clicking "Share" in the upper right corner, and copying the CartoDB.js link. It should look like the example below.
+  If you wish to use a CartoDB data visualization in your story, you will use the "vizjson" option to link to the visualization. The vizjson URL that you need to include here can be found by going to your visualization in CartoDB, clicking "Share" in the upper right corner, and copying the CartoDB.js link. Then paste this link in the vizjson parameter of your Odyssey.js story's config block. It should look like the example below.
 
 ~~~md
 - cartodb_filter: "column='VALUE'"
