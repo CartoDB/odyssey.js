@@ -23,11 +23,11 @@ The library is open source and freely available to use in your projects.
 
 ### Create a new Story
 
-If you want to start using the sandbox, go to the [homepage]({{ "/" | prepend: site.baseurl }}), click the button to create a new story or just go [here]({{ "/sandbox/sandbox.html" | prepend: site.baseurl }}).
+If you want to start creating a story using the sandbox, go to the [homepage]({{ "/" | prepend: site.baseurl }}), click the button to create a new story or just go [here]({{ "/sandbox/sandbox.html" | prepend: site.baseurl }}).
 
 #### Name your project
 
-Change the top level data in the sandbox. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview.
+Change the top level data in the sandbox. Change the _title_ and the _author_. You should see changes to these elements live in the Template preview. Optionally, if you want to include a CartoDB visualization in your Odyssey.js story, you'll be using an option called vizjson. Check out the section below called "Advanced use of the Sandbox" to learn how.
 
 ~~~md
 - title: "10 years later..."
@@ -137,15 +137,15 @@ In the Scroll and Slide templates, you will see these two options as defaults:
 
 If you are creating a visualization that uses a CartoDB map, you will see the following options in addition to the default:
 
-- **vizjson**  
-  The URL to any viz.json on cartodb
-
 - **cartodb_filter**  
   The value for the column you want to filter
+  
+- **vizjson**  
+  If you wish to use a CartoDB data visualization in your story, you will use the "vizjson" option to link to the visualization. The vizjson URL that you need to include here can be found by going to your visualization in CartoDB, clicking "Share" in the upper right corner, and copying the CartoDB.js link. It should look like the example below.
 
 ~~~md
-- vizjson: "http://viz2.cartodb.com/api/v2/viz/your-viz-key-here/viz.json"
 - cartodb_filter: "column='VALUE'"
+- vizjson: "http://{user}.cartodb.com/api/v2/viz/{your-viz-key-here}/viz.json"
 ~~~
 
 #### Torque options
