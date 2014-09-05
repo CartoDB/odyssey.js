@@ -3,7 +3,6 @@
 
 @include font-face("AleoRegular", font-files("aleo-regular-webfont.woff", "aleo-regular-webfont.ttf", "aleo-regular-webfont.svg"), "aleo-regular-webfont.eot");
 @include font-face("AleoBold", font-files("aleo-bold-webfont.woff", "aleo-bold-webfont.ttf", "aleo-bold-webfont.svg"), "aleo-bold-webfont.eot");
-@include font-face("ProximaNovaBold", font-files("ProximaNova-bold.woff", "ProximaNova-bold.ttf", "ProximaNova-bold.svg"), "ProximaNova-bold.eot");
 
 body { text-align: center; min-height: 100%; background: #fff; }
 html { min-height: 100%; }
@@ -201,7 +200,7 @@ div#credits {
 
     &.title{
       left: 40px;
-      font-family: ProximaNovaBold, Sans-serif;
+      font-family: 'Proxima N W01 Bold', Sans-serif;
       color: #333;
     }
 
