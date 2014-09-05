@@ -2,9 +2,10 @@
 @import "compass/css3/font-face";
 @import "compass/css3/transition";
 
-@include font-face("AleoRegular", font-files("aleo-regular-webfont.woff", "aleo-regular-webfont.ttf", "aleo-regular-webfont.svg"), "aleo-regular-webfont.eot");
-@include font-face("AleoBold", font-files("aleo-bold-webfont.woff", "aleo-bold-webfont.ttf", "aleo-bold-webfont.svg"), "aleo-bold-webfont.eot");
-@include font-face("ProximaNovaBold", font-files("ProximaNova-bold.woff", "ProximaNova-bold.ttf", "ProximaNova-bold.svg"), "ProximaNova-bold.eot");
+@import url("http://fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
+@include font-face("AleoRegular", font-files("//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.woff", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.ttf", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.svg"), "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot");
+@include font-face("AleoBold", font-files("//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.woff", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.ttf", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.svg"), "//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot");
+@include font-face("ProximaNovaBold", font-files("//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf", "//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg"), "//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot");
 
 body {
   overflow: hidden;

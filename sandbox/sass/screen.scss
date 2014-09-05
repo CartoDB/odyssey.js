@@ -4,13 +4,14 @@
 @import "compass/css3/box-sizing";
 
 
+@import url("http://fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
 @font-face {
   font-family: 'staticregular';
-  src: font-url('static-webfont.eot');
-  src: font-url('static-webfont.eot?#iefix') format('embedded-opentype'),
-       font-url('static-webfont.woff') format('woff'),
-       font-url('static-webfont.ttf') format('truetype'),
-       font-url('static-webfont.svg#staticregular') format('svg');
+  src: font-url('//cartodb-assets.global.ssl.fastly.net/odyssey.js/static-webfont.eot');
+  src: font-url('//cartodb-assets.global.ssl.fastly.net/odyssey.js/static-webfont.eot?#iefix') format('embedded-opentype'),
+       font-url('//cartodb-assets.global.ssl.fastly.net/odyssey.js/static-webfont.woff') format('woff'),
+       font-url('//cartodb-assets.global.ssl.fastly.net/odyssey.js/static-webfont.ttf') format('truetype'),
+       font-url('//cartodb-assets.global.ssl.fastly.net/odyssey.js/static-webfont.svg#staticregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
