@@ -955,7 +955,7 @@ var Template = function(template) {
   function configureEditor() {
     // add helpers
     if (template.map && template.map instanceof L.Map) {
-      new L.CrossHair('img/crosshair.png').addTo(template.map);
+      new L.CrossHair('http://cartodb.github.io/odyssey.js/img/crosshair.png').addTo(template.map);
     }
   }
 
