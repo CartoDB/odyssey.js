@@ -293,7 +293,7 @@ You can also use a reference-style link, which would look like:
 This is [an example][id] reference-style link.
 ~~~
 
-Here, the first text in parentheses would be the link, and the second text is a label refering to the label you have defined elsewhere in your document. The definition of your label (i.e. assigning it a URL to visit) would look like:
+Here, the first text in parentheses would be the link, and the second text is a label referring to the label you have defined elsewhere in your document. The definition of your label (i.e. assigning it a URL to visit) would look like:
 
 ~~~md
 [id]: http://example.com/  "Optional Title Here"
