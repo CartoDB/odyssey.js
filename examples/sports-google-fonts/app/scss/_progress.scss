@@ -1,0 +1,24 @@
+// Progress
+// --------------------------------------------------
+
+.Progress-time {
+  @extend %clearfix;
+  color: rgba(#fff, .8);
+  font-size: 15px;
+}
+
+.Progress-line {
+  background: #fff;
+  height: 1px;
+  position: relative;
+  margin: 20px 0 30px 0;
+}
+
+.Progress-progress {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  height: 3px;
+  margin-top: -1px;
+  background: #B20000;
+}

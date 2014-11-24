@@ -4,3 +4,6 @@ _site
 .ruby-version
 .sass-cache/
 node_modules/
+bower_components/
+dist/
+.tmp/

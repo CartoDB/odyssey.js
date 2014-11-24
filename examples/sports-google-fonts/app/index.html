@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js sports template</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@cartoDB">
+  <meta name="twitter:creator" content="@cartoDB">
+  <meta name="twitter:title" content="">
+
+  <!-- build:css css/vendor.css -->
+  <link rel="stylesheet" href="scss/vendor/reset.css">
+  <!-- endbuild -->
+  <link rel="stylesheet" href="https://libs.cartocdn.com.s3.amazonaws.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <!-- build:css(.tmp) css/main.css -->
+  <link rel="stylesheet" href="css/main.css">
+  <!-- endbuild -->
+
+  <!-- build:js js/vendor/modernizr.js -->
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+<body>
+  <div id="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; padding: 0; margin: 0; background: #404957;"></div>
+  <div id="slides"></div>
+
+  <div class="Scoreboard">
+    <ul>
+      <li class="Scoreboard-team Scoreboard-team--team1">
+        <img src="img/01.png" class="Scoreboard-image">
+        <h3 class="Scoreboard-title">MIAMI</h3>
+
+        <div class="Scoreboard-count">
+          <p class="Scoreboard-number">5</p>
+        </div>
+      </li>
+
+      <li class="Scoreboard-team Scoreboard-team--team2">
+        <div class="Scoreboard-count">
+          <p class="Scoreboard-number">0</p>
+        </div>
+
+        <h3 class="Scoreboard-title">SAN ANTONIO SPURS</h3>
+        <img src="img/02.png" class="Scoreboard-image ">
+      </li>
+    </ul>
+  </div>
+
+  <div class="Notifications">
+    <img src="img//image_team.jpg" class="Notification-image">
+    <div class="Notification-text">
+      <p class="Notification-time">MIN: <span>51</span></p>
+      <p class="Notification-content">Canasta de 2 de Navarro. España se acerca a el marcador</p>
+    </div>
+  </div>
+
+  <footer class="Footer">
+    <div class="Progress">
+      <div class="Progress-time">
+        <div class="h-left">16:30 PST</div>
+        <div class="h-right">19:30 PST</div>
+      </div>
+
+      <div class="Progress-line">
+        <span class="Progress-progress" style="width: 50%;"></span>
+      </div>
+    </div>
+
+    <div class="Footer-info">
+      <p class="h-left Footer-infoTitle">
+        The Worldcup Basketball on Twitter
+      </p>
+
+      <p class="h-right Footer-infoAttributions">
+        <span class="h-iblock h-malign">Made with</span>
+        <span class="h-iblock h-malign">
+          <img src="img/cartodb-brand.png" alt="cartodb-brand" />
+        </span>
+
+        <span class="h-iblock h-malign"> 
+          <a href="http://cartodb.com/" target="_blank" class="Footer-infoAttributionsLink h-iblock h-malign">CartoDB</a>
+        </span>
+      </p>
+    </footer>
+  <script src="https://libs.cartocdn.com.s3.amazonaws.com/cartodb.js/v3/3.11/cartodb.js"></script>
+  <script src="http://cartodb.github.io/odyssey.js/dist/odyssey.js"></script>
+
+  <!-- build:js js/main.js -->
+  <script src="js/main.js"></script>
+  <!-- endbuild -->
+</body>
+</html>

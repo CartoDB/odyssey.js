@@ -1,0 +1,69 @@
+// Notifications
+// --------------------------------------------------
+
+.Notifications {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  overflow: hidden;
+  z-index: 5;
+  width: 360px;
+  background: rgba(#373B42, .8);
+  border-radius: 4px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid rgba(#000, .2);
+    border-radius: 4px;
+  }
+}
+
+.Notification-text {
+  padding: 20px;
+}
+
+.Notification-image {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.Notification {
+  display: none;
+  float: right;
+  width: 360px;
+  margin-right: -30px;
+  padding: 0 40px 40px;
+  background: rgba(#373B42, .8);
+  opacity: 0;
+
+  &:first-child .Notification-inner {
+    border-top: 0;
+  }
+}
+
+.Notification-time {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 8px 6px;
+  border: 1px solid rgba(#fff, .8);
+  font-weight: 300;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: rgba(#fff, .8);
+  border-radius: 4px;
+}
+
+.Notification-inner {
+  border-top: 1px solid rgba(#fff, .2);
+  padding: 40px 0 0 25px;
+}
+
+.Notification-content {
+  font-size: 15px;
+  color: #fff;
+}
