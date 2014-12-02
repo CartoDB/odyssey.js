@@ -7,7 +7,7 @@ npm install
 python -m SimpleHTTPServer
 ```
 
-open [http://locahost:8000/sandbox/sandbox.html](http://locahost:8000/sandbox/sandbox.html)
+open [http://localhost:8000/sandbox/sandbox.html](http://localhost:8000/sandbox/sandbox.html)
 
 # how to run (for developers)
 
