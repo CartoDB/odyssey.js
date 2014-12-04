@@ -1,0 +1,77 @@
+// Overrides
+// --------------------------------------------------
+
+body {
+  overflow: hidden;
+  font: 400 15px 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #fff;
+  background: #333;
+}
+
+div.cartodb-timeslider {
+  position: absolute;
+  display: inline-block;
+  height: auto;
+  margin-bottom: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border: 0;
+  text-align: left;
+  z-index: 105;
+}
+
+.controls,
+.time,
+.leaflet-control-zoom,
+.cartodb-logo,
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+div.cartodb-timeslider {
+  right: 40px !important;
+  bottom: 80px !important;
+  left: 40px !important;
+
+  ul {
+    height: auto;
+    line-height: 1;
+
+    li {
+      display: block;
+      height: auto;
+      line-height: 1;
+    }
+  }
+
+  .slider-wrapper {
+    display: block;
+    width: auto;
+    padding: 0;
+  }
+
+  .slider {
+    width: auto;
+  }
+
+  .ui-slider-horizontal {
+    height: 2px;
+  }
+
+  .ui-slider {
+    .ui-slider-handle {
+      background: url("https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.11/themes/img/slider.png") no-repeat -99px -19px #fff;
+    }
+
+    .ui-slider-range {
+      background: #B20000;
+    }
+  }
+}

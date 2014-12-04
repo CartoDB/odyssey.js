@@ -3,117 +3,68 @@
 '_helpers.scss',
 '_base.scss',
 '_notifications.scss',
+'_tooltips.scss',
 '_scoreboard.scss',
-'_progress.scss',
-'_footer.scss';
-
-
-// overrides
-div.cartodb-timeslider,
-div.cartodb-legend-stack,
-.leaflet-control-zoom,
-.cartodb-logo,
-.leaflet-control-attribution {
-  display: none !important;
-}
-
-body {
-  overflow: hidden;
-  font: 400 15px 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #fff;
-  background: #333;
-}
+'_footer.scss',
+'_overrides';
 
 
 @media (max-width: 800px) {
-  .Notifications {
-    top: auto;
-    left: 40px;
-    bottom: 200px;
-    right: 40px;
-    overflow: hidden;
-    width: auto;
-  }
-  .Notifications img{
-    display: none;
+  div.cartodb-timeslider {
+    bottom: 120px !important;
   }
 
   .Scoreboard {
+    position: relative;
+    top: 20px;
+    left: auto;
+    right: auto;
+    text-align: center;
+
+    > ul {
+      display: inline-block;
+    }
+  }
+
+  .Notifications {
+    top: auto;
+    left: 40px;
     right: 40px;
-  }
-  .Scoreboard-Title {
-    margin-top: 15px;
-  }
-  .Scoreboard-count {
-    font:700 30px/40px 'Lato', sans-serif;
-    min-width: 40px;
-  }
-  .Scoreboard-team {
-    display: block;
-    margin: 0 0 15px 0;
-    width: 100%;
-    width: auto;
     overflow: hidden;
-    padding-bottom: 15px;
-  }
-  .Scoreboard-team img {
-    display: none;
-  }
-  .Scoreboard-team--team1 {
-    border-bottom: 1px solid rgba(255, 255, 255, .2);
-  }
-  .Scoreboard-team--team1 .Scoreboard-Title {
-    float:left; 
-  }
-  .Scoreboard-team--team1 .Scoreboard-count {
-    float:right; 
-  }
-  .Scoreboard-team--team2 .Scoreboard-Title {
-    float:left; 
-  }
-  .Scoreboard-team--team2 .Scoreboard-count {
-    float:right; 
+    width: auto;
   }
 
-}
-
-
-@media (max-width: 600px) {
   .Notification {
     width: 100%;
   }
-  .notification-inner {
-    border: 0;
-  }
-  .Progress-Time .H-Left {
-    float: left; 
-    width: auto;
-    text-align: left;
-  }
-  .Progress-Time .H-Right {
-    float: right; 
-    width: auto;
-    text-align: right;
-  }
 
-}
-
-@media (max-width: 750px) {
   .h-left,
   .h-right {
     display: block;
     float: none;
     width: 100%;
-    text-align: center;
   }
 
   .h-left {
     margin-bottom: 10px;
   }
 
-  .Progress-time {
+  div.cartodb-timeslider {
+  right: 20px !important;
+  left: 20px !important;
+  }
+
+  .Footer {
+    left: 20px;
+    right: 20px;
+    text-align: center;
+  }
+
+  .Footer-time {
+    bottom: 120px;
+
     .h-left {
-      float: left; 
+      float: left;
       width: auto;
       text-align: left;
       margin: 0;

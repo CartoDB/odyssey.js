@@ -16,12 +16,12 @@
   margin-bottom: 40px;
 }
 
-.Scoreboard-team--team1 {
+.Scoreboard-team--1 {
   text-align: right;
   margin-right: 12px;
 }
 
-.Scoreboard-team--team2 {
+.Scoreboard-team--2 {
   text-align: left;
 }
 
@@ -64,6 +64,7 @@
 }
 
 .Scoreboard-number {
+  display: none;
   position: relative;
   z-index: 2;
 
@@ -90,6 +91,10 @@
     background: rgba(#000, .1);
     z-index: 3;
   }
+
+  &.is-visible {
+    display: block;
+  }
 }
 
 .Scoreboard-title {
@@ -100,4 +105,11 @@
   font-weight: 400;
   font-size: 14px;
   color: #fff;
+}
+
+.team-marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
 }

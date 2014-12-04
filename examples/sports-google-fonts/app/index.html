@@ -33,50 +33,46 @@
 
   <div class="Scoreboard">
     <ul>
-      <li class="Scoreboard-team Scoreboard-team--team1">
-        <img src="img/01.png" class="Scoreboard-image">
-        <h3 class="Scoreboard-title">MIAMI</h3>
+      <li class="Scoreboard-team Scoreboard-team--1">
+        <span class="h-iblock h-malign team-marker"></span>
+        <h3 class="Scoreboard-title"></h3>
 
         <div class="Scoreboard-count">
-          <p class="Scoreboard-number">5</p>
+          <p class="Scoreboard-number Scoreboard-number--0 is-visible">0</p>
         </div>
       </li>
 
-      <li class="Scoreboard-team Scoreboard-team--team2">
+      <li class="Scoreboard-team Scoreboard-team--2">
         <div class="Scoreboard-count">
-          <p class="Scoreboard-number">0</p>
+          <p class="Scoreboard-number Scoreboard-number--0 is-visible">0</p>
         </div>
 
-        <h3 class="Scoreboard-title">SAN ANTONIO SPURS</h3>
-        <img src="img/02.png" class="Scoreboard-image ">
+        <h3 class="Scoreboard-title"></h3>
+        <span class="h-iblock h-malign team-marker"></span>
       </li>
     </ul>
   </div>
 
-  <div class="Notifications">
-    <img src="img//image_team.jpg" class="Notification-image">
-    <div class="Notification-text">
-      <p class="Notification-time">MIN: <span>51</span></p>
-      <p class="Notification-content">Canasta de 2 de Navarro. España se acerca a el marcador</p>
-    </div>
+  <div id="Notifications" class="Notifications">
+    <ul></ul>
   </div>
 
-  <footer class="Footer">
-    <div class="Progress">
-      <div class="Progress-time">
-        <div class="h-left">16:30 PST</div>
-        <div class="h-right">19:30 PST</div>
-      </div>
+  <!--
+  <img src="img//image_team.jpg" class="Notification-image">
+  <div class="Notification-text">
+    <p class="Notification-time">MIN: <span>51</span></p>
+    <p class="Notification-content">Canasta de 2 de Navarro. España se acerca a el marcador</p>
+  </div>
+  -->
 
-      <div class="Progress-line">
-        <span class="Progress-progress" style="width: 50%;"></span>
-      </div>
+  <footer class="Footer">
+    <div class="Footer-time">
+      <div class="h-left Footer-time--l"></div>
+      <div class="h-right Footer-time--r"></div>
     </div>
 
     <div class="Footer-info">
-      <p class="h-left Footer-infoTitle">
-        The Worldcup Basketball on Twitter
-      </p>
+      <p class="h-left Footer-infoTitle">Odyssey.js sports template</p>
 
       <p class="h-right Footer-infoAttributions">
         <span class="h-iblock h-malign">Made with</span>
@@ -90,9 +86,15 @@
       </p>
     </footer>
   <script src="https://libs.cartocdn.com.s3.amazonaws.com/cartodb.js/v3/3.11/cartodb.js"></script>
-  <script src="http://cartodb.github.io/odyssey.js/dist/odyssey.js"></script>
+
+  <!-- build:js js/vendor.js -->
+  <script src="js/vendor/markdown.js"></script>
+  <script src="js/vendor/odyssey.js"></script>
+  <!-- endbuild -->
 
   <!-- build:js js/main.js -->
+  <script src="js/helpers.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/main.js"></script>
   <!-- endbuild -->
 </body>
