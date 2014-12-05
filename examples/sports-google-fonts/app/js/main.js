@@ -5,11 +5,11 @@ var VIZJSON_URL;
 var TITLE = getParameterByName('title');
 var DESCRIPTION = getParameterByName('description');
 var DURATION = getParameterByName('duration');
-var TEAM1 = _.escape(getParameterByName('t').split('|')[0].split(',')[0]);
-var TEAM1_COLOR = '#' + _.escape(getParameterByName('t').split('|')[0].split(',')[1]);
+var TEAM1 = escape(getParameterByName('t').split('|')[0].split(',')[0]);
+var TEAM1_COLOR = '#' + escape(getParameterByName('t').split('|')[0].split(',')[1]);
 var TEAM1_SANITIZED = sanitizeCountry(TEAM1);
-var TEAM2 = _.escape(getParameterByName('t').split('|')[1].split(',')[0]);
-var TEAM2_COLOR = '#' + _.escape(getParameterByName('t').split('|')[1].split(',')[1]);
+var TEAM2 = escape(getParameterByName('t').split('|')[1].split(',')[0]);
+var TEAM2_COLOR = '#' + escape(getParameterByName('t').split('|')[1].split(',')[1]);
 var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
 
@@ -307,7 +307,7 @@ O.Template({
                   if (tb && tb.start !== undefined) {
                     var f = formaterForRange(tb.start, tb.end);
                     // avoid showing invalid dates
-                    if (!_.isNaN(layer.stepToTime(s).getYear())) {
+                    if (!isNaN(layer.stepToTime(s).getYear())) {
                       return f(layer.stepToTime(s));
                     }
                   }
