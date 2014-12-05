@@ -1,0 +1,73 @@
+// Helpers
+// --------------------------------------------------
+
+%clearfix:before,
+%clearfix:after {
+  content: " ";
+  display: table;
+}
+
+%clearfix:after {
+  clear: both;
+}
+
+.h-left { float: left; }
+.h-right { float: right; }
+
+.h-pa { position: absolute; }
+.h-pr { position: relative; }
+.h-ov { overflow: hidden; }
+.h-iblock { display: inline-block; }
+
+.inb-list {
+  > li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+}
+
+.h-malign { vertical-align: middle; }
+.h-talign { vertical-align: top; }
+.h-balign { vertical-align: bottom; }
+
+.h-txt-center { text-align: center; }
+.h-txt-left { text-align: left; }
+.h-txt-right { text-align: right; }
+.h-tupper { text-transform: uppercase; }
+
+.h-valign:before {
+  display: inline-block;
+  vertical-align: middle;
+  content: "";
+  height: 100%;
+  margin-left: -5px;
+}
+
+.h-vspace-xl { margin-bottom: 60px; }
+.h-vspace-l { margin-bottom: 40px; }
+.h-vspace-m { margin-bottom: 25px; }
+.h-vspace-s { margin-bottom: 12px; }
+.h-vspace-xs { margin-bottom: 8px; }
+.h-lspace-xl { margin-left: 40px; }
+.h-lspace-l { margin-left: 25px; }
+.h-lspace-xs { margin-left: 8px; }
+.h-lspace-xxs { margin-left: 4px; }
+.h-rspace-l { margin-right: 25px; }
+.h-rspace-xl { margin-right: 40px; }
+.h-rspace-xs { margin-right: 8px; }
+.h-rspace-s { margin-right: 12px; }
+.h-tspace-m { margin-top: 25px; }
+.h-tspace-s { margin-top: 8px; }
+.h-tspace-l { margin-top: 40px; }
+.h-tspace-xl { margin-top: 60px; }
+
+.h-img-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 100%;
+}
+
+.h-img-circle {
+  border-radius: 50%;
+}

@@ -1,0 +1,115 @@
+// Scoreboard
+// --------------------------------------------------
+
+.Scoreboard {
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  z-index: 5;
+  text-transform: uppercase; 
+  color: #fff;
+}
+
+.Scoreboard-team {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 40px;
+}
+
+.Scoreboard-team--1 {
+  text-align: right;
+  margin-right: 12px;
+}
+
+.Scoreboard-team--2 {
+  text-align: left;
+}
+
+.Scoreboard-image {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.Scoreboard-count {
+  display: inline-block;
+  position: relative;
+  min-width: 70px;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 70px;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  background: rgba(15, 15, 30, .5);
+  border-radius: 4px;
+  box-shadow:
+    1px 0px 0 rgba(#000, .1) inset,
+    -1px 0px 0 rgba(#000, .1) inset,
+    0 1px 0 rgba(#000, .1) inset,
+    0 -1px 0 rgba(#000, .1) inset;
+  text-shadow: 0 0 1px rgba(15, 15, 30, .5);
+
+  &:before {
+    content:"";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(#000, 0) 0%, rgba(#000, 1) 100%);
+    border-radius: 4px;
+    opacity: .3;
+  }
+}
+
+.Scoreboard-number {
+  display: none;
+  position: relative;
+  z-index: 2;
+
+  &:before {
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    right: -20px;
+    background: rgba(#fff, .05);
+    z-index: 3;
+  }
+
+  &:after {
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    right: -20px;
+    background: green;
+    margin-top:1px;
+    background: rgba(#000, .1);
+    z-index: 3;
+  }
+
+  &.is-visible {
+    display: block;
+  }
+}
+
+.Scoreboard-title {
+  display: inline-block;
+  margin: 0 12px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+}
+
+.team-marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+}

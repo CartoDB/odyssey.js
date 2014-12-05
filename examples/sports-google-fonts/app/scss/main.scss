@@ -1,0 +1,79 @@
+@import
+'_variables.scss',
+'_helpers.scss',
+'_base.scss',
+'_notifications.scss',
+'_tooltips.scss',
+'_scoreboard.scss',
+'_footer.scss',
+'_overrides';
+
+
+@media (max-width: 800px) {
+  div.cartodb-timeslider {
+    bottom: 120px !important;
+  }
+
+  .Scoreboard {
+    position: relative;
+    top: 20px;
+    left: auto;
+    right: auto;
+    text-align: center;
+
+    > ul {
+      display: inline-block;
+    }
+  }
+
+  .Notifications {
+    top: auto;
+    left: 40px;
+    right: 40px;
+    overflow: hidden;
+    width: auto;
+  }
+
+  .Notification {
+    width: 100%;
+  }
+
+  .h-left,
+  .h-right {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+
+  .h-left {
+    margin-bottom: 10px;
+  }
+
+  div.cartodb-timeslider {
+  right: 20px !important;
+  left: 20px !important;
+  }
+
+  .Footer {
+    left: 20px;
+    right: 20px;
+    text-align: center;
+  }
+
+  .Footer-time {
+    bottom: 120px;
+
+    .h-left {
+      float: left;
+      width: auto;
+      text-align: left;
+      margin: 0;
+    }
+
+    .h-right {
+      float: right; 
+      width: auto;
+      text-align: right;
+    }
+  }
+}
