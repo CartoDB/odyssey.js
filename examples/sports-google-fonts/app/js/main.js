@@ -41,7 +41,7 @@ function torque(layer) {
         if (tb && tb.start !== undefined) {
           var f = formaterForRange(tb.start, tb.end);
           // avoid showing invalid dates
-          if (!_.isNaN(layer.stepToTime(s).getYear())) {
+          if (!isNaN(layer.stepToTime(s).getYear())) {
             return f(layer.stepToTime(s));
           }
         }
