@@ -94,7 +94,7 @@ function torque(layer) {
     }
 
     if (type === 'score') {
-      var $number = $('.Scoreboard-team--'+team+' .Scoreboard-number');
+      var $number = $('.Scoreboard-team--'+team+' .Scoreboard-number').last();
 
       var n = parseInt($number.text(), 10);
 
@@ -104,6 +104,14 @@ function torque(layer) {
 
       var $counter = $('.Scoreboard-number_'+i);
     }
+
+    $('.slide-tip')
+      .on('mouseenter', function() {
+        $(this).find('.tooltip').fadeIn(150);
+      })
+      .on('mouseleave', function() {
+        $(this).find('.tooltip').fadeOut(150);
+      });
 
     var $tip = $('.slide-tip-'+i+' .tip');
     var $tooltip = $('.slide-tip-'+i+' .tooltip');
@@ -137,11 +145,6 @@ function torque(layer) {
           $counter.siblings('.Scoreboard-number').removeClass('is-visible');
           $counter.addClass('is-visible');
         }
-
-        if (!$tooltip.is(':visible')) {
-          $tooltip.fadeIn(150);
-        }
-
       } else if (changes.step >= i+5 && changes.step < i+10) {
         setTimeout(function() {
           $notification && $notification
@@ -153,10 +156,6 @@ function torque(layer) {
               $(this).hide();
             });
         }, 6000);
-
-        setTimeout(function() {
-          $('.tooltip').fadeOut(150);
-        }, 2000);
       }
     };
 
