@@ -198,14 +198,13 @@ O.Template({
     var slides = this.slides = O.Actions.Slides('slides');
     var story = this.story = O.Story();
 
+    // nasty hack
+    $(window).on('hashchange',function() {
+      window.location.reload(true);
+    });
+
     if (USER && VIZJSON) {
       VIZJSON_URL = 'http://' + USER + '.cartodb.com/api/v2/viz/' + VIZJSON + '/viz.json';
-
-      $('.Scoreboard-team--1 .team-marker').css({ background: TEAM1_COLOR});
-      $('.Scoreboard-team--2 .team-marker').css({ background: TEAM2_COLOR});
-
-      $('.Scoreboard-team--1 .Scoreboard-title').text(TEAM1);
-      $('.Scoreboard-team--2 .Scoreboard-title').text(TEAM2);
 
       var md = [
         '```',
@@ -237,13 +236,24 @@ O.Template({
             md = md + '\n' + '\n' + slide_md;
           }
 
-          O.Template.Storage.save(md.replace(/"/g, '\''), 'torque');
+          var h = location.hash;
+          var tk = h.split('/');
+
+          if (!h || h && !tk[2].length) {
+            O.Template.Storage.save(md.replace(/"/g, '\''), 'torque');
+          } else {
+            $('.Scoreboard-team--1 .team-marker').css({ background: TEAM1_COLOR});
+            $('.Scoreboard-team--2 .team-marker').css({ background: TEAM2_COLOR});
+
+            $('.Scoreboard-team--1 .Scoreboard-title').text(TEAM1);
+            $('.Scoreboard-team--2 .Scoreboard-title').text(TEAM2);
+          }
+
         });
     }
   },
 
   _initActions: function(actions) {
-
     for (var i = 0; i < actions.length; ++i) {
       var slide = actions[i];
 
@@ -268,7 +278,6 @@ O.Template({
     cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
       TITLE = vizjson.title;
       DESCRIPTION = vizjson.description;
-      console.log(TITLE);
       $('.Footer-infoTitle').text(TITLE);
 
       for (var i = 0; i < vizjson.layers.length; ++i) {
