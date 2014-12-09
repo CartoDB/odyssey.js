@@ -6,7 +6,7 @@
   <title>Odyssey.js sports template</title>
   <meta name="description" content="">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/odyssey.js/favicon.ico">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@cartoDB">
@@ -28,11 +28,11 @@
   <!-- endbuild -->
 </head>
 <body>
-  <div id="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; padding: 0; margin: 0; background: #404957;"></div>
+  <div id="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; padding: 0; margin: 0; background: #242426;"></div>
   <div id="slides"></div>
 
   <div class="Scoreboard">
-    <ul>
+    <ul class="hide-mobile">
       <li class="Scoreboard-team Scoreboard-team--1">
         <span class="h-iblock h-malign team-marker"></span>
         <h3 class="Scoreboard-title"></h3>
@@ -49,6 +49,26 @@
 
         <h3 class="Scoreboard-title"></h3>
         <span class="h-iblock h-malign team-marker"></span>
+      </li>
+    </ul>
+
+    <ul class="show-mobile">
+      <li class="Scoreboard-team Scoreboard-team--1">
+        <span class="h-iblock h-malign team-marker"></span>
+        <h3 class="Scoreboard-title"></h3>
+
+        <div class="Scoreboard-count Scoreboard-count--small">
+          <p class="Scoreboard-number Scoreboard-number--0 is-visible">0</p>
+        </div>
+      </li>
+
+      <li class="Scoreboard-team Scoreboard-team--2">
+        <span class="h-iblock h-malign team-marker"></span>
+        <h3 class="Scoreboard-title"></h3>
+
+        <div class="Scoreboard-count Scoreboard-count--small">
+          <p class="Scoreboard-number Scoreboard-number--0 is-visible">0</p>
+        </div>
       </li>
     </ul>
   </div>
@@ -72,7 +92,7 @@
     </div>
 
     <div class="Footer-info">
-      <p class="h-left Footer-infoTitle">Odyssey.js sports template</p>
+      <p class="h-left Footer-infoTitle"></p>
 
       <p class="h-right Footer-infoAttributions">
         <span class="h-iblock h-malign">Made with</span>

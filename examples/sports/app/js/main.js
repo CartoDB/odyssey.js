@@ -187,17 +187,6 @@ function torque(layer) {
 O.Template({
 
   init: function() {
-    var self = this;
-
-    var baseurl = this.baseurl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
-    var map = this.map = L.map('map').setView([0, 0], 4);
-    var basemap = this.basemap = L.tileLayer(baseurl, {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-    }).addTo(map);
-
-    var slides = this.slides = O.Actions.Slides('slides');
-    var story = this.story = O.Story();
-
     // nasty hack
     $(window).on('hashchange',function() {
       window.location.reload(true);
@@ -278,51 +267,28 @@ O.Template({
     cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
       TITLE = vizjson.title;
       DESCRIPTION = vizjson.description;
+
+      document.title = TITLE;
+      $('meta[name=description]').attr('content', DESCRIPTION);
       $('.Footer-infoTitle').text(TITLE);
 
+      var map = self.map = L.map('map').fitBounds(vizjson.bounds);
+      var baseurl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
+      var basemap = L.tileLayer(baseurl, {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+      }).addTo(self.map);
+
+      var slides = self.slides = O.Actions.Slides('slides');
+      var story = self.story = O.Story();
+
       for (var i = 0; i < vizjson.layers.length; ++i) {
-        self.map.fitBounds(vizjson.bounds);
-
-        var torqueIndex;
-
         if (vizjson.layers[i].type === 'torque') {
           cartodb.createLayer(self.map, vizjson, { layerIndex: i })
             .done(function(layer) {
               self.torqueLayer = layer;
+
               self.torqueLayer.stop();
-
               self.map.addLayer(self.torqueLayer);
-
-
-              function formaterForRange(start, end) {
-                start = start.getTime ? start.getTime(): start;
-                end = end.getTime ? end.getTime(): end;
-                var span = (end - start)/1000;
-                var ONE_DAY = 3600*24;
-                var ONE_YEAR = ONE_DAY * 31 * 12;
-                function pad(n) { return n < 10 ? '0' + n : n; };
-
-                // lest than a day
-                if (span < ONE_DAY) return function(t) { return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes()); };
-                if (span < ONE_YEAR) return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCDate()) + "/" + pad(t.getUTCFullYear()); };
-                return function(t) { return pad(t.getUTCMonth() + 1) + "/" + pad(t.getUTCFullYear()); };
-              }
-
-              function getTimeOrStep(s) {
-                var tb = layer.getTimeBounds();
-                if (!tb) return;
-                if (tb.columnType === 'date') {
-                  if (tb && tb.start !== undefined) {
-                    var f = formaterForRange(tb.start, tb.end);
-                    // avoid showing invalid dates
-                    if (!_.isNaN(layer.stepToTime(s).getYear())) {
-                      return f(layer.stepToTime(s));
-                    }
-                  }
-                } else {
-                  return s;
-                }
-              }
 
               self.torqueLayer.on('change:steps', function() {
                 self.torqueLayer.play();
