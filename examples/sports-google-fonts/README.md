@@ -52,6 +52,7 @@ Write down the username and the table name of the table and add them to the URL 
 ```
 
 Finally, for the match teams name and colors, we'll write them directly in the URL params separated by commas:
+
 ```
-t=Real%20Madrid,ffffff%7CAtl%C3%A9tico%20de%20Madrid,B40903
+&t=Real%20Madrid,ffffff%7CAtl%C3%A9tico%20de%20Madrid,B40903
 ```
