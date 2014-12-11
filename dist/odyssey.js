@@ -955,7 +955,7 @@ var Template = function(template) {
   function configureEditor() {
     // add helpers
     if (template.map && template.map instanceof L.Map) {
-      new L.CrossHair('http://cartodb.github.io/odyssey.js/img/crosshair.png').addTo(template.map);
+      new L.CrossHair('//cartodb.github.io/odyssey.js/img/crosshair.png').addTo(template.map);
     }
   }
 
@@ -1567,7 +1567,7 @@ function Sequential() {
   };
 
   seq.current = function(_) {
-    if (_) {
+    if (_ !== undefined) {
       var c = Math.max(Math.min(max, _), 0);
       if (c !== current) {
         current = c;
