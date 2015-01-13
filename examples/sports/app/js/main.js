@@ -14,7 +14,7 @@ var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
 
 
-function torque(layer) {
+function torque_(layer) {
   function _torque() {}
 
   _torque.reach = function (slide) {
@@ -255,7 +255,7 @@ O.Template({
       if (!slide.get('step')) return;
 
       this.story.addState(
-        torque(this.torqueLayer).reach(slide),
+        torque_(this.torqueLayer).reach(slide),
         action
       )
     }
@@ -292,7 +292,7 @@ O.Template({
 
               self.torqueLayer.on('change:steps', function() {
                 self.torqueLayer.play();
-                self.torqueLayer.actions = torque(self.torqueLayer);
+                self.torqueLayer.actions = torque_(self.torqueLayer);
                 self._initActions(actions);
               });
             }).on('error', function(err) {
