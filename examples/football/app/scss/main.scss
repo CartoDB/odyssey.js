@@ -1,0 +1,127 @@
+@import
+'_variables.scss',
+'_helpers.scss',
+'_base.scss',
+'_notifications.scss',
+'_tooltips.scss',
+'_scoreboard.scss',
+'_footer.scss',
+'_overrides';
+
+
+@media (max-width: 960px) {
+  .Scoreboard {
+    position: relative;
+    top: 20px;
+    left: auto;
+    right: auto;
+    text-align: center;
+
+    > ul {
+      display: inline-block;
+    }
+  }
+
+  .Notifications {
+    top: auto;
+    left: 80px;
+    right: 40px;
+    overflow: hidden;
+    width: auto;
+  }
+
+  .Notification {
+    width: 100%;
+  }
+}
+
+@media (min-width: 625px) {
+  .hide-mobile {
+    display: block !important;
+  }
+
+  .show-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 624px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+
+  .leaflet-control-zoom {
+    display: none !important;
+  }
+
+  .Scoreboard {
+    left: 20px;
+    text-align: left;
+
+    > ul {
+      display: block;
+    }
+  }
+
+  .Scoreboard-team {
+    display: block;
+    width: calc(100% - 40px);
+    line-height: 40px;
+    text-align: left;
+  }
+
+  .Scoreboard-team--1 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(#fff, .1);
+  }
+
+  .Notifications {
+    display: none;
+  }
+
+  div.cartodb-timeslider {
+    right: 20px !important;
+    left: 70px !important;
+    bottom: 120px !important;
+  }
+
+  .Footer {
+    left: 20px;
+    right: 20px;
+    text-align: center;
+  }
+
+  .Footer-time {
+    bottom: 120px;
+
+    .h-left {
+      float: left;
+      width: auto;
+      text-align: left;
+      margin: 0;
+      margin-left: 50px;
+    }
+
+    .h-right {
+      float: right; 
+      width: auto;
+      text-align: right;
+    }
+  }
+
+  .h-left,
+  .h-right {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+
+  .h-left {
+    margin-bottom: 10px;
+  }
+}
