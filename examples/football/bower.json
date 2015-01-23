@@ -1,8 +1,0 @@
-{
-  "name": "odysseyjs-sports-google-fonts",
-  "version": "0.0.1",
-  "private": true,
-  "devDependencies": {
-    "modernizr": "~2.8.3"
-  }
-}
