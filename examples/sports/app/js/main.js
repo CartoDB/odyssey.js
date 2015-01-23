@@ -1,10 +1,10 @@
-var USER = getParameterByName('user');
-var TABLE_NAME = getParameterByName('table_name');
 var VIZJSON = getParameterByName('vis');
 var VIZJSON_URL;
-var TITLE = getParameterByName('title');
-var DESCRIPTION = getParameterByName('description');
-var DURATION = getParameterByName('duration');
+var TITLE;
+var DESCRIPTION;
+var DURATION;
+var USER = getParameterByName('utn').split(',')[0];
+var TABLE_NAME = getParameterByName('utn').split(',')[1];
 var TEAM1 = _.escape(getParameterByName('t').split('|')[0].split(',')[0]);
 var TEAM1_COLOR = '#' + _.escape(getParameterByName('t').split('|')[0].split(',')[1]);
 var TEAM1_SANITIZED = sanitizeCountry(TEAM1);
@@ -12,6 +12,8 @@ var TEAM2 = _.escape(getParameterByName('t').split('|')[1].split(',')[0]);
 var TEAM2_COLOR = '#' + _.escape(getParameterByName('t').split('|')[1].split(',')[1]);
 var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
+var INIT = false;
+var LAYER;
 
 function torque_(layer) {
   function _torque() {}
@@ -62,16 +64,21 @@ function torque_(layer) {
     var type = title.split('+')[0];
     var team = title.split('+')[1];
     var visible = title.split('+')[2] === 'true';
+    var score = title.split('+')[3];
+    var slide_panel_title = title.split('+')[4];
     var subtitle = slide.html().split("<h2>")[1].split("</h2>")[0];
-    var content = slide.html().split("</h2>")[1];
+    var icon_url = decodeURIComponent(subtitle.split('+')[0]);
+    var background = (icon_url != "null" && icon_url != "") ? "background: url("+icon_url+") no-repeat center;" : "";
+    var tooltip_title = decodeURIComponent(subtitle.split('+')[1]);
+    var slide_panel_content_md = slide.html().split("</h2>")[1];
 
     if (visible) {
       // tooltips
       var l = i*$('.slider').width()/layer.options.steps;
 
-      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" data-slide="i" style="left:'+l+'px">',
+      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" style="left:'+l+'px;'+background+'">',
                      '<div class="tooltip">',
-                     '<h2>'+getTimeOrStep(i)+'</h2>'+(subtitle ? '<p>'+subtitle+'</p>' : ''),
+                     '<h2>'+getTimeOrStep(i)+'</h2>'+(tooltip_title ? '<p>'+tooltip_title+'</p>' : ''),
                      '</div>',
                      '</div>'].join("\n");
 
@@ -83,8 +90,8 @@ function torque_(layer) {
       var notification = ['<li class="Notification Notification_'+i+'">',
                           '<div class="Notification-text">',
                           '<p class="Notification-time">'+getTimeOrStep(i)+'</p>',
-                          '<div class="Notification-content">'+(subtitle ? '<h2>'+subtitle+'</h2>' : ''),
-                          '<p>'+content+'</p>',
+                          '<div class="Notification-content">'+(slide_panel_title ? '<h2>'+slide_panel_title+'</h2>' : ''),
+                          '<p>'+slide_panel_content_md+'</p>',
                           '</div>',
                           '</li>'].join("\n");
 
@@ -94,33 +101,17 @@ function torque_(layer) {
 
     if (type === 'score') {
       var $number = $('.Scoreboard-team--'+team+' .Scoreboard-number').last();
-
       var n = parseInt($number.text(), 10);
-
-      var counter = '<p class="Scoreboard-number Scoreboard-number--'+(n+1)+' Scoreboard-number_'+i+'">'+(n+1)+'</p>';
+      var counter = '<p class="Scoreboard-number Scoreboard-number--'+(n+1)+' Scoreboard-number_'+i+'">'+score+'</p>';
 
       $('.Scoreboard-team--'+team+' .Scoreboard-count').append(counter);
-
       var $counter = $('.Scoreboard-number_'+i);
     }
 
-    if (type === 'football') {
-      var $number = $('.Scoreboard-team--'+team+' .Scoreboard-number').last();
-
-      var n = parseInt($number.text(), 10);
-
-      var counter = '<p class="Scoreboard-number Scoreboard-number--'+(n+1)+' Scoreboard-number_'+i+'">'+content.split("<p>")[1].split("</p>")[0]+'</p>';
-
-      $('.Scoreboard-team--'+team+' .Scoreboard-count').append(counter);
-
-      var $counter = $('.Scoreboard-number_'+i);
-    }
-
-    var $sliderWrapper = $('.slider-wrapper');
+    var $sliderWrapper = $('#map .slider-wrapper');
 
     $('.slide-tip-s'+i)
       .on('mouseenter', function() {
-        console.log("EH");
         var $tooltipSlider = $(this).find('.tooltip').clone();
         $sliderWrapper.append($tooltipSlider.css({
           left: $(this).css('left'),
@@ -225,30 +216,59 @@ O.Template({
       ].join('\n');
 
       var sql = new cartodb.SQL({ user: USER });
-      sql.execute("SELECT * FROM " + TABLE_NAME + " ORDER BY step ASC")
+      sql.execute("SELECT * FROM " + TABLE_NAME + " ORDER BY date ASC")
         .done(function(data) {
           var rows = data.rows;
 
-          for (var i = 0; i < rows.length; ++i) {
-            var slide = rows[i];
+          cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
+            for (var t = 0; t < vizjson.layers.length; ++t) {
+              if (vizjson.layers[t].type === 'torque') {
+                var map2 = L.map('map2', {
+                  center: [51.505, -0.09],
+                  zoom: 13
+                })
 
-            var slide_info = "";
-
-            var slide_md = [
-              "#"+slide.name+'+'+slide.team+'+'+slide.visible,
-              '```'+'\n'+'-step: '+slide.step+'\n'+(slide.info ? slide.info+'\n' : '') + '```',
-              "##"+slide.title,
-              slide.description
-            ].join('\n');
-
-            md = md + '\n' + '\n' + slide_md;
-          }
+                cartodb.createLayer(map2, vizjson, { layerIndex: t })
+                .done(function(layer) {
+                  LAYER = layer;
+                });
+              }
+            }
+          });
 
           var h = location.hash;
           var tk = h.split('/');
 
-          if (!h || h && !tk[2].length) {
-            O.Template.Storage.save(md.replace(/"/g, '\''), 'torque');
+          if (!h) {
+            setInterval(function() {
+              if (LAYER && LAYER.getTimeBounds().start && LAYER.getTimeBounds().end && INIT === false) {
+
+                function map_range(dateUNIXrequired, minDateUNIX, maxDateUNIX, steps) {
+                  return steps * (dateUNIXrequired - minDateUNIX) / (maxDateUNIX - minDateUNIX);
+                }
+
+                for (var i = 0; i < rows.length; ++i) {
+                  var slide = rows[i];
+                  var slide_info = "";
+                  var step = map_range(new Date(rows[i].date).getTime(), LAYER.getTimeBounds().start, LAYER.getTimeBounds().end, LAYER.options.steps);
+
+                  var slide_md = [
+                    "#"+slide.event_type+'+'+slide.team_id+'+'+slide.visible+'+'+slide.score_panel+'+'+slide.slide_panel_title,
+                    '```'+'\n'+'-step: '+parseInt(step, 10)+'\n'+(slide.odyssey_actions ? slide.odyssey_actions+'\n' : '') + '```',
+                    "##"+encodeURIComponent(slide.event_icon_url)+'+'+encodeURIComponent(slide.tooltip_title),
+                    slide.slide_panel_content_md
+                  ].join('\n');
+
+                  md = md + '\n' + '\n' + slide_md;
+                }
+
+                if (!h || h && !tk[2].length) {
+                  O.Template.Storage.save(md.replace(/"/g, '\''), 'torque');
+                }
+
+                INIT = true;
+              }
+            }, 1);
           } else {
             $('.Scoreboard-team--1 .team-marker').css({ background: TEAM1_COLOR});
             $('.Scoreboard-team--2 .team-marker').css({ background: TEAM2_COLOR});
@@ -256,7 +276,6 @@ O.Template({
             $('.Scoreboard-team--1 .Scoreboard-title').text(TEAM1);
             $('.Scoreboard-team--2 .Scoreboard-title').text(TEAM2);
           }
-
         });
     }
   },
