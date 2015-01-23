@@ -10,42 +10,48 @@
   margin-left: -20px;
   z-index: 101;
 
-  &.slide-tip-1 {
+  &.slide-tip-t1 {
     top: -16px;
   }
 
-  &.slide-tip-2 {
+  &.slide-tip-t2 {
     top: 16px;
   }
 
-  &.slide-tip-score {
+  &.slide-tip-nscore {
     background: url('../img/sprite.png') no-repeat -40px 0;
   }
 
-  &.slide-tip-yellow {
+  &.slide-tip-nyellow {
     width: 11px;
     height: 15px;
     background: url('../img/sprite.png') no-repeat -20px 0;
   }
 
-  &.slide-tip-red {
+  &.slide-tip-nred {
     width: 11px;
     height: 15px;
     background: url('../img/sprite.png') no-repeat 0 0;
   }
 
-  &.slide-tip-substitution {
+  &.slide-tip-nsubstitution {
     background: url('../img/sprite.png') no-repeat -60px 0;
   }
 
-  &.slide-tip-slide {
+  &.slide-tip-nfootball {
+    background: url('../img/sprite.png') no-repeat -79px 0;
+  }
+
+  &.slide-tip-nslide {
     width: 12px;
     height: 12px;
     background: #fff;
     border: 2px solid #B20000;
     border-radius: 8px;
   }
+}
 
+.slider-wrapper {
   .tooltip {
     position: absolute;
     display: none;
@@ -60,6 +66,11 @@
     text-align: left;
     font-size: 12px;
     white-space: nowrap;
+    z-index: 1000;
+    height: 54px;
+    max-width: 100px;
+    margin-top: -70px;
+    margin-left: -26px;
 
     h2,
     p {

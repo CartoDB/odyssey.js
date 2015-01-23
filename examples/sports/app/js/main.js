@@ -13,7 +13,6 @@ var TEAM2_COLOR = '#' + _.escape(getParameterByName('t').split('|')[1].split(','
 var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
 
-
 function torque_(layer) {
   function _torque() {}
 
@@ -70,7 +69,7 @@ function torque_(layer) {
       // tooltips
       var l = i*$('.slider').width()/layer.options.steps;
 
-      var tooltip = ['<div class="slide-tip slide-tip-'+i+' slide-tip-'+team+' slide-tip-'+type+'" style="left:'+l+'px">',
+      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" data-slide="i" style="left:'+l+'px">',
                      '<div class="tooltip">',
                      '<h2>'+getTimeOrStep(i)+'</h2>'+(subtitle ? '<p>'+subtitle+'</p>' : ''),
                      '</div>',
@@ -105,23 +104,43 @@ function torque_(layer) {
       var $counter = $('.Scoreboard-number_'+i);
     }
 
-    $('.slide-tip')
+    if (type === 'football') {
+      var $number = $('.Scoreboard-team--'+team+' .Scoreboard-number').last();
+
+      var n = parseInt($number.text(), 10);
+
+      var counter = '<p class="Scoreboard-number Scoreboard-number--'+(n+1)+' Scoreboard-number_'+i+'">'+content.split("<p>")[1].split("</p>")[0]+'</p>';
+
+      $('.Scoreboard-team--'+team+' .Scoreboard-count').append(counter);
+
+      var $counter = $('.Scoreboard-number_'+i);
+    }
+
+    var $sliderWrapper = $('.slider-wrapper');
+
+    $('.slide-tip-s'+i)
       .on('mouseenter', function() {
-        $(this).find('.tooltip').fadeIn(150);
+        console.log("EH");
+        var $tooltipSlider = $(this).find('.tooltip').clone();
+        $sliderWrapper.append($tooltipSlider.css({
+          left: $(this).css('left'),
+          top: $(this).css('top')
+        }));
+        $tooltipSlider.fadeIn(250);
       })
       .on('mouseleave', function() {
-        $(this).find('.tooltip').fadeOut(150);
+        $sliderWrapper.children('.tooltip').fadeOut(250, function() {
+          $(this).remove();
+        });
       });
 
-    var $tip = $('.slide-tip-'+i+' .tip');
-    var $tooltip = $('.slide-tip-'+i+' .tooltip');
+    var $tip = $('.slide-tip-s'+i+' .tip');
+    var $tooltip = $('.slide-tip-s'+i+' .tooltip');
     var w = $tip.width()/2;
 
     $tip.css({ margin: -w });
 
     function check(changes) {
-      // console.log(changes);
-
       if (changes.step === 0) {
         $('.Scoreboard-number').removeClass('is-visible');
         $('.Scoreboard-number--0').addClass('is-visible');
