@@ -28,7 +28,8 @@ div.cartodb-timeslider {
 
 .time,
 .cartodb-logo,
-.leaflet-control-attribution {
+.leaflet-control-attribution,
+.cartodb-legend-stack {
   display: none !important;
 }
 
@@ -43,7 +44,7 @@ div.cartodb-timeslider {
 div.cartodb-timeslider {
   right: 40px !important;
   bottom: 80px !important;
-  left: 90px !important;
+  left: 75px !important;
 
   ul {
     height: auto;
