@@ -11,35 +11,11 @@
   z-index: 101;
 
   &.slide-tip-t1 {
-    top: -16px;
+    top: -24px;
   }
 
   &.slide-tip-t2 {
-    top: 16px;
-  }
-
-  &.slide-tip-nscore {
-    background: url('../img/sprite.png') no-repeat -40px 0;
-  }
-
-  &.slide-tip-nyellow {
-    width: 11px;
-    height: 15px;
-    background: url('../img/sprite.png') no-repeat -20px 0;
-  }
-
-  &.slide-tip-nred {
-    width: 11px;
-    height: 15px;
-    background: url('../img/sprite.png') no-repeat 0 0;
-  }
-
-  &.slide-tip-nsubstitution {
-    background: url('../img/sprite.png') no-repeat -60px 0;
-  }
-
-  &.slide-tip-nfootball {
-    background: url('../img/sprite.png') no-repeat -79px 0;
+    top: 14px;
   }
 
   &.slide-tip-nslide {
