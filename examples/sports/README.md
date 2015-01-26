@@ -4,9 +4,6 @@ This template is intended to be used for visualizing sports events, making use o
 
 ## Example
 
-- **Real Madrid vs Atlético de Madrid (Soccer)**  
-http://cartodb.github.io/odyssey.js/examples/sports/dist/?vis=a43ea07a-e3f2-11e3-92f9-0e230854a1cb&user=matallo&table_name=odyssey_sports&t=Real%20Madrid,ffffff%7CAtl%C3%A9tico%20de%20Madrid,B40903
-
 - **Ohio State vs. Oregon (Football)**  
 http://cartodb.github.io/odyssey.js/examples/sports/dist/?vis=628c2b32-9ae7-11e4-b88e-0e4fddd5de28&utn=matallo,ohio_state_vs_oregon&t=Ohio%20State,F11810%7COregon,229A00
 
