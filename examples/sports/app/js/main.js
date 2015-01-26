@@ -74,15 +74,15 @@ function torque_(layer) {
 
     if (visible) {
       // tooltips
-      var l = i*$('.slider').width()/layer.options.steps;
+      var l = i*$('#map .slider').width()/layer.options.steps;
 
-      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" style="left:'+l+'px;'+background+'">',
+      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" style="left:'+l+'px;'+background+'" data-steps="'+i+'">',
                      '<div class="tooltip">',
                      '<h2>'+getTimeOrStep(i)+'</h2>'+(tooltip_title ? '<p>'+tooltip_title+'</p>' : ''),
                      '</div>',
                      '</div>'].join("\n");
 
-      $('.slider').append(tooltip);
+      $('#map .slider').append(tooltip);
     }
 
     if (type === 'slide') {
@@ -299,6 +299,16 @@ O.Template({
     }
   },
 
+  _reposition: function() {
+    var self = this;
+
+    _.each($("#map .slide-tip"), function($slideTip) {
+      var l = $($slideTip).data('steps')*$('#map .slider').width()/self.torqueLayer.options.steps;
+
+      $($slideTip).css('left', l);
+    });
+  },
+
   update: function(actions) {
     var self = this;
 
@@ -323,6 +333,8 @@ O.Template({
         if (vizjson.layers[i].type === 'torque') {
           cartodb.createLayer(self.map, vizjson, { layerIndex: i })
             .done(function(layer) {
+              var timeOut = null;
+
               self.torqueLayer = layer;
 
               self.torqueLayer.stop();
@@ -332,6 +344,16 @@ O.Template({
                 self.torqueLayer.play();
                 self.torqueLayer.actions = torque_(self.torqueLayer);
                 self._initActions(actions);
+
+                $(window).on('resize', function() {
+                  if (timeOut != null) {
+                    clearTimeout(timeOut);
+                  }
+
+                  timeOut = setTimeout(function(){
+                    self._reposition();
+                  }, 400);
+                })
               });
             }).on('error', function(err) {
               throw new Error("Some error occurred: " + err);
