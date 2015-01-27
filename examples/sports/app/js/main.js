@@ -74,7 +74,7 @@ function torque_(layer) {
       // tooltips
       var l = i*$('#map .slider').width()/layer.options.steps;
 
-      var tooltip = ['<div class="slide-tip slide-tip-s'+i+' slide-tip-t'+team+' slide-tip-n'+type+'" style="left:'+l+'px;'+background+'" data-steps="'+i+'">',
+      var tooltip = ['<div class="slide-tip slide-tip-s'+i+((team != "null" && team != "") ? " slide-tip-t"+team : "")+' slide-tip-n'+type+'" style="left:'+l+'px;'+(type === "score" ? background : "")+'" data-steps="'+i+'">',
                      '<div class="tooltip">',
                      '<h2>'+getTimeOrStep(i)+'</h2>'+(tooltip_title ? '<p>'+tooltip_title+'</p>' : ''),
                      '</div>',
