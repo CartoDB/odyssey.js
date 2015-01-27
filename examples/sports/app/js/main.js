@@ -216,7 +216,7 @@ O.Template({
 
           cartodb.createVis('map', 'http://srogers.cartodb.com/api/v2/viz/bdd137fe-a60d-11e4-a7d7-0e4fddd5de28/viz.json')
             .done(function(vis, layers) {
-              var map = vis.getNativeMap();
+              var map = self.map = vis.getNativeMap();
 
               cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
                 for (var t = 0; t < vizjson.layers.length; ++t) {
@@ -275,8 +275,8 @@ O.Template({
 
       var action = O.Parallel(
         O.Actions.CSS($(".Notifications")).addClass('is-visible'),
-        this.slides.activate(i)
-        // slide(this)
+        this.slides.activate(i),
+        slide(this)
       );
 
       if (!slide.get('step')) return;
