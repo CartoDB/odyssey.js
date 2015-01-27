@@ -12,8 +12,6 @@ var TEAM2 = _.escape(getParameterByName('t').split('|')[1].split(',')[0]);
 var TEAM2_COLOR = '#' + _.escape(getParameterByName('t').split('|')[1].split(',')[1]);
 var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
-var INIT = false;
-var LAYER;
 
 function torque_(layer) {
   function _torque() {}
@@ -195,12 +193,8 @@ function torque_(layer) {
 
 
 O.Template({
-
   init: function() {
-    // nasty hack
-    $(window).on('hashchange',function() {
-      window.location.reload(true);
-    });
+    var self = this;
 
     if (USER && VIZJSON) {
       VIZJSON_URL = 'http://' + USER + '.cartodb.com/api/v2/viz/' + VIZJSON + '/viz.json';
@@ -220,62 +214,57 @@ O.Template({
         .done(function(data) {
           var rows = data.rows;
 
-          cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
-            for (var t = 0; t < vizjson.layers.length; ++t) {
-              if (vizjson.layers[t].type === 'torque') {
-                var map2 = L.map('map2', {
-                  center: [51.505, -0.09],
-                  zoom: 13
-                })
+          cartodb.createVis('map', 'http://srogers.cartodb.com/api/v2/viz/bdd137fe-a60d-11e4-a7d7-0e4fddd5de28/viz.json')
+            .done(function(vis, layers) {
+              var map = vis.getNativeMap();
 
-                cartodb.createLayer(map2, vizjson, { layerIndex: t })
-                .done(function(layer) {
-                  LAYER = layer;
-                });
+              cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
+                for (var t = 0; t < vizjson.layers.length; ++t) {
+                  if (vizjson.layers[t].type === 'torque') {
+                    cartodb.createLayer(map, vizjson, { layerIndex: t })
+                      .done(function(layer) {
+                        self.torqueLayer = layer;
+                        map.addLayer(self.torqueLayer);
+                      });
+                  }
+                }
+              });
+            });
+
+          var init = false;
+
+          setInterval(function() {
+            if (self.torqueLayer && self.torqueLayer.getTimeBounds().start && self.torqueLayer.getTimeBounds().end && init === false) {
+              function map_range(dateUNIXrequired, minDateUNIX, maxDateUNIX, steps) {
+                return steps * (dateUNIXrequired - minDateUNIX) / (maxDateUNIX - minDateUNIX);
               }
+
+              for (var i = 0; i < rows.length; ++i) {
+                var slide = rows[i];
+                var slide_info = "";
+                var step = map_range(new Date(rows[i].date).getTime(), self.torqueLayer.getTimeBounds().start, self.torqueLayer.getTimeBounds().end, self.torqueLayer.options.steps);
+
+                var slide_md = [
+                  "#"+slide.event_type+'+'+slide.team_id+'+'+slide.visible+'+'+slide.score_panel+'+'+slide.slide_panel_title,
+                  '```'+'\n'+'-step: '+parseInt(step, 10)+'\n'+(slide.odyssey_actions ? slide.odyssey_actions+'\n' : '') + '```',
+                  "##"+encodeURIComponent(slide.event_icon_url)+'+'+encodeURIComponent(slide.tooltip_title),
+                  slide.slide_panel_content_md
+                ].join('\n');
+
+                md = md + '\n' + '\n' + slide_md;
+              }
+
+              self.update(actionsFromMarkdown(md.replace(/"/g, '\'')));
+
+              init = true;
             }
-          });
+          }, 1);
 
-          var h = location.hash;
-          var tk = h.split('/');
+          $('.Scoreboard-team--1 .team-marker').css({ background: TEAM1_COLOR});
+          $('.Scoreboard-team--2 .team-marker').css({ background: TEAM2_COLOR});
 
-          if (!h) {
-            setInterval(function() {
-              if (LAYER && LAYER.getTimeBounds().start && LAYER.getTimeBounds().end && INIT === false) {
-
-                function map_range(dateUNIXrequired, minDateUNIX, maxDateUNIX, steps) {
-                  return steps * (dateUNIXrequired - minDateUNIX) / (maxDateUNIX - minDateUNIX);
-                }
-
-                for (var i = 0; i < rows.length; ++i) {
-                  var slide = rows[i];
-                  var slide_info = "";
-                  var step = map_range(new Date(rows[i].date).getTime(), LAYER.getTimeBounds().start, LAYER.getTimeBounds().end, LAYER.options.steps);
-
-                  var slide_md = [
-                    "#"+slide.event_type+'+'+slide.team_id+'+'+slide.visible+'+'+slide.score_panel+'+'+slide.slide_panel_title,
-                    '```'+'\n'+'-step: '+parseInt(step, 10)+'\n'+(slide.odyssey_actions ? slide.odyssey_actions+'\n' : '') + '```',
-                    "##"+encodeURIComponent(slide.event_icon_url)+'+'+encodeURIComponent(slide.tooltip_title),
-                    slide.slide_panel_content_md
-                  ].join('\n');
-
-                  md = md + '\n' + '\n' + slide_md;
-                }
-
-                if (!h || h && !tk[2].length) {
-                  O.Template.Storage.save(md.replace(/"/g, '\''), 'torque');
-                }
-
-                INIT = true;
-              }
-            }, 1);
-          } else {
-            $('.Scoreboard-team--1 .team-marker').css({ background: TEAM1_COLOR});
-            $('.Scoreboard-team--2 .team-marker').css({ background: TEAM2_COLOR});
-
-            $('.Scoreboard-team--1 .Scoreboard-title').text(TEAM1);
-            $('.Scoreboard-team--2 .Scoreboard-title').text(TEAM2);
-          }
+          $('.Scoreboard-team--1 .Scoreboard-title').text(TEAM1);
+          $('.Scoreboard-team--2 .Scoreboard-title').text(TEAM2);
         });
     }
   },
@@ -286,8 +275,8 @@ O.Template({
 
       var action = O.Parallel(
         O.Actions.CSS($(".Notifications")).addClass('is-visible'),
-        this.slides.activate(i),
-        slide(this)
+        this.slides.activate(i)
+        // slide(this)
       );
 
       if (!slide.get('step')) return;
@@ -320,46 +309,24 @@ O.Template({
       $('meta[name=description]').attr('content', DESCRIPTION);
       $('.Footer-infoTitle').text(TITLE);
 
-      var map = self.map = L.map('map').fitBounds(vizjson.bounds);
-      var baseurl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
-      var basemap = L.tileLayer(baseurl, {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-      }).addTo(self.map);
-
       var slides = self.slides = O.Actions.Slides('slides');
       var story = self.story = O.Story();
 
-      for (var i = 0; i < vizjson.layers.length; ++i) {
-        if (vizjson.layers[i].type === 'torque') {
-          cartodb.createLayer(self.map, vizjson, { layerIndex: i })
-            .done(function(layer) {
-              var timeOut = null;
+      self.torqueLayer.play();
+      self.torqueLayer.actions = torque_(self.torqueLayer);
+      self._initActions(actions);
 
-              self.torqueLayer = layer;
+      var timeOut;
 
-              self.torqueLayer.stop();
-              self.map.addLayer(self.torqueLayer);
-
-              self.torqueLayer.on('change:steps', function() {
-                self.torqueLayer.play();
-                self.torqueLayer.actions = torque_(self.torqueLayer);
-                self._initActions(actions);
-
-                $(window).on('resize', function() {
-                  if (timeOut != null) {
-                    clearTimeout(timeOut);
-                  }
-
-                  timeOut = setTimeout(function(){
-                    self._reposition();
-                  }, 400);
-                })
-              });
-            }).on('error', function(err) {
-              throw new Error("Some error occurred: " + err);
-            });
+      $(window).on('resize', function() {
+        if (timeOut != null) {
+          clearTimeout(timeOut);
         }
-      }
+
+        timeOut = setTimeout(function(){
+          self._reposition();
+        }, 400);
+      });
     });
   }
 

@@ -1181,6 +1181,8 @@ function actionsFromMarkdown(md) {
   return md2json(md_tree);
 }
 
+window.actionsFromMarkdown = actionsFromMarkdown;
+
 
 Template.parseProperties = parseProperties;
 

@@ -33,6 +33,14 @@
   .Notification {
     width: 100%;
   }
+
+  div.cartodb-zoom  {
+    margin: 20px 0 0 20px !important;
+  }
+
+  div.cartodb-share  {
+    margin: 100px 0 0 20px !important
+  }
 }
 
 @media (min-width: 625px) {
@@ -54,8 +62,12 @@
     display: block !important;
   }
 
-  .leaflet-control-zoom {
+  div.cartodb-zoom  {
     display: none !important;
+  }
+
+  div.cartodb-share  {
+    margin: 140px 0 0 20px !important;
   }
 
   .Scoreboard {
