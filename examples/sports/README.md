@@ -60,7 +60,3 @@ Finally, for the match teams name and colors, we'll write them directly in the U
 ```
 &t=Ohio%20State,F11810%7COregon,229A00
 ```
-
-In the end a hash begginning with `#md/torque/` will be appended with the data from the table to create the visualization. This happens because of how [Odyssey.js](http://cartodb.github.io/odyssey.js/) works.
-
-**Remember to share the link without the hash so you can edit later the table in CartoDB.**
