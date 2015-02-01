@@ -200,14 +200,23 @@
 
       _resetActions: function(actions) {
         // update footer title and author
-        var footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background,
-            title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using',
+            slides_width_ = actions.global.slides_width === undefined ? '' : actions.global.slides_width,
+            text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+            footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
+
+        var temp_color = colorNameToHex(footer_background_);
+        if (temp_color){
+            footer_background_ = temp_color;
+        }
 
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
+        document.getElementById('slides_container').style.width = slides_width_;
         document.getElementById('credits').style.background = footer_background_;
         document.title = title_ + " | " + author_ +' Odyssey.js';
+        $("#slides_container p").css( "font-size", text_font_size_ );
 
         var sl = actions;
 

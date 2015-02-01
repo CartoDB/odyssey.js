@@ -130,6 +130,7 @@
         // update footer title and author
 
         var header_background_ = actions.global.header_background === undefined ? '' : actions.global.header_background,
+            body_background_ = actions.global.body_background === undefined ? '' : actions.global.body_background,
             footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background,
             orientation_ = actions.global.orientation === undefined ? '' : actions.global.orientation,
             title_ = actions.global.title === undefined ? '' : actions.global.title,
@@ -144,10 +145,15 @@
         if (temp_color){
             footer_background_ = temp_color;
         }
+        var temp_color = colorNameToHex(body_background_);
+        if (temp_color){
+            body_background_ = temp_color;
+        }
 
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
         document.getElementById('inner-header').style.background = header_background_;
+        document.getElementById('layout').style.background = body_background_;
         document.getElementById('credits').style.background = footer_background_;
         document.title = title_ + " | " + author_ +' Odyssey.js';
 
