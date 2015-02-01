@@ -21,7 +21,7 @@
       <div id="header"></div>
     </div>
 
-    <div id="map_pos">
+    <div id="map_pos" class="horizontal">
       <div id="map_container" class="horizontal">
         <div id="map"></div>
       </div>
@@ -161,12 +161,14 @@
         if (orientation_[0]==="v") {
             var TRIGGER_LINE = 50;
             // console.log("vertical");
+            $("#map_pos").removeClass("horizontal");
             $("#map_container").removeClass("horizontal");
             $("#inner-header").removeClass("horizontal");
             $("#content").removeClass("horizontal");
             this.map._onResize();
         } else if (orientation_[0]==="h") {
             // console.log("horizontal");
+            $("#map_pos").addClass("horizontal");
             $("#map_container").addClass("horizontal");
             $("#inner-header").addClass("horizontal");
             $("#content").addClass("horizontal");
