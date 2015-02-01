@@ -158,7 +158,14 @@
         document.title = title_ + " | " + author_ +' Odyssey.js';
 
         // console.log(orientation_);
-        if (orientation_[0]==="h") {
+        if (orientation_[0]==="v") {
+            var TRIGGER_LINE = 50;
+            // console.log("vertical");
+            $("#map_container").removeClass("horizontal");
+            $("#inner-header").removeClass("horizontal");
+            $("#content").removeClass("horizontal");
+            this.map._onResize();
+        } else if (orientation_[0]==="h") {
             // console.log("horizontal");
             $("#map_container").addClass("horizontal");
             $("#inner-header").addClass("horizontal");
@@ -167,14 +174,7 @@
             var TRIGGER_LINE = this.map.getSize().y + 50;
             // window.scrollTo(0, 0);
             // console.log(this.map);
-        } else if (orientation_[0]==="v") {
-            var TRIGGER_LINE = 50;
-            // console.log("vertical");
-            $("#map_container").removeClass("horizontal");
-            $("#inner-header").removeClass("horizontal");
-            $("#content").removeClass("horizontal");
-            this.map._onResize();
-        }
+        } 
         this.story.addEvent(
           this.edge,
           O.Parallel(

@@ -166,6 +166,10 @@ html {
 #header blockquote *:first-child {
     margin-top: 0;
 }
+#map_pos {
+    width: 100%;
+    height: 100%;
+}
 #map_container {
 	height: 100%;
     width: 400px;
