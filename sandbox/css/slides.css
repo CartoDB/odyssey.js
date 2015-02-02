@@ -82,7 +82,7 @@ body {
     position: absolute;
     top: 40px;
     left: 40px;
-    width: 320px;
+    width: 400px;
     padding: 40px;
     padding-right: 20px;
     background-color: #fff;
@@ -205,7 +205,7 @@ div#credits {
     z-index: 1000001;
 }
 div#credits a {
-    color: #ff7373;
+    color: #57068c;
 }
 div#credits span {
     padding: 18px 0 0 0;
