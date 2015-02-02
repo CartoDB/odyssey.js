@@ -136,9 +136,16 @@
             footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
         // update layouts
         var orientation_ = actions.global.orientation === undefined ? '' : actions.global.orientation,
-            map_breadth_ = actions.global.map_breadth === undefined ? '' : actions.global.map_breadth,
-            text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
-            heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size;
+            map_breadth_ = actions.global.map_breadth === undefined ? '' : actions.global.map_breadth;
+
+        var text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+            text_font_family_ = actions.global.text_font_family === undefined ? '' : actions.global.text_font_family,
+            text_color_ = actions.global.text_color === undefined ? '' : actions.global.text_color,
+            text_color_top_ = actions.global.text_color_top === undefined ? '' : actions.global.text_color_top,
+            heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size,
+            heading_font_family_ = actions.global.heading_font_family === undefined ? '' : actions.global.heading_font_family,
+            heading_color_ = actions.global.heading_color === undefined ? '' : actions.global.heading_color,
+            heading_color_top_ = actions.global.heading_color_top === undefined ? '' : actions.global.heading_color_top;
 
         // check whether the color in the color collection
         var temp_color = colorNameToHex(header_background_);
@@ -153,6 +160,22 @@
         if (temp_color){
             body_background_ = temp_color;
         }
+        var temp_color = colorNameToHex(text_color_);
+        if (temp_color){
+            text_color_ = temp_color;
+        }
+        var temp_color = colorNameToHex(text_color_top_);
+        if (temp_color){
+            text_color_top_ = temp_color;
+        }
+        var temp_color = colorNameToHex(heading_color_);
+        if (temp_color){
+            heading_color_ = temp_color;
+        }
+        var temp_color = colorNameToHex(heading_color_top_);
+        if (temp_color){
+            heading_color_top_ = temp_color;
+        }
         // tilte and author
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
@@ -165,8 +188,10 @@
 
         // styles
         var css_style = '';
-        css_style += 'p {font-size:'+text_font_size_+' !important;}';
-        css_style += 'h1 {font-size:'+heading_font_size_+' !important;}';
+        css_style += 'p {font-size:'+text_font_size_+' !important;font-family:'+text_font_family_+' !important;color:'+text_color_+' !important;} ';
+        css_style += '#header p {color:'+text_color_top_+' !important;} ';
+        css_style += '#header h1 {color:'+heading_color_top_+' !important;} ';
+        css_style += 'h1 {font-size:'+heading_font_size_+' !important;font-family:'+heading_font_family_+' !important;color:'+heading_color_+' !important;} ';
         document.getElementById('style').innerHTML = css_style;
 
         // console.log(orientation_);

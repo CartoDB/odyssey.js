@@ -207,14 +207,27 @@
         var footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
 
         // update layouts
-        var slides_width_ = actions.global.slides_width === undefined ? '' : actions.global.slides_width,
-            text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+        var slides_width_ = actions.global.slides_width === undefined ? '' : actions.global.slides_width;
+
+        var text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+            text_font_family_ = actions.global.text_font_family === undefined ? '' : actions.global.text_font_family,
+            text_color_ = actions.global.text_color === undefined ? '' : actions.global.text_color,
             heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size;
+            heading_font_family_ = actions.global.heading_font_family === undefined ? '' : actions.global.heading_font_family;
+            heading_color_ = actions.global.heading_color === undefined ? '' : actions.global.heading_color;
             
 
         var temp_color = colorNameToHex(footer_background_);
         if (temp_color){
             footer_background_ = temp_color;
+        }
+        var temp_color = colorNameToHex(text_color_);
+        if (temp_color){
+            text_color_ = temp_color;
+        }
+        var temp_color = colorNameToHex(heading_color_);
+        if (temp_color){
+            heading_color_ = temp_color;
         }
         // title and author
         document.getElementById('title').innerHTML = title_;
@@ -226,8 +239,8 @@
 
         // style
         var css_style = '';
-        css_style += 'p {font-size:'+text_font_size_+' !important;}';
-        css_style += 'h1 {font-size:'+heading_font_size_+' !important;}';
+        css_style += 'p {font-size:'+text_font_size_+' !important;font-family:'+text_font_family_+' !important;color:'+text_color_+' !important;}';
+        css_style += 'h1 {font-size:'+heading_font_size_+' !important;font-family:'+heading_font_family_+' !important;color:'+heading_color_+' !important;}';
         document.getElementById('style').innerHTML = css_style;
 
         var sl = actions;
