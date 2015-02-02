@@ -128,13 +128,17 @@
 
       _resetActions: function(actions) {
         // update footer title and author
-
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+        // update backgrounds
         var header_background_ = actions.global.header_background === undefined ? '' : actions.global.header_background,
             body_background_ = actions.global.body_background === undefined ? '' : actions.global.body_background,
-            footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background,
-            orientation_ = actions.global.orientation === undefined ? '' : actions.global.orientation,
-            title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+            footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
+        // update layouts
+        var orientation_ = actions.global.orientation === undefined ? '' : actions.global.orientation,
+            map_breadth_ = actions.global.map_breadth === undefined ? '' : actions.global.map_breadth,
+            text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+            heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size;
 
         // check whether the color in the color collection
         var temp_color = colorNameToHex(header_background_);
@@ -149,13 +153,21 @@
         if (temp_color){
             body_background_ = temp_color;
         }
-
+        // tilte and author
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        // layouts
         document.getElementById('inner-header').style.background = header_background_;
         document.getElementById('layout').style.background = body_background_;
         document.getElementById('credits').style.background = footer_background_;
-        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        // styles
+        var css_style = '';
+        css_style += 'p {font-size:'+text_font_size_+' !important;}';
+        css_style += 'h1 {font-size:'+heading_font_size_+' !important;}';
+        document.getElementById('style').innerHTML = css_style;
 
         // console.log(orientation_);
         if (orientation_[0]==="v") {
@@ -166,6 +178,11 @@
             $("#inner-header").removeClass("horizontal");
             $("#content").removeClass("horizontal");
             this.map._onResize();
+            // reset map height
+            // document.getElementById('map_container').style.height = "100%";
+            document.getElementById('inner-header').style.paddingLeft = map_breadth_;
+            document.getElementById('content').style.marginLeft = map_breadth_;
+            document.getElementById('map_container').style.width = map_breadth_;
         } else if (orientation_[0]==="h") {
             // console.log("horizontal");
             $("#map_pos").addClass("horizontal");
@@ -173,6 +190,10 @@
             $("#inner-header").addClass("horizontal");
             $("#content").addClass("horizontal");
             this.map._onResize();
+            document.getElementById('map_container').style.width = "100%";
+            document.getElementById('inner-header').style.paddingLeft = "auto";
+            document.getElementById('content').style.marginLeft = "auto";
+            // document.getElementById('map_container').style.height = map_breadth_;
             var TRIGGER_LINE = this.map.getSize().y + 50;
             // window.scrollTo(0, 0);
             // console.log(this.map);
@@ -267,5 +288,6 @@
     ga('create', 'UA-20934186-21', 'cartodb.github.io');
     ga('send', 'pageview');
   </script>
+  <style id="style" type="text/css"></style>
 </body>
 </html>

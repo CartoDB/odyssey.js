@@ -201,28 +201,39 @@
       _resetActions: function(actions) {
         // update footer title and author
         var title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using',
-            slides_width_ = actions.global.slides_width === undefined ? '' : actions.global.slides_width,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        // update backgrounds
+        var footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
+
+        // update layouts
+        var slides_width_ = actions.global.slides_width === undefined ? '' : actions.global.slides_width,
             text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
-            footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
+            heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size;
+            
 
         var temp_color = colorNameToHex(footer_background_);
         if (temp_color){
             footer_background_ = temp_color;
         }
-
+        // title and author
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+        // layouts
         document.getElementById('slides_container').style.width = slides_width_;
         document.getElementById('credits').style.background = footer_background_;
-        document.title = title_ + " | " + author_ +' Odyssey.js';
-        $("#slides_container p").css( "font-size", text_font_size_ );
+
+        // style
+        var css_style = '';
+        css_style += 'p {font-size:'+text_font_size_+' !important;}';
+        css_style += 'h1 {font-size:'+heading_font_size_+' !important;}';
+        document.getElementById('style').innerHTML = css_style;
 
         var sl = actions;
 
-        document.getElementById('slides').innerHTML = ''
+        document.getElementById('slides').innerHTML = '';
         this.progress.count(sl.length);
-
         // create new story
         for(var i = 0; i < sl.length; ++i) {
           var slide = sl[i];
@@ -302,5 +313,6 @@
     ga('create', 'UA-20934186-21', 'cartodb.github.io');
     ga('send', 'pageview');
   </script>
+  <style id="style" type="text/css"></style>
 </body>
 </html>
