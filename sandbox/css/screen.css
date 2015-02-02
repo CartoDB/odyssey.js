@@ -599,7 +599,7 @@ a.expandButton {
     color: #fff;
 }
 .mode_menu li.selected a:hover {
-    background: #e94c41;
+    background: #48266f;
 }
 .mode_menu a {
     display: block;
@@ -612,7 +612,7 @@ a.expandButton {
     text-transform: uppercase;
     text-decoration: none;
     background: #eee;
-    color: #FF7373;
+    color: #470473;
     -moz-transition: all 0.15s ease-in-out;
     -o-transition: all 0.15s ease-in-out;
     -webkit-transition: all 0.15s ease-in-out;
