@@ -201,7 +201,8 @@
       _resetActions: function(actions) {
         // update footer title and author
         var title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using',
+            google_font_ = actions.global.google_font === undefined ? '' : actions.global.google_font;
 
         // update backgrounds
         var footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
@@ -239,6 +240,7 @@
 
         // style
         var css_style = '';
+        css_style += google_font_;
         css_style += 'p {font-size:'+text_font_size_+' !important;font-family:'+text_font_family_+' !important;color:'+text_color_+' !important;}';
         css_style += 'h1 {font-size:'+heading_font_size_+' !important;font-family:'+heading_font_family_+' !important;color:'+heading_color_+' !important;}';
         document.getElementById('style').innerHTML = css_style;

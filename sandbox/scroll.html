@@ -129,7 +129,8 @@
       _resetActions: function(actions) {
         // update footer title and author
         var title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using',
+            google_font_ = actions.global.google_font === undefined ? '' : actions.global.google_font;
         // update backgrounds
         var header_background_ = actions.global.header_background === undefined ? '' : actions.global.header_background,
             body_background_ = actions.global.body_background === undefined ? '' : actions.global.body_background,
@@ -188,6 +189,7 @@
 
         // styles
         var css_style = '';
+        css_style += google_font_;
         css_style += 'p {font-size:'+text_font_size_+' !important;font-family:'+text_font_family_+' !important;color:'+text_color_+' !important;} ';
         css_style += '#header p {color:'+text_color_top_+' !important;} ';
         css_style += '#header h1 {color:'+heading_color_top_+' !important;} ';
