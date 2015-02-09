@@ -91,9 +91,11 @@ html {
 	background: #57068c;
     color: #fff;
     padding: 20px 0 20px 400px;
+    text-align: left;
 }
 #inner-header.horizontal {
     padding: 20px 0;
+    text-align: center;
 }
 #layout {
     width: 100%;
@@ -103,6 +105,9 @@ html {
 #header {
     padding: 20px 0;
     max-width: 800px;
+    margin: 0 80px 0 80px;
+}
+#header.horizontal {
     margin: 0 auto;
 }
 #header h1 {

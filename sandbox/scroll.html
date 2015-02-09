@@ -18,7 +18,7 @@
   <div id="layout">
     <!--<div class="progress-bar"></div>-->
     <div class="horizontal" id="inner-header">
-      <div id="header"></div>
+      <div id="header" class="horizontal"></div>
     </div>
 
     <div id="map_pos" class="horizontal">
@@ -203,6 +203,7 @@
             $("#map_pos").removeClass("horizontal");
             $("#map_container").removeClass("horizontal");
             $("#inner-header").removeClass("horizontal");
+            $("#header").removeClass("horizontal");
             $("#content").removeClass("horizontal");
             this.map._onResize();
             // reset map height
@@ -215,6 +216,7 @@
             $("#map_pos").addClass("horizontal");
             $("#map_container").addClass("horizontal");
             $("#inner-header").addClass("horizontal");
+            $("#header").addClass("horizontal");
             $("#content").addClass("horizontal");
             this.map._onResize();
             document.getElementById('map_container').style.width = "100%";

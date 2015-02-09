@@ -201,17 +201,17 @@ body {
     -moz-border-radius: 4px / 4px;
     -webkit-border-radius: 4px 4px;
     border-radius: 4px / 4px;
-    -webkit-transition: opacity 1s linear 2s;
-    -moz-transition: opacity 1s linear 2s;
-    -o-transition: opacity 1s linear 2s;
-    transition: opacity 1s linear 2s;
+    -webkit-transition: opacity 1s linear 1s;
+    -moz-transition: opacity 1s linear 1s;
+    -o-transition: opacity 1s linear 1s;
+    transition: opacity 1s linear 1s;
 }
 #editor_modal:hover {
-    opacity: 0.8;
-    -webkit-transition: opacity 0.5s linear;
-    -moz-transition: opacity 0.5s linear;
-    -o-transition: opacity 0.5s linear;
-    transition: opacity 0.5s linear;
+    opacity: 1;
+    -webkit-transition: opacity 0.1s linear;
+    -moz-transition: opacity 0.1s linear;
+    -o-transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear;
 }
 #editor_modal.expanded {
     width: 720px;
