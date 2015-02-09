@@ -7,6 +7,12 @@ body {
   color: #fff;
 }
 
+.leaflet-container * {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
 div.cartodb-timeslider {
   position: absolute;
   display: inline-block;
@@ -28,22 +34,31 @@ div.cartodb-timeslider {
 
 .time,
 .cartodb-logo,
-.leaflet-control-attribution {
+.leaflet-control-attribution,
+.cartodb-legend-stack,
+.cartodb-tiles-loader {
   display: none !important;
 }
 
-.leaflet-left .leaflet-control {
-  margin-left: 40px;
+div.cartodb-zoom {
+  margin: 110px 0 0 40px !important;
 }
 
-.leaflet-top .leaflet-control {
-  margin-top: 110px;
+div.cartodb-share  {
+  position: absolute !important;
+  margin: 190px 0 0 40px !important;
 }
 
 div.cartodb-timeslider {
   right: 40px !important;
   bottom: 80px !important;
-  left: 90px !important;
+  left: 75px !important;
+
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 
   ul {
     height: auto;

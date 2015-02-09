@@ -931,7 +931,7 @@ cd odyssey.js
 
 ~~~bash
 npm install
-gem system --update
+gem update --system
 gem install compass
 ~~~
 
