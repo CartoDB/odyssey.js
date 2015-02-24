@@ -217,7 +217,8 @@ O.Template({
         .done(function(data) {
           var rows = data.rows;
 
-          cartodb.createVis('map', VIZJSON_URL)
+          // cartodb.createVis('map', VIZJSON_URL)
+          cartodb.createVis('map', 'http://srogers.cartodb.com/api/v2/viz/bdd137fe-a60d-11e4-a7d7-0e4fddd5de28/viz.json')
             .done(function(vis, layers) {
               var map = self.map = vis.getNativeMap();
               if (getParameterByName('center') !== "") {
