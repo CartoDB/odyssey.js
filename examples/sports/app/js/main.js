@@ -3,6 +3,9 @@ var VIZJSON_URL;
 var TITLE;
 var DESCRIPTION;
 var DURATION;
+var LAT = getParameterByName('center').split(',')[0];
+var LNG = getParameterByName('center').split(',')[1];
+var ZOOM = getParameterByName('center').split(',')[2];
 var USER = getParameterByName('utn').split(',')[0];
 var TABLE_NAME = getParameterByName('utn').split(',')[1];
 var TEAM1 = _.escape(getParameterByName('t').split('|')[0].split(',')[0]);
@@ -214,9 +217,13 @@ O.Template({
         .done(function(data) {
           var rows = data.rows;
 
+          // cartodb.createVis('map', VIZJSON_URL)
           cartodb.createVis('map', 'http://srogers.cartodb.com/api/v2/viz/bdd137fe-a60d-11e4-a7d7-0e4fddd5de28/viz.json')
             .done(function(vis, layers) {
               var map = self.map = vis.getNativeMap();
+              if (getParameterByName('center') !== "") {
+                map.setView([LAT, LNG], ZOOM);
+              }
 
               cdb.vis.Loader.get(VIZJSON_URL, function(vizjson) {
                 for (var t = 0; t < vizjson.layers.length; ++t) {
