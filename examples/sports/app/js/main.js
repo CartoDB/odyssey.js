@@ -15,6 +15,7 @@ var TEAM2 = _.escape(getParameterByName('t').split('|')[1].split(',')[0]);
 var TEAM2_COLOR = '#' + _.escape(getParameterByName('t').split('|')[1].split(',')[1]);
 var TEAM2_SANITIZED = sanitizeCountry(TEAM2);
 var TIME = false;
+var SCOREBOARD = getParameterByName('board').length !== 0
 
 function torque_(layer) {
   function _torque() {}
@@ -199,6 +200,9 @@ O.Template({
   init: function() {
     var self = this;
 
+    if (SCOREBOARD) {
+      $('.Scoreboard').show();
+    }
     if (USER && VIZJSON) {
       VIZJSON_URL = 'http://' + USER + '.cartodb.com/api/v2/viz/' + VIZJSON + '/viz.json';
 
