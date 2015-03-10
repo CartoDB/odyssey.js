@@ -176,7 +176,7 @@
                       layer_name = layer.layers[0].options.layer_name,
                       filter = actions.global.cartodb_filter ? " WHERE "+actions.global.cartodb_filter : "";
 
-                  sublayer.set({'sql': 'SELECT * FROM '+layer_name+filter, 'cartocss': '#'+layer_name+'{line-color: #FFFFFF; line-width: 2; line-opacity: 0.7; line-dasharray: 10, 4; line-smooth: 1; }'})
+                  sublayer.set({'sql': 'SELECT * FROM '+layer_name+filter, 'cartocss': '#'+layer_name+'{line-color: #4CA5A5; line-width: 2; line-opacity: 0.7; line-dasharray: 10, 4; line-smooth: 1; }'})
 
                   self.map.addLayer(layer);
 
