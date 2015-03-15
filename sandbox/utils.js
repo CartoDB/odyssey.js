@@ -10,4 +10,4 @@ function debounce(fn, t, ctx) {
 
 module.exports = {
   debounce: debounce
-}
+};

@@ -12,14 +12,14 @@ function Splash(context) {
       .attr('id', 'template_selector')
       .attr('class', 'splash h-valign');
 
-    var inner_content = div.append('div').attr('class', 'splash_inner')
+    var inner_content = div.append('div').attr('class', 'splash_inner');
 
-    inner_content.append('h1').text('Select your template')
+    inner_content.append('h1').text('Select your template');
     inner_content
       .append('p')
       .attr('class', 'last')
-      .text('Templates give you different ways to unfold your story')
-    var templates = inner_content.append('ul').attr('class', 'template_list h-valign')
+      .text('Templates give you different ways to unfold your story');
+    var templates = inner_content.append('ul').attr('class', 'template_list h-valign');
 
 
     var template = templates
@@ -30,7 +30,7 @@ function Splash(context) {
         .append ('div')
         .attr('class', function(d) {
             return 'inner-template '
-          })
+          });
 
     template
         .append('div')
@@ -52,13 +52,13 @@ function Splash(context) {
         .attr('data-autoplay', 'stop')
         .attr('data-autoload', 'true')
         .attr('data-retina', 'false')
-        .attr('data-idx', 0)
+        .attr('data-idx', 0);
 
     template
         .append('p')
           .text(function(d) {
             return d.description
-          })
+          });
 
     template
       .append('a').text(function(d) {
@@ -76,10 +76,10 @@ function Splash(context) {
       .selectAll('#template_selector')
       .data([]);
     s.exit().remove();
-  }
+  };
 
   return d3.rebind(_splash, evt, 'on');
 
 }
 
-module.exports = Splash
+module.exports = Splash;

@@ -1,6 +1,6 @@
 
 function share_dialog(url, html_url) {
-  var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>"
+  var share_iframe = "<iframe width='100%' height='520' frameborder='0' src='"+html_url+"' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>";
 
   // show the dialog
   var s = d3.select('#share_dialog').style('display', 'block');
@@ -55,4 +55,4 @@ function share_dialog(url, html_url) {
     });
 }
 
-module.exports = share_dialog
+module.exports = share_dialog;

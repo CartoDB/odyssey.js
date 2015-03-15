@@ -22,7 +22,7 @@ function open(el, items, _class, offset) {
     d3.selectAll('#actionDropdown').attr('class', '');
   }
 
-  offset = offset || { x: 0, y: 0 }
+  offset = offset || { x: 0, y: 0 };
 
   // update
   var bbox = el.getBoundingClientRect(),
@@ -69,7 +69,7 @@ function dialog(context) {
         d3.event.preventDefault();
         // console.log(event.target);
         _expand();
-      })
+      });
 
     divHeader.append('h1')
       .text('Odyssey sandbox');
@@ -90,7 +90,7 @@ function dialog(context) {
       .append('a')
       .attr('class', 'basemapSelector')
       .attr('title','Change basemap')
-      .attr('href', '#basemap')
+      .attr('href', '#basemap');
 
     selector.append('img')
       .attr('id', 'selectorImg')
@@ -287,7 +287,7 @@ function dialog(context) {
 
     function _expand() {
       var _t = d3.select('#editor_modal');
-      var _hassClass = _t.classed('expanded')
+      var _hassClass = _t.classed('expanded');
       _t.classed('expanded', !_hassClass);
 
       var _b = d3.select('a.expandButton');
@@ -303,11 +303,11 @@ function dialog(context) {
     });
 
     context.on('error.editor', function(errors) {
-      var e = el.selectAll('.error').data(errors)
+      var e = el.selectAll('.error').data(errors);
       e.enter()
         .append('div')
-        .attr('class', 'error')
-      e.text(String)
+        .attr('class', 'error');
+      e.text(String);
 
       e.exit().remove();
     })
@@ -398,7 +398,7 @@ function dialog(context) {
     });
 
     //remove previously added buttons
-    el.selectAll('.actionButton').remove()
+    el.selectAll('.actionButton').remove();
 
     var buttons = el.selectAll('.actionButton')
       .data(positions);
@@ -424,7 +424,7 @@ function dialog(context) {
     el.on('click.actionbutton', function() {
       //close popup
       close();
-    })
+    });
 
     // update
     var LINE_HEIGHT = 38;
