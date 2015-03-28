@@ -1,17 +1,17 @@
 if (!('indexOf' in Array.prototype)) {
-    Array.prototype.indexOf= function(find, i /*opt*/) {
-        if (i===undefined) i= 0;
-        if (i<0) i+= this.length;
-        if (i<0) i= 0;
-        for (var n= this.length; i<n; i++)
-            if (i in this && this[i]===find)
-                return i;
-        return -1;
-    };
+  Array.prototype.indexOf= function(find, i /*opt*/) {
+    if (i===undefined) i= 0;
+    if (i<0) i+= this.length;
+    if (i<0) i= 0;
+    for (var n= this.length; i<n; i++)
+      if (i in this && this[i]===find)
+        return i;
+    return -1;
+  };
 }
 
-d3 = (function(){
-  var d3 = {version: "3.3.10"}; // semver
+var d3 = module.exports = {version: "3.3.10"};
+
 function d3_class(ctor, properties) {
   try {
     for (var key in properties) {
@@ -158,5 +158,3 @@ function d3_rebind(target, source, method) {
     return value === source ? target : value;
   };
 }
-  return d3;
-})();

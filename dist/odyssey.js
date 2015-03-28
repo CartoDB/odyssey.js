@@ -537,7 +537,11 @@ module.exports = {
 
 },{}],14:[function(_dereq_,module,exports){
 
-_dereq_('../../vendor/d3.custom');
+/**
+ * Module dependencies
+ */
+
+var d3 = _dereq_('../../vendor/d3.custom');
 
 function Story() {
 
@@ -4826,19 +4830,19 @@ if(typeof define == 'function' && define.amd) {
 })(window);
 },{}],32:[function(_dereq_,module,exports){
 if (!('indexOf' in Array.prototype)) {
-    Array.prototype.indexOf= function(find, i /*opt*/) {
-        if (i===undefined) i= 0;
-        if (i<0) i+= this.length;
-        if (i<0) i= 0;
-        for (var n= this.length; i<n; i++)
-            if (i in this && this[i]===find)
-                return i;
-        return -1;
-    };
+  Array.prototype.indexOf= function(find, i /*opt*/) {
+    if (i===undefined) i= 0;
+    if (i<0) i+= this.length;
+    if (i<0) i= 0;
+    for (var n= this.length; i<n; i++)
+      if (i in this && this[i]===find)
+        return i;
+    return -1;
+  };
 }
 
-d3 = (function(){
-  var d3 = {version: "3.3.10"}; // semver
+var d3 = module.exports = {version: "3.3.10"};
+
 function d3_class(ctor, properties) {
   try {
     for (var key in properties) {
@@ -4985,8 +4989,6 @@ function d3_rebind(target, source, method) {
     return value === source ? target : value;
   };
 }
-  return d3;
-})();
 
 },{}],33:[function(_dereq_,module,exports){
 // Released under MIT license
