@@ -73,7 +73,7 @@ function dialog(context) {
       })
 
     divHeader.append('h1')
-      .text('Odyssey sandbox');
+      .text('NYU Shanghai Odyssey sandbox');
 
     var templates = context.templates().map(function(d) { return d.title; }),
         basemaps = context.basemaps();
@@ -95,7 +95,7 @@ function dialog(context) {
 
     selector.append('img')
       .attr('id', 'selectorImg')
-      .attr('src', 'https://cartocdn_a.global.ssl.fastly.net/base-light/6/30/24.png')
+      .attr('src', 'http://cartocdn_a.global.ssl.fastly.net/base-light/8/214/104.png')
       .attr('alt', '');
 
     selector.append('span')
@@ -483,7 +483,7 @@ module.exports = dropdown;
 },{}],3:[function(_dereq_,module,exports){
 function relocateAssets(doc) {
   var s = location.pathname.split('/');
-  var relocate_url = "http://cartodb.github.io" + s.slice(0, s.length - 1).join('/') + "/";
+  var relocate_url = "http://jackbdu.github.io" + s.slice(0, s.length - 1).join('/') + "/";
 
   var js = doc.getElementsByTagName('script');
   for (var i = 0; i < js.length; ++i) {
@@ -599,11 +599,11 @@ var utils = _dereq_('./utils');
 var TEMPLATE_LIST =  [{
     title: 'slides',
     description: 'Display visualization chapters like slides in a presentation',
-    default: "```\n-title: \"Odyssey example FTW\"\n-author: \"CartoDB\"\n```\n\n#Your first odyssey.js story\n```\n- center: [37.7620, -122.4385]\n- zoom: 9\nL.marker([37.7620, -122.4385]).actions.addRemove(S.map)\n```\n\nMove the map around and save the position by clicking on \"ADD > Move map to the current position\". As you can see, now we are highlighting San Francisco.\n\nThen add here the description for your slide so it's shown on the left side box.\n\n\n#How to add more states\n```\n- center: [40.7348, -73.9970]\n- zoom: 9\nL.marker([40.7348, -73.9970]).actions.addRemove(S.map)\n```\n\nBy adding new [Markdown] (http://daringfireball.net/projects/markdown/]) h1 elements (#) you add new states to your story.\n\n\n#Adding images to your story\n```\n- center: [40.7365, -73.9982]\n- zoom: 13\n```\n\nBy default, images are also supported. \n\n![New York](http://www.boston-discovery-guide.com/image-files/new-york-1.jpg)\n\n#Exporting your story\n```\n- center: [40.4469, -28.5645]\n- zoom: 3\n```\n\nYou have different options for exporting your odyssey.js visualization. You can either embed this using an iframe, publishing with a click on bl.ocks or just share the URL of this visualization.\n\nIf you want to customize it further, you can download the generated source code by clicking on the button below.\n\n#Advanced users\n\nCheck out our [documentation](/odyssey.js/documentation/) to learn how to use odyssey to create more custom things. It's crazy the amount of cool things that can be done with the library.\n\nAlso if you are a developer, take a look at our contributing guideline so you can push code to the actual library.\n\nCheers!\n"
+    default: "```\n-google_font: \"@import url(http://fonts.googleapis.com/css?family=Ubuntu);\"\n-title: \"Odyssey example FTW\"\n-author: \"NYU Shanghai\"\n-slides_width: \"30%\"\n-text_font_size: \"100%\"\n-text_font_family: \"AleoRegular, Serif\"\n-text_color: \"black\"\n-heading_font_size: \"45px\"\n-heading_font_family: \"ubuntu\"\n-heading_color: \"black\"\n-footer_background: \"rgba(255, 255, 255, 0.7)\"\n-musicurl: \"paste_muisc_url_here\"\n```\n\n#Your first odyssey.js story\n```\n- center: [40.7348, -73.9970]\n- zoom: 9\nL.marker([40.7348, -73.9970]).actions.addRemove(S.map)\n```\n\nMove the map around and save the position by clicking on \"ADD > Move map to the current position\". As you can see, now we are highlighting San Francisco.\n\nThen add here the description for your slide so it's shown on the left side box.\n\n\n#How to add more states\n```\n- center: [31.2259, 121.5340]\n- zoom: 9\nL.marker([31.2259, 121.5340]).actions.addRemove(S.map)\n```\n\nBy adding new [Markdown] (http://daringfireball.net/projects/markdown/]) h1 elements (#) you add new states to your story.\n\n\n#Adding images to your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 13\n```\n\nBy default, images are also supported. \n\n![NYU Shanghai](http://shanghai.nyu.edu/sites/default/files/styles/content_page_slideshow_display/public/field/image/pudong.jpg?itok=sKfoffHK)\n\n#Adding youtube videos to your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 13\n```\n\nBy default, youtube videos are also supported. \n\n!{400}{300}(https://www.youtube.com/embed/2r1BzXUbK78)\n\n#Exporting your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 3\n```\n\nYou have different options for exporting your odyssey.js visualization. You can either embed this using an iframe, publishing with a click on bl.ocks or just share the URL of this visualization.\n\nIf you want to customize it further, you can download the generated source code by clicking on the button below.\n\n#Advanced users\n\nCheck out our [documentation](/odyssey.js/documentation/) to learn how to use odyssey to create more custom things. It's crazy the amount of cool things that can be done with the library.\n\nAlso if you are a developer, take a look at our contributing guideline so you can push code to the actual library.\n\nCheers!\n"
   }, {
     title: 'scroll',
     description: 'Create a visualization that changes as your reader moves through your narrative',
-    default: "```\n-title: \"Odyssey example FTW\"\n-author: \"CartoDB\"\n```\n\n#Your first odyssey.js story\n```\n- center: [37.7620, -122.4385]\n- zoom: 9\nL.marker([37.7620, -122.4385]).actions.addRemove(S.map)\n```\n\nMove the map around and save the position by clicking on \"ADD > Move map to the current position\". As you can see, now we are highlighting San Francisco.\n\nThen add here the description for your slide so it's shown on the left side box.\n\n\n#How to add more states\n```\n- center: [40.7348, -73.9970]\n- zoom: 9\nL.marker([40.7348, -73.9970]).actions.addRemove(S.map)\n```\n\nBy adding new [Markdown] (http://daringfireball.net/projects/markdown/]) h1 elements (#) you add new states to your story.\n\n\n#Adding images to your story\n```\n- center: [40.7365, -73.9982]\n- zoom: 13\n```\n\nBy default, images are also supported. \n\n![New York](http://www.boston-discovery-guide.com/image-files/new-york-1.jpg)\n\n#Exporting your story\n```\n- center: [40.4469, -28.5645]\n- zoom: 3\n```\n\nYou have different options for exporting your odyssey.js visualization. You can either embed this using an iframe, publishing with a click on bl.ocks or just share the URL of this visualization.\n\nIf you want to customize it further, you can download the generated source code by clicking on the button below.\n\n#Advanced users\n\nCheck out our [documentation](/odyssey.js/documentation/) to learn how to use odyssey to create more custom things. It's crazy the amount of cool things that can be done with the library.\n\nAlso if you are a developer, take a look at our contributing guideline so you can push code to the actual library.\n\nCheers!\n"
+    default: "```\n-google_font: \"@import url(http://fonts.googleapis.com/css?family=Ubuntu);\"\n-title: \"Odyssey example FTW\"\n-author: \"NYU Shanghai\"\n//BACKGROUNDS:\n-header_background: \"nyupurple\"\n-body_background: \"0 0 / 100% 100%  url(http://www.psdgraphics.com/file/colorful-triangles-background.jpg) fixed\"\n-footer_background: \"rgba(255, 255, 255, 0.7)\"\n//LAYOUT:\n-orientation: \"horizontal\"\n-text_font_size: \"100%\"\n-text_font_family: \"AleoRegular, Serif\"\n-text_color: \"black\"\n-text_color_top: \"white\"\n-heading_font_size: \"45px\"\n-heading_font_family: \"ubuntu\"\n-heading_color: \"black\"\n-heading_color_top: \"white\"\n-musicurl: \"paste_muisc_url_here\"\n```\n\n#Your first odyssey.js story\n```\n- center: [40.7348, -73.9970]\n- zoom: 9\nL.marker([40.7348, -73.9970]).actions.addRemove(S.map)\n```\n\nMove the map around and save the position by clicking on \"ADD > Move map to the current position\". As you can see, now we are highlighting San Francisco.\n\nThen add here the description for your slide so it's shown on the left side box.\n\n\n#How to add more states\n```\n- center: [31.2259, 121.5340]\n- zoom: 9\nL.marker([31.2259, 121.5340]).actions.addRemove(S.map)\n```\n\nBy adding new [Markdown] (http://daringfireball.net/projects/markdown/]) h1 elements (#) you add new states to your story.\n\n\n#Adding images to your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 13\n```\n\nBy default, images are also supported. \n\n![NYU Shanghai](http://shanghai.nyu.edu/sites/default/files/styles/content_page_slideshow_display/public/field/image/pudong.jpg?itok=sKfoffHK)\n\n#Adding youtube videos to your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 13\n```\n\nBy default, youtube videos are also supported. \n\n!{400}{300}(https://www.youtube.com/embed/2r1BzXUbK78)\n\n#Exporting your story\n```\n- center: [31.2259, 121.5340]\n- zoom: 3\n```\n\nYou have different options for exporting your odyssey.js visualization. You can either embed this using an iframe, publishing with a click on bl.ocks or just share the URL of this visualization.\n\nIf you want to customize it further, you can download the generated source code by clicking on the button below.\n\n#Advanced users\n\nCheck out our [documentation](/odyssey.js/documentation/) to learn how to use odyssey to create more custom things. It's crazy the amount of cool things that can be done with the library.\n\nAlso if you are a developer, take a look at our contributing guideline so you can push code to the actual library.\n\nCheers!\n"
   }, {
     title: 'torque',
     description: 'Link story elements to moments in time using this animated map template',
@@ -613,16 +613,104 @@ var TEMPLATE_LIST =  [{
 
 var BASEMAP_LIST =  [{
     title: 'CartoDB Light',
-    url: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/{z}\/{x}\/{y}.png",
-    thumbnail: "https:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/6\/30\/24.png"
+    url: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-light\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB Positron',
+    url: "http:\/\/{s}.basemaps.cartocdn.com\/light_all\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/a.basemaps.cartocdn.com\/light_all\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB Dark Matter',
+    url: "http:\/\/{s}.basemaps.cartocdn.com\/dark_all\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/a.basemaps.cartocdn.com\/dark_all\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB Light (Lite)',
+    url: "http:\/\/{s}.api.cartocdn.com\/base-light-nolabels\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/a.api.cartocdn.com\/base-light-nolabels\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB Positron (Lite)',
+    url: "http:\/\/{s}.basemaps.cartocdn.com\/light_nolabels\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/a.basemaps.cartocdn.com\/light_nolabels\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB Dark Matter (Lite)',
+    url: "http:\/\/{s}.basemaps.cartocdn.com\/dark_nolabels\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/a.basemaps.cartocdn.com\/dark_nolabels\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB World Antique',
+    url: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-antique\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-antique\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB World Eco',
+    url: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-eco\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-eco\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB World Flat Blue',
+    url: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-flatblue\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-flatblue\/8\/214\/104.png"
+  }, {
+    title: 'CartoDB World Midnight Commander',
+    url: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-midnight\/{z}\/{x}\/{y}.png",
+    thumbnail: "http:\/\/cartocdn_a.global.ssl.fastly.net\/base-midnight\/8\/214\/104.png"
   }, {
     title: 'Nokia Day',
     url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
-    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.day\/6\/30\/24\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.day\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Day Grey',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day.grey/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.day.grey\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Night',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.night/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.night\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Day Transit',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day.transit/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/normal.day.transit\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Carnav Day Grey',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/carnav.day.grey/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/carnav.day.grey\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Terrain Day',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/terrain.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/terrain.day\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Hybrid Day',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/hybrid.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/hybrid.day\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Satellite Day',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/satellite.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/satellite.day\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Nokia Reduced Day',
+    url: "https://2.maps.nlp.nokia.com/maptile/2.1/maptile/newest/reduced.day/{z}\/{x}\/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24",
+    thumbnail: "https:\/\/2.maps.nlp.nokia.com\/maptile\/2.1\/maptile\/newest\/reduced.day\/8\/214\/104\/256\/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24"
+  }, {
+    title: 'Stamen Toner',
+    url: "http://{s}.tile.stamen.com/toner/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/toner\/8\/214\/104.jpg"
+  }, {
+    title: 'Stamen Toner Background',
+    url: "http://{s}.tile.stamen.com/toner-background/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/toner-background\/8\/214\/104.jpg"
+  }, {
+    title: 'Stamen Toner Lite',
+    url: "http://{s}.tile.stamen.com/toner-lite/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/toner-lite\/8\/214\/104.jpg"
+  }, {
+    title: 'Stamen Toner Lines',
+    url: "http://{s}.tile.stamen.com/toner-lines/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/toner-lines\/8\/214\/104.jpg"
+  }, {
+    title: 'Stamen Toner Hybrid',
+    url: "http://{s}.tile.stamen.com/toner-hybrid/{z}\/{x}\/{y}.jpg",
+    thumbnail: "http:\/\/a.tile.stamen.com\/toner-hybrid\/8\/214\/104.jpg"
   }, {
     title: 'Stamen Watercolor',
     url: "http://{s}.tile.stamen.com/watercolor/{z}\/{x}\/{y}.jpg",
-    thumbnail: "http:\/\/a.tile.stamen.com\/watercolor\/6\/30\/24.jpg"
+    thumbnail: "http:\/\/a.tile.stamen.com\/watercolor\/8\/214\/104.jpg"
   }
 ];
 
@@ -782,9 +870,9 @@ function editor(callback) {
           url = code_.split("\"")[1];
 
       var url_ = url.replace(/\{s\}/g, "a")
-        .replace(/\{x\}/g, "30")
-        .replace(/\{y\}/g, "24")
-        .replace(/\{z\}/g, "6");
+        .replace(/\{x\}/g, "214")
+        .replace(/\{y\}/g, "104")
+        .replace(/\{z\}/g, "8");
 
       document.getElementById('selectorImg').src = url_;
 

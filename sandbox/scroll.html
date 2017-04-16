@@ -17,22 +17,25 @@
 <body>
   <div id="layout">
     <!--<div class="progress-bar"></div>-->
-
-    <div class="inner-header">
-      <div id="header"></div>
+    <div class="horizontal" id="inner-header">
+      <div id="header" class="horizontal"></div>
     </div>
 
-    <div id="map_pos">
-      <div id="map_container">
+    <div id="map_pos" class="horizontal">
+      <div id="map_container" class="horizontal">
         <div id="map"></div>
       </div>
     </div>
 
-    <div id="content"></div>
+    <div id="content" class="horizontal"></div>
 
     <div id="credits">
+      <span>
+          <audio id="music" class="hide" src="" oncanplay="onCanPlay();" controls autoplay loop></audio>
+          <button id="pButton" class="pause hide" onclick="play()"></button>
+      </span>
       <span class="title" id="title">Title</span>
-      <span class="author"><b id="author">By Name using</b> <a href="#">Odyssey.js</a><span>
+      <span class="author"><strong id="author">By Name using</strong> <a href="http://jackbdu.github.io/odyssey.js/">Odyssey.js</a></span>
     </div>
   </div> <!-- layout -->
 
@@ -40,6 +43,7 @@
   <script src="../dist/odyssey.js" charset="UTF-8"></script>
 
   <script>
+
     O.Template({
       init: function() {
         var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
@@ -47,6 +51,8 @@
           center: [0, 0],
           zoom: 4
         });
+
+        this.musicurl = "musicurl";
 
         this.map.scrollWheelZoom.disable();
 
@@ -68,9 +74,7 @@
 
       update: function(actions) {
         var self = this;
-
         this.story.clear();
-
         if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
           this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
 
@@ -113,19 +117,116 @@
           return;
         }
 
+        if (this.musicurl && (this.musicurl !== actions.global.musicurl)) {
+            this.musicurl = actions.global.musicurl || 'paste_muisc_url_here';
+            document.getElementById('music').src = this.musicurl;
+            $("#pButton").addClass("hide");
+        }
+
         this._resetActions(actions);
       },
 
       _resetActions: function(actions) {
         // update footer title and author
         var title_ = actions.global.title === undefined ? '' : actions.global.title,
-            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using',
+            google_font_ = actions.global.google_font === undefined ? '' : actions.global.google_font;
+        // update backgrounds
+        var header_background_ = actions.global.header_background === undefined ? '' : actions.global.header_background,
+            body_background_ = actions.global.body_background === undefined ? '' : actions.global.body_background,
+            footer_background_ = actions.global.footer_background === undefined ? '' : actions.global.footer_background;
+        // update layouts
+        var orientation_ = actions.global.orientation === undefined ? '' : actions.global.orientation,
+            map_breadth_ = actions.global.map_breadth === undefined ? '' : actions.global.map_breadth;
 
+        var text_font_size_ = actions.global.text_font_size === undefined ? '' : actions.global.text_font_size,
+            text_font_family_ = actions.global.text_font_family === undefined ? '' : actions.global.text_font_family,
+            text_color_ = actions.global.text_color === undefined ? '' : actions.global.text_color,
+            text_color_top_ = actions.global.text_color_top === undefined ? '' : actions.global.text_color_top,
+            heading_font_size_ = actions.global.heading_font_size === undefined ? '' : actions.global.heading_font_size,
+            heading_font_family_ = actions.global.heading_font_family === undefined ? '' : actions.global.heading_font_family,
+            heading_color_ = actions.global.heading_color === undefined ? '' : actions.global.heading_color,
+            heading_color_top_ = actions.global.heading_color_top === undefined ? '' : actions.global.heading_color_top;
+
+        // check whether the color in the color collection
+        var temp_color = colorNameToHex(header_background_);
+        if (temp_color){
+            header_background_ = temp_color;
+        }
+        var temp_color = colorNameToHex(footer_background_);
+        if (temp_color){
+            footer_background_ = temp_color;
+        }
+        var temp_color = colorNameToHex(body_background_);
+        if (temp_color){
+            body_background_ = temp_color;
+        }
+        var temp_color = colorNameToHex(text_color_);
+        if (temp_color){
+            text_color_ = temp_color;
+        }
+        var temp_color = colorNameToHex(text_color_top_);
+        if (temp_color){
+            text_color_top_ = temp_color;
+        }
+        var temp_color = colorNameToHex(heading_color_);
+        if (temp_color){
+            heading_color_ = temp_color;
+        }
+        var temp_color = colorNameToHex(heading_color_top_);
+        if (temp_color){
+            heading_color_top_ = temp_color;
+        }
+        // tilte and author
         document.getElementById('title').innerHTML = title_;
         document.getElementById('author').innerHTML = author_;
         document.title = title_ + " | " + author_ +' Odyssey.js';
 
-        var TRIGGER_LINE = this.map.getSize().y + 50;
+        // layouts
+        document.getElementById('inner-header').style.background = header_background_;
+        document.getElementById('layout').style.background = body_background_;
+        document.getElementById('credits').style.background = footer_background_;
+
+        // styles
+        var css_style = '';
+        css_style += google_font_;
+        css_style += 'p {font-size:'+text_font_size_+' !important;font-family:'+text_font_family_+' !important;color:'+text_color_+' !important;} ';
+        css_style += '#header p {color:'+text_color_top_+' !important;} ';
+        css_style += '#header h1 {color:'+heading_color_top_+' !important;} ';
+        css_style += 'h1 {font-size:'+heading_font_size_+' !important;font-family:'+heading_font_family_+' !important;color:'+heading_color_+' !important;} ';
+        document.getElementById('style').innerHTML = css_style;
+
+        // console.log(orientation_);
+        if (orientation_[0]==="v") {
+            var TRIGGER_LINE = 50;
+            // console.log("vertical");
+            $("#map_pos").removeClass("horizontal");
+            $("#map_container").removeClass("horizontal");
+            $("#inner-header").removeClass("horizontal");
+            $("#header").removeClass("horizontal");
+            $("#content").removeClass("horizontal");
+            this.map._onResize();
+            // reset map height
+            // document.getElementById('map_container').style.height = "100%";
+            document.getElementById('inner-header').style.paddingLeft = map_breadth_;
+            document.getElementById('content').style.marginLeft = map_breadth_;
+            document.getElementById('map_container').style.width = map_breadth_;
+        } else if (orientation_[0]==="h") {
+            // console.log("horizontal");
+            $("#map_pos").addClass("horizontal");
+            $("#map_container").addClass("horizontal");
+            $("#inner-header").addClass("horizontal");
+            $("#header").addClass("horizontal");
+            $("#content").addClass("horizontal");
+            this.map._onResize();
+            document.getElementById('map_container').style.width = "100%";
+            document.getElementById('inner-header').style.paddingLeft = "auto";
+            document.getElementById('content').style.marginLeft = "auto";
+            // document.getElementById('map_container').style.height = map_breadth_;
+            var TRIGGER_LINE = this.map.getSize().y + 50;
+            // window.scrollTo(0, 0);
+            // console.log(this.map);
+        } 
         this.story.addEvent(
           this.edge,
           O.Parallel(
@@ -134,6 +235,7 @@
             O.Actions.Debug().log('attach')
           )
         )
+
 
         // create content
         var content = '';
@@ -171,6 +273,39 @@
         }
       }
     });
+
+    // convert nyupurple to #57068c, more color names could be added
+    function colorNameToHex(color)
+    {
+      var colors = {"nyupurple":"#57068c"};
+
+      if (typeof colors[color.toLowerCase()] != 'undefined')
+          return colors[color.toLowerCase()];
+
+      return false;
+    }
+
+    function play() {
+      // start music
+      if (music.paused) {
+        document.getElementById('music').play();
+        // remove play, add pause
+        pButton.className = "";
+        pButton.className = "pause";
+      } else { // pause music
+        document.getElementById('music').pause();
+        // remove pause, add play
+        pButton.className = "";
+        pButton.className = "play";
+      }
+    }
+
+    function onCanPlay() {
+      $("#pButton").removeClass("hide");
+      pButton.className = "";
+      pButton.className = "pause";
+    }
+
   </script>
 
   <script>
@@ -182,5 +317,6 @@
     ga('create', 'UA-20934186-21', 'cartodb.github.io');
     ga('send', 'pageview');
   </script>
+  <style id="style" type="text/css"></style>
 </body>
 </html>

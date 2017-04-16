@@ -1,7 +1,7 @@
 ## Develop
 
 We use Compass to organize and work with stylesheets.
-
+ 
 To compile the project's sass files into css:
 
 ```

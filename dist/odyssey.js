@@ -955,7 +955,7 @@ var Template = function(template) {
   function configureEditor() {
     // add helpers
     if (template.map && template.map instanceof L.Map) {
-      new L.CrossHair('//cartodb.github.io/odyssey.js/img/crosshair.png').addTo(template.map);
+      new L.CrossHair('//jackbdu.github.io/odyssey.js/img/crosshair.png').addTo(template.map);
     }
   }
 
@@ -5517,6 +5517,10 @@ function d3_rebind(target, source, method) {
       jsonml[ 1 ].src = jsonml[ 1 ].href;
       delete jsonml[ 1 ].href;
       break;
+    case "iframe":
+      jsonml[ 1 ].src = jsonml[ 1 ].href;
+      delete jsonml[ 1 ].href;
+      break;
     case "linebreak":
       jsonml[ 0 ] = "br";
       break;
@@ -5547,6 +5551,7 @@ function d3_rebind(target, source, method) {
       }
       break;
     case "img_ref":
+
       jsonml[ 0 ] = "img";
 
       // grab this ref and clean up the attribute node
@@ -6229,6 +6234,28 @@ function d3_rebind(target, source, method) {
 
         // Just consume the '!['
         return [ 2, "![" ];
+      },
+
+      "!{": function iframe( text ) {
+
+        // Unlike images, alt text is plain text only. no other elements are
+        // allowed in there
+
+        // ![Alt text](/path/to/img.jpg "Optional title")
+        //      1          2            3       4         <--- captures
+        var m = text.match( /^!\{(.*?)\}\{(.*?)\}[ \t]*\([ \t]*([^")]*?)(?:[ \t]+(["'])(.*?)\3)?[ \t]*\)/ );
+
+        if ( m ) {
+          if ( m[2] && m[2][0] === "<" && m[2][m[2].length-1] === ">" )
+            m[2] = m[2].substring( 1, m[2].length - 1 );
+
+          m[2] = this.dialect.inline.__call__.call( this, m[2], /\\/ )[0];
+          var attrs = { width: m[1], height: m[2], href: m[3] || "" };
+          if ( m[4] !== undefined)
+            attrs.title = m[4];
+
+          return [ m[0].length, [ "iframe", attrs ] ];
+        }
       },
 
       "[": function link( text ) {
